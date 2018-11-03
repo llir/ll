@@ -155,12 +155,12 @@ const (
 	AllocaInst         // InAlloca? SwiftError? ElemType=Type NElems=TypeValue? Alignment? AddrSpace? Metadata=(MetadataAttachment)*
 	InAlloca
 	SwiftError
-	LoadInst    // Atomic? Volatile? ElemType=Type Src=TypeValue SyncScope? AtomicOrdering? Alignment? Metadata=(MetadataAttachment)*
-	StoreInst   // Atomic? Volatile? Src=TypeValue Dst=TypeValue SyncScope? AtomicOrdering? Alignment? Metadata=(MetadataAttachment)*
-	FenceInst   // SyncScope? AtomicOrdering Metadata=(MetadataAttachment)*
-	CmpXchgInst // Weak? Volatile? Ptr=TypeValue Cmp=TypeValue New=TypeValue SyncScope? Success=AtomicOrdering Failure=AtomicOrdering Metadata=(MetadataAttachment)*
+	LoadInst    // Atomic? Volatile? ElemType=Type Src=TypeValue SyncScope? Ordering=AtomicOrdering? Alignment? Metadata=(MetadataAttachment)*
+	StoreInst   // Atomic? Volatile? Src=TypeValue Dst=TypeValue SyncScope? Ordering=AtomicOrdering? Alignment? Metadata=(MetadataAttachment)*
+	FenceInst   // SyncScope? Ordering=AtomicOrdering Metadata=(MetadataAttachment)*
+	CmpXchgInst // Weak? Volatile? Ptr=TypeValue Cmp=TypeValue New=TypeValue SyncScope? SuccessOrdering=AtomicOrdering FailureOrdering=AtomicOrdering Metadata=(MetadataAttachment)*
 	Weak
-	AtomicRMWInst // Volatile? Op=AtomicOp Dst=TypeValue X=TypeValue SyncScope? AtomicOrdering Metadata=(MetadataAttachment)*
+	AtomicRMWInst // Volatile? Op=AtomicOp Dst=TypeValue X=TypeValue SyncScope? Ordering=AtomicOrdering Metadata=(MetadataAttachment)*
 	AtomicOp
 	GetElementPtrInst // InBounds? ElemType=Type Src=TypeValue Indices=(TypeValue)* Metadata=(MetadataAttachment)*
 	TruncInst         // From=TypeValue To=Type Metadata=(MetadataAttachment)*
@@ -184,7 +184,7 @@ const (
 	CallInst          // Tail? FastMathFlags=(FastMathFlag)* CallingConv? ReturnAttrs=(ReturnAttr)* AddrSpace? Typ=Type Callee=Value Args FuncAttrs=(FuncAttr)* OperandBundles=(OperandBundle)* Metadata=(MetadataAttachment)*
 	Tail
 	VAArgInst      // ArgList=TypeValue ArgType=Type Metadata=(MetadataAttachment)*
-	LandingPadInst // Typ=Type Cleanup? Clauses=(Clause)* Metadata=(MetadataAttachment)*
+	LandingPadInst // ResultType=Type Cleanup? Clauses=(Clause)* Metadata=(MetadataAttachment)*
 	Cleanup
 	CatchClause                // X=TypeValue
 	FilterClause               // XTyp=Type X=(ArrayConst | CharArrayConst)

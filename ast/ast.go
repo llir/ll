@@ -1945,7 +1945,7 @@ func (n AtomicRMWInst) SyncScope() *SyncScope {
 	return nil
 }
 
-func (n AtomicRMWInst) AtomicOrdering() AtomicOrdering {
+func (n AtomicRMWInst) Ordering() AtomicOrdering {
 	return AtomicOrdering{n.Child(selector.AtomicOrdering)}
 }
 
@@ -2428,11 +2428,11 @@ func (n CmpXchgInst) SyncScope() *SyncScope {
 	return nil
 }
 
-func (n CmpXchgInst) Success() AtomicOrdering {
+func (n CmpXchgInst) SuccessOrdering() AtomicOrdering {
 	return AtomicOrdering{n.Child(selector.AtomicOrdering)}
 }
 
-func (n CmpXchgInst) Failure() AtomicOrdering {
+func (n CmpXchgInst) FailureOrdering() AtomicOrdering {
 	return AtomicOrdering{n.Child(selector.AtomicOrdering).Next(selector.AtomicOrdering)}
 }
 
@@ -3632,7 +3632,7 @@ func (n FenceInst) SyncScope() *SyncScope {
 	return nil
 }
 
-func (n FenceInst) AtomicOrdering() AtomicOrdering {
+func (n FenceInst) Ordering() AtomicOrdering {
 	return AtomicOrdering{n.Child(selector.AtomicOrdering)}
 }
 
@@ -4802,7 +4802,7 @@ type LandingPadInst struct {
 	*Node
 }
 
-func (n LandingPadInst) Typ() Type {
+func (n LandingPadInst) ResultType() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
@@ -4892,7 +4892,7 @@ func (n LoadInst) SyncScope() *SyncScope {
 	return nil
 }
 
-func (n LoadInst) AtomicOrdering() *AtomicOrdering {
+func (n LoadInst) Ordering() *AtomicOrdering {
 	if child := n.Child(selector.AtomicOrdering); child != nil {
 		return &AtomicOrdering{child}
 	}
@@ -5917,7 +5917,7 @@ func (n StoreInst) SyncScope() *SyncScope {
 	return nil
 }
 
-func (n StoreInst) AtomicOrdering() *AtomicOrdering {
+func (n StoreInst) Ordering() *AtomicOrdering {
 	if child := n.Child(selector.AtomicOrdering); child != nil {
 		return &AtomicOrdering{child}
 	}
