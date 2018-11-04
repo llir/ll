@@ -10,7 +10,7 @@ import (
 type Parser struct {
 	listener Listener
 
-	next symbol
+	next      symbol
 }
 
 type SyntaxError struct {
@@ -83,7 +83,7 @@ func (p *Parser) parse(start, end int16, lexer *Lexer) error {
 				entry.sym.endoffset = rhs[ln-1].sym.endoffset
 			}
 			if err := p.applyRule(rule, &entry, rhs, lexer); err != nil {
-				return err
+			  return err
 			}
 			if debugSyntax {
 				fmt.Printf("reduced to: %v\n", Symbol(entry.sym.symbol))
@@ -118,8 +118,8 @@ func (p *Parser) parse(start, end int16, lexer *Lexer) error {
 	if state != end {
 		offset, endoffset := lexer.Pos()
 		err := SyntaxError{
-			Line:      lexer.Line(),
-			Offset:    offset,
+			Line: lexer.Line(),
+			Offset: offset,
 			Endoffset: endoffset,
 		}
 		return err

@@ -25,349 +25,349 @@ const (
 	FloatLit
 	StringLit
 	NullLit
-	Module           // TopLevelEntities=(TopLevelEntity)*
-	SourceFilename   // Name=StringLit
-	TargetDataLayout // DataLayout=StringLit
-	TargetTriple     // TargetTriple=StringLit
-	ModuleAsm        // Asm=StringLit
-	TypeDef          // Alias=LocalIdent Typ=(OpaqueType | Type)
-	ComdatDef        // Name=ComdatName Kind=SelectionKind
+	Module  // TopLevelEntities=(TopLevelEntity)*
+	SourceFilename  // Name=StringLit
+	TargetDataLayout  // DataLayout=StringLit
+	TargetTriple  // TargetTriple=StringLit
+	ModuleAsm  // Asm=StringLit
+	TypeDef  // Alias=LocalIdent Typ=(OpaqueType | Type)
+	ComdatDef  // Name=ComdatName Kind=SelectionKind
 	SelectionKind
-	GlobalDecl // Name=GlobalIdent ExternLinkage Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? AddrSpace? ExternallyInitialized? Immutable ContentType=Type GlobalAttrs=(GlobalAttr)* FuncAttrs=(FuncAttr)*
+	GlobalDecl  // Name=GlobalIdent ExternLinkage Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? AddrSpace? ExternallyInitialized? Immutable ContentType=Type GlobalAttrs=(GlobalAttr)* FuncAttrs=(FuncAttr)*
 	GlobalDef  // Name=GlobalIdent Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? AddrSpace? ExternallyInitialized? Immutable ContentType=Type Init=Constant GlobalAttrs=(GlobalAttr)* FuncAttrs=(FuncAttr)*
 	ExternallyInitialized
 	Immutable
-	AliasDef         // Name=GlobalIdent ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? Typ=Type AliaseeType=Type Aliasee=Constant
-	IFuncDef         // Name=GlobalIdent ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? Typ=Type ResolverType=Type Resolver=Constant
-	FuncDecl         // Metadata=(MetadataAttachment)* Header=FuncHeader
-	FuncDef          // Header=FuncHeader Metadata=(MetadataAttachment)* Body=FuncBody
-	FuncHeader       // ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? CallingConv? ReturnAttrs=(ReturnAttr)* RetType=Type Name=GlobalIdent Params UnnamedAddr? AddrSpace? FuncAttrs=(FuncAttr)* Section? Comdat? GCNode? Prefix? Prologue? Personality?
-	GCNode           // Name=StringLit
-	Prefix           // Typ=Type Val=Constant
-	Prologue         // Typ=Type Val=Constant
-	Personality      // Typ=Type Val=Constant
-	FuncBody         // Blocks=(BasicBlock)+ UseListOrders=(UseListOrder)*
-	AttrGroupDef     // Name=AttrGroupID Attrs=(FuncAttr)*
-	NamedMetadataDef // Name=MetadataName MDNodes=(MetadataNode)*
-	MetadataDef      // Name=MetadataID Distinct? MDNode=(MDTuple | SpecializedMDNode)
+	AliasDef  // Name=GlobalIdent ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? Typ=Type AliaseeType=Type Aliasee=Constant
+	IFuncDef  // Name=GlobalIdent ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? Typ=Type ResolverType=Type Resolver=Constant
+	FuncDecl  // Metadata=(MetadataAttachment)* Header=FuncHeader
+	FuncDef  // Header=FuncHeader Metadata=(MetadataAttachment)* Body=FuncBody
+	FuncHeader  // ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? CallingConv? ReturnAttrs=(ReturnAttr)* RetType=Type Name=GlobalIdent Params UnnamedAddr? AddrSpace? FuncAttrs=(FuncAttr)* Section? Comdat? GCNode? Prefix? Prologue? Personality?
+	GCNode  // Name=StringLit
+	Prefix  // Typ=Type Val=Constant
+	Prologue  // Typ=Type Val=Constant
+	Personality  // Typ=Type Val=Constant
+	FuncBody  // Blocks=(BasicBlock)+ UseListOrders=(UseListOrder)*
+	AttrGroupDef  // Name=AttrGroupID Attrs=(FuncAttr)*
+	NamedMetadataDef  // Name=MetadataName MDNodes=(MetadataNode)*
+	MetadataDef  // Name=MetadataID Distinct? MDNode=(MDTuple | SpecializedMDNode)
 	Distinct
-	UseListOrder   // Typ=Type Val=Value Indicies=(UintLit)+
-	UseListOrderBB // Func=GlobalIdent Block=LocalIdent Indicies=(UintLit)+
+	UseListOrder  // Typ=Type Val=Value Indicies=(UintLit)+
+	UseListOrderBB  // Func=GlobalIdent Block=LocalIdent Indicies=(UintLit)+
 	VoidType
-	FuncType // RetType=Type Params
+	FuncType  // RetType=Type Params
 	IntType
-	FloatType // FloatKind
+	FloatType  // FloatKind
 	FloatKind
 	MMXType
-	PointerType // Elem=Type AddrSpace?
+	PointerType  // Elem=Type AddrSpace?
 	VectorType  // Len=UintLit Elem=Type
 	LabelType
 	TokenType
 	MetadataType
-	ArrayType        // Len=UintLit Elem=Type
-	StructType       // Fields=(Type)*
-	PackedStructType // Fields=(Type)*
+	ArrayType  // Len=UintLit Elem=Type
+	StructType  // Fields=(Type)*
+	PackedStructType  // Fields=(Type)*
 	OpaqueType
-	NamedType // Name=LocalIdent
-	InlineAsm // SideEffect? AlignStack? IntelDialect? Asm=StringLit Constraints=StringLit
+	NamedType  // Name=LocalIdent
+	InlineAsm  // SideEffect? AlignStack? IntelDialect? Asm=StringLit Constraints=StringLit
 	SideEffect
 	AlignStack
 	IntelDialect
 	BoolConst  // BoolLit
-	IntConst   // IntLit
-	FloatConst // FloatLit
+	IntConst  // IntLit
+	FloatConst  // FloatLit
 	NullConst  // NullLit
 	NoneConst
-	StructConst    // Fields=(TypeConst)*
-	ArrayConst     // Elems=(TypeConst)*
-	CharArrayConst // Val=StringLit
-	VectorConst    // Elems=(TypeConst)*
+	StructConst  // Fields=(TypeConst)*
+	ArrayConst  // Elems=(TypeConst)*
+	CharArrayConst  // Val=StringLit
+	VectorConst  // Elems=(TypeConst)*
 	ZeroInitializerConst
 	UndefConst
 	BlockAddressConst  // Func=GlobalIdent Block=LocalIdent
-	AddExpr            // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
-	FAddExpr           // X=TypeConst Y=TypeConst
-	SubExpr            // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
-	FSubExpr           // X=TypeConst Y=TypeConst
-	MulExpr            // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
-	FMulExpr           // X=TypeConst Y=TypeConst
-	UDivExpr           // Exact? X=TypeConst Y=TypeConst
-	SDivExpr           // Exact? X=TypeConst Y=TypeConst
-	FDivExpr           // X=TypeConst Y=TypeConst
-	URemExpr           // X=TypeConst Y=TypeConst
-	SRemExpr           // X=TypeConst Y=TypeConst
-	FRemExpr           // X=TypeConst Y=TypeConst
-	ShlExpr            // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
-	LShrExpr           // Exact? X=TypeConst Y=TypeConst
-	AShrExpr           // Exact? X=TypeConst Y=TypeConst
-	AndExpr            // X=TypeConst Y=TypeConst
-	OrExpr             // X=TypeConst Y=TypeConst
-	XorExpr            // X=TypeConst Y=TypeConst
-	ExtractElementExpr // X=TypeConst Index=TypeConst
+	AddExpr  // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
+	FAddExpr  // X=TypeConst Y=TypeConst
+	SubExpr  // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
+	FSubExpr  // X=TypeConst Y=TypeConst
+	MulExpr  // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
+	FMulExpr  // X=TypeConst Y=TypeConst
+	UDivExpr  // Exact? X=TypeConst Y=TypeConst
+	SDivExpr  // Exact? X=TypeConst Y=TypeConst
+	FDivExpr  // X=TypeConst Y=TypeConst
+	URemExpr  // X=TypeConst Y=TypeConst
+	SRemExpr  // X=TypeConst Y=TypeConst
+	FRemExpr  // X=TypeConst Y=TypeConst
+	ShlExpr  // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
+	LShrExpr  // Exact? X=TypeConst Y=TypeConst
+	AShrExpr  // Exact? X=TypeConst Y=TypeConst
+	AndExpr  // X=TypeConst Y=TypeConst
+	OrExpr  // X=TypeConst Y=TypeConst
+	XorExpr  // X=TypeConst Y=TypeConst
+	ExtractElementExpr  // X=TypeConst Index=TypeConst
 	InsertElementExpr  // X=TypeConst Elem=TypeConst Index=TypeConst
 	ShuffleVectorExpr  // X=TypeConst Y=TypeConst Mask=TypeConst
-	ExtractValueExpr   // X=TypeConst Indices=(UintLit)*
-	InsertValueExpr    // X=TypeConst Elem=TypeConst Indices=(UintLit)*
+	ExtractValueExpr  // X=TypeConst Indices=(UintLit)*
+	InsertValueExpr  // X=TypeConst Elem=TypeConst Indices=(UintLit)*
 	GetElementPtrExpr  // InBounds? ElemType=Type Src=TypeConst Indices=(GEPIndex)*
-	GEPIndex           // InRange? Index=TypeConst
+	GEPIndex  // InRange? Index=TypeConst
 	InRange
-	TruncExpr          // From=TypeConst To=Type
-	ZExtExpr           // From=TypeConst To=Type
-	SExtExpr           // From=TypeConst To=Type
-	FPTruncExpr        // From=TypeConst To=Type
-	FPExtExpr          // From=TypeConst To=Type
-	FPToUIExpr         // From=TypeConst To=Type
-	FPToSIExpr         // From=TypeConst To=Type
-	UIToFPExpr         // From=TypeConst To=Type
-	SIToFPExpr         // From=TypeConst To=Type
-	PtrToIntExpr       // From=TypeConst To=Type
-	IntToPtrExpr       // From=TypeConst To=Type
-	BitCastExpr        // From=TypeConst To=Type
+	TruncExpr  // From=TypeConst To=Type
+	ZExtExpr  // From=TypeConst To=Type
+	SExtExpr  // From=TypeConst To=Type
+	FPTruncExpr  // From=TypeConst To=Type
+	FPExtExpr  // From=TypeConst To=Type
+	FPToUIExpr  // From=TypeConst To=Type
+	FPToSIExpr  // From=TypeConst To=Type
+	UIToFPExpr  // From=TypeConst To=Type
+	SIToFPExpr  // From=TypeConst To=Type
+	PtrToIntExpr  // From=TypeConst To=Type
+	IntToPtrExpr  // From=TypeConst To=Type
+	BitCastExpr  // From=TypeConst To=Type
 	AddrSpaceCastExpr  // From=TypeConst To=Type
-	ICmpExpr           // Pred=IPred X=TypeConst Y=TypeConst
-	FCmpExpr           // Pred=FPred X=TypeConst Y=TypeConst
-	SelectExpr         // Cond=TypeConst X=TypeConst Y=TypeConst
-	BasicBlock         // Name=LabelIdent? Insts=(Instruction)* Term=Terminator
-	LocalDefInst       // Name=LocalIdent Inst=ValueInstruction
-	AddInst            // OverflowFlags=(OverflowFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	FAddInst           // FastMathFlags=(FastMathFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	SubInst            // OverflowFlags=(OverflowFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	FSubInst           // FastMathFlags=(FastMathFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	MulInst            // OverflowFlags=(OverflowFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	FMulInst           // FastMathFlags=(FastMathFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	UDivInst           // Exact? X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	SDivInst           // Exact? X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	FDivInst           // FastMathFlags=(FastMathFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	URemInst           // X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	SRemInst           // X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	FRemInst           // FastMathFlags=(FastMathFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	ShlInst            // OverflowFlags=(OverflowFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	LShrInst           // Exact? X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	AShrInst           // Exact? X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	AndInst            // X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	OrInst             // X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	XorInst            // X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	ExtractElementInst // X=TypeValue Index=TypeValue Metadata=(MetadataAttachment)*
+	ICmpExpr  // Pred=IPred X=TypeConst Y=TypeConst
+	FCmpExpr  // Pred=FPred X=TypeConst Y=TypeConst
+	SelectExpr  // Cond=TypeConst X=TypeConst Y=TypeConst
+	BasicBlock  // Name=LabelIdent? Insts=(Instruction)* Term=Terminator
+	LocalDefInst  // Name=LocalIdent Inst=ValueInstruction
+	AddInst  // OverflowFlags=(OverflowFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	FAddInst  // FastMathFlags=(FastMathFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	SubInst  // OverflowFlags=(OverflowFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	FSubInst  // FastMathFlags=(FastMathFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	MulInst  // OverflowFlags=(OverflowFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	FMulInst  // FastMathFlags=(FastMathFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	UDivInst  // Exact? X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	SDivInst  // Exact? X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	FDivInst  // FastMathFlags=(FastMathFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	URemInst  // X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	SRemInst  // X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	FRemInst  // FastMathFlags=(FastMathFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	ShlInst  // OverflowFlags=(OverflowFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	LShrInst  // Exact? X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	AShrInst  // Exact? X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	AndInst  // X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	OrInst  // X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	XorInst  // X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	ExtractElementInst  // X=TypeValue Index=TypeValue Metadata=(MetadataAttachment)*
 	InsertElementInst  // X=TypeValue Elem=TypeValue Index=TypeValue Metadata=(MetadataAttachment)*
 	ShuffleVectorInst  // X=TypeValue Y=TypeValue Mask=TypeValue Metadata=(MetadataAttachment)*
-	ExtractValueInst   // X=TypeValue Indices=(UintLit)+ Metadata=(MetadataAttachment)*
-	InsertValueInst    // X=TypeValue Elem=TypeValue Indices=(UintLit)+ Metadata=(MetadataAttachment)*
-	AllocaInst         // InAlloca? SwiftError? ElemType=Type NElems=TypeValue? Alignment? AddrSpace? Metadata=(MetadataAttachment)*
+	ExtractValueInst  // X=TypeValue Indices=(UintLit)+ Metadata=(MetadataAttachment)*
+	InsertValueInst  // X=TypeValue Elem=TypeValue Indices=(UintLit)+ Metadata=(MetadataAttachment)*
+	AllocaInst  // InAlloca? SwiftError? ElemType=Type NElems=TypeValue? Alignment? AddrSpace? Metadata=(MetadataAttachment)*
 	InAlloca
 	SwiftError
-	LoadInst    // Atomic? Volatile? ElemType=Type Src=TypeValue SyncScope? Ordering=AtomicOrdering? Alignment? Metadata=(MetadataAttachment)*
-	StoreInst   // Atomic? Volatile? Src=TypeValue Dst=TypeValue SyncScope? Ordering=AtomicOrdering? Alignment? Metadata=(MetadataAttachment)*
-	FenceInst   // SyncScope? Ordering=AtomicOrdering Metadata=(MetadataAttachment)*
-	CmpXchgInst // Weak? Volatile? Ptr=TypeValue Cmp=TypeValue New=TypeValue SyncScope? SuccessOrdering=AtomicOrdering FailureOrdering=AtomicOrdering Metadata=(MetadataAttachment)*
+	LoadInst  // Atomic? Volatile? ElemType=Type Src=TypeValue SyncScope? Ordering=AtomicOrdering? Alignment? Metadata=(MetadataAttachment)*
+	StoreInst  // Atomic? Volatile? Src=TypeValue Dst=TypeValue SyncScope? Ordering=AtomicOrdering? Alignment? Metadata=(MetadataAttachment)*
+	FenceInst  // SyncScope? Ordering=AtomicOrdering Metadata=(MetadataAttachment)*
+	CmpXchgInst  // Weak? Volatile? Ptr=TypeValue Cmp=TypeValue New=TypeValue SyncScope? SuccessOrdering=AtomicOrdering FailureOrdering=AtomicOrdering Metadata=(MetadataAttachment)*
 	Weak
-	AtomicRMWInst // Volatile? Op=AtomicOp Dst=TypeValue X=TypeValue SyncScope? Ordering=AtomicOrdering Metadata=(MetadataAttachment)*
+	AtomicRMWInst  // Volatile? Op=AtomicOp Dst=TypeValue X=TypeValue SyncScope? Ordering=AtomicOrdering Metadata=(MetadataAttachment)*
 	AtomicOp
-	GetElementPtrInst // InBounds? ElemType=Type Src=TypeValue Indices=(TypeValue)* Metadata=(MetadataAttachment)*
-	TruncInst         // From=TypeValue To=Type Metadata=(MetadataAttachment)*
-	ZExtInst          // From=TypeValue To=Type Metadata=(MetadataAttachment)*
-	SExtInst          // From=TypeValue To=Type Metadata=(MetadataAttachment)*
-	FPTruncInst       // From=TypeValue To=Type Metadata=(MetadataAttachment)*
-	FPExtInst         // From=TypeValue To=Type Metadata=(MetadataAttachment)*
-	FPToUIInst        // From=TypeValue To=Type Metadata=(MetadataAttachment)*
-	FPToSIInst        // From=TypeValue To=Type Metadata=(MetadataAttachment)*
-	UIToFPInst        // From=TypeValue To=Type Metadata=(MetadataAttachment)*
-	SIToFPInst        // From=TypeValue To=Type Metadata=(MetadataAttachment)*
-	PtrToIntInst      // From=TypeValue To=Type Metadata=(MetadataAttachment)*
-	IntToPtrInst      // From=TypeValue To=Type Metadata=(MetadataAttachment)*
-	BitCastInst       // From=TypeValue To=Type Metadata=(MetadataAttachment)*
-	AddrSpaceCastInst // From=TypeValue To=Type Metadata=(MetadataAttachment)*
-	ICmpInst          // Pred=IPred X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	FCmpInst          // FastMathFlags=(FastMathFlag)* Pred=FPred X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	PhiInst           // Typ=Type Incs=(Inc)+ Metadata=(MetadataAttachment)*
-	Inc               // X=Value Pred=LocalIdent
-	SelectInst        // Cond=TypeValue X=TypeValue Y=TypeValue Metadata=(MetadataAttachment)*
-	CallInst          // Tail? FastMathFlags=(FastMathFlag)* CallingConv? ReturnAttrs=(ReturnAttr)* AddrSpace? Typ=Type Callee=Value Args FuncAttrs=(FuncAttr)* OperandBundles=(OperandBundle)* Metadata=(MetadataAttachment)*
+	GetElementPtrInst  // InBounds? ElemType=Type Src=TypeValue Indices=(TypeValue)* Metadata=(MetadataAttachment)*
+	TruncInst  // From=TypeValue To=Type Metadata=(MetadataAttachment)*
+	ZExtInst  // From=TypeValue To=Type Metadata=(MetadataAttachment)*
+	SExtInst  // From=TypeValue To=Type Metadata=(MetadataAttachment)*
+	FPTruncInst  // From=TypeValue To=Type Metadata=(MetadataAttachment)*
+	FPExtInst  // From=TypeValue To=Type Metadata=(MetadataAttachment)*
+	FPToUIInst  // From=TypeValue To=Type Metadata=(MetadataAttachment)*
+	FPToSIInst  // From=TypeValue To=Type Metadata=(MetadataAttachment)*
+	UIToFPInst  // From=TypeValue To=Type Metadata=(MetadataAttachment)*
+	SIToFPInst  // From=TypeValue To=Type Metadata=(MetadataAttachment)*
+	PtrToIntInst  // From=TypeValue To=Type Metadata=(MetadataAttachment)*
+	IntToPtrInst  // From=TypeValue To=Type Metadata=(MetadataAttachment)*
+	BitCastInst  // From=TypeValue To=Type Metadata=(MetadataAttachment)*
+	AddrSpaceCastInst  // From=TypeValue To=Type Metadata=(MetadataAttachment)*
+	ICmpInst  // Pred=IPred X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	FCmpInst  // FastMathFlags=(FastMathFlag)* Pred=FPred X=TypeValue Y=Value Metadata=(MetadataAttachment)*
+	PhiInst  // Typ=Type Incs=(Inc)+ Metadata=(MetadataAttachment)*
+	Inc  // X=Value Pred=LocalIdent
+	SelectInst  // Cond=TypeValue X=TypeValue Y=TypeValue Metadata=(MetadataAttachment)*
+	CallInst  // Tail? FastMathFlags=(FastMathFlag)* CallingConv? ReturnAttrs=(ReturnAttr)* AddrSpace? Typ=Type Callee=Value Args FuncAttrs=(FuncAttr)* OperandBundles=(OperandBundle)* Metadata=(MetadataAttachment)*
 	Tail
-	VAArgInst      // ArgList=TypeValue ArgType=Type Metadata=(MetadataAttachment)*
-	LandingPadInst // ResultType=Type Cleanup? Clauses=(Clause)* Metadata=(MetadataAttachment)*
+	VAArgInst  // ArgList=TypeValue ArgType=Type Metadata=(MetadataAttachment)*
+	LandingPadInst  // ResultType=Type Cleanup? Clauses=(Clause)* Metadata=(MetadataAttachment)*
 	Cleanup
-	Clause // ClauseType X=TypeValue
+	Clause  // ClauseType X=TypeValue
 	ClauseType
-	CatchPadInst               // Scope=LocalIdent Args=(ExceptionArg)* Metadata=(MetadataAttachment)*
-	CleanupPadInst             // Scope=ExceptionScope Args=(ExceptionArg)* Metadata=(MetadataAttachment)*
-	LocalDefTerm               // Name=LocalIdent Term=ValueTerminator
-	RetTerm                    // XTyp=(ConcreteType | VoidType) X=Value? Metadata=(MetadataAttachment)*
-	BrTerm                     // Target=Label Metadata=(MetadataAttachment)*
-	CondBrTerm                 // CondTyp=IntType Cond=Value TargetTrue=Label TargetFalse=Label Metadata=(MetadataAttachment)*
-	SwitchTerm                 // X=TypeValue Default=Label Cases=(Case)* Metadata=(MetadataAttachment)*
-	Case                       // X=TypeConst Target=Label
-	IndirectBrTerm             // Addr=TypeValue ValidTargets=(Label)+ Metadata=(MetadataAttachment)*
-	InvokeTerm                 // CallingConv? ReturnAttrs=(ReturnAttr)* AddrSpace? Typ=Type Invokee=Value Args FuncAttrs=(FuncAttr)* OperandBundles=(OperandBundle)* Normal=Label Exception=Label Metadata=(MetadataAttachment)*
-	ResumeTerm                 // X=TypeValue Metadata=(MetadataAttachment)*
-	CatchSwitchTerm            // Scope=ExceptionScope Handlers=(Label)+ UnwindTarget Metadata=(MetadataAttachment)*
-	CatchRetTerm               // From=Value To=Label Metadata=(MetadataAttachment)*
-	CleanupRetTerm             // From=Value UnwindTarget Metadata=(MetadataAttachment)*
-	UnreachableTerm            // Metadata=(MetadataAttachment)*
-	MDTuple                    // MDFields
-	MDFields                   // MDFields=(MDField)*
-	MDString                   // Val=StringLit
-	MetadataAttachment         // Name=MetadataName MDNode
-	DIBasicType                // Fields=(DIBasicTypeField)*
-	DICompileUnit              // Fields=(DICompileUnitField)*
-	DICompositeType            // Fields=(DICompositeTypeField)*
-	DIDerivedType              // Fields=(DIDerivedTypeField)*
-	DIEnumerator               // Fields=(DIEnumeratorField)*
-	DIExpression               // Fields=(DIExpressionField)*
-	DIFile                     // Fields=(DIFileField)*
-	DIGlobalVariable           // Fields=(DIGlobalVariableField)*
-	DIGlobalVariableExpression // Fields=(DIGlobalVariableExpressionField)*
-	DIImportedEntity           // Fields=(DIImportedEntityField)*
-	DILabel                    // Fields=(DILabelField)*
-	DILexicalBlock             // Fields=(DILexicalBlockField)*
-	DILexicalBlockFile         // Fields=(DILexicalBlockFileField)*
-	DILocalVariable            // Fields=(DILocalVariableField)*
-	DILocation                 // Fields=(DILocationField)*
-	DIMacro                    // Fields=(DIMacroField)*
-	DIMacroFile                // Fields=(DIMacroFileField)*
-	DIModule                   // Fields=(DIModuleField)*
-	DINamespace                // Fields=(DINamespaceField)*
-	DIObjCProperty             // Fields=(DIObjCPropertyField)*
-	DISubprogram               // Fields=(DISubprogramField)*
-	DISubrange                 // Fields=(DISubrangeField)*
-	DISubroutineType           // Fields=(DISubroutineTypeField)*
-	DITemplateTypeParameter    // Fields=(DITemplateTypeParameterField)*
-	DITemplateValueParameter   // Fields=(DITemplateValueParameterField)*
-	GenericDINode              // Fields=(GenericDINodeField)*
-	AlignField                 // IntLit
-	ArgField                   // IntLit
-	AttributesField            // IntLit
-	BaseTypeField              // MDField
-	CCField                    // DwarfCC
-	ChecksumField              // StringLit
-	ChecksumkindField          // ChecksumKind
-	ColumnField                // IntLit
-	ConfigMacrosField          // StringLit
-	ContainingTypeField        // MDField
-	CountField                 // MDFieldOrInt
-	DebugInfoForProfilingField // BoolLit
-	DeclarationField           // MDField
-	DirectoryField             // StringLit
-	DiscriminatorField         // MDField
-	DiscriminatorIntField      // IntLit
-	DwarfAddressSpaceField     // IntLit
-	DwoIdField                 // IntLit
-	ElementsField              // MDField
-	EmissionKindField          // EmissionKind
-	EncodingField              // DwarfAttEncoding
-	EntityField                // MDField
-	EnumsField                 // MDField
-	ExportSymbolsField         // BoolLit
-	ExprField                  // MDField
-	ExtraDataField             // MDField
-	FileField                  // MDField
-	FilenameField              // StringLit
-	FlagsField                 // DIFlags
-	FlagsStringField           // StringLit
-	GetterField                // StringLit
-	GlobalsField               // MDField
-	HeaderField                // StringLit
-	IdentifierField            // StringLit
-	ImportsField               // MDField
-	IncludePathField           // StringLit
-	InlinedAtField             // MDField
-	IsDefinitionField          // BoolLit
-	IsImplicitCodeField        // BoolLit
-	IsLocalField               // BoolLit
-	IsOptimizedField           // BoolLit
-	IsUnsignedField            // BoolLit
-	IsysrootField              // StringLit
-	LanguageField              // DwarfLang
-	LineField                  // IntLit
-	LinkageNameField           // StringLit
-	LowerBoundField            // IntLit
-	MacrosField                // MDField
-	NameField                  // StringLit
-	NameTableKindField         // NameTableKind
-	NodesField                 // MDField
-	OffsetField                // IntLit
-	OperandsField              // MDFields
-	ProducerField              // StringLit
-	RetainedNodesField         // MDField
-	RetainedTypesField         // MDField
-	RuntimeLangField           // DwarfLang
-	RuntimeVersionField        // IntLit
-	ScopeField                 // MDField
-	ScopeLineField             // IntLit
-	SetterField                // StringLit
-	SizeField                  // IntLit
-	SourceField                // StringLit
-	SplitDebugFilenameField    // StringLit
-	SplitDebugInliningField    // BoolLit
-	TagField                   // DwarfTag
-	TemplateParamsField        // MDField
-	ThisAdjustmentField        // IntLit
-	ThrownTypesField           // MDField
-	TypeField                  // MDField
-	TypeMacinfoField           // DwarfMacinfo
-	TypesField                 // MDField
-	UnitField                  // MDField
-	ValueField                 // MDField
-	ValueIntField              // IntLit
-	ValueStringField           // StringLit
-	VarField                   // MDField
-	VirtualIndexField          // IntLit
-	VirtualityField            // DwarfVirtuality
-	VtableHolderField          // MDField
+	CatchPadInst  // Scope=LocalIdent Args=(ExceptionArg)* Metadata=(MetadataAttachment)*
+	CleanupPadInst  // Scope=ExceptionScope Args=(ExceptionArg)* Metadata=(MetadataAttachment)*
+	LocalDefTerm  // Name=LocalIdent Term=ValueTerminator
+	RetTerm  // XTyp=(ConcreteType | VoidType) X=Value? Metadata=(MetadataAttachment)*
+	BrTerm  // Target=Label Metadata=(MetadataAttachment)*
+	CondBrTerm  // CondTyp=IntType Cond=Value TargetTrue=Label TargetFalse=Label Metadata=(MetadataAttachment)*
+	SwitchTerm  // X=TypeValue Default=Label Cases=(Case)* Metadata=(MetadataAttachment)*
+	Case  // X=TypeConst Target=Label
+	IndirectBrTerm  // Addr=TypeValue ValidTargets=(Label)+ Metadata=(MetadataAttachment)*
+	InvokeTerm  // CallingConv? ReturnAttrs=(ReturnAttr)* AddrSpace? Typ=Type Invokee=Value Args FuncAttrs=(FuncAttr)* OperandBundles=(OperandBundle)* Normal=Label Exception=Label Metadata=(MetadataAttachment)*
+	ResumeTerm  // X=TypeValue Metadata=(MetadataAttachment)*
+	CatchSwitchTerm  // Scope=ExceptionScope Handlers=(Label)+ UnwindTarget Metadata=(MetadataAttachment)*
+	CatchRetTerm  // From=Value To=Label Metadata=(MetadataAttachment)*
+	CleanupRetTerm  // From=Value UnwindTarget Metadata=(MetadataAttachment)*
+	UnreachableTerm  // Metadata=(MetadataAttachment)*
+	MDTuple  // MDFields
+	MDFields  // MDFields=(MDField)*
+	MDString  // Val=StringLit
+	MetadataAttachment  // Name=MetadataName MDNode
+	DIBasicType  // Fields=(DIBasicTypeField)*
+	DICompileUnit  // Fields=(DICompileUnitField)*
+	DICompositeType  // Fields=(DICompositeTypeField)*
+	DIDerivedType  // Fields=(DIDerivedTypeField)*
+	DIEnumerator  // Fields=(DIEnumeratorField)*
+	DIExpression  // Fields=(DIExpressionField)*
+	DIFile  // Fields=(DIFileField)*
+	DIGlobalVariable  // Fields=(DIGlobalVariableField)*
+	DIGlobalVariableExpression  // Fields=(DIGlobalVariableExpressionField)*
+	DIImportedEntity  // Fields=(DIImportedEntityField)*
+	DILabel  // Fields=(DILabelField)*
+	DILexicalBlock  // Fields=(DILexicalBlockField)*
+	DILexicalBlockFile  // Fields=(DILexicalBlockFileField)*
+	DILocalVariable  // Fields=(DILocalVariableField)*
+	DILocation  // Fields=(DILocationField)*
+	DIMacro  // Fields=(DIMacroField)*
+	DIMacroFile  // Fields=(DIMacroFileField)*
+	DIModule  // Fields=(DIModuleField)*
+	DINamespace  // Fields=(DINamespaceField)*
+	DIObjCProperty  // Fields=(DIObjCPropertyField)*
+	DISubprogram  // Fields=(DISubprogramField)*
+	DISubrange  // Fields=(DISubrangeField)*
+	DISubroutineType  // Fields=(DISubroutineTypeField)*
+	DITemplateTypeParameter  // Fields=(DITemplateTypeParameterField)*
+	DITemplateValueParameter  // Fields=(DITemplateValueParameterField)*
+	GenericDINode  // Fields=(GenericDINodeField)*
+	AlignField  // IntLit
+	ArgField  // IntLit
+	AttributesField  // IntLit
+	BaseTypeField  // MDField
+	CCField  // DwarfCC
+	ChecksumField  // StringLit
+	ChecksumkindField  // ChecksumKind
+	ColumnField  // IntLit
+	ConfigMacrosField  // StringLit
+	ContainingTypeField  // MDField
+	CountField  // MDFieldOrInt
+	DebugInfoForProfilingField  // BoolLit
+	DeclarationField  // MDField
+	DirectoryField  // StringLit
+	DiscriminatorField  // MDField
+	DiscriminatorIntField  // IntLit
+	DwarfAddressSpaceField  // IntLit
+	DwoIdField  // IntLit
+	ElementsField  // MDField
+	EmissionKindField  // EmissionKind
+	EncodingField  // DwarfAttEncoding
+	EntityField  // MDField
+	EnumsField  // MDField
+	ExportSymbolsField  // BoolLit
+	ExprField  // MDField
+	ExtraDataField  // MDField
+	FileField  // MDField
+	FilenameField  // StringLit
+	FlagsField  // DIFlags
+	FlagsStringField  // StringLit
+	GetterField  // StringLit
+	GlobalsField  // MDField
+	HeaderField  // StringLit
+	IdentifierField  // StringLit
+	ImportsField  // MDField
+	IncludePathField  // StringLit
+	InlinedAtField  // MDField
+	IsDefinitionField  // BoolLit
+	IsImplicitCodeField  // BoolLit
+	IsLocalField  // BoolLit
+	IsOptimizedField  // BoolLit
+	IsUnsignedField  // BoolLit
+	IsysrootField  // StringLit
+	LanguageField  // DwarfLang
+	LineField  // IntLit
+	LinkageNameField  // StringLit
+	LowerBoundField  // IntLit
+	MacrosField  // MDField
+	NameField  // StringLit
+	NameTableKindField  // NameTableKind
+	NodesField  // MDField
+	OffsetField  // IntLit
+	OperandsField  // MDFields
+	ProducerField  // StringLit
+	RetainedNodesField  // MDField
+	RetainedTypesField  // MDField
+	RuntimeLangField  // DwarfLang
+	RuntimeVersionField  // IntLit
+	ScopeField  // MDField
+	ScopeLineField  // IntLit
+	SetterField  // StringLit
+	SizeField  // IntLit
+	SourceField  // StringLit
+	SplitDebugFilenameField  // StringLit
+	SplitDebugInliningField  // BoolLit
+	TagField  // DwarfTag
+	TemplateParamsField  // MDField
+	ThisAdjustmentField  // IntLit
+	ThrownTypesField  // MDField
+	TypeField  // MDField
+	TypeMacinfoField  // DwarfMacinfo
+	TypesField  // MDField
+	UnitField  // MDField
+	ValueField  // MDField
+	ValueIntField  // IntLit
+	ValueStringField  // StringLit
+	VarField  // MDField
+	VirtualIndexField  // IntLit
+	VirtualityField  // DwarfVirtuality
+	VtableHolderField  // MDField
 	ChecksumKind
-	DIFlags          // Flags=(DIFlag)+
-	DIFlag           // UintLit?
-	DwarfAttEncoding // UintLit?
-	DwarfCC          // UintLit?
-	DwarfLang        // UintLit?
-	DwarfMacinfo     // UintLit?
+	DIFlags  // Flags=(DIFlag)+
+	DIFlag  // UintLit?
+	DwarfAttEncoding  // UintLit?
+	DwarfCC  // UintLit?
+	DwarfLang  // UintLit?
+	DwarfMacinfo  // UintLit?
 	DwarfOp
-	DwarfTag        // UintLit?
-	DwarfVirtuality // UintLit?
-	EmissionKind    // UintLit?
-	NameTableKind   // UintLit?
-	AddrSpace       // N=UintLit
-	Alignment       // N=UintLit
-	AlignPair       // N=UintLit
+	DwarfTag  // UintLit?
+	DwarfVirtuality  // UintLit?
+	EmissionKind  // UintLit?
+	NameTableKind  // UintLit?
+	AddrSpace  // N=UintLit
+	Alignment  // N=UintLit
+	AlignPair  // N=UintLit
 	AlignStackPair  // N=UintLit
-	AllocSize       // ElemSize=UintLit N=UintLit?
-	Args            // Args=(Arg)*
-	Arg             // Typ=(ConcreteType | MetadataType) Attrs=(ParamAttr)* Val=(Metadata | Value)
+	AllocSize  // ElemSize=UintLit N=UintLit?
+	Args  // Args=(Arg)*
+	Arg  // Typ=(ConcreteType | MetadataType) Attrs=(ParamAttr)* Val=(Metadata | Value)
 	Atomic
 	AtomicOrdering
-	AttrPair   // Key=StringLit Val=StringLit
-	AttrString // Val=StringLit
+	AttrPair  // Key=StringLit Val=StringLit
+	AttrString  // Val=StringLit
 	CallingConvEnum
 	CallingConvInt  // UintLit
-	Comdat          // Name=ComdatName?
-	Dereferenceable // N=UintLit
+	Comdat  // Name=ComdatName?
+	Dereferenceable  // N=UintLit
 	DLLStorageClass
 	Ellipsis
 	Exact
-	ExceptionArg // Typ=(ConcreteType | MetadataType) Val=(Metadata | Value)
+	ExceptionArg  // Typ=(ConcreteType | MetadataType) Val=(Metadata | Value)
 	FastMathFlag
 	FPred
 	FuncAttribute
 	InBounds
 	IPred
-	Label // Typ=LabelType Name=LocalIdent
+	Label  // Typ=LabelType Name=LocalIdent
 	Linkage
 	ExternLinkage
-	OperandBundle // Tag=StringLit Inputs=(TypeValue)*
+	OperandBundle  // Tag=StringLit Inputs=(TypeValue)*
 	OverflowFlag
-	Params // Params=(Param)* Variadic=Ellipsis?
+	Params  // Params=(Param)* Variadic=Ellipsis?
 	Param  // Typ=Type Attrs=(ParamAttr)* Name=LocalIdent?
 	ParamAttribute
 	Preemption
 	ReturnAttribute
-	Section        // Name=StringLit
-	StackAlignment // N=UintLit
-	SyncScope      // Scope=StringLit
-	ThreadLocal    // Model=TLSModel?
+	Section  // Name=StringLit
+	StackAlignment  // N=UintLit
+	SyncScope  // Scope=StringLit
+	ThreadLocal  // Model=TLSModel?
 	TLSModel
-	TypeConst // Typ=FirstClassType Val=Constant
-	TypeValue // Typ=FirstClassType Val=Value
+	TypeConst  // Typ=FirstClassType Val=Constant
+	TypeValue  // Typ=FirstClassType Val=Value
 	UnnamedAddr
-	UnwindTarget // Label?
+	UnwindTarget  // Label?
 	Visibility
 	Volatile
 	NodeTypeMax
@@ -743,2103 +743,2104 @@ func (t NodeType) String() string {
 }
 
 var CallingConv = []NodeType{
-	CallingConvEnum,
-	CallingConvInt,
+    CallingConvEnum,
+    CallingConvInt,
 }
 
 var ConcreteType = []NodeType{
-	ArrayType,
-	FloatType,
-	IntType,
-	LabelType,
-	MMXType,
-	NamedType,
-	PackedStructType,
-	PointerType,
-	StructType,
-	TokenType,
-	VectorType,
+    ArrayType,
+    FloatType,
+    IntType,
+    LabelType,
+    MMXType,
+    NamedType,
+    PackedStructType,
+    PointerType,
+    StructType,
+    TokenType,
+    VectorType,
 }
 
 var Constant = []NodeType{
-	AShrExpr,
-	AddExpr,
-	AddrSpaceCastExpr,
-	AndExpr,
-	ArrayConst,
-	BitCastExpr,
-	BlockAddressConst,
-	BoolConst,
-	CharArrayConst,
-	ExtractElementExpr,
-	ExtractValueExpr,
-	FAddExpr,
-	FCmpExpr,
-	FDivExpr,
-	FMulExpr,
-	FPExtExpr,
-	FPToSIExpr,
-	FPToUIExpr,
-	FPTruncExpr,
-	FRemExpr,
-	FSubExpr,
-	FloatConst,
-	GetElementPtrExpr,
-	GlobalIdent,
-	ICmpExpr,
-	InsertElementExpr,
-	InsertValueExpr,
-	IntConst,
-	IntToPtrExpr,
-	LShrExpr,
-	MulExpr,
-	NoneConst,
-	NullConst,
-	OrExpr,
-	PtrToIntExpr,
-	SDivExpr,
-	SExtExpr,
-	SIToFPExpr,
-	SRemExpr,
-	SelectExpr,
-	ShlExpr,
-	ShuffleVectorExpr,
-	StructConst,
-	SubExpr,
-	TruncExpr,
-	UDivExpr,
-	UIToFPExpr,
-	URemExpr,
-	UndefConst,
-	VectorConst,
-	XorExpr,
-	ZExtExpr,
-	ZeroInitializerConst,
+    AShrExpr,
+    AddExpr,
+    AddrSpaceCastExpr,
+    AndExpr,
+    ArrayConst,
+    BitCastExpr,
+    BlockAddressConst,
+    BoolConst,
+    CharArrayConst,
+    ExtractElementExpr,
+    ExtractValueExpr,
+    FAddExpr,
+    FCmpExpr,
+    FDivExpr,
+    FMulExpr,
+    FPExtExpr,
+    FPToSIExpr,
+    FPToUIExpr,
+    FPTruncExpr,
+    FRemExpr,
+    FSubExpr,
+    FloatConst,
+    GetElementPtrExpr,
+    GlobalIdent,
+    ICmpExpr,
+    InsertElementExpr,
+    InsertValueExpr,
+    IntConst,
+    IntToPtrExpr,
+    LShrExpr,
+    MulExpr,
+    NoneConst,
+    NullConst,
+    OrExpr,
+    PtrToIntExpr,
+    SDivExpr,
+    SExtExpr,
+    SIToFPExpr,
+    SRemExpr,
+    SelectExpr,
+    ShlExpr,
+    ShuffleVectorExpr,
+    StructConst,
+    SubExpr,
+    TruncExpr,
+    UDivExpr,
+    UIToFPExpr,
+    URemExpr,
+    UndefConst,
+    VectorConst,
+    XorExpr,
+    ZExtExpr,
+    ZeroInitializerConst,
 }
 
 var ConstantExpr = []NodeType{
-	AShrExpr,
-	AddExpr,
-	AddrSpaceCastExpr,
-	AndExpr,
-	BitCastExpr,
-	ExtractElementExpr,
-	ExtractValueExpr,
-	FAddExpr,
-	FCmpExpr,
-	FDivExpr,
-	FMulExpr,
-	FPExtExpr,
-	FPToSIExpr,
-	FPToUIExpr,
-	FPTruncExpr,
-	FRemExpr,
-	FSubExpr,
-	GetElementPtrExpr,
-	ICmpExpr,
-	InsertElementExpr,
-	InsertValueExpr,
-	IntToPtrExpr,
-	LShrExpr,
-	MulExpr,
-	OrExpr,
-	PtrToIntExpr,
-	SDivExpr,
-	SExtExpr,
-	SIToFPExpr,
-	SRemExpr,
-	SelectExpr,
-	ShlExpr,
-	ShuffleVectorExpr,
-	SubExpr,
-	TruncExpr,
-	UDivExpr,
-	UIToFPExpr,
-	URemExpr,
-	XorExpr,
-	ZExtExpr,
+    AShrExpr,
+    AddExpr,
+    AddrSpaceCastExpr,
+    AndExpr,
+    BitCastExpr,
+    ExtractElementExpr,
+    ExtractValueExpr,
+    FAddExpr,
+    FCmpExpr,
+    FDivExpr,
+    FMulExpr,
+    FPExtExpr,
+    FPToSIExpr,
+    FPToUIExpr,
+    FPTruncExpr,
+    FRemExpr,
+    FSubExpr,
+    GetElementPtrExpr,
+    ICmpExpr,
+    InsertElementExpr,
+    InsertValueExpr,
+    IntToPtrExpr,
+    LShrExpr,
+    MulExpr,
+    OrExpr,
+    PtrToIntExpr,
+    SDivExpr,
+    SExtExpr,
+    SIToFPExpr,
+    SRemExpr,
+    SelectExpr,
+    ShlExpr,
+    ShuffleVectorExpr,
+    SubExpr,
+    TruncExpr,
+    UDivExpr,
+    UIToFPExpr,
+    URemExpr,
+    XorExpr,
+    ZExtExpr,
 }
 
 var DIBasicTypeField = []NodeType{
-	AlignField,
-	EncodingField,
-	FlagsField,
-	NameField,
-	SizeField,
-	TagField,
+    AlignField,
+    EncodingField,
+    FlagsField,
+    NameField,
+    SizeField,
+    TagField,
 }
 
 var DICompileUnitField = []NodeType{
-	DebugInfoForProfilingField,
-	DwoIdField,
-	EmissionKindField,
-	EnumsField,
-	FileField,
-	FlagsStringField,
-	GlobalsField,
-	ImportsField,
-	IsOptimizedField,
-	LanguageField,
-	MacrosField,
-	NameTableKindField,
-	ProducerField,
-	RetainedTypesField,
-	RuntimeVersionField,
-	SplitDebugFilenameField,
-	SplitDebugInliningField,
+    DebugInfoForProfilingField,
+    DwoIdField,
+    EmissionKindField,
+    EnumsField,
+    FileField,
+    FlagsStringField,
+    GlobalsField,
+    ImportsField,
+    IsOptimizedField,
+    LanguageField,
+    MacrosField,
+    NameTableKindField,
+    ProducerField,
+    RetainedTypesField,
+    RuntimeVersionField,
+    SplitDebugFilenameField,
+    SplitDebugInliningField,
 }
 
 var DICompositeTypeField = []NodeType{
-	AlignField,
-	BaseTypeField,
-	DiscriminatorField,
-	ElementsField,
-	FileField,
-	FlagsField,
-	IdentifierField,
-	LineField,
-	NameField,
-	OffsetField,
-	RuntimeLangField,
-	ScopeField,
-	SizeField,
-	TagField,
-	TemplateParamsField,
-	VtableHolderField,
+    AlignField,
+    BaseTypeField,
+    DiscriminatorField,
+    ElementsField,
+    FileField,
+    FlagsField,
+    IdentifierField,
+    LineField,
+    NameField,
+    OffsetField,
+    RuntimeLangField,
+    ScopeField,
+    SizeField,
+    TagField,
+    TemplateParamsField,
+    VtableHolderField,
 }
 
 var DIDerivedTypeField = []NodeType{
-	AlignField,
-	BaseTypeField,
-	DwarfAddressSpaceField,
-	ExtraDataField,
-	FileField,
-	FlagsField,
-	LineField,
-	NameField,
-	OffsetField,
-	ScopeField,
-	SizeField,
-	TagField,
+    AlignField,
+    BaseTypeField,
+    DwarfAddressSpaceField,
+    ExtraDataField,
+    FileField,
+    FlagsField,
+    LineField,
+    NameField,
+    OffsetField,
+    ScopeField,
+    SizeField,
+    TagField,
 }
 
 var DIEnumeratorField = []NodeType{
-	IsUnsignedField,
-	NameField,
-	ValueIntField,
+    IsUnsignedField,
+    NameField,
+    ValueIntField,
 }
 
 var DIExpressionField = []NodeType{
-	DwarfOp,
-	IntLit,
+    DwarfOp,
+    IntLit,
 }
 
 var DIFileField = []NodeType{
-	ChecksumField,
-	ChecksumkindField,
-	DirectoryField,
-	FilenameField,
-	SourceField,
+    ChecksumField,
+    ChecksumkindField,
+    DirectoryField,
+    FilenameField,
+    SourceField,
 }
 
 var DIGlobalVariableExpressionField = []NodeType{
-	ExprField,
-	VarField,
+    ExprField,
+    VarField,
 }
 
 var DIGlobalVariableField = []NodeType{
-	AlignField,
-	DeclarationField,
-	FileField,
-	IsDefinitionField,
-	IsLocalField,
-	LineField,
-	LinkageNameField,
-	NameField,
-	ScopeField,
-	TemplateParamsField,
-	TypeField,
+    AlignField,
+    DeclarationField,
+    FileField,
+    IsDefinitionField,
+    IsLocalField,
+    LineField,
+    LinkageNameField,
+    NameField,
+    ScopeField,
+    TemplateParamsField,
+    TypeField,
 }
 
 var DIImportedEntityField = []NodeType{
-	EntityField,
-	FileField,
-	LineField,
-	NameField,
-	ScopeField,
-	TagField,
+    EntityField,
+    FileField,
+    LineField,
+    NameField,
+    ScopeField,
+    TagField,
 }
 
 var DILabelField = []NodeType{
-	FileField,
-	LineField,
-	NameField,
-	ScopeField,
+    FileField,
+    LineField,
+    NameField,
+    ScopeField,
 }
 
 var DILexicalBlockField = []NodeType{
-	ColumnField,
-	FileField,
-	LineField,
-	ScopeField,
+    ColumnField,
+    FileField,
+    LineField,
+    ScopeField,
 }
 
 var DILexicalBlockFileField = []NodeType{
-	DiscriminatorIntField,
-	FileField,
-	ScopeField,
+    DiscriminatorIntField,
+    FileField,
+    ScopeField,
 }
 
 var DILocalVariableField = []NodeType{
-	AlignField,
-	ArgField,
-	FileField,
-	FlagsField,
-	LineField,
-	NameField,
-	ScopeField,
-	TypeField,
+    AlignField,
+    ArgField,
+    FileField,
+    FlagsField,
+    LineField,
+    NameField,
+    ScopeField,
+    TypeField,
 }
 
 var DILocationField = []NodeType{
-	ColumnField,
-	InlinedAtField,
-	IsImplicitCodeField,
-	LineField,
-	ScopeField,
+    ColumnField,
+    InlinedAtField,
+    IsImplicitCodeField,
+    LineField,
+    ScopeField,
 }
 
 var DIMacroField = []NodeType{
-	LineField,
-	NameField,
-	TypeMacinfoField,
-	ValueStringField,
+    LineField,
+    NameField,
+    TypeMacinfoField,
+    ValueStringField,
 }
 
 var DIMacroFileField = []NodeType{
-	FileField,
-	LineField,
-	NodesField,
-	TypeMacinfoField,
+    FileField,
+    LineField,
+    NodesField,
+    TypeMacinfoField,
 }
 
 var DIModuleField = []NodeType{
-	ConfigMacrosField,
-	IncludePathField,
-	IsysrootField,
-	NameField,
-	ScopeField,
+    ConfigMacrosField,
+    IncludePathField,
+    IsysrootField,
+    NameField,
+    ScopeField,
 }
 
 var DINamespaceField = []NodeType{
-	ExportSymbolsField,
-	NameField,
-	ScopeField,
+    ExportSymbolsField,
+    NameField,
+    ScopeField,
 }
 
 var DIObjCPropertyField = []NodeType{
-	AttributesField,
-	FileField,
-	GetterField,
-	LineField,
-	NameField,
-	SetterField,
-	TypeField,
+    AttributesField,
+    FileField,
+    GetterField,
+    LineField,
+    NameField,
+    SetterField,
+    TypeField,
 }
 
 var DISubprogramField = []NodeType{
-	ContainingTypeField,
-	DeclarationField,
-	FileField,
-	FlagsField,
-	IsDefinitionField,
-	IsLocalField,
-	IsOptimizedField,
-	LineField,
-	LinkageNameField,
-	NameField,
-	RetainedNodesField,
-	ScopeField,
-	ScopeLineField,
-	TemplateParamsField,
-	ThisAdjustmentField,
-	ThrownTypesField,
-	TypeField,
-	UnitField,
-	VirtualIndexField,
-	VirtualityField,
+    ContainingTypeField,
+    DeclarationField,
+    FileField,
+    FlagsField,
+    IsDefinitionField,
+    IsLocalField,
+    IsOptimizedField,
+    LineField,
+    LinkageNameField,
+    NameField,
+    RetainedNodesField,
+    ScopeField,
+    ScopeLineField,
+    TemplateParamsField,
+    ThisAdjustmentField,
+    ThrownTypesField,
+    TypeField,
+    UnitField,
+    VirtualIndexField,
+    VirtualityField,
 }
 
 var DISubrangeField = []NodeType{
-	CountField,
-	LowerBoundField,
+    CountField,
+    LowerBoundField,
 }
 
 var DISubroutineTypeField = []NodeType{
-	CCField,
-	FlagsField,
-	TypesField,
+    CCField,
+    FlagsField,
+    TypesField,
 }
 
 var DITemplateTypeParameterField = []NodeType{
-	NameField,
-	TypeField,
+    NameField,
+    TypeField,
 }
 
 var DITemplateValueParameterField = []NodeType{
-	NameField,
-	TagField,
-	TypeField,
-	ValueField,
+    NameField,
+    TagField,
+    TypeField,
+    ValueField,
 }
 
 var ExceptionScope = []NodeType{
-	LocalIdent,
-	NoneConst,
+    LocalIdent,
+    NoneConst,
 }
 
 var FirstClassType = []NodeType{
-	ArrayType,
-	FloatType,
-	IntType,
-	LabelType,
-	MMXType,
-	MetadataType,
-	NamedType,
-	PackedStructType,
-	PointerType,
-	StructType,
-	TokenType,
-	VectorType,
+    ArrayType,
+    FloatType,
+    IntType,
+    LabelType,
+    MMXType,
+    MetadataType,
+    NamedType,
+    PackedStructType,
+    PointerType,
+    StructType,
+    TokenType,
+    VectorType,
 }
 
 var FuncAttr = []NodeType{
-	AlignPair,
-	AlignStackPair,
-	AllocSize,
-	AttrGroupID,
-	AttrPair,
-	AttrString,
-	FuncAttribute,
-	StackAlignment,
+    AlignPair,
+    AlignStackPair,
+    AllocSize,
+    AttrGroupID,
+    AttrPair,
+    AttrString,
+    FuncAttribute,
+    StackAlignment,
 }
 
 var GenericDINodeField = []NodeType{
-	HeaderField,
-	OperandsField,
-	TagField,
+    HeaderField,
+    OperandsField,
+    TagField,
 }
 
 var GlobalAttr = []NodeType{
-	Alignment,
-	Comdat,
-	MetadataAttachment,
-	Section,
+    Alignment,
+    Comdat,
+    MetadataAttachment,
+    Section,
 }
 
 var IndirectSymbolDef = []NodeType{
-	AliasDef,
-	IFuncDef,
+    AliasDef,
+    IFuncDef,
 }
 
 var Instruction = []NodeType{
-	AShrInst,
-	AddInst,
-	AddrSpaceCastInst,
-	AllocaInst,
-	AndInst,
-	AtomicRMWInst,
-	BitCastInst,
-	CallInst,
-	CatchPadInst,
-	CleanupPadInst,
-	CmpXchgInst,
-	ExtractElementInst,
-	ExtractValueInst,
-	FAddInst,
-	FCmpInst,
-	FDivInst,
-	FMulInst,
-	FPExtInst,
-	FPToSIInst,
-	FPToUIInst,
-	FPTruncInst,
-	FRemInst,
-	FSubInst,
-	FenceInst,
-	GetElementPtrInst,
-	ICmpInst,
-	InsertElementInst,
-	InsertValueInst,
-	IntToPtrInst,
-	LShrInst,
-	LandingPadInst,
-	LoadInst,
-	LocalDefInst,
-	MulInst,
-	OrInst,
-	PhiInst,
-	PtrToIntInst,
-	SDivInst,
-	SExtInst,
-	SIToFPInst,
-	SRemInst,
-	SelectInst,
-	ShlInst,
-	ShuffleVectorInst,
-	StoreInst,
-	SubInst,
-	TruncInst,
-	UDivInst,
-	UIToFPInst,
-	URemInst,
-	VAArgInst,
-	XorInst,
-	ZExtInst,
+    AShrInst,
+    AddInst,
+    AddrSpaceCastInst,
+    AllocaInst,
+    AndInst,
+    AtomicRMWInst,
+    BitCastInst,
+    CallInst,
+    CatchPadInst,
+    CleanupPadInst,
+    CmpXchgInst,
+    ExtractElementInst,
+    ExtractValueInst,
+    FAddInst,
+    FCmpInst,
+    FDivInst,
+    FMulInst,
+    FPExtInst,
+    FPToSIInst,
+    FPToUIInst,
+    FPTruncInst,
+    FRemInst,
+    FSubInst,
+    FenceInst,
+    GetElementPtrInst,
+    ICmpInst,
+    InsertElementInst,
+    InsertValueInst,
+    IntToPtrInst,
+    LShrInst,
+    LandingPadInst,
+    LoadInst,
+    LocalDefInst,
+    MulInst,
+    OrInst,
+    PhiInst,
+    PtrToIntInst,
+    SDivInst,
+    SExtInst,
+    SIToFPInst,
+    SRemInst,
+    SelectInst,
+    ShlInst,
+    ShuffleVectorInst,
+    StoreInst,
+    SubInst,
+    TruncInst,
+    UDivInst,
+    UIToFPInst,
+    URemInst,
+    VAArgInst,
+    XorInst,
+    ZExtInst,
 }
 
 var MDField = []NodeType{
-	DIBasicType,
-	DICompileUnit,
-	DICompositeType,
-	DIDerivedType,
-	DIEnumerator,
-	DIExpression,
-	DIFile,
-	DIGlobalVariable,
-	DIGlobalVariableExpression,
-	DIImportedEntity,
-	DILabel,
-	DILexicalBlock,
-	DILexicalBlockFile,
-	DILocalVariable,
-	DILocation,
-	DIMacro,
-	DIMacroFile,
-	DIModule,
-	DINamespace,
-	DIObjCProperty,
-	DISubprogram,
-	DISubrange,
-	DISubroutineType,
-	DITemplateTypeParameter,
-	DITemplateValueParameter,
-	GenericDINode,
-	MDString,
-	MDTuple,
-	MetadataID,
-	NullLit,
-	TypeValue,
+    DIBasicType,
+    DICompileUnit,
+    DICompositeType,
+    DIDerivedType,
+    DIEnumerator,
+    DIExpression,
+    DIFile,
+    DIGlobalVariable,
+    DIGlobalVariableExpression,
+    DIImportedEntity,
+    DILabel,
+    DILexicalBlock,
+    DILexicalBlockFile,
+    DILocalVariable,
+    DILocation,
+    DIMacro,
+    DIMacroFile,
+    DIModule,
+    DINamespace,
+    DIObjCProperty,
+    DISubprogram,
+    DISubrange,
+    DISubroutineType,
+    DITemplateTypeParameter,
+    DITemplateValueParameter,
+    GenericDINode,
+    MDString,
+    MDTuple,
+    MetadataID,
+    NullLit,
+    TypeValue,
 }
 
 var MDFieldOrInt = []NodeType{
-	DIBasicType,
-	DICompileUnit,
-	DICompositeType,
-	DIDerivedType,
-	DIEnumerator,
-	DIExpression,
-	DIFile,
-	DIGlobalVariable,
-	DIGlobalVariableExpression,
-	DIImportedEntity,
-	DILabel,
-	DILexicalBlock,
-	DILexicalBlockFile,
-	DILocalVariable,
-	DILocation,
-	DIMacro,
-	DIMacroFile,
-	DIModule,
-	DINamespace,
-	DIObjCProperty,
-	DISubprogram,
-	DISubrange,
-	DISubroutineType,
-	DITemplateTypeParameter,
-	DITemplateValueParameter,
-	GenericDINode,
-	IntLit,
-	MDString,
-	MDTuple,
-	MetadataID,
-	NullLit,
-	TypeValue,
+    DIBasicType,
+    DICompileUnit,
+    DICompositeType,
+    DIDerivedType,
+    DIEnumerator,
+    DIExpression,
+    DIFile,
+    DIGlobalVariable,
+    DIGlobalVariableExpression,
+    DIImportedEntity,
+    DILabel,
+    DILexicalBlock,
+    DILexicalBlockFile,
+    DILocalVariable,
+    DILocation,
+    DIMacro,
+    DIMacroFile,
+    DIModule,
+    DINamespace,
+    DIObjCProperty,
+    DISubprogram,
+    DISubrange,
+    DISubroutineType,
+    DITemplateTypeParameter,
+    DITemplateValueParameter,
+    GenericDINode,
+    IntLit,
+    MDString,
+    MDTuple,
+    MetadataID,
+    NullLit,
+    TypeValue,
 }
 
 var MDNode = []NodeType{
-	DIBasicType,
-	DICompileUnit,
-	DICompositeType,
-	DIDerivedType,
-	DIEnumerator,
-	DIExpression,
-	DIFile,
-	DIGlobalVariable,
-	DIGlobalVariableExpression,
-	DIImportedEntity,
-	DILabel,
-	DILexicalBlock,
-	DILexicalBlockFile,
-	DILocalVariable,
-	DILocation,
-	DIMacro,
-	DIMacroFile,
-	DIModule,
-	DINamespace,
-	DIObjCProperty,
-	DISubprogram,
-	DISubrange,
-	DISubroutineType,
-	DITemplateTypeParameter,
-	DITemplateValueParameter,
-	GenericDINode,
-	MDTuple,
-	MetadataID,
+    DIBasicType,
+    DICompileUnit,
+    DICompositeType,
+    DIDerivedType,
+    DIEnumerator,
+    DIExpression,
+    DIFile,
+    DIGlobalVariable,
+    DIGlobalVariableExpression,
+    DIImportedEntity,
+    DILabel,
+    DILexicalBlock,
+    DILexicalBlockFile,
+    DILocalVariable,
+    DILocation,
+    DIMacro,
+    DIMacroFile,
+    DIModule,
+    DINamespace,
+    DIObjCProperty,
+    DISubprogram,
+    DISubrange,
+    DISubroutineType,
+    DITemplateTypeParameter,
+    DITemplateValueParameter,
+    GenericDINode,
+    MDTuple,
+    MetadataID,
 }
 
 var Metadata = []NodeType{
-	DIBasicType,
-	DICompileUnit,
-	DICompositeType,
-	DIDerivedType,
-	DIEnumerator,
-	DIExpression,
-	DIFile,
-	DIGlobalVariable,
-	DIGlobalVariableExpression,
-	DIImportedEntity,
-	DILabel,
-	DILexicalBlock,
-	DILexicalBlockFile,
-	DILocalVariable,
-	DILocation,
-	DIMacro,
-	DIMacroFile,
-	DIModule,
-	DINamespace,
-	DIObjCProperty,
-	DISubprogram,
-	DISubrange,
-	DISubroutineType,
-	DITemplateTypeParameter,
-	DITemplateValueParameter,
-	GenericDINode,
-	MDString,
-	MDTuple,
-	MetadataID,
-	TypeValue,
+    DIBasicType,
+    DICompileUnit,
+    DICompositeType,
+    DIDerivedType,
+    DIEnumerator,
+    DIExpression,
+    DIFile,
+    DIGlobalVariable,
+    DIGlobalVariableExpression,
+    DIImportedEntity,
+    DILabel,
+    DILexicalBlock,
+    DILexicalBlockFile,
+    DILocalVariable,
+    DILocation,
+    DIMacro,
+    DIMacroFile,
+    DIModule,
+    DINamespace,
+    DIObjCProperty,
+    DISubprogram,
+    DISubrange,
+    DISubroutineType,
+    DITemplateTypeParameter,
+    DITemplateValueParameter,
+    GenericDINode,
+    MDString,
+    MDTuple,
+    MetadataID,
+    TypeValue,
 }
 
 var MetadataNode = []NodeType{
-	DIExpression,
-	MetadataID,
+    DIExpression,
+    MetadataID,
 }
 
 var ParamAttr = []NodeType{
-	Alignment,
-	AttrPair,
-	AttrString,
-	Dereferenceable,
-	ParamAttribute,
+    Alignment,
+    AttrPair,
+    AttrString,
+    Dereferenceable,
+    ParamAttribute,
 }
 
 var ReturnAttr = []NodeType{
-	Alignment,
-	Dereferenceable,
-	ReturnAttribute,
+    Alignment,
+    Dereferenceable,
+    ReturnAttribute,
 }
 
 var SpecializedMDNode = []NodeType{
-	DIBasicType,
-	DICompileUnit,
-	DICompositeType,
-	DIDerivedType,
-	DIEnumerator,
-	DIExpression,
-	DIFile,
-	DIGlobalVariable,
-	DIGlobalVariableExpression,
-	DIImportedEntity,
-	DILabel,
-	DILexicalBlock,
-	DILexicalBlockFile,
-	DILocalVariable,
-	DILocation,
-	DIMacro,
-	DIMacroFile,
-	DIModule,
-	DINamespace,
-	DIObjCProperty,
-	DISubprogram,
-	DISubrange,
-	DISubroutineType,
-	DITemplateTypeParameter,
-	DITemplateValueParameter,
-	GenericDINode,
+    DIBasicType,
+    DICompileUnit,
+    DICompositeType,
+    DIDerivedType,
+    DIEnumerator,
+    DIExpression,
+    DIFile,
+    DIGlobalVariable,
+    DIGlobalVariableExpression,
+    DIImportedEntity,
+    DILabel,
+    DILexicalBlock,
+    DILexicalBlockFile,
+    DILocalVariable,
+    DILocation,
+    DIMacro,
+    DIMacroFile,
+    DIModule,
+    DINamespace,
+    DIObjCProperty,
+    DISubprogram,
+    DISubrange,
+    DISubroutineType,
+    DITemplateTypeParameter,
+    DITemplateValueParameter,
+    GenericDINode,
 }
 
 var TargetDef = []NodeType{
-	TargetDataLayout,
-	TargetTriple,
+    TargetDataLayout,
+    TargetTriple,
 }
 
 var Terminator = []NodeType{
-	BrTerm,
-	CatchRetTerm,
-	CatchSwitchTerm,
-	CleanupRetTerm,
-	CondBrTerm,
-	IndirectBrTerm,
-	InvokeTerm,
-	LocalDefTerm,
-	ResumeTerm,
-	RetTerm,
-	SwitchTerm,
-	UnreachableTerm,
+    BrTerm,
+    CatchRetTerm,
+    CatchSwitchTerm,
+    CleanupRetTerm,
+    CondBrTerm,
+    IndirectBrTerm,
+    InvokeTerm,
+    LocalDefTerm,
+    ResumeTerm,
+    RetTerm,
+    SwitchTerm,
+    UnreachableTerm,
 }
 
 var TopLevelEntity = []NodeType{
-	AliasDef,
-	AttrGroupDef,
-	ComdatDef,
-	FuncDecl,
-	FuncDef,
-	GlobalDecl,
-	GlobalDef,
-	IFuncDef,
-	MetadataDef,
-	ModuleAsm,
-	NamedMetadataDef,
-	SourceFilename,
-	TargetDataLayout,
-	TargetTriple,
-	TypeDef,
-	UseListOrder,
-	UseListOrderBB,
+    AliasDef,
+    AttrGroupDef,
+    ComdatDef,
+    FuncDecl,
+    FuncDef,
+    GlobalDecl,
+    GlobalDef,
+    IFuncDef,
+    MetadataDef,
+    ModuleAsm,
+    NamedMetadataDef,
+    SourceFilename,
+    TargetDataLayout,
+    TargetTriple,
+    TypeDef,
+    UseListOrder,
+    UseListOrderBB,
 }
 
 var Type = []NodeType{
-	ArrayType,
-	FloatType,
-	FuncType,
-	IntType,
-	LabelType,
-	MMXType,
-	MetadataType,
-	NamedType,
-	PackedStructType,
-	PointerType,
-	StructType,
-	TokenType,
-	VectorType,
-	VoidType,
+    ArrayType,
+    FloatType,
+    FuncType,
+    IntType,
+    LabelType,
+    MMXType,
+    MetadataType,
+    NamedType,
+    PackedStructType,
+    PointerType,
+    StructType,
+    TokenType,
+    VectorType,
+    VoidType,
 }
 
 var Value = []NodeType{
-	AShrExpr,
-	AddExpr,
-	AddrSpaceCastExpr,
-	AndExpr,
-	ArrayConst,
-	BitCastExpr,
-	BlockAddressConst,
-	BoolConst,
-	CharArrayConst,
-	ExtractElementExpr,
-	ExtractValueExpr,
-	FAddExpr,
-	FCmpExpr,
-	FDivExpr,
-	FMulExpr,
-	FPExtExpr,
-	FPToSIExpr,
-	FPToUIExpr,
-	FPTruncExpr,
-	FRemExpr,
-	FSubExpr,
-	FloatConst,
-	GetElementPtrExpr,
-	GlobalIdent,
-	ICmpExpr,
-	InlineAsm,
-	InsertElementExpr,
-	InsertValueExpr,
-	IntConst,
-	IntToPtrExpr,
-	LShrExpr,
-	LocalIdent,
-	MulExpr,
-	NoneConst,
-	NullConst,
-	OrExpr,
-	PtrToIntExpr,
-	SDivExpr,
-	SExtExpr,
-	SIToFPExpr,
-	SRemExpr,
-	SelectExpr,
-	ShlExpr,
-	ShuffleVectorExpr,
-	StructConst,
-	SubExpr,
-	TruncExpr,
-	UDivExpr,
-	UIToFPExpr,
-	URemExpr,
-	UndefConst,
-	VectorConst,
-	XorExpr,
-	ZExtExpr,
-	ZeroInitializerConst,
+    AShrExpr,
+    AddExpr,
+    AddrSpaceCastExpr,
+    AndExpr,
+    ArrayConst,
+    BitCastExpr,
+    BlockAddressConst,
+    BoolConst,
+    CharArrayConst,
+    ExtractElementExpr,
+    ExtractValueExpr,
+    FAddExpr,
+    FCmpExpr,
+    FDivExpr,
+    FMulExpr,
+    FPExtExpr,
+    FPToSIExpr,
+    FPToUIExpr,
+    FPTruncExpr,
+    FRemExpr,
+    FSubExpr,
+    FloatConst,
+    GetElementPtrExpr,
+    GlobalIdent,
+    ICmpExpr,
+    InlineAsm,
+    InsertElementExpr,
+    InsertValueExpr,
+    IntConst,
+    IntToPtrExpr,
+    LShrExpr,
+    LocalIdent,
+    MulExpr,
+    NoneConst,
+    NullConst,
+    OrExpr,
+    PtrToIntExpr,
+    SDivExpr,
+    SExtExpr,
+    SIToFPExpr,
+    SRemExpr,
+    SelectExpr,
+    ShlExpr,
+    ShuffleVectorExpr,
+    StructConst,
+    SubExpr,
+    TruncExpr,
+    UDivExpr,
+    UIToFPExpr,
+    URemExpr,
+    UndefConst,
+    VectorConst,
+    XorExpr,
+    ZExtExpr,
+    ZeroInitializerConst,
 }
 
 var ValueInstruction = []NodeType{
-	AShrInst,
-	AddInst,
-	AddrSpaceCastInst,
-	AllocaInst,
-	AndInst,
-	AtomicRMWInst,
-	BitCastInst,
-	CallInst,
-	CatchPadInst,
-	CleanupPadInst,
-	CmpXchgInst,
-	ExtractElementInst,
-	ExtractValueInst,
-	FAddInst,
-	FCmpInst,
-	FDivInst,
-	FMulInst,
-	FPExtInst,
-	FPToSIInst,
-	FPToUIInst,
-	FPTruncInst,
-	FRemInst,
-	FSubInst,
-	GetElementPtrInst,
-	ICmpInst,
-	InsertElementInst,
-	InsertValueInst,
-	IntToPtrInst,
-	LShrInst,
-	LandingPadInst,
-	LoadInst,
-	MulInst,
-	OrInst,
-	PhiInst,
-	PtrToIntInst,
-	SDivInst,
-	SExtInst,
-	SIToFPInst,
-	SRemInst,
-	SelectInst,
-	ShlInst,
-	ShuffleVectorInst,
-	SubInst,
-	TruncInst,
-	UDivInst,
-	UIToFPInst,
-	URemInst,
-	VAArgInst,
-	XorInst,
-	ZExtInst,
+    AShrInst,
+    AddInst,
+    AddrSpaceCastInst,
+    AllocaInst,
+    AndInst,
+    AtomicRMWInst,
+    BitCastInst,
+    CallInst,
+    CatchPadInst,
+    CleanupPadInst,
+    CmpXchgInst,
+    ExtractElementInst,
+    ExtractValueInst,
+    FAddInst,
+    FCmpInst,
+    FDivInst,
+    FMulInst,
+    FPExtInst,
+    FPToSIInst,
+    FPToUIInst,
+    FPTruncInst,
+    FRemInst,
+    FSubInst,
+    GetElementPtrInst,
+    ICmpInst,
+    InsertElementInst,
+    InsertValueInst,
+    IntToPtrInst,
+    LShrInst,
+    LandingPadInst,
+    LoadInst,
+    MulInst,
+    OrInst,
+    PhiInst,
+    PtrToIntInst,
+    SDivInst,
+    SExtInst,
+    SIToFPInst,
+    SRemInst,
+    SelectInst,
+    ShlInst,
+    ShuffleVectorInst,
+    SubInst,
+    TruncInst,
+    UDivInst,
+    UIToFPInst,
+    URemInst,
+    VAArgInst,
+    XorInst,
+    ZExtInst,
 }
 
 var ValueTerminator = []NodeType{
-	CatchSwitchTerm,
-	InvokeTerm,
+    CatchSwitchTerm,
+    InvokeTerm,
 }
 
 var ruleNodeType = [...]NodeType{
-	GlobalIdent,                // GlobalIdent : global_ident_tok
-	LocalIdent,                 // LocalIdent : local_ident_tok
-	LabelIdent,                 // LabelIdent : label_ident_tok
-	AttrGroupID,                // AttrGroupID : attr_group_id_tok
-	ComdatName,                 // ComdatName : comdat_name_tok
-	MetadataName,               // MetadataName : metadata_name_tok
-	MetadataID,                 // MetadataID : metadata_id_tok
-	BoolLit,                    // BoolLit : 'true'
-	BoolLit,                    // BoolLit : 'false'
-	IntLit,                     // IntLit : int_lit_tok
-	UintLit,                    // UintLit : int_lit_tok
-	FloatLit,                   // FloatLit : float_lit_tok
-	StringLit,                  // StringLit : string_lit_tok
-	NullLit,                    // NullLit : 'null'
-	Module,                     // Module : TopLevelEntity_optlist
-	0,                          // TopLevelEntity_optlist : TopLevelEntity_optlist TopLevelEntity
-	0,                          // TopLevelEntity_optlist :
-	0,                          // TopLevelEntity : SourceFilename
-	0,                          // TopLevelEntity : TargetDef
-	0,                          // TopLevelEntity : ModuleAsm
-	0,                          // TopLevelEntity : TypeDef
-	0,                          // TopLevelEntity : ComdatDef
-	0,                          // TopLevelEntity : GlobalDecl
-	0,                          // TopLevelEntity : GlobalDef
-	0,                          // TopLevelEntity : IndirectSymbolDef
-	0,                          // TopLevelEntity : FuncDecl
-	0,                          // TopLevelEntity : FuncDef
-	0,                          // TopLevelEntity : AttrGroupDef
-	0,                          // TopLevelEntity : NamedMetadataDef
-	0,                          // TopLevelEntity : MetadataDef
-	0,                          // TopLevelEntity : UseListOrder
-	0,                          // TopLevelEntity : UseListOrderBB
-	SourceFilename,             // SourceFilename : 'source_filename' '=' StringLit
-	0,                          // TargetDef : TargetDataLayout
-	0,                          // TargetDef : TargetTriple
-	TargetDataLayout,           // TargetDataLayout : 'target' 'datalayout' '=' StringLit
-	TargetTriple,               // TargetTriple : 'target' 'triple' '=' StringLit
-	ModuleAsm,                  // ModuleAsm : 'module' 'asm' StringLit
-	TypeDef,                    // TypeDef : LocalIdent '=' 'type' OpaqueType
-	TypeDef,                    // TypeDef : LocalIdent '=' 'type' Type
-	ComdatDef,                  // ComdatDef : ComdatName '=' 'comdat' SelectionKind
-	SelectionKind,              // SelectionKind : 'any'
-	SelectionKind,              // SelectionKind : 'exactmatch'
-	SelectionKind,              // SelectionKind : 'largest'
-	SelectionKind,              // SelectionKind : 'noduplicates'
-	SelectionKind,              // SelectionKind : 'samesize'
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type list_of_','_and_1_elements list_of_','_and_1_elements1
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type list_of_','_and_1_elements1
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type
-	0,                          // list_of_','_and_1_elements : list_of_','_and_1_elements ',' GlobalAttr
-	0,                          // list_of_','_and_1_elements : ',' GlobalAttr
-	0,                          // list_of_','_and_1_elements1 : list_of_','_and_1_elements1 ',' FuncAttr
-	0,                          // list_of_','_and_1_elements1 : ',' FuncAttr
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements list_of_','_and_1_elements1
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements1
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant
-	ExternallyInitialized,      // ExternallyInitialized : 'externally_initialized'
-	Immutable,                  // Immutable : 'constant'
-	Immutable,                  // Immutable : 'global'
-	0,                          // IndirectSymbolDef : AliasDef
-	0,                          // IndirectSymbolDef : IFuncDef
-	AliasDef,                   // AliasDef : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'alias' Type ',' Type Constant
-	AliasDef,                   // AliasDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'alias' Type ',' Type Constant
-	IFuncDef,                   // IFuncDef : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'ifunc' Type ',' Type Constant
-	IFuncDef,                   // IFuncDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'ifunc' Type ',' Type Constant
-	FuncDecl,                   // FuncDecl : 'declare' MetadataAttachment_optlist FuncHeader
-	0,                          // MetadataAttachment_optlist : MetadataAttachment_optlist MetadataAttachment
-	0,                          // MetadataAttachment_optlist :
-	FuncDef,                    // FuncDef : 'define' FuncHeader MetadataAttachment_optlist FuncBody
-	0,                          // FuncAttr_optlist : FuncAttr_optlist FuncAttr
-	0,                          // FuncAttr_optlist :
-	FuncHeader,                 // FuncHeader : Linkage Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttr_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttr_optlist Sectionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
-	FuncHeader,                 // FuncHeader : ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttr_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttr_optlist Sectionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
-	FuncHeader,                 // FuncHeader : Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttr_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttr_optlist Sectionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
-	0,                          // ReturnAttr_optlist : ReturnAttr_optlist ReturnAttr
-	0,                          // ReturnAttr_optlist :
-	GCNode,                     // GC : 'gc' StringLit
-	Prefix,                     // Prefix : 'prefix' Type Constant
-	Prologue,                   // Prologue : 'prologue' Type Constant
-	Personality,                // Personality : 'personality' Type Constant
-	0,                          // BasicBlock_list : BasicBlock_list BasicBlock
-	0,                          // BasicBlock_list : BasicBlock
-	FuncBody,                   // FuncBody : '{' BasicBlock_list UseListOrder_optlist '}'
-	0,                          // UseListOrder_optlist : UseListOrder_optlist UseListOrder
-	0,                          // UseListOrder_optlist :
-	AttrGroupDef,               // AttrGroupDef : 'attributes' AttrGroupID '=' '{' FuncAttr_optlist '}'
-	0,                          // MetadataNode_list_withsep : MetadataNode_list_withsep ',' MetadataNode
-	0,                          // MetadataNode_list_withsep : MetadataNode
-	0,                          // MetadataNode_list_withsep_opt : MetadataNode_list_withsep
-	0,                          // MetadataNode_list_withsep_opt :
-	NamedMetadataDef,           // NamedMetadataDef : MetadataName '=' '!' '{' MetadataNode_list_withsep_opt '}'
-	0,                          // MetadataNode : MetadataID
-	0,                          // MetadataNode : DIExpression
-	MetadataDef,                // MetadataDef : MetadataID '=' Distinctopt MDTuple
-	MetadataDef,                // MetadataDef : MetadataID '=' Distinctopt SpecializedMDNode
-	Distinct,                   // Distinct : 'distinct'
-	0,                          // UintLit_list_withsep : UintLit_list_withsep ',' UintLit
-	0,                          // UintLit_list_withsep : UintLit
-	UseListOrder,               // UseListOrder : 'uselistorder' Type Value ',' '{' UintLit_list_withsep '}'
-	UseListOrderBB,             // UseListOrderBB : 'uselistorder_bb' GlobalIdent ',' LocalIdent ',' '{' UintLit_list_withsep '}'
-	0,                          // Type : VoidType
-	0,                          // Type : FuncType
-	0,                          // Type : FirstClassType
-	0,                          // FirstClassType : ConcreteType
-	0,                          // FirstClassType : MetadataType
-	0,                          // ConcreteType : IntType
-	0,                          // ConcreteType : FloatType
-	0,                          // ConcreteType : PointerType
-	0,                          // ConcreteType : VectorType
-	0,                          // ConcreteType : LabelType
-	0,                          // ConcreteType : ArrayType
-	0,                          // ConcreteType : StructType
-	0,                          // ConcreteType : NamedType
-	0,                          // ConcreteType : MMXType
-	0,                          // ConcreteType : TokenType
-	VoidType,                   // VoidType : 'void'
-	FuncType,                   // FuncType : Type '(' Params ')'
-	IntType,                    // IntType : int_type_tok
-	FloatType,                  // FloatType : FloatKind
-	FloatKind,                  // FloatKind : 'half'
-	FloatKind,                  // FloatKind : 'float'
-	FloatKind,                  // FloatKind : 'double'
-	FloatKind,                  // FloatKind : 'x86_fp80'
-	FloatKind,                  // FloatKind : 'fp128'
-	FloatKind,                  // FloatKind : 'ppc_fp128'
-	MMXType,                    // MMXType : 'x86_mmx'
-	PointerType,                // PointerType : Type AddrSpaceopt '*'
-	VectorType,                 // VectorType : '<' UintLit 'x' Type '>'
-	LabelType,                  // LabelType : 'label'
-	TokenType,                  // TokenType : 'token'
-	MetadataType,               // MetadataType : 'metadata'
-	ArrayType,                  // ArrayType : '[' UintLit 'x' Type ']'
-	StructType,                 // StructType : '{' Type_list_withsep '}'
-	StructType,                 // StructType : '{' '}'
-	PackedStructType,           // StructType : '<' '{' Type_list_withsep '}' '>'
-	PackedStructType,           // StructType : '<' '{' '}' '>'
-	0,                          // Type_list_withsep : Type_list_withsep ',' Type
-	0,                          // Type_list_withsep : Type
-	OpaqueType,                 // OpaqueType : 'opaque'
-	NamedType,                  // NamedType : LocalIdent
-	0,                          // Value : Constant
-	0,                          // Value : LocalIdent
-	0,                          // Value : InlineAsm
-	InlineAsm,                  // InlineAsm : 'asm' SideEffectopt AlignStackopt IntelDialectopt StringLit ',' StringLit
-	SideEffect,                 // SideEffect : 'sideeffect'
-	AlignStack,                 // AlignStack : 'alignstack'
-	IntelDialect,               // IntelDialect : 'inteldialect'
-	0,                          // Constant : BoolConst
-	0,                          // Constant : IntConst
-	0,                          // Constant : FloatConst
-	0,                          // Constant : NullConst
-	0,                          // Constant : NoneConst
-	0,                          // Constant : StructConst
-	0,                          // Constant : ArrayConst
-	0,                          // Constant : VectorConst
-	0,                          // Constant : ZeroInitializerConst
-	0,                          // Constant : GlobalIdent
-	0,                          // Constant : UndefConst
-	0,                          // Constant : BlockAddressConst
-	0,                          // Constant : ConstantExpr
-	BoolConst,                  // BoolConst : BoolLit
-	IntConst,                   // IntConst : IntLit
-	FloatConst,                 // FloatConst : FloatLit
-	NullConst,                  // NullConst : NullLit
-	NoneConst,                  // NoneConst : 'none'
-	StructConst,                // StructConst : '{' TypeConst_list_withsep '}'
-	StructConst,                // StructConst : '{' '}'
-	StructConst,                // StructConst : '<' '{' TypeConst_list_withsep '}' '>'
-	StructConst,                // StructConst : '<' '{' '}' '>'
-	0,                          // TypeConst_list_withsep : TypeConst_list_withsep ',' TypeConst
-	0,                          // TypeConst_list_withsep : TypeConst
-	ArrayConst,                 // ArrayConst : '[' TypeConst_list_withsep_opt ']'
-	CharArrayConst,             // ArrayConst : 'c' StringLit
-	0,                          // TypeConst_list_withsep_opt : TypeConst_list_withsep
-	0,                          // TypeConst_list_withsep_opt :
-	VectorConst,                // VectorConst : '<' TypeConst_list_withsep_opt '>'
-	ZeroInitializerConst,       // ZeroInitializerConst : 'zeroinitializer'
-	UndefConst,                 // UndefConst : 'undef'
-	BlockAddressConst,          // BlockAddressConst : 'blockaddress' '(' GlobalIdent ',' LocalIdent ')'
-	0,                          // ConstantExpr : AddExpr
-	0,                          // ConstantExpr : FAddExpr
-	0,                          // ConstantExpr : SubExpr
-	0,                          // ConstantExpr : FSubExpr
-	0,                          // ConstantExpr : MulExpr
-	0,                          // ConstantExpr : FMulExpr
-	0,                          // ConstantExpr : UDivExpr
-	0,                          // ConstantExpr : SDivExpr
-	0,                          // ConstantExpr : FDivExpr
-	0,                          // ConstantExpr : URemExpr
-	0,                          // ConstantExpr : SRemExpr
-	0,                          // ConstantExpr : FRemExpr
-	0,                          // ConstantExpr : ShlExpr
-	0,                          // ConstantExpr : LShrExpr
-	0,                          // ConstantExpr : AShrExpr
-	0,                          // ConstantExpr : AndExpr
-	0,                          // ConstantExpr : OrExpr
-	0,                          // ConstantExpr : XorExpr
-	0,                          // ConstantExpr : ExtractElementExpr
-	0,                          // ConstantExpr : InsertElementExpr
-	0,                          // ConstantExpr : ShuffleVectorExpr
-	0,                          // ConstantExpr : ExtractValueExpr
-	0,                          // ConstantExpr : InsertValueExpr
-	0,                          // ConstantExpr : GetElementPtrExpr
-	0,                          // ConstantExpr : TruncExpr
-	0,                          // ConstantExpr : ZExtExpr
-	0,                          // ConstantExpr : SExtExpr
-	0,                          // ConstantExpr : FPTruncExpr
-	0,                          // ConstantExpr : FPExtExpr
-	0,                          // ConstantExpr : FPToUIExpr
-	0,                          // ConstantExpr : FPToSIExpr
-	0,                          // ConstantExpr : UIToFPExpr
-	0,                          // ConstantExpr : SIToFPExpr
-	0,                          // ConstantExpr : PtrToIntExpr
-	0,                          // ConstantExpr : IntToPtrExpr
-	0,                          // ConstantExpr : BitCastExpr
-	0,                          // ConstantExpr : AddrSpaceCastExpr
-	0,                          // ConstantExpr : ICmpExpr
-	0,                          // ConstantExpr : FCmpExpr
-	0,                          // ConstantExpr : SelectExpr
-	AddExpr,                    // AddExpr : 'add' OverflowFlag_optlist '(' TypeConst ',' TypeConst ')'
-	0,                          // OverflowFlag_optlist : OverflowFlag_optlist OverflowFlag
-	0,                          // OverflowFlag_optlist :
-	FAddExpr,                   // FAddExpr : 'fadd' '(' TypeConst ',' TypeConst ')'
-	SubExpr,                    // SubExpr : 'sub' OverflowFlag_optlist '(' TypeConst ',' TypeConst ')'
-	FSubExpr,                   // FSubExpr : 'fsub' '(' TypeConst ',' TypeConst ')'
-	MulExpr,                    // MulExpr : 'mul' OverflowFlag_optlist '(' TypeConst ',' TypeConst ')'
-	FMulExpr,                   // FMulExpr : 'fmul' '(' TypeConst ',' TypeConst ')'
-	UDivExpr,                   // UDivExpr : 'udiv' Exactopt '(' TypeConst ',' TypeConst ')'
-	SDivExpr,                   // SDivExpr : 'sdiv' Exactopt '(' TypeConst ',' TypeConst ')'
-	FDivExpr,                   // FDivExpr : 'fdiv' '(' TypeConst ',' TypeConst ')'
-	URemExpr,                   // URemExpr : 'urem' '(' TypeConst ',' TypeConst ')'
-	SRemExpr,                   // SRemExpr : 'srem' '(' TypeConst ',' TypeConst ')'
-	FRemExpr,                   // FRemExpr : 'frem' '(' TypeConst ',' TypeConst ')'
-	ShlExpr,                    // ShlExpr : 'shl' OverflowFlag_optlist '(' TypeConst ',' TypeConst ')'
-	LShrExpr,                   // LShrExpr : 'lshr' Exactopt '(' TypeConst ',' TypeConst ')'
-	AShrExpr,                   // AShrExpr : 'ashr' Exactopt '(' TypeConst ',' TypeConst ')'
-	AndExpr,                    // AndExpr : 'and' '(' TypeConst ',' TypeConst ')'
-	OrExpr,                     // OrExpr : 'or' '(' TypeConst ',' TypeConst ')'
-	XorExpr,                    // XorExpr : 'xor' '(' TypeConst ',' TypeConst ')'
-	ExtractElementExpr,         // ExtractElementExpr : 'extractelement' '(' TypeConst ',' TypeConst ')'
-	InsertElementExpr,          // InsertElementExpr : 'insertelement' '(' TypeConst ',' TypeConst ',' TypeConst ')'
-	ShuffleVectorExpr,          // ShuffleVectorExpr : 'shufflevector' '(' TypeConst ',' TypeConst ',' TypeConst ')'
-	ExtractValueExpr,           // ExtractValueExpr : 'extractvalue' '(' TypeConst list_of_','_and_1_elements2 ')'
-	0,                          // list_of_','_and_1_elements2 : list_of_','_and_1_elements2 ',' UintLit
-	0,                          // list_of_','_and_1_elements2 :
-	InsertValueExpr,            // InsertValueExpr : 'insertvalue' '(' TypeConst ',' TypeConst list_of_','_and_1_elements2 ')'
-	GetElementPtrExpr,          // GetElementPtrExpr : 'getelementptr' InBoundsopt '(' Type ',' TypeConst list_of_','_and_1_elements3 ')'
-	0,                          // list_of_','_and_1_elements3 : list_of_','_and_1_elements3 ',' GEPIndex
-	0,                          // list_of_','_and_1_elements3 :
-	GEPIndex,                   // GEPIndex : InRangeopt TypeConst
-	InRange,                    // InRange : 'inrange'
-	TruncExpr,                  // TruncExpr : 'trunc' '(' TypeConst 'to' Type ')'
-	ZExtExpr,                   // ZExtExpr : 'zext' '(' TypeConst 'to' Type ')'
-	SExtExpr,                   // SExtExpr : 'sext' '(' TypeConst 'to' Type ')'
-	FPTruncExpr,                // FPTruncExpr : 'fptrunc' '(' TypeConst 'to' Type ')'
-	FPExtExpr,                  // FPExtExpr : 'fpext' '(' TypeConst 'to' Type ')'
-	FPToUIExpr,                 // FPToUIExpr : 'fptoui' '(' TypeConst 'to' Type ')'
-	FPToSIExpr,                 // FPToSIExpr : 'fptosi' '(' TypeConst 'to' Type ')'
-	UIToFPExpr,                 // UIToFPExpr : 'uitofp' '(' TypeConst 'to' Type ')'
-	SIToFPExpr,                 // SIToFPExpr : 'sitofp' '(' TypeConst 'to' Type ')'
-	PtrToIntExpr,               // PtrToIntExpr : 'ptrtoint' '(' TypeConst 'to' Type ')'
-	IntToPtrExpr,               // IntToPtrExpr : 'inttoptr' '(' TypeConst 'to' Type ')'
-	BitCastExpr,                // BitCastExpr : 'bitcast' '(' TypeConst 'to' Type ')'
-	AddrSpaceCastExpr,          // AddrSpaceCastExpr : 'addrspacecast' '(' TypeConst 'to' Type ')'
-	ICmpExpr,                   // ICmpExpr : 'icmp' IPred '(' TypeConst ',' TypeConst ')'
-	FCmpExpr,                   // FCmpExpr : 'fcmp' FPred '(' TypeConst ',' TypeConst ')'
-	SelectExpr,                 // SelectExpr : 'select' '(' TypeConst ',' TypeConst ',' TypeConst ')'
-	BasicBlock,                 // BasicBlock : LabelIdentopt Instruction_optlist Terminator
-	0,                          // Instruction_optlist : Instruction_optlist Instruction
-	0,                          // Instruction_optlist :
-	0,                          // Instruction : LocalDefInst
-	0,                          // Instruction : ValueInstruction
-	0,                          // Instruction : StoreInst
-	0,                          // Instruction : FenceInst
-	LocalDefInst,               // LocalDefInst : LocalIdent '=' ValueInstruction
-	0,                          // ValueInstruction : AddInst
-	0,                          // ValueInstruction : FAddInst
-	0,                          // ValueInstruction : SubInst
-	0,                          // ValueInstruction : FSubInst
-	0,                          // ValueInstruction : MulInst
-	0,                          // ValueInstruction : FMulInst
-	0,                          // ValueInstruction : UDivInst
-	0,                          // ValueInstruction : SDivInst
-	0,                          // ValueInstruction : FDivInst
-	0,                          // ValueInstruction : URemInst
-	0,                          // ValueInstruction : SRemInst
-	0,                          // ValueInstruction : FRemInst
-	0,                          // ValueInstruction : ShlInst
-	0,                          // ValueInstruction : LShrInst
-	0,                          // ValueInstruction : AShrInst
-	0,                          // ValueInstruction : AndInst
-	0,                          // ValueInstruction : OrInst
-	0,                          // ValueInstruction : XorInst
-	0,                          // ValueInstruction : ExtractElementInst
-	0,                          // ValueInstruction : InsertElementInst
-	0,                          // ValueInstruction : ShuffleVectorInst
-	0,                          // ValueInstruction : ExtractValueInst
-	0,                          // ValueInstruction : InsertValueInst
-	0,                          // ValueInstruction : AllocaInst
-	0,                          // ValueInstruction : LoadInst
-	0,                          // ValueInstruction : CmpXchgInst
-	0,                          // ValueInstruction : AtomicRMWInst
-	0,                          // ValueInstruction : GetElementPtrInst
-	0,                          // ValueInstruction : TruncInst
-	0,                          // ValueInstruction : ZExtInst
-	0,                          // ValueInstruction : SExtInst
-	0,                          // ValueInstruction : FPTruncInst
-	0,                          // ValueInstruction : FPExtInst
-	0,                          // ValueInstruction : FPToUIInst
-	0,                          // ValueInstruction : FPToSIInst
-	0,                          // ValueInstruction : UIToFPInst
-	0,                          // ValueInstruction : SIToFPInst
-	0,                          // ValueInstruction : PtrToIntInst
-	0,                          // ValueInstruction : IntToPtrInst
-	0,                          // ValueInstruction : BitCastInst
-	0,                          // ValueInstruction : AddrSpaceCastInst
-	0,                          // ValueInstruction : ICmpInst
-	0,                          // ValueInstruction : FCmpInst
-	0,                          // ValueInstruction : PhiInst
-	0,                          // ValueInstruction : SelectInst
-	0,                          // ValueInstruction : CallInst
-	0,                          // ValueInstruction : VAArgInst
-	0,                          // ValueInstruction : LandingPadInst
-	0,                          // ValueInstruction : CatchPadInst
-	0,                          // ValueInstruction : CleanupPadInst
-	AddInst,                    // AddInst : 'add' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
-	AddInst,                    // AddInst : 'add' OverflowFlag_optlist TypeValue ',' Value
-	0,                          // list_of_','_and_1_elements4 : list_of_','_and_1_elements4 ',' MetadataAttachment
-	0,                          // list_of_','_and_1_elements4 : ',' MetadataAttachment
-	FAddInst,                   // FAddInst : 'fadd' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
-	FAddInst,                   // FAddInst : 'fadd' FastMathFlag_optlist TypeValue ',' Value
-	0,                          // FastMathFlag_optlist : FastMathFlag_optlist FastMathFlag
-	0,                          // FastMathFlag_optlist :
-	SubInst,                    // SubInst : 'sub' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
-	SubInst,                    // SubInst : 'sub' OverflowFlag_optlist TypeValue ',' Value
-	FSubInst,                   // FSubInst : 'fsub' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
-	FSubInst,                   // FSubInst : 'fsub' FastMathFlag_optlist TypeValue ',' Value
-	MulInst,                    // MulInst : 'mul' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
-	MulInst,                    // MulInst : 'mul' OverflowFlag_optlist TypeValue ',' Value
-	FMulInst,                   // FMulInst : 'fmul' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
-	FMulInst,                   // FMulInst : 'fmul' FastMathFlag_optlist TypeValue ',' Value
-	UDivInst,                   // UDivInst : 'udiv' Exactopt TypeValue ',' Value list_of_','_and_1_elements4
-	UDivInst,                   // UDivInst : 'udiv' Exactopt TypeValue ',' Value
-	SDivInst,                   // SDivInst : 'sdiv' Exactopt TypeValue ',' Value list_of_','_and_1_elements4
-	SDivInst,                   // SDivInst : 'sdiv' Exactopt TypeValue ',' Value
-	FDivInst,                   // FDivInst : 'fdiv' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
-	FDivInst,                   // FDivInst : 'fdiv' FastMathFlag_optlist TypeValue ',' Value
-	URemInst,                   // URemInst : 'urem' TypeValue ',' Value list_of_','_and_1_elements4
-	URemInst,                   // URemInst : 'urem' TypeValue ',' Value
-	SRemInst,                   // SRemInst : 'srem' TypeValue ',' Value list_of_','_and_1_elements4
-	SRemInst,                   // SRemInst : 'srem' TypeValue ',' Value
-	FRemInst,                   // FRemInst : 'frem' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
-	FRemInst,                   // FRemInst : 'frem' FastMathFlag_optlist TypeValue ',' Value
-	ShlInst,                    // ShlInst : 'shl' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
-	ShlInst,                    // ShlInst : 'shl' OverflowFlag_optlist TypeValue ',' Value
-	LShrInst,                   // LShrInst : 'lshr' Exactopt TypeValue ',' Value list_of_','_and_1_elements4
-	LShrInst,                   // LShrInst : 'lshr' Exactopt TypeValue ',' Value
-	AShrInst,                   // AShrInst : 'ashr' Exactopt TypeValue ',' Value list_of_','_and_1_elements4
-	AShrInst,                   // AShrInst : 'ashr' Exactopt TypeValue ',' Value
-	AndInst,                    // AndInst : 'and' TypeValue ',' Value list_of_','_and_1_elements4
-	AndInst,                    // AndInst : 'and' TypeValue ',' Value
-	OrInst,                     // OrInst : 'or' TypeValue ',' Value list_of_','_and_1_elements4
-	OrInst,                     // OrInst : 'or' TypeValue ',' Value
-	XorInst,                    // XorInst : 'xor' TypeValue ',' Value list_of_','_and_1_elements4
-	XorInst,                    // XorInst : 'xor' TypeValue ',' Value
-	ExtractElementInst,         // ExtractElementInst : 'extractelement' TypeValue ',' TypeValue list_of_','_and_1_elements4
-	ExtractElementInst,         // ExtractElementInst : 'extractelement' TypeValue ',' TypeValue
-	InsertElementInst,          // InsertElementInst : 'insertelement' TypeValue ',' TypeValue ',' TypeValue list_of_','_and_1_elements4
-	InsertElementInst,          // InsertElementInst : 'insertelement' TypeValue ',' TypeValue ',' TypeValue
-	ShuffleVectorInst,          // ShuffleVectorInst : 'shufflevector' TypeValue ',' TypeValue ',' TypeValue list_of_','_and_1_elements4
-	ShuffleVectorInst,          // ShuffleVectorInst : 'shufflevector' TypeValue ',' TypeValue ',' TypeValue
-	ExtractValueInst,           // ExtractValueInst : 'extractvalue' TypeValue list_of_','_and_1_elements5 list_of_','_and_1_elements4
-	ExtractValueInst,           // ExtractValueInst : 'extractvalue' TypeValue list_of_','_and_1_elements5
-	0,                          // list_of_','_and_1_elements5 : list_of_','_and_1_elements5 ',' UintLit
-	0,                          // list_of_','_and_1_elements5 : ',' UintLit
-	InsertValueInst,            // InsertValueInst : 'insertvalue' TypeValue ',' TypeValue list_of_','_and_1_elements5 list_of_','_and_1_elements4
-	InsertValueInst,            // InsertValueInst : 'insertvalue' TypeValue ',' TypeValue list_of_','_and_1_elements5
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' Alignment ',' AddrSpace list_of_','_and_1_elements4
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' Alignment ',' AddrSpace
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' Alignment list_of_','_and_1_elements4
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' Alignment
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' AddrSpace list_of_','_and_1_elements4
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' AddrSpace
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue list_of_','_and_1_elements4
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' Alignment ',' AddrSpace list_of_','_and_1_elements4
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' Alignment ',' AddrSpace
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' Alignment list_of_','_and_1_elements4
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' Alignment
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' AddrSpace list_of_','_and_1_elements4
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' AddrSpace
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type list_of_','_and_1_elements4
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type
-	InAlloca,                   // InAlloca : 'inalloca'
-	SwiftError,                 // SwiftError : 'swifterror'
-	LoadInst,                   // LoadInst : 'load' Volatileopt Type ',' TypeValue ',' Alignment list_of_','_and_1_elements4
-	LoadInst,                   // LoadInst : 'load' Volatileopt Type ',' TypeValue ',' Alignment
-	LoadInst,                   // LoadInst : 'load' Volatileopt Type ',' TypeValue list_of_','_and_1_elements4
-	LoadInst,                   // LoadInst : 'load' Volatileopt Type ',' TypeValue
-	LoadInst,                   // LoadInst : 'load' Atomic Volatileopt Type ',' TypeValue SyncScopeopt AtomicOrdering ',' Alignment list_of_','_and_1_elements4
-	LoadInst,                   // LoadInst : 'load' Atomic Volatileopt Type ',' TypeValue SyncScopeopt AtomicOrdering ',' Alignment
-	LoadInst,                   // LoadInst : 'load' Atomic Volatileopt Type ',' TypeValue SyncScopeopt AtomicOrdering list_of_','_and_1_elements4
-	LoadInst,                   // LoadInst : 'load' Atomic Volatileopt Type ',' TypeValue SyncScopeopt AtomicOrdering
-	StoreInst,                  // StoreInst : 'store' Volatileopt TypeValue ',' TypeValue ',' Alignment list_of_','_and_1_elements4
-	StoreInst,                  // StoreInst : 'store' Volatileopt TypeValue ',' TypeValue ',' Alignment
-	StoreInst,                  // StoreInst : 'store' Volatileopt TypeValue ',' TypeValue list_of_','_and_1_elements4
-	StoreInst,                  // StoreInst : 'store' Volatileopt TypeValue ',' TypeValue
-	StoreInst,                  // StoreInst : 'store' Atomic Volatileopt TypeValue ',' TypeValue SyncScopeopt AtomicOrdering ',' Alignment list_of_','_and_1_elements4
-	StoreInst,                  // StoreInst : 'store' Atomic Volatileopt TypeValue ',' TypeValue SyncScopeopt AtomicOrdering ',' Alignment
-	StoreInst,                  // StoreInst : 'store' Atomic Volatileopt TypeValue ',' TypeValue SyncScopeopt AtomicOrdering list_of_','_and_1_elements4
-	StoreInst,                  // StoreInst : 'store' Atomic Volatileopt TypeValue ',' TypeValue SyncScopeopt AtomicOrdering
-	FenceInst,                  // FenceInst : 'fence' SyncScopeopt AtomicOrdering list_of_','_and_1_elements4
-	FenceInst,                  // FenceInst : 'fence' SyncScopeopt AtomicOrdering
-	CmpXchgInst,                // CmpXchgInst : 'cmpxchg' Weakopt Volatileopt TypeValue ',' TypeValue ',' TypeValue SyncScopeopt AtomicOrdering AtomicOrdering list_of_','_and_1_elements4
-	CmpXchgInst,                // CmpXchgInst : 'cmpxchg' Weakopt Volatileopt TypeValue ',' TypeValue ',' TypeValue SyncScopeopt AtomicOrdering AtomicOrdering
-	Weak,                       // Weak : 'weak'
-	AtomicRMWInst,              // AtomicRMWInst : 'atomicrmw' Volatileopt AtomicOp TypeValue ',' TypeValue SyncScopeopt AtomicOrdering list_of_','_and_1_elements4
-	AtomicRMWInst,              // AtomicRMWInst : 'atomicrmw' Volatileopt AtomicOp TypeValue ',' TypeValue SyncScopeopt AtomicOrdering
-	AtomicOp,                   // AtomicOp : 'add'
-	AtomicOp,                   // AtomicOp : 'and'
-	AtomicOp,                   // AtomicOp : 'max'
-	AtomicOp,                   // AtomicOp : 'min'
-	AtomicOp,                   // AtomicOp : 'nand'
-	AtomicOp,                   // AtomicOp : 'or'
-	AtomicOp,                   // AtomicOp : 'sub'
-	AtomicOp,                   // AtomicOp : 'umax'
-	AtomicOp,                   // AtomicOp : 'umin'
-	AtomicOp,                   // AtomicOp : 'xchg'
-	AtomicOp,                   // AtomicOp : 'xor'
-	GetElementPtrInst,          // GetElementPtrInst : 'getelementptr' InBoundsopt Type ',' TypeValue list_of_','_and_1_elements6 list_of_','_and_1_elements4
-	GetElementPtrInst,          // GetElementPtrInst : 'getelementptr' InBoundsopt Type ',' TypeValue list_of_','_and_1_elements6
-	0,                          // list_of_','_and_1_elements6 : list_of_','_and_1_elements6 ',' TypeValue
-	0,                          // list_of_','_and_1_elements6 :
-	TruncInst,                  // TruncInst : 'trunc' TypeValue 'to' Type list_of_','_and_1_elements4
-	TruncInst,                  // TruncInst : 'trunc' TypeValue 'to' Type
-	ZExtInst,                   // ZExtInst : 'zext' TypeValue 'to' Type list_of_','_and_1_elements4
-	ZExtInst,                   // ZExtInst : 'zext' TypeValue 'to' Type
-	SExtInst,                   // SExtInst : 'sext' TypeValue 'to' Type list_of_','_and_1_elements4
-	SExtInst,                   // SExtInst : 'sext' TypeValue 'to' Type
-	FPTruncInst,                // FPTruncInst : 'fptrunc' TypeValue 'to' Type list_of_','_and_1_elements4
-	FPTruncInst,                // FPTruncInst : 'fptrunc' TypeValue 'to' Type
-	FPExtInst,                  // FPExtInst : 'fpext' TypeValue 'to' Type list_of_','_and_1_elements4
-	FPExtInst,                  // FPExtInst : 'fpext' TypeValue 'to' Type
-	FPToUIInst,                 // FPToUIInst : 'fptoui' TypeValue 'to' Type list_of_','_and_1_elements4
-	FPToUIInst,                 // FPToUIInst : 'fptoui' TypeValue 'to' Type
-	FPToSIInst,                 // FPToSIInst : 'fptosi' TypeValue 'to' Type list_of_','_and_1_elements4
-	FPToSIInst,                 // FPToSIInst : 'fptosi' TypeValue 'to' Type
-	UIToFPInst,                 // UIToFPInst : 'uitofp' TypeValue 'to' Type list_of_','_and_1_elements4
-	UIToFPInst,                 // UIToFPInst : 'uitofp' TypeValue 'to' Type
-	SIToFPInst,                 // SIToFPInst : 'sitofp' TypeValue 'to' Type list_of_','_and_1_elements4
-	SIToFPInst,                 // SIToFPInst : 'sitofp' TypeValue 'to' Type
-	PtrToIntInst,               // PtrToIntInst : 'ptrtoint' TypeValue 'to' Type list_of_','_and_1_elements4
-	PtrToIntInst,               // PtrToIntInst : 'ptrtoint' TypeValue 'to' Type
-	IntToPtrInst,               // IntToPtrInst : 'inttoptr' TypeValue 'to' Type list_of_','_and_1_elements4
-	IntToPtrInst,               // IntToPtrInst : 'inttoptr' TypeValue 'to' Type
-	BitCastInst,                // BitCastInst : 'bitcast' TypeValue 'to' Type list_of_','_and_1_elements4
-	BitCastInst,                // BitCastInst : 'bitcast' TypeValue 'to' Type
-	AddrSpaceCastInst,          // AddrSpaceCastInst : 'addrspacecast' TypeValue 'to' Type list_of_','_and_1_elements4
-	AddrSpaceCastInst,          // AddrSpaceCastInst : 'addrspacecast' TypeValue 'to' Type
-	ICmpInst,                   // ICmpInst : 'icmp' IPred TypeValue ',' Value list_of_','_and_1_elements4
-	ICmpInst,                   // ICmpInst : 'icmp' IPred TypeValue ',' Value
-	FCmpInst,                   // FCmpInst : 'fcmp' FastMathFlag_optlist FPred TypeValue ',' Value list_of_','_and_1_elements4
-	FCmpInst,                   // FCmpInst : 'fcmp' FastMathFlag_optlist FPred TypeValue ',' Value
-	0,                          // Inc_list_withsep : Inc_list_withsep ',' Inc
-	0,                          // Inc_list_withsep : Inc
-	PhiInst,                    // PhiInst : 'phi' Type Inc_list_withsep list_of_','_and_1_elements4
-	PhiInst,                    // PhiInst : 'phi' Type Inc_list_withsep
-	Inc,                        // Inc : '[' Value ',' LocalIdent ']'
-	SelectInst,                 // SelectInst : 'select' TypeValue ',' TypeValue ',' TypeValue list_of_','_and_1_elements4
-	SelectInst,                 // SelectInst : 'select' TypeValue ',' TypeValue ',' TypeValue
-	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist '[' OperandBundle_list_withsep ']' list_of_','_and_1_elements4
-	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist '[' OperandBundle_list_withsep ']'
-	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist list_of_','_and_1_elements4
-	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist
-	0,                          // OperandBundle_list_withsep : OperandBundle_list_withsep ',' OperandBundle
-	0,                          // OperandBundle_list_withsep : OperandBundle
-	Tail,                       // Tail : 'musttail'
-	Tail,                       // Tail : 'notail'
-	Tail,                       // Tail : 'tail'
-	VAArgInst,                  // VAArgInst : 'va_arg' TypeValue ',' Type list_of_','_and_1_elements4
-	VAArgInst,                  // VAArgInst : 'va_arg' TypeValue ',' Type
-	0,                          // Clause_optlist : Clause_optlist Clause
-	0,                          // Clause_optlist :
-	LandingPadInst,             // LandingPadInst : 'landingpad' Type Cleanupopt Clause_optlist list_of_','_and_1_elements4
-	LandingPadInst,             // LandingPadInst : 'landingpad' Type Cleanupopt Clause_optlist
-	Cleanup,                    // Cleanup : 'cleanup'
-	Clause,                     // Clause : ClauseType TypeValue
-	ClauseType,                 // ClauseType : 'catch'
-	ClauseType,                 // ClauseType : 'filter'
-	CatchPadInst,               // CatchPadInst : 'catchpad' 'within' LocalIdent '[' ExceptionArg_list_withsep_opt ']' list_of_','_and_1_elements4
-	CatchPadInst,               // CatchPadInst : 'catchpad' 'within' LocalIdent '[' ExceptionArg_list_withsep_opt ']'
-	0,                          // ExceptionArg_list_withsep : ExceptionArg_list_withsep ',' ExceptionArg
-	0,                          // ExceptionArg_list_withsep : ExceptionArg
-	0,                          // ExceptionArg_list_withsep_opt : ExceptionArg_list_withsep
-	0,                          // ExceptionArg_list_withsep_opt :
-	CleanupPadInst,             // CleanupPadInst : 'cleanuppad' 'within' ExceptionScope '[' ExceptionArg_list_withsep_opt ']' list_of_','_and_1_elements4
-	CleanupPadInst,             // CleanupPadInst : 'cleanuppad' 'within' ExceptionScope '[' ExceptionArg_list_withsep_opt ']'
-	0,                          // Terminator : LocalDefTerm
-	0,                          // Terminator : ValueTerminator
-	0,                          // Terminator : RetTerm
-	0,                          // Terminator : BrTerm
-	0,                          // Terminator : CondBrTerm
-	0,                          // Terminator : SwitchTerm
-	0,                          // Terminator : IndirectBrTerm
-	0,                          // Terminator : ResumeTerm
-	0,                          // Terminator : CatchRetTerm
-	0,                          // Terminator : CleanupRetTerm
-	0,                          // Terminator : UnreachableTerm
-	LocalDefTerm,               // LocalDefTerm : LocalIdent '=' ValueTerminator
-	0,                          // ValueTerminator : InvokeTerm
-	0,                          // ValueTerminator : CatchSwitchTerm
-	RetTerm,                    // RetTerm : 'ret' VoidType list_of_','_and_1_elements4
-	RetTerm,                    // RetTerm : 'ret' VoidType
-	RetTerm,                    // RetTerm : 'ret' ConcreteType Value list_of_','_and_1_elements4
-	RetTerm,                    // RetTerm : 'ret' ConcreteType Value
-	BrTerm,                     // BrTerm : 'br' Label list_of_','_and_1_elements4
-	BrTerm,                     // BrTerm : 'br' Label
-	CondBrTerm,                 // CondBrTerm : 'br' IntType Value ',' Label ',' Label list_of_','_and_1_elements4
-	CondBrTerm,                 // CondBrTerm : 'br' IntType Value ',' Label ',' Label
-	0,                          // Case_optlist : Case_optlist Case
-	0,                          // Case_optlist :
-	SwitchTerm,                 // SwitchTerm : 'switch' TypeValue ',' Label '[' Case_optlist ']' list_of_','_and_1_elements4
-	SwitchTerm,                 // SwitchTerm : 'switch' TypeValue ',' Label '[' Case_optlist ']'
-	Case,                       // Case : TypeConst ',' Label
-	IndirectBrTerm,             // IndirectBrTerm : 'indirectbr' TypeValue ',' '[' Label_list_withsep ']' list_of_','_and_1_elements4
-	IndirectBrTerm,             // IndirectBrTerm : 'indirectbr' TypeValue ',' '[' Label_list_withsep ']'
-	0,                          // Label_list_withsep : Label_list_withsep ',' Label
-	0,                          // Label_list_withsep : Label
-	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist '[' OperandBundle_list_withsep ']' 'to' Label 'unwind' Label list_of_','_and_1_elements4
-	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist '[' OperandBundle_list_withsep ']' 'to' Label 'unwind' Label
-	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist 'to' Label 'unwind' Label list_of_','_and_1_elements4
-	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist 'to' Label 'unwind' Label
-	ResumeTerm,                 // ResumeTerm : 'resume' TypeValue list_of_','_and_1_elements4
-	ResumeTerm,                 // ResumeTerm : 'resume' TypeValue
-	CatchSwitchTerm,            // CatchSwitchTerm : 'catchswitch' 'within' ExceptionScope '[' Label_list_withsep ']' 'unwind' UnwindTarget list_of_','_and_1_elements4
-	CatchSwitchTerm,            // CatchSwitchTerm : 'catchswitch' 'within' ExceptionScope '[' Label_list_withsep ']' 'unwind' UnwindTarget
-	CatchRetTerm,               // CatchRetTerm : 'catchret' 'from' Value 'to' Label list_of_','_and_1_elements4
-	CatchRetTerm,               // CatchRetTerm : 'catchret' 'from' Value 'to' Label
-	CleanupRetTerm,             // CleanupRetTerm : 'cleanupret' 'from' Value 'unwind' UnwindTarget list_of_','_and_1_elements4
-	CleanupRetTerm,             // CleanupRetTerm : 'cleanupret' 'from' Value 'unwind' UnwindTarget
-	UnreachableTerm,            // UnreachableTerm : 'unreachable' list_of_','_and_1_elements4
-	UnreachableTerm,            // UnreachableTerm : 'unreachable'
-	MDTuple,                    // MDTuple : '!' MDFields
-	0,                          // MDField_list_withsep : MDField_list_withsep ',' MDField
-	0,                          // MDField_list_withsep : MDField
-	0,                          // MDField_list_withsep_opt : MDField_list_withsep
-	0,                          // MDField_list_withsep_opt :
-	MDFields,                   // MDFields : '{' MDField_list_withsep_opt '}'
-	0,                          // MDField : NullLit
-	0,                          // MDField : Metadata
-	0,                          // Metadata : TypeValue
-	0,                          // Metadata : MDString
-	0,                          // Metadata : MDTuple
-	0,                          // Metadata : MetadataID
-	0,                          // Metadata : SpecializedMDNode
-	MDString,                   // MDString : '!' StringLit
-	MetadataAttachment,         // MetadataAttachment : MetadataName MDNode
-	0,                          // MDNode : MDTuple
-	0,                          // MDNode : MetadataID
-	0,                          // MDNode : SpecializedMDNode
-	0,                          // SpecializedMDNode : DIBasicType
-	0,                          // SpecializedMDNode : DICompileUnit
-	0,                          // SpecializedMDNode : DICompositeType
-	0,                          // SpecializedMDNode : DIDerivedType
-	0,                          // SpecializedMDNode : DIEnumerator
-	0,                          // SpecializedMDNode : DIExpression
-	0,                          // SpecializedMDNode : DIFile
-	0,                          // SpecializedMDNode : DIGlobalVariable
-	0,                          // SpecializedMDNode : DIGlobalVariableExpression
-	0,                          // SpecializedMDNode : DIImportedEntity
-	0,                          // SpecializedMDNode : DILabel
-	0,                          // SpecializedMDNode : DILexicalBlock
-	0,                          // SpecializedMDNode : DILexicalBlockFile
-	0,                          // SpecializedMDNode : DILocalVariable
-	0,                          // SpecializedMDNode : DILocation
-	0,                          // SpecializedMDNode : DIMacro
-	0,                          // SpecializedMDNode : DIMacroFile
-	0,                          // SpecializedMDNode : DIModule
-	0,                          // SpecializedMDNode : DINamespace
-	0,                          // SpecializedMDNode : DIObjCProperty
-	0,                          // SpecializedMDNode : DISubprogram
-	0,                          // SpecializedMDNode : DISubrange
-	0,                          // SpecializedMDNode : DISubroutineType
-	0,                          // SpecializedMDNode : DITemplateTypeParameter
-	0,                          // SpecializedMDNode : DITemplateValueParameter
-	0,                          // SpecializedMDNode : GenericDINode
-	DIBasicType,                // DIBasicType : '!DIBasicType' '(' DIBasicTypeField_list_withsep_opt ')'
-	0,                          // DIBasicTypeField_list_withsep : DIBasicTypeField_list_withsep ',' DIBasicTypeField
-	0,                          // DIBasicTypeField_list_withsep : DIBasicTypeField
-	0,                          // DIBasicTypeField_list_withsep_opt : DIBasicTypeField_list_withsep
-	0,                          // DIBasicTypeField_list_withsep_opt :
-	0,                          // DIBasicTypeField : TagField
-	0,                          // DIBasicTypeField : NameField
-	0,                          // DIBasicTypeField : SizeField
-	0,                          // DIBasicTypeField : AlignField
-	0,                          // DIBasicTypeField : EncodingField
-	0,                          // DIBasicTypeField : FlagsField
-	DICompileUnit,              // DICompileUnit : '!DICompileUnit' '(' DICompileUnitField_list_withsep_opt ')'
-	0,                          // DICompileUnitField_list_withsep : DICompileUnitField_list_withsep ',' DICompileUnitField
-	0,                          // DICompileUnitField_list_withsep : DICompileUnitField
-	0,                          // DICompileUnitField_list_withsep_opt : DICompileUnitField_list_withsep
-	0,                          // DICompileUnitField_list_withsep_opt :
-	0,                          // DICompileUnitField : LanguageField
-	0,                          // DICompileUnitField : FileField
-	0,                          // DICompileUnitField : ProducerField
-	0,                          // DICompileUnitField : IsOptimizedField
-	0,                          // DICompileUnitField : FlagsStringField
-	0,                          // DICompileUnitField : RuntimeVersionField
-	0,                          // DICompileUnitField : SplitDebugFilenameField
-	0,                          // DICompileUnitField : EmissionKindField
-	0,                          // DICompileUnitField : EnumsField
-	0,                          // DICompileUnitField : RetainedTypesField
-	0,                          // DICompileUnitField : GlobalsField
-	0,                          // DICompileUnitField : ImportsField
-	0,                          // DICompileUnitField : MacrosField
-	0,                          // DICompileUnitField : DwoIdField
-	0,                          // DICompileUnitField : SplitDebugInliningField
-	0,                          // DICompileUnitField : DebugInfoForProfilingField
-	0,                          // DICompileUnitField : NameTableKindField
-	DICompositeType,            // DICompositeType : '!DICompositeType' '(' DICompositeTypeField_list_withsep_opt ')'
-	0,                          // DICompositeTypeField_list_withsep : DICompositeTypeField_list_withsep ',' DICompositeTypeField
-	0,                          // DICompositeTypeField_list_withsep : DICompositeTypeField
-	0,                          // DICompositeTypeField_list_withsep_opt : DICompositeTypeField_list_withsep
-	0,                          // DICompositeTypeField_list_withsep_opt :
-	0,                          // DICompositeTypeField : TagField
-	0,                          // DICompositeTypeField : NameField
-	0,                          // DICompositeTypeField : ScopeField
-	0,                          // DICompositeTypeField : FileField
-	0,                          // DICompositeTypeField : LineField
-	0,                          // DICompositeTypeField : BaseTypeField
-	0,                          // DICompositeTypeField : SizeField
-	0,                          // DICompositeTypeField : AlignField
-	0,                          // DICompositeTypeField : OffsetField
-	0,                          // DICompositeTypeField : FlagsField
-	0,                          // DICompositeTypeField : ElementsField
-	0,                          // DICompositeTypeField : RuntimeLangField
-	0,                          // DICompositeTypeField : VtableHolderField
-	0,                          // DICompositeTypeField : TemplateParamsField
-	0,                          // DICompositeTypeField : IdentifierField
-	0,                          // DICompositeTypeField : DiscriminatorField
-	DIDerivedType,              // DIDerivedType : '!DIDerivedType' '(' DIDerivedTypeField_list_withsep_opt ')'
-	0,                          // DIDerivedTypeField_list_withsep : DIDerivedTypeField_list_withsep ',' DIDerivedTypeField
-	0,                          // DIDerivedTypeField_list_withsep : DIDerivedTypeField
-	0,                          // DIDerivedTypeField_list_withsep_opt : DIDerivedTypeField_list_withsep
-	0,                          // DIDerivedTypeField_list_withsep_opt :
-	0,                          // DIDerivedTypeField : TagField
-	0,                          // DIDerivedTypeField : NameField
-	0,                          // DIDerivedTypeField : ScopeField
-	0,                          // DIDerivedTypeField : FileField
-	0,                          // DIDerivedTypeField : LineField
-	0,                          // DIDerivedTypeField : BaseTypeField
-	0,                          // DIDerivedTypeField : SizeField
-	0,                          // DIDerivedTypeField : AlignField
-	0,                          // DIDerivedTypeField : OffsetField
-	0,                          // DIDerivedTypeField : FlagsField
-	0,                          // DIDerivedTypeField : ExtraDataField
-	0,                          // DIDerivedTypeField : DwarfAddressSpaceField
-	DIEnumerator,               // DIEnumerator : '!DIEnumerator' '(' DIEnumeratorField_list_withsep_opt ')'
-	0,                          // DIEnumeratorField_list_withsep : DIEnumeratorField_list_withsep ',' DIEnumeratorField
-	0,                          // DIEnumeratorField_list_withsep : DIEnumeratorField
-	0,                          // DIEnumeratorField_list_withsep_opt : DIEnumeratorField_list_withsep
-	0,                          // DIEnumeratorField_list_withsep_opt :
-	0,                          // DIEnumeratorField : NameField
-	0,                          // DIEnumeratorField : ValueIntField
-	0,                          // DIEnumeratorField : IsUnsignedField
-	DIExpression,               // DIExpression : '!DIExpression' '(' DIExpressionField_list_withsep_opt ')'
-	0,                          // DIExpressionField_list_withsep : DIExpressionField_list_withsep ',' DIExpressionField
-	0,                          // DIExpressionField_list_withsep : DIExpressionField
-	0,                          // DIExpressionField_list_withsep_opt : DIExpressionField_list_withsep
-	0,                          // DIExpressionField_list_withsep_opt :
-	0,                          // DIExpressionField : IntLit
-	0,                          // DIExpressionField : DwarfOp
-	DIFile,                     // DIFile : '!DIFile' '(' DIFileField_list_withsep_opt ')'
-	0,                          // DIFileField_list_withsep : DIFileField_list_withsep ',' DIFileField
-	0,                          // DIFileField_list_withsep : DIFileField
-	0,                          // DIFileField_list_withsep_opt : DIFileField_list_withsep
-	0,                          // DIFileField_list_withsep_opt :
-	0,                          // DIFileField : FilenameField
-	0,                          // DIFileField : DirectoryField
-	0,                          // DIFileField : ChecksumkindField
-	0,                          // DIFileField : ChecksumField
-	0,                          // DIFileField : SourceField
-	DIGlobalVariable,           // DIGlobalVariable : '!DIGlobalVariable' '(' DIGlobalVariableField_list_withsep_opt ')'
-	0,                          // DIGlobalVariableField_list_withsep : DIGlobalVariableField_list_withsep ',' DIGlobalVariableField
-	0,                          // DIGlobalVariableField_list_withsep : DIGlobalVariableField
-	0,                          // DIGlobalVariableField_list_withsep_opt : DIGlobalVariableField_list_withsep
-	0,                          // DIGlobalVariableField_list_withsep_opt :
-	0,                          // DIGlobalVariableField : NameField
-	0,                          // DIGlobalVariableField : ScopeField
-	0,                          // DIGlobalVariableField : LinkageNameField
-	0,                          // DIGlobalVariableField : FileField
-	0,                          // DIGlobalVariableField : LineField
-	0,                          // DIGlobalVariableField : TypeField
-	0,                          // DIGlobalVariableField : IsLocalField
-	0,                          // DIGlobalVariableField : IsDefinitionField
-	0,                          // DIGlobalVariableField : TemplateParamsField
-	0,                          // DIGlobalVariableField : DeclarationField
-	0,                          // DIGlobalVariableField : AlignField
+	GlobalIdent, // GlobalIdent : global_ident_tok
+	LocalIdent, // LocalIdent : local_ident_tok
+	LabelIdent, // LabelIdent : label_ident_tok
+	AttrGroupID, // AttrGroupID : attr_group_id_tok
+	ComdatName, // ComdatName : comdat_name_tok
+	MetadataName, // MetadataName : metadata_name_tok
+	MetadataID, // MetadataID : metadata_id_tok
+	BoolLit, // BoolLit : 'true'
+	BoolLit, // BoolLit : 'false'
+	IntLit, // IntLit : int_lit_tok
+	UintLit, // UintLit : int_lit_tok
+	FloatLit, // FloatLit : float_lit_tok
+	StringLit, // StringLit : string_lit_tok
+	NullLit, // NullLit : 'null'
+	Module, // Module : TopLevelEntity_optlist
+	0, // TopLevelEntity_optlist : TopLevelEntity_optlist TopLevelEntity
+	0, // TopLevelEntity_optlist :
+	0, // TopLevelEntity : SourceFilename
+	0, // TopLevelEntity : TargetDef
+	0, // TopLevelEntity : ModuleAsm
+	0, // TopLevelEntity : TypeDef
+	0, // TopLevelEntity : ComdatDef
+	0, // TopLevelEntity : GlobalDecl
+	0, // TopLevelEntity : GlobalDef
+	0, // TopLevelEntity : IndirectSymbolDef
+	0, // TopLevelEntity : FuncDecl
+	0, // TopLevelEntity : FuncDef
+	0, // TopLevelEntity : AttrGroupDef
+	0, // TopLevelEntity : NamedMetadataDef
+	0, // TopLevelEntity : MetadataDef
+	0, // TopLevelEntity : UseListOrder
+	0, // TopLevelEntity : UseListOrderBB
+	SourceFilename, // SourceFilename : 'source_filename' '=' StringLit
+	0, // TargetDef : TargetDataLayout
+	0, // TargetDef : TargetTriple
+	TargetDataLayout, // TargetDataLayout : 'target' 'datalayout' '=' StringLit
+	TargetTriple, // TargetTriple : 'target' 'triple' '=' StringLit
+	ModuleAsm, // ModuleAsm : 'module' 'asm' StringLit
+	TypeDef, // TypeDef : LocalIdent '=' 'type' OpaqueType
+	TypeDef, // TypeDef : LocalIdent '=' 'type' Type
+	ComdatDef, // ComdatDef : ComdatName '=' 'comdat' SelectionKind
+	SelectionKind, // SelectionKind : 'any'
+	SelectionKind, // SelectionKind : 'exactmatch'
+	SelectionKind, // SelectionKind : 'largest'
+	SelectionKind, // SelectionKind : 'noduplicates'
+	SelectionKind, // SelectionKind : 'samesize'
+	GlobalDecl, // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type list_of_','_and_1_elements list_of_','_and_1_elements1
+	GlobalDecl, // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type list_of_','_and_1_elements
+	GlobalDecl, // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type list_of_','_and_1_elements1
+	GlobalDecl, // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type
+	0, // list_of_','_and_1_elements : list_of_','_and_1_elements ',' GlobalAttr
+	0, // list_of_','_and_1_elements : ',' GlobalAttr
+	0, // list_of_','_and_1_elements1 : list_of_','_and_1_elements1 ',' FuncAttr
+	0, // list_of_','_and_1_elements1 : ',' FuncAttr
+	GlobalDef, // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements list_of_','_and_1_elements1
+	GlobalDef, // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements
+	GlobalDef, // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements1
+	GlobalDef, // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant
+	ExternallyInitialized, // ExternallyInitialized : 'externally_initialized'
+	Immutable, // Immutable : 'constant'
+	Immutable, // Immutable : 'global'
+	0, // IndirectSymbolDef : AliasDef
+	0, // IndirectSymbolDef : IFuncDef
+	AliasDef, // AliasDef : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'alias' Type ',' Type Constant
+	AliasDef, // AliasDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'alias' Type ',' Type Constant
+	IFuncDef, // IFuncDef : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'ifunc' Type ',' Type Constant
+	IFuncDef, // IFuncDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'ifunc' Type ',' Type Constant
+	FuncDecl, // FuncDecl : 'declare' MetadataAttachment_optlist FuncHeader
+	0, // MetadataAttachment_optlist : MetadataAttachment_optlist MetadataAttachment
+	0, // MetadataAttachment_optlist :
+	FuncDef, // FuncDef : 'define' FuncHeader MetadataAttachment_optlist FuncBody
+	0, // FuncAttr_optlist : FuncAttr_optlist FuncAttr
+	0, // FuncAttr_optlist :
+	FuncHeader, // FuncHeader : Linkage Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttr_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttr_optlist Sectionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
+	FuncHeader, // FuncHeader : ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttr_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttr_optlist Sectionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
+	FuncHeader, // FuncHeader : Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttr_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttr_optlist Sectionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
+	0, // ReturnAttr_optlist : ReturnAttr_optlist ReturnAttr
+	0, // ReturnAttr_optlist :
+	GCNode, // GC : 'gc' StringLit
+	Prefix, // Prefix : 'prefix' Type Constant
+	Prologue, // Prologue : 'prologue' Type Constant
+	Personality, // Personality : 'personality' Type Constant
+	0, // BasicBlock_list : BasicBlock_list BasicBlock
+	0, // BasicBlock_list : BasicBlock
+	FuncBody, // FuncBody : '{' BasicBlock_list UseListOrder_optlist '}'
+	0, // UseListOrder_optlist : UseListOrder_optlist UseListOrder
+	0, // UseListOrder_optlist :
+	AttrGroupDef, // AttrGroupDef : 'attributes' AttrGroupID '=' '{' FuncAttr_optlist '}'
+	0, // MetadataNode_list_withsep : MetadataNode_list_withsep ',' MetadataNode
+	0, // MetadataNode_list_withsep : MetadataNode
+	0, // MetadataNode_list_withsep_opt : MetadataNode_list_withsep
+	0, // MetadataNode_list_withsep_opt :
+	NamedMetadataDef, // NamedMetadataDef : MetadataName '=' '!' '{' MetadataNode_list_withsep_opt '}'
+	0, // MetadataNode : MetadataID
+	0, // MetadataNode : DIExpression
+	MetadataDef, // MetadataDef : MetadataID '=' Distinctopt MDTuple
+	MetadataDef, // MetadataDef : MetadataID '=' Distinctopt SpecializedMDNode
+	Distinct, // Distinct : 'distinct'
+	0, // UintLit_list_withsep : UintLit_list_withsep ',' UintLit
+	0, // UintLit_list_withsep : UintLit
+	UseListOrder, // UseListOrder : 'uselistorder' Type Value ',' '{' UintLit_list_withsep '}'
+	UseListOrderBB, // UseListOrderBB : 'uselistorder_bb' GlobalIdent ',' LocalIdent ',' '{' UintLit_list_withsep '}'
+	0, // Type : VoidType
+	0, // Type : FuncType
+	0, // Type : FirstClassType
+	0, // FirstClassType : ConcreteType
+	0, // FirstClassType : MetadataType
+	0, // ConcreteType : IntType
+	0, // ConcreteType : FloatType
+	0, // ConcreteType : PointerType
+	0, // ConcreteType : VectorType
+	0, // ConcreteType : LabelType
+	0, // ConcreteType : ArrayType
+	0, // ConcreteType : StructType
+	0, // ConcreteType : NamedType
+	0, // ConcreteType : MMXType
+	0, // ConcreteType : TokenType
+	VoidType, // VoidType : 'void'
+	FuncType, // FuncType : Type '(' Params ')'
+	IntType, // IntType : int_type_tok
+	FloatType, // FloatType : FloatKind
+	FloatKind, // FloatKind : 'half'
+	FloatKind, // FloatKind : 'float'
+	FloatKind, // FloatKind : 'double'
+	FloatKind, // FloatKind : 'x86_fp80'
+	FloatKind, // FloatKind : 'fp128'
+	FloatKind, // FloatKind : 'ppc_fp128'
+	MMXType, // MMXType : 'x86_mmx'
+	PointerType, // PointerType : Type AddrSpaceopt '*'
+	VectorType, // VectorType : '<' UintLit 'x' Type '>'
+	LabelType, // LabelType : 'label'
+	TokenType, // TokenType : 'token'
+	MetadataType, // MetadataType : 'metadata'
+	ArrayType, // ArrayType : '[' UintLit 'x' Type ']'
+	StructType, // StructType : '{' Type_list_withsep '}'
+	StructType, // StructType : '{' '}'
+	PackedStructType, // StructType : '<' '{' Type_list_withsep '}' '>'
+	PackedStructType, // StructType : '<' '{' '}' '>'
+	0, // Type_list_withsep : Type_list_withsep ',' Type
+	0, // Type_list_withsep : Type
+	OpaqueType, // OpaqueType : 'opaque'
+	NamedType, // NamedType : LocalIdent
+	0, // Value : Constant
+	0, // Value : LocalIdent
+	0, // Value : InlineAsm
+	InlineAsm, // InlineAsm : 'asm' SideEffectopt AlignStackopt IntelDialectopt StringLit ',' StringLit
+	SideEffect, // SideEffect : 'sideeffect'
+	AlignStack, // AlignStack : 'alignstack'
+	IntelDialect, // IntelDialect : 'inteldialect'
+	0, // Constant : BoolConst
+	0, // Constant : IntConst
+	0, // Constant : FloatConst
+	0, // Constant : NullConst
+	0, // Constant : NoneConst
+	0, // Constant : StructConst
+	0, // Constant : ArrayConst
+	0, // Constant : VectorConst
+	0, // Constant : ZeroInitializerConst
+	0, // Constant : GlobalIdent
+	0, // Constant : UndefConst
+	0, // Constant : BlockAddressConst
+	0, // Constant : ConstantExpr
+	BoolConst, // BoolConst : BoolLit
+	IntConst, // IntConst : IntLit
+	FloatConst, // FloatConst : FloatLit
+	NullConst, // NullConst : NullLit
+	NoneConst, // NoneConst : 'none'
+	StructConst, // StructConst : '{' TypeConst_list_withsep '}'
+	StructConst, // StructConst : '{' '}'
+	StructConst, // StructConst : '<' '{' TypeConst_list_withsep '}' '>'
+	StructConst, // StructConst : '<' '{' '}' '>'
+	0, // TypeConst_list_withsep : TypeConst_list_withsep ',' TypeConst
+	0, // TypeConst_list_withsep : TypeConst
+	ArrayConst, // ArrayConst : '[' TypeConst_list_withsep_opt ']'
+	CharArrayConst, // ArrayConst : 'c' StringLit
+	0, // TypeConst_list_withsep_opt : TypeConst_list_withsep
+	0, // TypeConst_list_withsep_opt :
+	VectorConst, // VectorConst : '<' TypeConst_list_withsep_opt '>'
+	ZeroInitializerConst, // ZeroInitializerConst : 'zeroinitializer'
+	UndefConst, // UndefConst : 'undef'
+	BlockAddressConst, // BlockAddressConst : 'blockaddress' '(' GlobalIdent ',' LocalIdent ')'
+	0, // ConstantExpr : AddExpr
+	0, // ConstantExpr : FAddExpr
+	0, // ConstantExpr : SubExpr
+	0, // ConstantExpr : FSubExpr
+	0, // ConstantExpr : MulExpr
+	0, // ConstantExpr : FMulExpr
+	0, // ConstantExpr : UDivExpr
+	0, // ConstantExpr : SDivExpr
+	0, // ConstantExpr : FDivExpr
+	0, // ConstantExpr : URemExpr
+	0, // ConstantExpr : SRemExpr
+	0, // ConstantExpr : FRemExpr
+	0, // ConstantExpr : ShlExpr
+	0, // ConstantExpr : LShrExpr
+	0, // ConstantExpr : AShrExpr
+	0, // ConstantExpr : AndExpr
+	0, // ConstantExpr : OrExpr
+	0, // ConstantExpr : XorExpr
+	0, // ConstantExpr : ExtractElementExpr
+	0, // ConstantExpr : InsertElementExpr
+	0, // ConstantExpr : ShuffleVectorExpr
+	0, // ConstantExpr : ExtractValueExpr
+	0, // ConstantExpr : InsertValueExpr
+	0, // ConstantExpr : GetElementPtrExpr
+	0, // ConstantExpr : TruncExpr
+	0, // ConstantExpr : ZExtExpr
+	0, // ConstantExpr : SExtExpr
+	0, // ConstantExpr : FPTruncExpr
+	0, // ConstantExpr : FPExtExpr
+	0, // ConstantExpr : FPToUIExpr
+	0, // ConstantExpr : FPToSIExpr
+	0, // ConstantExpr : UIToFPExpr
+	0, // ConstantExpr : SIToFPExpr
+	0, // ConstantExpr : PtrToIntExpr
+	0, // ConstantExpr : IntToPtrExpr
+	0, // ConstantExpr : BitCastExpr
+	0, // ConstantExpr : AddrSpaceCastExpr
+	0, // ConstantExpr : ICmpExpr
+	0, // ConstantExpr : FCmpExpr
+	0, // ConstantExpr : SelectExpr
+	AddExpr, // AddExpr : 'add' OverflowFlag_optlist '(' TypeConst ',' TypeConst ')'
+	0, // OverflowFlag_optlist : OverflowFlag_optlist OverflowFlag
+	0, // OverflowFlag_optlist :
+	FAddExpr, // FAddExpr : 'fadd' '(' TypeConst ',' TypeConst ')'
+	SubExpr, // SubExpr : 'sub' OverflowFlag_optlist '(' TypeConst ',' TypeConst ')'
+	FSubExpr, // FSubExpr : 'fsub' '(' TypeConst ',' TypeConst ')'
+	MulExpr, // MulExpr : 'mul' OverflowFlag_optlist '(' TypeConst ',' TypeConst ')'
+	FMulExpr, // FMulExpr : 'fmul' '(' TypeConst ',' TypeConst ')'
+	UDivExpr, // UDivExpr : 'udiv' Exactopt '(' TypeConst ',' TypeConst ')'
+	SDivExpr, // SDivExpr : 'sdiv' Exactopt '(' TypeConst ',' TypeConst ')'
+	FDivExpr, // FDivExpr : 'fdiv' '(' TypeConst ',' TypeConst ')'
+	URemExpr, // URemExpr : 'urem' '(' TypeConst ',' TypeConst ')'
+	SRemExpr, // SRemExpr : 'srem' '(' TypeConst ',' TypeConst ')'
+	FRemExpr, // FRemExpr : 'frem' '(' TypeConst ',' TypeConst ')'
+	ShlExpr, // ShlExpr : 'shl' OverflowFlag_optlist '(' TypeConst ',' TypeConst ')'
+	LShrExpr, // LShrExpr : 'lshr' Exactopt '(' TypeConst ',' TypeConst ')'
+	AShrExpr, // AShrExpr : 'ashr' Exactopt '(' TypeConst ',' TypeConst ')'
+	AndExpr, // AndExpr : 'and' '(' TypeConst ',' TypeConst ')'
+	OrExpr, // OrExpr : 'or' '(' TypeConst ',' TypeConst ')'
+	XorExpr, // XorExpr : 'xor' '(' TypeConst ',' TypeConst ')'
+	ExtractElementExpr, // ExtractElementExpr : 'extractelement' '(' TypeConst ',' TypeConst ')'
+	InsertElementExpr, // InsertElementExpr : 'insertelement' '(' TypeConst ',' TypeConst ',' TypeConst ')'
+	ShuffleVectorExpr, // ShuffleVectorExpr : 'shufflevector' '(' TypeConst ',' TypeConst ',' TypeConst ')'
+	ExtractValueExpr, // ExtractValueExpr : 'extractvalue' '(' TypeConst list_of_','_and_1_elements2 ')'
+	0, // list_of_','_and_1_elements2 : list_of_','_and_1_elements2 ',' UintLit
+	0, // list_of_','_and_1_elements2 :
+	InsertValueExpr, // InsertValueExpr : 'insertvalue' '(' TypeConst ',' TypeConst list_of_','_and_1_elements2 ')'
+	GetElementPtrExpr, // GetElementPtrExpr : 'getelementptr' InBoundsopt '(' Type ',' TypeConst list_of_','_and_1_elements3 ')'
+	0, // list_of_','_and_1_elements3 : list_of_','_and_1_elements3 ',' GEPIndex
+	0, // list_of_','_and_1_elements3 :
+	GEPIndex, // GEPIndex : InRangeopt TypeConst
+	InRange, // InRange : 'inrange'
+	TruncExpr, // TruncExpr : 'trunc' '(' TypeConst 'to' Type ')'
+	ZExtExpr, // ZExtExpr : 'zext' '(' TypeConst 'to' Type ')'
+	SExtExpr, // SExtExpr : 'sext' '(' TypeConst 'to' Type ')'
+	FPTruncExpr, // FPTruncExpr : 'fptrunc' '(' TypeConst 'to' Type ')'
+	FPExtExpr, // FPExtExpr : 'fpext' '(' TypeConst 'to' Type ')'
+	FPToUIExpr, // FPToUIExpr : 'fptoui' '(' TypeConst 'to' Type ')'
+	FPToSIExpr, // FPToSIExpr : 'fptosi' '(' TypeConst 'to' Type ')'
+	UIToFPExpr, // UIToFPExpr : 'uitofp' '(' TypeConst 'to' Type ')'
+	SIToFPExpr, // SIToFPExpr : 'sitofp' '(' TypeConst 'to' Type ')'
+	PtrToIntExpr, // PtrToIntExpr : 'ptrtoint' '(' TypeConst 'to' Type ')'
+	IntToPtrExpr, // IntToPtrExpr : 'inttoptr' '(' TypeConst 'to' Type ')'
+	BitCastExpr, // BitCastExpr : 'bitcast' '(' TypeConst 'to' Type ')'
+	AddrSpaceCastExpr, // AddrSpaceCastExpr : 'addrspacecast' '(' TypeConst 'to' Type ')'
+	ICmpExpr, // ICmpExpr : 'icmp' IPred '(' TypeConst ',' TypeConst ')'
+	FCmpExpr, // FCmpExpr : 'fcmp' FPred '(' TypeConst ',' TypeConst ')'
+	SelectExpr, // SelectExpr : 'select' '(' TypeConst ',' TypeConst ',' TypeConst ')'
+	BasicBlock, // BasicBlock : LabelIdentopt Instruction_optlist Terminator
+	0, // Instruction_optlist : Instruction_optlist Instruction
+	0, // Instruction_optlist :
+	0, // Instruction : LocalDefInst
+	0, // Instruction : ValueInstruction
+	0, // Instruction : StoreInst
+	0, // Instruction : FenceInst
+	LocalDefInst, // LocalDefInst : LocalIdent '=' ValueInstruction
+	0, // ValueInstruction : AddInst
+	0, // ValueInstruction : FAddInst
+	0, // ValueInstruction : SubInst
+	0, // ValueInstruction : FSubInst
+	0, // ValueInstruction : MulInst
+	0, // ValueInstruction : FMulInst
+	0, // ValueInstruction : UDivInst
+	0, // ValueInstruction : SDivInst
+	0, // ValueInstruction : FDivInst
+	0, // ValueInstruction : URemInst
+	0, // ValueInstruction : SRemInst
+	0, // ValueInstruction : FRemInst
+	0, // ValueInstruction : ShlInst
+	0, // ValueInstruction : LShrInst
+	0, // ValueInstruction : AShrInst
+	0, // ValueInstruction : AndInst
+	0, // ValueInstruction : OrInst
+	0, // ValueInstruction : XorInst
+	0, // ValueInstruction : ExtractElementInst
+	0, // ValueInstruction : InsertElementInst
+	0, // ValueInstruction : ShuffleVectorInst
+	0, // ValueInstruction : ExtractValueInst
+	0, // ValueInstruction : InsertValueInst
+	0, // ValueInstruction : AllocaInst
+	0, // ValueInstruction : LoadInst
+	0, // ValueInstruction : CmpXchgInst
+	0, // ValueInstruction : AtomicRMWInst
+	0, // ValueInstruction : GetElementPtrInst
+	0, // ValueInstruction : TruncInst
+	0, // ValueInstruction : ZExtInst
+	0, // ValueInstruction : SExtInst
+	0, // ValueInstruction : FPTruncInst
+	0, // ValueInstruction : FPExtInst
+	0, // ValueInstruction : FPToUIInst
+	0, // ValueInstruction : FPToSIInst
+	0, // ValueInstruction : UIToFPInst
+	0, // ValueInstruction : SIToFPInst
+	0, // ValueInstruction : PtrToIntInst
+	0, // ValueInstruction : IntToPtrInst
+	0, // ValueInstruction : BitCastInst
+	0, // ValueInstruction : AddrSpaceCastInst
+	0, // ValueInstruction : ICmpInst
+	0, // ValueInstruction : FCmpInst
+	0, // ValueInstruction : PhiInst
+	0, // ValueInstruction : SelectInst
+	0, // ValueInstruction : CallInst
+	0, // ValueInstruction : VAArgInst
+	0, // ValueInstruction : LandingPadInst
+	0, // ValueInstruction : CatchPadInst
+	0, // ValueInstruction : CleanupPadInst
+	AddInst, // AddInst : 'add' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
+	AddInst, // AddInst : 'add' OverflowFlag_optlist TypeValue ',' Value
+	0, // list_of_','_and_1_elements4 : list_of_','_and_1_elements4 ',' MetadataAttachment
+	0, // list_of_','_and_1_elements4 : ',' MetadataAttachment
+	FAddInst, // FAddInst : 'fadd' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
+	FAddInst, // FAddInst : 'fadd' FastMathFlag_optlist TypeValue ',' Value
+	0, // FastMathFlag_optlist : FastMathFlag_optlist FastMathFlag
+	0, // FastMathFlag_optlist :
+	SubInst, // SubInst : 'sub' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
+	SubInst, // SubInst : 'sub' OverflowFlag_optlist TypeValue ',' Value
+	FSubInst, // FSubInst : 'fsub' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
+	FSubInst, // FSubInst : 'fsub' FastMathFlag_optlist TypeValue ',' Value
+	MulInst, // MulInst : 'mul' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
+	MulInst, // MulInst : 'mul' OverflowFlag_optlist TypeValue ',' Value
+	FMulInst, // FMulInst : 'fmul' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
+	FMulInst, // FMulInst : 'fmul' FastMathFlag_optlist TypeValue ',' Value
+	UDivInst, // UDivInst : 'udiv' Exactopt TypeValue ',' Value list_of_','_and_1_elements4
+	UDivInst, // UDivInst : 'udiv' Exactopt TypeValue ',' Value
+	SDivInst, // SDivInst : 'sdiv' Exactopt TypeValue ',' Value list_of_','_and_1_elements4
+	SDivInst, // SDivInst : 'sdiv' Exactopt TypeValue ',' Value
+	FDivInst, // FDivInst : 'fdiv' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
+	FDivInst, // FDivInst : 'fdiv' FastMathFlag_optlist TypeValue ',' Value
+	URemInst, // URemInst : 'urem' TypeValue ',' Value list_of_','_and_1_elements4
+	URemInst, // URemInst : 'urem' TypeValue ',' Value
+	SRemInst, // SRemInst : 'srem' TypeValue ',' Value list_of_','_and_1_elements4
+	SRemInst, // SRemInst : 'srem' TypeValue ',' Value
+	FRemInst, // FRemInst : 'frem' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
+	FRemInst, // FRemInst : 'frem' FastMathFlag_optlist TypeValue ',' Value
+	ShlInst, // ShlInst : 'shl' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements4
+	ShlInst, // ShlInst : 'shl' OverflowFlag_optlist TypeValue ',' Value
+	LShrInst, // LShrInst : 'lshr' Exactopt TypeValue ',' Value list_of_','_and_1_elements4
+	LShrInst, // LShrInst : 'lshr' Exactopt TypeValue ',' Value
+	AShrInst, // AShrInst : 'ashr' Exactopt TypeValue ',' Value list_of_','_and_1_elements4
+	AShrInst, // AShrInst : 'ashr' Exactopt TypeValue ',' Value
+	AndInst, // AndInst : 'and' TypeValue ',' Value list_of_','_and_1_elements4
+	AndInst, // AndInst : 'and' TypeValue ',' Value
+	OrInst, // OrInst : 'or' TypeValue ',' Value list_of_','_and_1_elements4
+	OrInst, // OrInst : 'or' TypeValue ',' Value
+	XorInst, // XorInst : 'xor' TypeValue ',' Value list_of_','_and_1_elements4
+	XorInst, // XorInst : 'xor' TypeValue ',' Value
+	ExtractElementInst, // ExtractElementInst : 'extractelement' TypeValue ',' TypeValue list_of_','_and_1_elements4
+	ExtractElementInst, // ExtractElementInst : 'extractelement' TypeValue ',' TypeValue
+	InsertElementInst, // InsertElementInst : 'insertelement' TypeValue ',' TypeValue ',' TypeValue list_of_','_and_1_elements4
+	InsertElementInst, // InsertElementInst : 'insertelement' TypeValue ',' TypeValue ',' TypeValue
+	ShuffleVectorInst, // ShuffleVectorInst : 'shufflevector' TypeValue ',' TypeValue ',' TypeValue list_of_','_and_1_elements4
+	ShuffleVectorInst, // ShuffleVectorInst : 'shufflevector' TypeValue ',' TypeValue ',' TypeValue
+	ExtractValueInst, // ExtractValueInst : 'extractvalue' TypeValue list_of_','_and_1_elements5 list_of_','_and_1_elements4
+	ExtractValueInst, // ExtractValueInst : 'extractvalue' TypeValue list_of_','_and_1_elements5
+	0, // list_of_','_and_1_elements5 : list_of_','_and_1_elements5 ',' UintLit
+	0, // list_of_','_and_1_elements5 : ',' UintLit
+	InsertValueInst, // InsertValueInst : 'insertvalue' TypeValue ',' TypeValue list_of_','_and_1_elements5 list_of_','_and_1_elements4
+	InsertValueInst, // InsertValueInst : 'insertvalue' TypeValue ',' TypeValue list_of_','_and_1_elements5
+	AllocaInst, // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' Alignment ',' AddrSpace list_of_','_and_1_elements4
+	AllocaInst, // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' Alignment ',' AddrSpace
+	AllocaInst, // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' Alignment list_of_','_and_1_elements4
+	AllocaInst, // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' Alignment
+	AllocaInst, // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' AddrSpace list_of_','_and_1_elements4
+	AllocaInst, // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' AddrSpace
+	AllocaInst, // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue list_of_','_and_1_elements4
+	AllocaInst, // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue
+	AllocaInst, // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' Alignment ',' AddrSpace list_of_','_and_1_elements4
+	AllocaInst, // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' Alignment ',' AddrSpace
+	AllocaInst, // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' Alignment list_of_','_and_1_elements4
+	AllocaInst, // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' Alignment
+	AllocaInst, // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' AddrSpace list_of_','_and_1_elements4
+	AllocaInst, // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' AddrSpace
+	AllocaInst, // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type list_of_','_and_1_elements4
+	AllocaInst, // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type
+	InAlloca, // InAlloca : 'inalloca'
+	SwiftError, // SwiftError : 'swifterror'
+	LoadInst, // LoadInst : 'load' Volatileopt Type ',' TypeValue ',' Alignment list_of_','_and_1_elements4
+	LoadInst, // LoadInst : 'load' Volatileopt Type ',' TypeValue ',' Alignment
+	LoadInst, // LoadInst : 'load' Volatileopt Type ',' TypeValue list_of_','_and_1_elements4
+	LoadInst, // LoadInst : 'load' Volatileopt Type ',' TypeValue
+	LoadInst, // LoadInst : 'load' Atomic Volatileopt Type ',' TypeValue SyncScopeopt AtomicOrdering ',' Alignment list_of_','_and_1_elements4
+	LoadInst, // LoadInst : 'load' Atomic Volatileopt Type ',' TypeValue SyncScopeopt AtomicOrdering ',' Alignment
+	LoadInst, // LoadInst : 'load' Atomic Volatileopt Type ',' TypeValue SyncScopeopt AtomicOrdering list_of_','_and_1_elements4
+	LoadInst, // LoadInst : 'load' Atomic Volatileopt Type ',' TypeValue SyncScopeopt AtomicOrdering
+	StoreInst, // StoreInst : 'store' Volatileopt TypeValue ',' TypeValue ',' Alignment list_of_','_and_1_elements4
+	StoreInst, // StoreInst : 'store' Volatileopt TypeValue ',' TypeValue ',' Alignment
+	StoreInst, // StoreInst : 'store' Volatileopt TypeValue ',' TypeValue list_of_','_and_1_elements4
+	StoreInst, // StoreInst : 'store' Volatileopt TypeValue ',' TypeValue
+	StoreInst, // StoreInst : 'store' Atomic Volatileopt TypeValue ',' TypeValue SyncScopeopt AtomicOrdering ',' Alignment list_of_','_and_1_elements4
+	StoreInst, // StoreInst : 'store' Atomic Volatileopt TypeValue ',' TypeValue SyncScopeopt AtomicOrdering ',' Alignment
+	StoreInst, // StoreInst : 'store' Atomic Volatileopt TypeValue ',' TypeValue SyncScopeopt AtomicOrdering list_of_','_and_1_elements4
+	StoreInst, // StoreInst : 'store' Atomic Volatileopt TypeValue ',' TypeValue SyncScopeopt AtomicOrdering
+	FenceInst, // FenceInst : 'fence' SyncScopeopt AtomicOrdering list_of_','_and_1_elements4
+	FenceInst, // FenceInst : 'fence' SyncScopeopt AtomicOrdering
+	CmpXchgInst, // CmpXchgInst : 'cmpxchg' Weakopt Volatileopt TypeValue ',' TypeValue ',' TypeValue SyncScopeopt AtomicOrdering AtomicOrdering list_of_','_and_1_elements4
+	CmpXchgInst, // CmpXchgInst : 'cmpxchg' Weakopt Volatileopt TypeValue ',' TypeValue ',' TypeValue SyncScopeopt AtomicOrdering AtomicOrdering
+	Weak, // Weak : 'weak'
+	AtomicRMWInst, // AtomicRMWInst : 'atomicrmw' Volatileopt AtomicOp TypeValue ',' TypeValue SyncScopeopt AtomicOrdering list_of_','_and_1_elements4
+	AtomicRMWInst, // AtomicRMWInst : 'atomicrmw' Volatileopt AtomicOp TypeValue ',' TypeValue SyncScopeopt AtomicOrdering
+	AtomicOp, // AtomicOp : 'add'
+	AtomicOp, // AtomicOp : 'and'
+	AtomicOp, // AtomicOp : 'max'
+	AtomicOp, // AtomicOp : 'min'
+	AtomicOp, // AtomicOp : 'nand'
+	AtomicOp, // AtomicOp : 'or'
+	AtomicOp, // AtomicOp : 'sub'
+	AtomicOp, // AtomicOp : 'umax'
+	AtomicOp, // AtomicOp : 'umin'
+	AtomicOp, // AtomicOp : 'xchg'
+	AtomicOp, // AtomicOp : 'xor'
+	GetElementPtrInst, // GetElementPtrInst : 'getelementptr' InBoundsopt Type ',' TypeValue list_of_','_and_1_elements6 list_of_','_and_1_elements4
+	GetElementPtrInst, // GetElementPtrInst : 'getelementptr' InBoundsopt Type ',' TypeValue list_of_','_and_1_elements6
+	0, // list_of_','_and_1_elements6 : list_of_','_and_1_elements6 ',' TypeValue
+	0, // list_of_','_and_1_elements6 :
+	TruncInst, // TruncInst : 'trunc' TypeValue 'to' Type list_of_','_and_1_elements4
+	TruncInst, // TruncInst : 'trunc' TypeValue 'to' Type
+	ZExtInst, // ZExtInst : 'zext' TypeValue 'to' Type list_of_','_and_1_elements4
+	ZExtInst, // ZExtInst : 'zext' TypeValue 'to' Type
+	SExtInst, // SExtInst : 'sext' TypeValue 'to' Type list_of_','_and_1_elements4
+	SExtInst, // SExtInst : 'sext' TypeValue 'to' Type
+	FPTruncInst, // FPTruncInst : 'fptrunc' TypeValue 'to' Type list_of_','_and_1_elements4
+	FPTruncInst, // FPTruncInst : 'fptrunc' TypeValue 'to' Type
+	FPExtInst, // FPExtInst : 'fpext' TypeValue 'to' Type list_of_','_and_1_elements4
+	FPExtInst, // FPExtInst : 'fpext' TypeValue 'to' Type
+	FPToUIInst, // FPToUIInst : 'fptoui' TypeValue 'to' Type list_of_','_and_1_elements4
+	FPToUIInst, // FPToUIInst : 'fptoui' TypeValue 'to' Type
+	FPToSIInst, // FPToSIInst : 'fptosi' TypeValue 'to' Type list_of_','_and_1_elements4
+	FPToSIInst, // FPToSIInst : 'fptosi' TypeValue 'to' Type
+	UIToFPInst, // UIToFPInst : 'uitofp' TypeValue 'to' Type list_of_','_and_1_elements4
+	UIToFPInst, // UIToFPInst : 'uitofp' TypeValue 'to' Type
+	SIToFPInst, // SIToFPInst : 'sitofp' TypeValue 'to' Type list_of_','_and_1_elements4
+	SIToFPInst, // SIToFPInst : 'sitofp' TypeValue 'to' Type
+	PtrToIntInst, // PtrToIntInst : 'ptrtoint' TypeValue 'to' Type list_of_','_and_1_elements4
+	PtrToIntInst, // PtrToIntInst : 'ptrtoint' TypeValue 'to' Type
+	IntToPtrInst, // IntToPtrInst : 'inttoptr' TypeValue 'to' Type list_of_','_and_1_elements4
+	IntToPtrInst, // IntToPtrInst : 'inttoptr' TypeValue 'to' Type
+	BitCastInst, // BitCastInst : 'bitcast' TypeValue 'to' Type list_of_','_and_1_elements4
+	BitCastInst, // BitCastInst : 'bitcast' TypeValue 'to' Type
+	AddrSpaceCastInst, // AddrSpaceCastInst : 'addrspacecast' TypeValue 'to' Type list_of_','_and_1_elements4
+	AddrSpaceCastInst, // AddrSpaceCastInst : 'addrspacecast' TypeValue 'to' Type
+	ICmpInst, // ICmpInst : 'icmp' IPred TypeValue ',' Value list_of_','_and_1_elements4
+	ICmpInst, // ICmpInst : 'icmp' IPred TypeValue ',' Value
+	FCmpInst, // FCmpInst : 'fcmp' FastMathFlag_optlist FPred TypeValue ',' Value list_of_','_and_1_elements4
+	FCmpInst, // FCmpInst : 'fcmp' FastMathFlag_optlist FPred TypeValue ',' Value
+	0, // Inc_list_withsep : Inc_list_withsep ',' Inc
+	0, // Inc_list_withsep : Inc
+	PhiInst, // PhiInst : 'phi' Type Inc_list_withsep list_of_','_and_1_elements4
+	PhiInst, // PhiInst : 'phi' Type Inc_list_withsep
+	Inc, // Inc : '[' Value ',' LocalIdent ']'
+	SelectInst, // SelectInst : 'select' TypeValue ',' TypeValue ',' TypeValue list_of_','_and_1_elements4
+	SelectInst, // SelectInst : 'select' TypeValue ',' TypeValue ',' TypeValue
+	CallInst, // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist '[' OperandBundle_list_withsep ']' list_of_','_and_1_elements4
+	CallInst, // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist '[' OperandBundle_list_withsep ']'
+	CallInst, // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist list_of_','_and_1_elements4
+	CallInst, // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist
+	0, // OperandBundle_list_withsep : OperandBundle_list_withsep ',' OperandBundle
+	0, // OperandBundle_list_withsep : OperandBundle
+	Tail, // Tail : 'musttail'
+	Tail, // Tail : 'notail'
+	Tail, // Tail : 'tail'
+	VAArgInst, // VAArgInst : 'va_arg' TypeValue ',' Type list_of_','_and_1_elements4
+	VAArgInst, // VAArgInst : 'va_arg' TypeValue ',' Type
+	0, // Clause_optlist : Clause_optlist Clause
+	0, // Clause_optlist :
+	LandingPadInst, // LandingPadInst : 'landingpad' Type Cleanupopt Clause_optlist list_of_','_and_1_elements4
+	LandingPadInst, // LandingPadInst : 'landingpad' Type Cleanupopt Clause_optlist
+	Cleanup, // Cleanup : 'cleanup'
+	Clause, // Clause : ClauseType TypeValue
+	ClauseType, // ClauseType : 'catch'
+	ClauseType, // ClauseType : 'filter'
+	CatchPadInst, // CatchPadInst : 'catchpad' 'within' LocalIdent '[' ExceptionArg_list_withsep_opt ']' list_of_','_and_1_elements4
+	CatchPadInst, // CatchPadInst : 'catchpad' 'within' LocalIdent '[' ExceptionArg_list_withsep_opt ']'
+	0, // ExceptionArg_list_withsep : ExceptionArg_list_withsep ',' ExceptionArg
+	0, // ExceptionArg_list_withsep : ExceptionArg
+	0, // ExceptionArg_list_withsep_opt : ExceptionArg_list_withsep
+	0, // ExceptionArg_list_withsep_opt :
+	CleanupPadInst, // CleanupPadInst : 'cleanuppad' 'within' ExceptionScope '[' ExceptionArg_list_withsep_opt ']' list_of_','_and_1_elements4
+	CleanupPadInst, // CleanupPadInst : 'cleanuppad' 'within' ExceptionScope '[' ExceptionArg_list_withsep_opt ']'
+	0, // Terminator : LocalDefTerm
+	0, // Terminator : ValueTerminator
+	0, // Terminator : RetTerm
+	0, // Terminator : BrTerm
+	0, // Terminator : CondBrTerm
+	0, // Terminator : SwitchTerm
+	0, // Terminator : IndirectBrTerm
+	0, // Terminator : ResumeTerm
+	0, // Terminator : CatchRetTerm
+	0, // Terminator : CleanupRetTerm
+	0, // Terminator : UnreachableTerm
+	LocalDefTerm, // LocalDefTerm : LocalIdent '=' ValueTerminator
+	0, // ValueTerminator : InvokeTerm
+	0, // ValueTerminator : CatchSwitchTerm
+	RetTerm, // RetTerm : 'ret' VoidType list_of_','_and_1_elements4
+	RetTerm, // RetTerm : 'ret' VoidType
+	RetTerm, // RetTerm : 'ret' ConcreteType Value list_of_','_and_1_elements4
+	RetTerm, // RetTerm : 'ret' ConcreteType Value
+	BrTerm, // BrTerm : 'br' Label list_of_','_and_1_elements4
+	BrTerm, // BrTerm : 'br' Label
+	CondBrTerm, // CondBrTerm : 'br' IntType Value ',' Label ',' Label list_of_','_and_1_elements4
+	CondBrTerm, // CondBrTerm : 'br' IntType Value ',' Label ',' Label
+	0, // Case_optlist : Case_optlist Case
+	0, // Case_optlist :
+	SwitchTerm, // SwitchTerm : 'switch' TypeValue ',' Label '[' Case_optlist ']' list_of_','_and_1_elements4
+	SwitchTerm, // SwitchTerm : 'switch' TypeValue ',' Label '[' Case_optlist ']'
+	Case, // Case : TypeConst ',' Label
+	IndirectBrTerm, // IndirectBrTerm : 'indirectbr' TypeValue ',' '[' Label_list_withsep ']' list_of_','_and_1_elements4
+	IndirectBrTerm, // IndirectBrTerm : 'indirectbr' TypeValue ',' '[' Label_list_withsep ']'
+	0, // Label_list_withsep : Label_list_withsep ',' Label
+	0, // Label_list_withsep : Label
+	InvokeTerm, // InvokeTerm : 'invoke' CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist '[' OperandBundle_list_withsep ']' 'to' Label 'unwind' Label list_of_','_and_1_elements4
+	InvokeTerm, // InvokeTerm : 'invoke' CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist '[' OperandBundle_list_withsep ']' 'to' Label 'unwind' Label
+	InvokeTerm, // InvokeTerm : 'invoke' CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist 'to' Label 'unwind' Label list_of_','_and_1_elements4
+	InvokeTerm, // InvokeTerm : 'invoke' CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist 'to' Label 'unwind' Label
+	ResumeTerm, // ResumeTerm : 'resume' TypeValue list_of_','_and_1_elements4
+	ResumeTerm, // ResumeTerm : 'resume' TypeValue
+	CatchSwitchTerm, // CatchSwitchTerm : 'catchswitch' 'within' ExceptionScope '[' Label_list_withsep ']' 'unwind' UnwindTarget list_of_','_and_1_elements4
+	CatchSwitchTerm, // CatchSwitchTerm : 'catchswitch' 'within' ExceptionScope '[' Label_list_withsep ']' 'unwind' UnwindTarget
+	CatchRetTerm, // CatchRetTerm : 'catchret' 'from' Value 'to' Label list_of_','_and_1_elements4
+	CatchRetTerm, // CatchRetTerm : 'catchret' 'from' Value 'to' Label
+	CleanupRetTerm, // CleanupRetTerm : 'cleanupret' 'from' Value 'unwind' UnwindTarget list_of_','_and_1_elements4
+	CleanupRetTerm, // CleanupRetTerm : 'cleanupret' 'from' Value 'unwind' UnwindTarget
+	UnreachableTerm, // UnreachableTerm : 'unreachable' list_of_','_and_1_elements4
+	UnreachableTerm, // UnreachableTerm : 'unreachable'
+	MDTuple, // MDTuple : '!' MDFields
+	0, // MDField_list_withsep : MDField_list_withsep ',' MDField
+	0, // MDField_list_withsep : MDField
+	0, // MDField_list_withsep_opt : MDField_list_withsep
+	0, // MDField_list_withsep_opt :
+	MDFields, // MDFields : '{' MDField_list_withsep_opt '}'
+	0, // MDField : NullLit
+	0, // MDField : Metadata
+	0, // Metadata : TypeValue
+	0, // Metadata : MDString
+	0, // Metadata : MDTuple
+	0, // Metadata : MetadataID
+	0, // Metadata : SpecializedMDNode
+	MDString, // MDString : '!' StringLit
+	MetadataAttachment, // MetadataAttachment : MetadataName MDNode
+	0, // MDNode : MDTuple
+	0, // MDNode : MetadataID
+	0, // MDNode : SpecializedMDNode
+	0, // SpecializedMDNode : DIBasicType
+	0, // SpecializedMDNode : DICompileUnit
+	0, // SpecializedMDNode : DICompositeType
+	0, // SpecializedMDNode : DIDerivedType
+	0, // SpecializedMDNode : DIEnumerator
+	0, // SpecializedMDNode : DIExpression
+	0, // SpecializedMDNode : DIFile
+	0, // SpecializedMDNode : DIGlobalVariable
+	0, // SpecializedMDNode : DIGlobalVariableExpression
+	0, // SpecializedMDNode : DIImportedEntity
+	0, // SpecializedMDNode : DILabel
+	0, // SpecializedMDNode : DILexicalBlock
+	0, // SpecializedMDNode : DILexicalBlockFile
+	0, // SpecializedMDNode : DILocalVariable
+	0, // SpecializedMDNode : DILocation
+	0, // SpecializedMDNode : DIMacro
+	0, // SpecializedMDNode : DIMacroFile
+	0, // SpecializedMDNode : DIModule
+	0, // SpecializedMDNode : DINamespace
+	0, // SpecializedMDNode : DIObjCProperty
+	0, // SpecializedMDNode : DISubprogram
+	0, // SpecializedMDNode : DISubrange
+	0, // SpecializedMDNode : DISubroutineType
+	0, // SpecializedMDNode : DITemplateTypeParameter
+	0, // SpecializedMDNode : DITemplateValueParameter
+	0, // SpecializedMDNode : GenericDINode
+	DIBasicType, // DIBasicType : '!DIBasicType' '(' DIBasicTypeField_list_withsep_opt ')'
+	0, // DIBasicTypeField_list_withsep : DIBasicTypeField_list_withsep ',' DIBasicTypeField
+	0, // DIBasicTypeField_list_withsep : DIBasicTypeField
+	0, // DIBasicTypeField_list_withsep_opt : DIBasicTypeField_list_withsep
+	0, // DIBasicTypeField_list_withsep_opt :
+	0, // DIBasicTypeField : TagField
+	0, // DIBasicTypeField : NameField
+	0, // DIBasicTypeField : SizeField
+	0, // DIBasicTypeField : AlignField
+	0, // DIBasicTypeField : EncodingField
+	0, // DIBasicTypeField : FlagsField
+	DICompileUnit, // DICompileUnit : '!DICompileUnit' '(' DICompileUnitField_list_withsep_opt ')'
+	0, // DICompileUnitField_list_withsep : DICompileUnitField_list_withsep ',' DICompileUnitField
+	0, // DICompileUnitField_list_withsep : DICompileUnitField
+	0, // DICompileUnitField_list_withsep_opt : DICompileUnitField_list_withsep
+	0, // DICompileUnitField_list_withsep_opt :
+	0, // DICompileUnitField : LanguageField
+	0, // DICompileUnitField : FileField
+	0, // DICompileUnitField : ProducerField
+	0, // DICompileUnitField : IsOptimizedField
+	0, // DICompileUnitField : FlagsStringField
+	0, // DICompileUnitField : RuntimeVersionField
+	0, // DICompileUnitField : SplitDebugFilenameField
+	0, // DICompileUnitField : EmissionKindField
+	0, // DICompileUnitField : EnumsField
+	0, // DICompileUnitField : RetainedTypesField
+	0, // DICompileUnitField : GlobalsField
+	0, // DICompileUnitField : ImportsField
+	0, // DICompileUnitField : MacrosField
+	0, // DICompileUnitField : DwoIdField
+	0, // DICompileUnitField : SplitDebugInliningField
+	0, // DICompileUnitField : DebugInfoForProfilingField
+	0, // DICompileUnitField : NameTableKindField
+	DICompositeType, // DICompositeType : '!DICompositeType' '(' DICompositeTypeField_list_withsep_opt ')'
+	0, // DICompositeTypeField_list_withsep : DICompositeTypeField_list_withsep ',' DICompositeTypeField
+	0, // DICompositeTypeField_list_withsep : DICompositeTypeField
+	0, // DICompositeTypeField_list_withsep_opt : DICompositeTypeField_list_withsep
+	0, // DICompositeTypeField_list_withsep_opt :
+	0, // DICompositeTypeField : TagField
+	0, // DICompositeTypeField : NameField
+	0, // DICompositeTypeField : ScopeField
+	0, // DICompositeTypeField : FileField
+	0, // DICompositeTypeField : LineField
+	0, // DICompositeTypeField : BaseTypeField
+	0, // DICompositeTypeField : SizeField
+	0, // DICompositeTypeField : AlignField
+	0, // DICompositeTypeField : OffsetField
+	0, // DICompositeTypeField : FlagsField
+	0, // DICompositeTypeField : ElementsField
+	0, // DICompositeTypeField : RuntimeLangField
+	0, // DICompositeTypeField : VtableHolderField
+	0, // DICompositeTypeField : TemplateParamsField
+	0, // DICompositeTypeField : IdentifierField
+	0, // DICompositeTypeField : DiscriminatorField
+	DIDerivedType, // DIDerivedType : '!DIDerivedType' '(' DIDerivedTypeField_list_withsep_opt ')'
+	0, // DIDerivedTypeField_list_withsep : DIDerivedTypeField_list_withsep ',' DIDerivedTypeField
+	0, // DIDerivedTypeField_list_withsep : DIDerivedTypeField
+	0, // DIDerivedTypeField_list_withsep_opt : DIDerivedTypeField_list_withsep
+	0, // DIDerivedTypeField_list_withsep_opt :
+	0, // DIDerivedTypeField : TagField
+	0, // DIDerivedTypeField : NameField
+	0, // DIDerivedTypeField : ScopeField
+	0, // DIDerivedTypeField : FileField
+	0, // DIDerivedTypeField : LineField
+	0, // DIDerivedTypeField : BaseTypeField
+	0, // DIDerivedTypeField : SizeField
+	0, // DIDerivedTypeField : AlignField
+	0, // DIDerivedTypeField : OffsetField
+	0, // DIDerivedTypeField : FlagsField
+	0, // DIDerivedTypeField : ExtraDataField
+	0, // DIDerivedTypeField : DwarfAddressSpaceField
+	DIEnumerator, // DIEnumerator : '!DIEnumerator' '(' DIEnumeratorField_list_withsep_opt ')'
+	0, // DIEnumeratorField_list_withsep : DIEnumeratorField_list_withsep ',' DIEnumeratorField
+	0, // DIEnumeratorField_list_withsep : DIEnumeratorField
+	0, // DIEnumeratorField_list_withsep_opt : DIEnumeratorField_list_withsep
+	0, // DIEnumeratorField_list_withsep_opt :
+	0, // DIEnumeratorField : NameField
+	0, // DIEnumeratorField : ValueIntField
+	0, // DIEnumeratorField : IsUnsignedField
+	DIExpression, // DIExpression : '!DIExpression' '(' DIExpressionField_list_withsep_opt ')'
+	0, // DIExpressionField_list_withsep : DIExpressionField_list_withsep ',' DIExpressionField
+	0, // DIExpressionField_list_withsep : DIExpressionField
+	0, // DIExpressionField_list_withsep_opt : DIExpressionField_list_withsep
+	0, // DIExpressionField_list_withsep_opt :
+	0, // DIExpressionField : IntLit
+	0, // DIExpressionField : DwarfOp
+	DIFile, // DIFile : '!DIFile' '(' DIFileField_list_withsep_opt ')'
+	0, // DIFileField_list_withsep : DIFileField_list_withsep ',' DIFileField
+	0, // DIFileField_list_withsep : DIFileField
+	0, // DIFileField_list_withsep_opt : DIFileField_list_withsep
+	0, // DIFileField_list_withsep_opt :
+	0, // DIFileField : FilenameField
+	0, // DIFileField : DirectoryField
+	0, // DIFileField : ChecksumkindField
+	0, // DIFileField : ChecksumField
+	0, // DIFileField : SourceField
+	DIGlobalVariable, // DIGlobalVariable : '!DIGlobalVariable' '(' DIGlobalVariableField_list_withsep_opt ')'
+	0, // DIGlobalVariableField_list_withsep : DIGlobalVariableField_list_withsep ',' DIGlobalVariableField
+	0, // DIGlobalVariableField_list_withsep : DIGlobalVariableField
+	0, // DIGlobalVariableField_list_withsep_opt : DIGlobalVariableField_list_withsep
+	0, // DIGlobalVariableField_list_withsep_opt :
+	0, // DIGlobalVariableField : NameField
+	0, // DIGlobalVariableField : ScopeField
+	0, // DIGlobalVariableField : LinkageNameField
+	0, // DIGlobalVariableField : FileField
+	0, // DIGlobalVariableField : LineField
+	0, // DIGlobalVariableField : TypeField
+	0, // DIGlobalVariableField : IsLocalField
+	0, // DIGlobalVariableField : IsDefinitionField
+	0, // DIGlobalVariableField : TemplateParamsField
+	0, // DIGlobalVariableField : DeclarationField
+	0, // DIGlobalVariableField : AlignField
 	DIGlobalVariableExpression, // DIGlobalVariableExpression : '!DIGlobalVariableExpression' '(' DIGlobalVariableExpressionField_list_withsep_opt ')'
-	0,                          // DIGlobalVariableExpressionField_list_withsep : DIGlobalVariableExpressionField_list_withsep ',' DIGlobalVariableExpressionField
-	0,                          // DIGlobalVariableExpressionField_list_withsep : DIGlobalVariableExpressionField
-	0,                          // DIGlobalVariableExpressionField_list_withsep_opt : DIGlobalVariableExpressionField_list_withsep
-	0,                          // DIGlobalVariableExpressionField_list_withsep_opt :
-	0,                          // DIGlobalVariableExpressionField : VarField
-	0,                          // DIGlobalVariableExpressionField : ExprField
-	DIImportedEntity,           // DIImportedEntity : '!DIImportedEntity' '(' DIImportedEntityField_list_withsep_opt ')'
-	0,                          // DIImportedEntityField_list_withsep : DIImportedEntityField_list_withsep ',' DIImportedEntityField
-	0,                          // DIImportedEntityField_list_withsep : DIImportedEntityField
-	0,                          // DIImportedEntityField_list_withsep_opt : DIImportedEntityField_list_withsep
-	0,                          // DIImportedEntityField_list_withsep_opt :
-	0,                          // DIImportedEntityField : TagField
-	0,                          // DIImportedEntityField : ScopeField
-	0,                          // DIImportedEntityField : EntityField
-	0,                          // DIImportedEntityField : FileField
-	0,                          // DIImportedEntityField : LineField
-	0,                          // DIImportedEntityField : NameField
-	DILabel,                    // DILabel : '!DILabel' '(' DILabelField_list_withsep_opt ')'
-	0,                          // DILabelField_list_withsep : DILabelField_list_withsep ',' DILabelField
-	0,                          // DILabelField_list_withsep : DILabelField
-	0,                          // DILabelField_list_withsep_opt : DILabelField_list_withsep
-	0,                          // DILabelField_list_withsep_opt :
-	0,                          // DILabelField : ScopeField
-	0,                          // DILabelField : NameField
-	0,                          // DILabelField : FileField
-	0,                          // DILabelField : LineField
-	DILexicalBlock,             // DILexicalBlock : '!DILexicalBlock' '(' DILexicalBlockField_list_withsep_opt ')'
-	0,                          // DILexicalBlockField_list_withsep : DILexicalBlockField_list_withsep ',' DILexicalBlockField
-	0,                          // DILexicalBlockField_list_withsep : DILexicalBlockField
-	0,                          // DILexicalBlockField_list_withsep_opt : DILexicalBlockField_list_withsep
-	0,                          // DILexicalBlockField_list_withsep_opt :
-	0,                          // DILexicalBlockField : ScopeField
-	0,                          // DILexicalBlockField : FileField
-	0,                          // DILexicalBlockField : LineField
-	0,                          // DILexicalBlockField : ColumnField
-	DILexicalBlockFile,         // DILexicalBlockFile : '!DILexicalBlockFile' '(' DILexicalBlockFileField_list_withsep_opt ')'
-	0,                          // DILexicalBlockFileField_list_withsep : DILexicalBlockFileField_list_withsep ',' DILexicalBlockFileField
-	0,                          // DILexicalBlockFileField_list_withsep : DILexicalBlockFileField
-	0,                          // DILexicalBlockFileField_list_withsep_opt : DILexicalBlockFileField_list_withsep
-	0,                          // DILexicalBlockFileField_list_withsep_opt :
-	0,                          // DILexicalBlockFileField : ScopeField
-	0,                          // DILexicalBlockFileField : FileField
-	0,                          // DILexicalBlockFileField : DiscriminatorIntField
-	DILocalVariable,            // DILocalVariable : '!DILocalVariable' '(' DILocalVariableField_list_withsep_opt ')'
-	0,                          // DILocalVariableField_list_withsep : DILocalVariableField_list_withsep ',' DILocalVariableField
-	0,                          // DILocalVariableField_list_withsep : DILocalVariableField
-	0,                          // DILocalVariableField_list_withsep_opt : DILocalVariableField_list_withsep
-	0,                          // DILocalVariableField_list_withsep_opt :
-	0,                          // DILocalVariableField : NameField
-	0,                          // DILocalVariableField : ArgField
-	0,                          // DILocalVariableField : ScopeField
-	0,                          // DILocalVariableField : FileField
-	0,                          // DILocalVariableField : LineField
-	0,                          // DILocalVariableField : TypeField
-	0,                          // DILocalVariableField : FlagsField
-	0,                          // DILocalVariableField : AlignField
-	DILocation,                 // DILocation : '!DILocation' '(' DILocationField_list_withsep_opt ')'
-	0,                          // DILocationField_list_withsep : DILocationField_list_withsep ',' DILocationField
-	0,                          // DILocationField_list_withsep : DILocationField
-	0,                          // DILocationField_list_withsep_opt : DILocationField_list_withsep
-	0,                          // DILocationField_list_withsep_opt :
-	0,                          // DILocationField : LineField
-	0,                          // DILocationField : ColumnField
-	0,                          // DILocationField : ScopeField
-	0,                          // DILocationField : InlinedAtField
-	0,                          // DILocationField : IsImplicitCodeField
-	DIMacro,                    // DIMacro : '!DIMacro' '(' DIMacroField_list_withsep_opt ')'
-	0,                          // DIMacroField_list_withsep : DIMacroField_list_withsep ',' DIMacroField
-	0,                          // DIMacroField_list_withsep : DIMacroField
-	0,                          // DIMacroField_list_withsep_opt : DIMacroField_list_withsep
-	0,                          // DIMacroField_list_withsep_opt :
-	0,                          // DIMacroField : TypeMacinfoField
-	0,                          // DIMacroField : LineField
-	0,                          // DIMacroField : NameField
-	0,                          // DIMacroField : ValueStringField
-	DIMacroFile,                // DIMacroFile : '!DIMacroFile' '(' DIMacroFileField_list_withsep_opt ')'
-	0,                          // DIMacroFileField_list_withsep : DIMacroFileField_list_withsep ',' DIMacroFileField
-	0,                          // DIMacroFileField_list_withsep : DIMacroFileField
-	0,                          // DIMacroFileField_list_withsep_opt : DIMacroFileField_list_withsep
-	0,                          // DIMacroFileField_list_withsep_opt :
-	0,                          // DIMacroFileField : TypeMacinfoField
-	0,                          // DIMacroFileField : LineField
-	0,                          // DIMacroFileField : FileField
-	0,                          // DIMacroFileField : NodesField
-	DIModule,                   // DIModule : '!DIModule' '(' DIModuleField_list_withsep_opt ')'
-	0,                          // DIModuleField_list_withsep : DIModuleField_list_withsep ',' DIModuleField
-	0,                          // DIModuleField_list_withsep : DIModuleField
-	0,                          // DIModuleField_list_withsep_opt : DIModuleField_list_withsep
-	0,                          // DIModuleField_list_withsep_opt :
-	0,                          // DIModuleField : ScopeField
-	0,                          // DIModuleField : NameField
-	0,                          // DIModuleField : ConfigMacrosField
-	0,                          // DIModuleField : IncludePathField
-	0,                          // DIModuleField : IsysrootField
-	DINamespace,                // DINamespace : '!DINamespace' '(' DINamespaceField_list_withsep_opt ')'
-	0,                          // DINamespaceField_list_withsep : DINamespaceField_list_withsep ',' DINamespaceField
-	0,                          // DINamespaceField_list_withsep : DINamespaceField
-	0,                          // DINamespaceField_list_withsep_opt : DINamespaceField_list_withsep
-	0,                          // DINamespaceField_list_withsep_opt :
-	0,                          // DINamespaceField : ScopeField
-	0,                          // DINamespaceField : NameField
-	0,                          // DINamespaceField : ExportSymbolsField
-	DIObjCProperty,             // DIObjCProperty : '!DIObjCProperty' '(' DIObjCPropertyField_list_withsep_opt ')'
-	0,                          // DIObjCPropertyField_list_withsep : DIObjCPropertyField_list_withsep ',' DIObjCPropertyField
-	0,                          // DIObjCPropertyField_list_withsep : DIObjCPropertyField
-	0,                          // DIObjCPropertyField_list_withsep_opt : DIObjCPropertyField_list_withsep
-	0,                          // DIObjCPropertyField_list_withsep_opt :
-	0,                          // DIObjCPropertyField : NameField
-	0,                          // DIObjCPropertyField : FileField
-	0,                          // DIObjCPropertyField : LineField
-	0,                          // DIObjCPropertyField : SetterField
-	0,                          // DIObjCPropertyField : GetterField
-	0,                          // DIObjCPropertyField : AttributesField
-	0,                          // DIObjCPropertyField : TypeField
-	DISubprogram,               // DISubprogram : '!DISubprogram' '(' DISubprogramField_list_withsep_opt ')'
-	0,                          // DISubprogramField_list_withsep : DISubprogramField_list_withsep ',' DISubprogramField
-	0,                          // DISubprogramField_list_withsep : DISubprogramField
-	0,                          // DISubprogramField_list_withsep_opt : DISubprogramField_list_withsep
-	0,                          // DISubprogramField_list_withsep_opt :
-	0,                          // DISubprogramField : ScopeField
-	0,                          // DISubprogramField : NameField
-	0,                          // DISubprogramField : LinkageNameField
-	0,                          // DISubprogramField : FileField
-	0,                          // DISubprogramField : LineField
-	0,                          // DISubprogramField : TypeField
-	0,                          // DISubprogramField : IsLocalField
-	0,                          // DISubprogramField : IsDefinitionField
-	0,                          // DISubprogramField : ScopeLineField
-	0,                          // DISubprogramField : ContainingTypeField
-	0,                          // DISubprogramField : VirtualityField
-	0,                          // DISubprogramField : VirtualIndexField
-	0,                          // DISubprogramField : ThisAdjustmentField
-	0,                          // DISubprogramField : FlagsField
-	0,                          // DISubprogramField : IsOptimizedField
-	0,                          // DISubprogramField : UnitField
-	0,                          // DISubprogramField : TemplateParamsField
-	0,                          // DISubprogramField : DeclarationField
-	0,                          // DISubprogramField : RetainedNodesField
-	0,                          // DISubprogramField : ThrownTypesField
-	DISubrange,                 // DISubrange : '!DISubrange' '(' DISubrangeField_list_withsep_opt ')'
-	0,                          // DISubrangeField_list_withsep : DISubrangeField_list_withsep ',' DISubrangeField
-	0,                          // DISubrangeField_list_withsep : DISubrangeField
-	0,                          // DISubrangeField_list_withsep_opt : DISubrangeField_list_withsep
-	0,                          // DISubrangeField_list_withsep_opt :
-	0,                          // DISubrangeField : CountField
-	0,                          // DISubrangeField : LowerBoundField
-	DISubroutineType,           // DISubroutineType : '!DISubroutineType' '(' DISubroutineTypeField_list_withsep_opt ')'
-	0,                          // DISubroutineTypeField_list_withsep : DISubroutineTypeField_list_withsep ',' DISubroutineTypeField
-	0,                          // DISubroutineTypeField_list_withsep : DISubroutineTypeField
-	0,                          // DISubroutineTypeField_list_withsep_opt : DISubroutineTypeField_list_withsep
-	0,                          // DISubroutineTypeField_list_withsep_opt :
-	0,                          // DISubroutineTypeField : FlagsField
-	0,                          // DISubroutineTypeField : CCField
-	0,                          // DISubroutineTypeField : TypesField
-	DITemplateTypeParameter,    // DITemplateTypeParameter : '!DITemplateTypeParameter' '(' DITemplateTypeParameterField_list_withsep_opt ')'
-	0,                          // DITemplateTypeParameterField_list_withsep : DITemplateTypeParameterField_list_withsep ',' DITemplateTypeParameterField
-	0,                          // DITemplateTypeParameterField_list_withsep : DITemplateTypeParameterField
-	0,                          // DITemplateTypeParameterField_list_withsep_opt : DITemplateTypeParameterField_list_withsep
-	0,                          // DITemplateTypeParameterField_list_withsep_opt :
-	0,                          // DITemplateTypeParameterField : NameField
-	0,                          // DITemplateTypeParameterField : TypeField
-	DITemplateValueParameter,   // DITemplateValueParameter : '!DITemplateValueParameter' '(' DITemplateValueParameterField_list_withsep_opt ')'
-	0,                          // DITemplateValueParameterField_list_withsep : DITemplateValueParameterField_list_withsep ',' DITemplateValueParameterField
-	0,                          // DITemplateValueParameterField_list_withsep : DITemplateValueParameterField
-	0,                          // DITemplateValueParameterField_list_withsep_opt : DITemplateValueParameterField_list_withsep
-	0,                          // DITemplateValueParameterField_list_withsep_opt :
-	0,                          // DITemplateValueParameterField : TagField
-	0,                          // DITemplateValueParameterField : NameField
-	0,                          // DITemplateValueParameterField : TypeField
-	0,                          // DITemplateValueParameterField : ValueField
-	GenericDINode,              // GenericDINode : '!GenericDINode' '(' GenericDINodeField_list_withsep_opt ')'
-	0,                          // GenericDINodeField_list_withsep : GenericDINodeField_list_withsep ',' GenericDINodeField
-	0,                          // GenericDINodeField_list_withsep : GenericDINodeField
-	0,                          // GenericDINodeField_list_withsep_opt : GenericDINodeField_list_withsep
-	0,                          // GenericDINodeField_list_withsep_opt :
-	0,                          // GenericDINodeField : TagField
-	0,                          // GenericDINodeField : HeaderField
-	0,                          // GenericDINodeField : OperandsField
-	AlignField,                 // AlignField : 'align:' IntLit
-	ArgField,                   // ArgField : 'arg:' IntLit
-	AttributesField,            // AttributesField : 'attributes:' IntLit
-	BaseTypeField,              // BaseTypeField : 'baseType:' MDField
-	CCField,                    // CCField : 'cc:' DwarfCC
-	ChecksumField,              // ChecksumField : 'checksum:' StringLit
-	ChecksumkindField,          // ChecksumkindField : 'checksumkind:' ChecksumKind
-	ColumnField,                // ColumnField : 'column:' IntLit
-	ConfigMacrosField,          // ConfigMacrosField : 'configMacros:' StringLit
-	ContainingTypeField,        // ContainingTypeField : 'containingType:' MDField
-	CountField,                 // CountField : 'count:' MDFieldOrInt
+	0, // DIGlobalVariableExpressionField_list_withsep : DIGlobalVariableExpressionField_list_withsep ',' DIGlobalVariableExpressionField
+	0, // DIGlobalVariableExpressionField_list_withsep : DIGlobalVariableExpressionField
+	0, // DIGlobalVariableExpressionField_list_withsep_opt : DIGlobalVariableExpressionField_list_withsep
+	0, // DIGlobalVariableExpressionField_list_withsep_opt :
+	0, // DIGlobalVariableExpressionField : VarField
+	0, // DIGlobalVariableExpressionField : ExprField
+	DIImportedEntity, // DIImportedEntity : '!DIImportedEntity' '(' DIImportedEntityField_list_withsep_opt ')'
+	0, // DIImportedEntityField_list_withsep : DIImportedEntityField_list_withsep ',' DIImportedEntityField
+	0, // DIImportedEntityField_list_withsep : DIImportedEntityField
+	0, // DIImportedEntityField_list_withsep_opt : DIImportedEntityField_list_withsep
+	0, // DIImportedEntityField_list_withsep_opt :
+	0, // DIImportedEntityField : TagField
+	0, // DIImportedEntityField : ScopeField
+	0, // DIImportedEntityField : EntityField
+	0, // DIImportedEntityField : FileField
+	0, // DIImportedEntityField : LineField
+	0, // DIImportedEntityField : NameField
+	DILabel, // DILabel : '!DILabel' '(' DILabelField_list_withsep_opt ')'
+	0, // DILabelField_list_withsep : DILabelField_list_withsep ',' DILabelField
+	0, // DILabelField_list_withsep : DILabelField
+	0, // DILabelField_list_withsep_opt : DILabelField_list_withsep
+	0, // DILabelField_list_withsep_opt :
+	0, // DILabelField : ScopeField
+	0, // DILabelField : NameField
+	0, // DILabelField : FileField
+	0, // DILabelField : LineField
+	DILexicalBlock, // DILexicalBlock : '!DILexicalBlock' '(' DILexicalBlockField_list_withsep_opt ')'
+	0, // DILexicalBlockField_list_withsep : DILexicalBlockField_list_withsep ',' DILexicalBlockField
+	0, // DILexicalBlockField_list_withsep : DILexicalBlockField
+	0, // DILexicalBlockField_list_withsep_opt : DILexicalBlockField_list_withsep
+	0, // DILexicalBlockField_list_withsep_opt :
+	0, // DILexicalBlockField : ScopeField
+	0, // DILexicalBlockField : FileField
+	0, // DILexicalBlockField : LineField
+	0, // DILexicalBlockField : ColumnField
+	DILexicalBlockFile, // DILexicalBlockFile : '!DILexicalBlockFile' '(' DILexicalBlockFileField_list_withsep_opt ')'
+	0, // DILexicalBlockFileField_list_withsep : DILexicalBlockFileField_list_withsep ',' DILexicalBlockFileField
+	0, // DILexicalBlockFileField_list_withsep : DILexicalBlockFileField
+	0, // DILexicalBlockFileField_list_withsep_opt : DILexicalBlockFileField_list_withsep
+	0, // DILexicalBlockFileField_list_withsep_opt :
+	0, // DILexicalBlockFileField : ScopeField
+	0, // DILexicalBlockFileField : FileField
+	0, // DILexicalBlockFileField : DiscriminatorIntField
+	DILocalVariable, // DILocalVariable : '!DILocalVariable' '(' DILocalVariableField_list_withsep_opt ')'
+	0, // DILocalVariableField_list_withsep : DILocalVariableField_list_withsep ',' DILocalVariableField
+	0, // DILocalVariableField_list_withsep : DILocalVariableField
+	0, // DILocalVariableField_list_withsep_opt : DILocalVariableField_list_withsep
+	0, // DILocalVariableField_list_withsep_opt :
+	0, // DILocalVariableField : NameField
+	0, // DILocalVariableField : ArgField
+	0, // DILocalVariableField : ScopeField
+	0, // DILocalVariableField : FileField
+	0, // DILocalVariableField : LineField
+	0, // DILocalVariableField : TypeField
+	0, // DILocalVariableField : FlagsField
+	0, // DILocalVariableField : AlignField
+	DILocation, // DILocation : '!DILocation' '(' DILocationField_list_withsep_opt ')'
+	0, // DILocationField_list_withsep : DILocationField_list_withsep ',' DILocationField
+	0, // DILocationField_list_withsep : DILocationField
+	0, // DILocationField_list_withsep_opt : DILocationField_list_withsep
+	0, // DILocationField_list_withsep_opt :
+	0, // DILocationField : LineField
+	0, // DILocationField : ColumnField
+	0, // DILocationField : ScopeField
+	0, // DILocationField : InlinedAtField
+	0, // DILocationField : IsImplicitCodeField
+	DIMacro, // DIMacro : '!DIMacro' '(' DIMacroField_list_withsep_opt ')'
+	0, // DIMacroField_list_withsep : DIMacroField_list_withsep ',' DIMacroField
+	0, // DIMacroField_list_withsep : DIMacroField
+	0, // DIMacroField_list_withsep_opt : DIMacroField_list_withsep
+	0, // DIMacroField_list_withsep_opt :
+	0, // DIMacroField : TypeMacinfoField
+	0, // DIMacroField : LineField
+	0, // DIMacroField : NameField
+	0, // DIMacroField : ValueStringField
+	DIMacroFile, // DIMacroFile : '!DIMacroFile' '(' DIMacroFileField_list_withsep_opt ')'
+	0, // DIMacroFileField_list_withsep : DIMacroFileField_list_withsep ',' DIMacroFileField
+	0, // DIMacroFileField_list_withsep : DIMacroFileField
+	0, // DIMacroFileField_list_withsep_opt : DIMacroFileField_list_withsep
+	0, // DIMacroFileField_list_withsep_opt :
+	0, // DIMacroFileField : TypeMacinfoField
+	0, // DIMacroFileField : LineField
+	0, // DIMacroFileField : FileField
+	0, // DIMacroFileField : NodesField
+	DIModule, // DIModule : '!DIModule' '(' DIModuleField_list_withsep_opt ')'
+	0, // DIModuleField_list_withsep : DIModuleField_list_withsep ',' DIModuleField
+	0, // DIModuleField_list_withsep : DIModuleField
+	0, // DIModuleField_list_withsep_opt : DIModuleField_list_withsep
+	0, // DIModuleField_list_withsep_opt :
+	0, // DIModuleField : ScopeField
+	0, // DIModuleField : NameField
+	0, // DIModuleField : ConfigMacrosField
+	0, // DIModuleField : IncludePathField
+	0, // DIModuleField : IsysrootField
+	DINamespace, // DINamespace : '!DINamespace' '(' DINamespaceField_list_withsep_opt ')'
+	0, // DINamespaceField_list_withsep : DINamespaceField_list_withsep ',' DINamespaceField
+	0, // DINamespaceField_list_withsep : DINamespaceField
+	0, // DINamespaceField_list_withsep_opt : DINamespaceField_list_withsep
+	0, // DINamespaceField_list_withsep_opt :
+	0, // DINamespaceField : ScopeField
+	0, // DINamespaceField : NameField
+	0, // DINamespaceField : ExportSymbolsField
+	DIObjCProperty, // DIObjCProperty : '!DIObjCProperty' '(' DIObjCPropertyField_list_withsep_opt ')'
+	0, // DIObjCPropertyField_list_withsep : DIObjCPropertyField_list_withsep ',' DIObjCPropertyField
+	0, // DIObjCPropertyField_list_withsep : DIObjCPropertyField
+	0, // DIObjCPropertyField_list_withsep_opt : DIObjCPropertyField_list_withsep
+	0, // DIObjCPropertyField_list_withsep_opt :
+	0, // DIObjCPropertyField : NameField
+	0, // DIObjCPropertyField : FileField
+	0, // DIObjCPropertyField : LineField
+	0, // DIObjCPropertyField : SetterField
+	0, // DIObjCPropertyField : GetterField
+	0, // DIObjCPropertyField : AttributesField
+	0, // DIObjCPropertyField : TypeField
+	DISubprogram, // DISubprogram : '!DISubprogram' '(' DISubprogramField_list_withsep_opt ')'
+	0, // DISubprogramField_list_withsep : DISubprogramField_list_withsep ',' DISubprogramField
+	0, // DISubprogramField_list_withsep : DISubprogramField
+	0, // DISubprogramField_list_withsep_opt : DISubprogramField_list_withsep
+	0, // DISubprogramField_list_withsep_opt :
+	0, // DISubprogramField : ScopeField
+	0, // DISubprogramField : NameField
+	0, // DISubprogramField : LinkageNameField
+	0, // DISubprogramField : FileField
+	0, // DISubprogramField : LineField
+	0, // DISubprogramField : TypeField
+	0, // DISubprogramField : IsLocalField
+	0, // DISubprogramField : IsDefinitionField
+	0, // DISubprogramField : ScopeLineField
+	0, // DISubprogramField : ContainingTypeField
+	0, // DISubprogramField : VirtualityField
+	0, // DISubprogramField : VirtualIndexField
+	0, // DISubprogramField : ThisAdjustmentField
+	0, // DISubprogramField : FlagsField
+	0, // DISubprogramField : IsOptimizedField
+	0, // DISubprogramField : UnitField
+	0, // DISubprogramField : TemplateParamsField
+	0, // DISubprogramField : DeclarationField
+	0, // DISubprogramField : RetainedNodesField
+	0, // DISubprogramField : ThrownTypesField
+	DISubrange, // DISubrange : '!DISubrange' '(' DISubrangeField_list_withsep_opt ')'
+	0, // DISubrangeField_list_withsep : DISubrangeField_list_withsep ',' DISubrangeField
+	0, // DISubrangeField_list_withsep : DISubrangeField
+	0, // DISubrangeField_list_withsep_opt : DISubrangeField_list_withsep
+	0, // DISubrangeField_list_withsep_opt :
+	0, // DISubrangeField : CountField
+	0, // DISubrangeField : LowerBoundField
+	DISubroutineType, // DISubroutineType : '!DISubroutineType' '(' DISubroutineTypeField_list_withsep_opt ')'
+	0, // DISubroutineTypeField_list_withsep : DISubroutineTypeField_list_withsep ',' DISubroutineTypeField
+	0, // DISubroutineTypeField_list_withsep : DISubroutineTypeField
+	0, // DISubroutineTypeField_list_withsep_opt : DISubroutineTypeField_list_withsep
+	0, // DISubroutineTypeField_list_withsep_opt :
+	0, // DISubroutineTypeField : FlagsField
+	0, // DISubroutineTypeField : CCField
+	0, // DISubroutineTypeField : TypesField
+	DITemplateTypeParameter, // DITemplateTypeParameter : '!DITemplateTypeParameter' '(' DITemplateTypeParameterField_list_withsep_opt ')'
+	0, // DITemplateTypeParameterField_list_withsep : DITemplateTypeParameterField_list_withsep ',' DITemplateTypeParameterField
+	0, // DITemplateTypeParameterField_list_withsep : DITemplateTypeParameterField
+	0, // DITemplateTypeParameterField_list_withsep_opt : DITemplateTypeParameterField_list_withsep
+	0, // DITemplateTypeParameterField_list_withsep_opt :
+	0, // DITemplateTypeParameterField : NameField
+	0, // DITemplateTypeParameterField : TypeField
+	DITemplateValueParameter, // DITemplateValueParameter : '!DITemplateValueParameter' '(' DITemplateValueParameterField_list_withsep_opt ')'
+	0, // DITemplateValueParameterField_list_withsep : DITemplateValueParameterField_list_withsep ',' DITemplateValueParameterField
+	0, // DITemplateValueParameterField_list_withsep : DITemplateValueParameterField
+	0, // DITemplateValueParameterField_list_withsep_opt : DITemplateValueParameterField_list_withsep
+	0, // DITemplateValueParameterField_list_withsep_opt :
+	0, // DITemplateValueParameterField : TagField
+	0, // DITemplateValueParameterField : NameField
+	0, // DITemplateValueParameterField : TypeField
+	0, // DITemplateValueParameterField : ValueField
+	GenericDINode, // GenericDINode : '!GenericDINode' '(' GenericDINodeField_list_withsep_opt ')'
+	0, // GenericDINodeField_list_withsep : GenericDINodeField_list_withsep ',' GenericDINodeField
+	0, // GenericDINodeField_list_withsep : GenericDINodeField
+	0, // GenericDINodeField_list_withsep_opt : GenericDINodeField_list_withsep
+	0, // GenericDINodeField_list_withsep_opt :
+	0, // GenericDINodeField : TagField
+	0, // GenericDINodeField : HeaderField
+	0, // GenericDINodeField : OperandsField
+	AlignField, // AlignField : 'align:' IntLit
+	ArgField, // ArgField : 'arg:' IntLit
+	AttributesField, // AttributesField : 'attributes:' IntLit
+	BaseTypeField, // BaseTypeField : 'baseType:' MDField
+	CCField, // CCField : 'cc:' DwarfCC
+	ChecksumField, // ChecksumField : 'checksum:' StringLit
+	ChecksumkindField, // ChecksumkindField : 'checksumkind:' ChecksumKind
+	ColumnField, // ColumnField : 'column:' IntLit
+	ConfigMacrosField, // ConfigMacrosField : 'configMacros:' StringLit
+	ContainingTypeField, // ContainingTypeField : 'containingType:' MDField
+	CountField, // CountField : 'count:' MDFieldOrInt
 	DebugInfoForProfilingField, // DebugInfoForProfilingField : 'debugInfoForProfiling:' BoolLit
-	DeclarationField,           // DeclarationField : 'declaration:' MDField
-	DirectoryField,             // DirectoryField : 'directory:' StringLit
-	DiscriminatorField,         // DiscriminatorField : 'discriminator:' MDField
-	DiscriminatorIntField,      // DiscriminatorIntField : 'discriminator:' IntLit
-	DwarfAddressSpaceField,     // DwarfAddressSpaceField : 'dwarfAddressSpace:' IntLit
-	DwoIdField,                 // DwoIdField : 'dwoId:' IntLit
-	ElementsField,              // ElementsField : 'elements:' MDField
-	EmissionKindField,          // EmissionKindField : 'emissionKind:' EmissionKind
-	EncodingField,              // EncodingField : 'encoding:' DwarfAttEncoding
-	EntityField,                // EntityField : 'entity:' MDField
-	EnumsField,                 // EnumsField : 'enums:' MDField
-	ExportSymbolsField,         // ExportSymbolsField : 'exportSymbols:' BoolLit
-	ExprField,                  // ExprField : 'expr:' MDField
-	ExtraDataField,             // ExtraDataField : 'extraData:' MDField
-	FileField,                  // FileField : 'file:' MDField
-	FilenameField,              // FilenameField : 'filename:' StringLit
-	FlagsField,                 // FlagsField : 'flags:' DIFlags
-	FlagsStringField,           // FlagsStringField : 'flags:' StringLit
-	GetterField,                // GetterField : 'getter:' StringLit
-	GlobalsField,               // GlobalsField : 'globals:' MDField
-	HeaderField,                // HeaderField : 'header:' StringLit
-	IdentifierField,            // IdentifierField : 'identifier:' StringLit
-	ImportsField,               // ImportsField : 'imports:' MDField
-	IncludePathField,           // IncludePathField : 'includePath:' StringLit
-	InlinedAtField,             // InlinedAtField : 'inlinedAt:' MDField
-	IsDefinitionField,          // IsDefinitionField : 'isDefinition:' BoolLit
-	IsImplicitCodeField,        // IsImplicitCodeField : 'isImplicitCode:' BoolLit
-	IsLocalField,               // IsLocalField : 'isLocal:' BoolLit
-	IsOptimizedField,           // IsOptimizedField : 'isOptimized:' BoolLit
-	IsUnsignedField,            // IsUnsignedField : 'isUnsigned:' BoolLit
-	IsysrootField,              // IsysrootField : 'isysroot:' StringLit
-	LanguageField,              // LanguageField : 'language:' DwarfLang
-	LineField,                  // LineField : 'line:' IntLit
-	LinkageNameField,           // LinkageNameField : 'linkageName:' StringLit
-	LowerBoundField,            // LowerBoundField : 'lowerBound:' IntLit
-	MacrosField,                // MacrosField : 'macros:' MDField
-	NameField,                  // NameField : 'name:' StringLit
-	NameTableKindField,         // NameTableKindField : 'nameTableKind:' NameTableKind
-	NodesField,                 // NodesField : 'nodes:' MDField
-	OffsetField,                // OffsetField : 'offset:' IntLit
-	OperandsField,              // OperandsField : 'operands:' MDFields
-	ProducerField,              // ProducerField : 'producer:' StringLit
-	RetainedNodesField,         // RetainedNodesField : 'retainedNodes:' MDField
-	RetainedTypesField,         // RetainedTypesField : 'retainedTypes:' MDField
-	RuntimeLangField,           // RuntimeLangField : 'runtimeLang:' DwarfLang
-	RuntimeVersionField,        // RuntimeVersionField : 'runtimeVersion:' IntLit
-	ScopeField,                 // ScopeField : 'scope:' MDField
-	ScopeLineField,             // ScopeLineField : 'scopeLine:' IntLit
-	SetterField,                // SetterField : 'setter:' StringLit
-	SizeField,                  // SizeField : 'size:' IntLit
-	SourceField,                // SourceField : 'source:' StringLit
-	SplitDebugFilenameField,    // SplitDebugFilenameField : 'splitDebugFilename:' StringLit
-	SplitDebugInliningField,    // SplitDebugInliningField : 'splitDebugInlining:' BoolLit
-	TagField,                   // TagField : 'tag:' DwarfTag
-	TemplateParamsField,        // TemplateParamsField : 'templateParams:' MDField
-	ThisAdjustmentField,        // ThisAdjustmentField : 'thisAdjustment:' IntLit
-	ThrownTypesField,           // ThrownTypesField : 'thrownTypes:' MDField
-	TypeField,                  // TypeField : 'type:' MDField
-	TypeMacinfoField,           // TypeMacinfoField : 'type:' DwarfMacinfo
-	TypesField,                 // TypesField : 'types:' MDField
-	UnitField,                  // UnitField : 'unit:' MDField
-	ValueField,                 // ValueField : 'value:' MDField
-	ValueIntField,              // ValueIntField : 'value:' IntLit
-	ValueStringField,           // ValueStringField : 'value:' StringLit
-	VarField,                   // VarField : 'var:' MDField
-	VirtualIndexField,          // VirtualIndexField : 'virtualIndex:' IntLit
-	VirtualityField,            // VirtualityField : 'virtuality:' DwarfVirtuality
-	VtableHolderField,          // VtableHolderField : 'vtableHolder:' MDField
-	0,                          // MDFieldOrInt : MDField
-	0,                          // MDFieldOrInt : IntLit
-	ChecksumKind,               // ChecksumKind : checksum_kind_tok
-	0,                          // DIFlag_list_withsep : DIFlag_list_withsep '|' DIFlag
-	0,                          // DIFlag_list_withsep : DIFlag
-	DIFlags,                    // DIFlags : DIFlag_list_withsep
-	DIFlag,                     // DIFlag : UintLit
-	DIFlag,                     // DIFlag : di_flag_tok
-	DwarfAttEncoding,           // DwarfAttEncoding : UintLit
-	DwarfAttEncoding,           // DwarfAttEncoding : dwarf_att_encoding_tok
-	DwarfCC,                    // DwarfCC : UintLit
-	DwarfCC,                    // DwarfCC : dwarf_cc_tok
-	DwarfLang,                  // DwarfLang : UintLit
-	DwarfLang,                  // DwarfLang : dwarf_lang_tok
-	DwarfMacinfo,               // DwarfMacinfo : UintLit
-	DwarfMacinfo,               // DwarfMacinfo : dwarf_macinfo_tok
-	DwarfOp,                    // DwarfOp : dwarf_op_tok
-	DwarfTag,                   // DwarfTag : UintLit
-	DwarfTag,                   // DwarfTag : dwarf_tag_tok
-	DwarfVirtuality,            // DwarfVirtuality : UintLit
-	DwarfVirtuality,            // DwarfVirtuality : dwarf_virtuality_tok
-	EmissionKind,               // EmissionKind : UintLit
-	EmissionKind,               // EmissionKind : emission_kind_tok
-	NameTableKind,              // NameTableKind : UintLit
-	NameTableKind,              // NameTableKind : name_table_kind_tok
-	AddrSpace,                  // AddrSpace : 'addrspace' '(' UintLit ')'
-	Alignment,                  // Alignment : 'align' UintLit
-	AlignPair,                  // AlignPair : 'align' '=' UintLit
-	AlignStackPair,             // AlignStackPair : 'alignstack' '=' UintLit
-	AllocSize,                  // AllocSize : 'allocsize' '(' UintLit ')'
-	AllocSize,                  // AllocSize : 'allocsize' '(' UintLit ',' UintLit ')'
-	0,                          // Arg_list_withsep : Arg_list_withsep ',' Arg
-	0,                          // Arg_list_withsep : Arg
-	Args,                       // Args : '...'
-	Args,                       // Args :
-	Args,                       // Args : Arg_list_withsep ',' '...'
-	Args,                       // Args : Arg_list_withsep
-	Arg,                        // Arg : ConcreteType ParamAttr_optlist Value
-	Arg,                        // Arg : MetadataType Metadata
-	0,                          // ParamAttr_optlist : ParamAttr_optlist ParamAttr
-	0,                          // ParamAttr_optlist :
-	Atomic,                     // Atomic : 'atomic'
-	AtomicOrdering,             // AtomicOrdering : 'acq_rel'
-	AtomicOrdering,             // AtomicOrdering : 'acquire'
-	AtomicOrdering,             // AtomicOrdering : 'monotonic'
-	AtomicOrdering,             // AtomicOrdering : 'release'
-	AtomicOrdering,             // AtomicOrdering : 'seq_cst'
-	AtomicOrdering,             // AtomicOrdering : 'unordered'
-	AttrPair,                   // AttrPair : StringLit '=' StringLit
-	AttrString,                 // AttrString : StringLit
-	0,                          // CallingConv : CallingConvEnum
-	0,                          // CallingConv : CallingConvInt
-	CallingConvEnum,            // CallingConvEnum : 'aarch64_vector_pcs'
-	CallingConvEnum,            // CallingConvEnum : 'amdgpu_cs'
-	CallingConvEnum,            // CallingConvEnum : 'amdgpu_es'
-	CallingConvEnum,            // CallingConvEnum : 'amdgpu_gs'
-	CallingConvEnum,            // CallingConvEnum : 'amdgpu_hs'
-	CallingConvEnum,            // CallingConvEnum : 'amdgpu_kernel'
-	CallingConvEnum,            // CallingConvEnum : 'amdgpu_ls'
-	CallingConvEnum,            // CallingConvEnum : 'amdgpu_ps'
-	CallingConvEnum,            // CallingConvEnum : 'amdgpu_vs'
-	CallingConvEnum,            // CallingConvEnum : 'anyregcc'
-	CallingConvEnum,            // CallingConvEnum : 'arm_aapcs_vfpcc'
-	CallingConvEnum,            // CallingConvEnum : 'arm_aapcscc'
-	CallingConvEnum,            // CallingConvEnum : 'arm_apcscc'
-	CallingConvEnum,            // CallingConvEnum : 'avr_intrcc'
-	CallingConvEnum,            // CallingConvEnum : 'avr_signalcc'
-	CallingConvEnum,            // CallingConvEnum : 'ccc'
-	CallingConvEnum,            // CallingConvEnum : 'coldcc'
-	CallingConvEnum,            // CallingConvEnum : 'cxx_fast_tlscc'
-	CallingConvEnum,            // CallingConvEnum : 'fastcc'
-	CallingConvEnum,            // CallingConvEnum : 'ghccc'
-	CallingConvEnum,            // CallingConvEnum : 'hhvm_ccc'
-	CallingConvEnum,            // CallingConvEnum : 'hhvmcc'
-	CallingConvEnum,            // CallingConvEnum : 'intel_ocl_bicc'
-	CallingConvEnum,            // CallingConvEnum : 'msp430_intrcc'
-	CallingConvEnum,            // CallingConvEnum : 'preserve_allcc'
-	CallingConvEnum,            // CallingConvEnum : 'preserve_mostcc'
-	CallingConvEnum,            // CallingConvEnum : 'ptx_device'
-	CallingConvEnum,            // CallingConvEnum : 'ptx_kernel'
-	CallingConvEnum,            // CallingConvEnum : 'spir_func'
-	CallingConvEnum,            // CallingConvEnum : 'spir_kernel'
-	CallingConvEnum,            // CallingConvEnum : 'swiftcc'
-	CallingConvEnum,            // CallingConvEnum : 'webkit_jscc'
-	CallingConvEnum,            // CallingConvEnum : 'win64cc'
-	CallingConvEnum,            // CallingConvEnum : 'x86_64_sysvcc'
-	CallingConvEnum,            // CallingConvEnum : 'x86_fastcallcc'
-	CallingConvEnum,            // CallingConvEnum : 'x86_intrcc'
-	CallingConvEnum,            // CallingConvEnum : 'x86_regcallcc'
-	CallingConvEnum,            // CallingConvEnum : 'x86_stdcallcc'
-	CallingConvEnum,            // CallingConvEnum : 'x86_thiscallcc'
-	CallingConvEnum,            // CallingConvEnum : 'x86_vectorcallcc'
-	CallingConvInt,             // CallingConvInt : 'cc' UintLit
-	Comdat,                     // Comdat : 'comdat'
-	Comdat,                     // Comdat : 'comdat' '(' ComdatName ')'
-	Dereferenceable,            // Dereferenceable : 'dereferenceable' '(' UintLit ')'
-	Dereferenceable,            // Dereferenceable : 'dereferenceable_or_null' '(' UintLit ')'
-	DLLStorageClass,            // DLLStorageClass : 'dllexport'
-	DLLStorageClass,            // DLLStorageClass : 'dllimport'
-	Ellipsis,                   // Ellipsis : '...'
-	Exact,                      // Exact : 'exact'
-	ExceptionArg,               // ExceptionArg : ConcreteType Value
-	ExceptionArg,               // ExceptionArg : MetadataType Metadata
-	0,                          // ExceptionScope : NoneConst
-	0,                          // ExceptionScope : LocalIdent
-	FastMathFlag,               // FastMathFlag : 'afn'
-	FastMathFlag,               // FastMathFlag : 'arcp'
-	FastMathFlag,               // FastMathFlag : 'contract'
-	FastMathFlag,               // FastMathFlag : 'fast'
-	FastMathFlag,               // FastMathFlag : 'ninf'
-	FastMathFlag,               // FastMathFlag : 'nnan'
-	FastMathFlag,               // FastMathFlag : 'nsz'
-	FastMathFlag,               // FastMathFlag : 'reassoc'
-	FPred,                      // FPred : 'false'
-	FPred,                      // FPred : 'oeq'
-	FPred,                      // FPred : 'oge'
-	FPred,                      // FPred : 'ogt'
-	FPred,                      // FPred : 'ole'
-	FPred,                      // FPred : 'olt'
-	FPred,                      // FPred : 'one'
-	FPred,                      // FPred : 'ord'
-	FPred,                      // FPred : 'true'
-	FPred,                      // FPred : 'ueq'
-	FPred,                      // FPred : 'uge'
-	FPred,                      // FPred : 'ugt'
-	FPred,                      // FPred : 'ule'
-	FPred,                      // FPred : 'ult'
-	FPred,                      // FPred : 'une'
-	FPred,                      // FPred : 'uno'
-	0,                          // FuncAttr : AttrString
-	0,                          // FuncAttr : AttrPair
-	0,                          // FuncAttr : AttrGroupID
-	0,                          // FuncAttr : AlignPair
-	0,                          // FuncAttr : AlignStackPair
-	0,                          // FuncAttr : AllocSize
-	0,                          // FuncAttr : StackAlignment
-	0,                          // FuncAttr : FuncAttribute
-	FuncAttribute,              // FuncAttribute : 'alwaysinline'
-	FuncAttribute,              // FuncAttribute : 'argmemonly'
-	FuncAttribute,              // FuncAttribute : 'builtin'
-	FuncAttribute,              // FuncAttribute : 'cold'
-	FuncAttribute,              // FuncAttribute : 'convergent'
-	FuncAttribute,              // FuncAttribute : 'inaccessiblemem_or_argmemonly'
-	FuncAttribute,              // FuncAttribute : 'inaccessiblememonly'
-	FuncAttribute,              // FuncAttribute : 'inlinehint'
-	FuncAttribute,              // FuncAttribute : 'jumptable'
-	FuncAttribute,              // FuncAttribute : 'minsize'
-	FuncAttribute,              // FuncAttribute : 'naked'
-	FuncAttribute,              // FuncAttribute : 'nobuiltin'
-	FuncAttribute,              // FuncAttribute : 'nocf_check'
-	FuncAttribute,              // FuncAttribute : 'noduplicate'
-	FuncAttribute,              // FuncAttribute : 'noimplicitfloat'
-	FuncAttribute,              // FuncAttribute : 'noinline'
-	FuncAttribute,              // FuncAttribute : 'nonlazybind'
-	FuncAttribute,              // FuncAttribute : 'norecurse'
-	FuncAttribute,              // FuncAttribute : 'noredzone'
-	FuncAttribute,              // FuncAttribute : 'noreturn'
-	FuncAttribute,              // FuncAttribute : 'nounwind'
-	FuncAttribute,              // FuncAttribute : 'optforfuzzing'
-	FuncAttribute,              // FuncAttribute : 'optnone'
-	FuncAttribute,              // FuncAttribute : 'optsize'
-	FuncAttribute,              // FuncAttribute : 'readnone'
-	FuncAttribute,              // FuncAttribute : 'readonly'
-	FuncAttribute,              // FuncAttribute : 'returns_twice'
-	FuncAttribute,              // FuncAttribute : 'safestack'
-	FuncAttribute,              // FuncAttribute : 'sanitize_address'
-	FuncAttribute,              // FuncAttribute : 'sanitize_hwaddress'
-	FuncAttribute,              // FuncAttribute : 'sanitize_memory'
-	FuncAttribute,              // FuncAttribute : 'sanitize_thread'
-	FuncAttribute,              // FuncAttribute : 'shadowcallstack'
-	FuncAttribute,              // FuncAttribute : 'speculatable'
-	FuncAttribute,              // FuncAttribute : 'speculative_load_hardening'
-	FuncAttribute,              // FuncAttribute : 'ssp'
-	FuncAttribute,              // FuncAttribute : 'sspreq'
-	FuncAttribute,              // FuncAttribute : 'sspstrong'
-	FuncAttribute,              // FuncAttribute : 'strictfp'
-	FuncAttribute,              // FuncAttribute : 'uwtable'
-	FuncAttribute,              // FuncAttribute : 'writeonly'
-	0,                          // GlobalAttr : Section
-	0,                          // GlobalAttr : Comdat
-	0,                          // GlobalAttr : Alignment
-	0,                          // GlobalAttr : MetadataAttachment
-	InBounds,                   // InBounds : 'inbounds'
-	IPred,                      // IPred : 'eq'
-	IPred,                      // IPred : 'ne'
-	IPred,                      // IPred : 'sge'
-	IPred,                      // IPred : 'sgt'
-	IPred,                      // IPred : 'sle'
-	IPred,                      // IPred : 'slt'
-	IPred,                      // IPred : 'uge'
-	IPred,                      // IPred : 'ugt'
-	IPred,                      // IPred : 'ule'
-	IPred,                      // IPred : 'ult'
-	Label,                      // Label : LabelType LocalIdent
-	Linkage,                    // Linkage : 'appending'
-	Linkage,                    // Linkage : 'available_externally'
-	Linkage,                    // Linkage : 'common'
-	Linkage,                    // Linkage : 'internal'
-	Linkage,                    // Linkage : 'linkonce'
-	Linkage,                    // Linkage : 'linkonce_odr'
-	Linkage,                    // Linkage : 'private'
-	Linkage,                    // Linkage : 'weak'
-	Linkage,                    // Linkage : 'weak_odr'
-	ExternLinkage,              // ExternLinkage : 'extern_weak'
-	ExternLinkage,              // ExternLinkage : 'external'
-	OperandBundle,              // OperandBundle : StringLit '(' TypeValue_list_withsep_opt ')'
-	0,                          // TypeValue_list_withsep : TypeValue_list_withsep ',' TypeValue
-	0,                          // TypeValue_list_withsep : TypeValue
-	0,                          // TypeValue_list_withsep_opt : TypeValue_list_withsep
-	0,                          // TypeValue_list_withsep_opt :
-	OverflowFlag,               // OverflowFlag : 'nsw'
-	OverflowFlag,               // OverflowFlag : 'nuw'
-	0,                          // Param_list_withsep : Param_list_withsep ',' Param
-	0,                          // Param_list_withsep : Param
-	Params,                     // Params : Ellipsisopt
-	Params,                     // Params : Param_list_withsep ',' Ellipsis
-	Params,                     // Params : Param_list_withsep
-	Param,                      // Param : Type ParamAttr_optlist LocalIdent
-	Param,                      // Param : Type ParamAttr_optlist
-	0,                          // ParamAttr : AttrString
-	0,                          // ParamAttr : AttrPair
-	0,                          // ParamAttr : Alignment
-	0,                          // ParamAttr : Dereferenceable
-	0,                          // ParamAttr : ParamAttribute
-	ParamAttribute,             // ParamAttribute : 'byval'
-	ParamAttribute,             // ParamAttribute : 'inalloca'
-	ParamAttribute,             // ParamAttribute : 'inreg'
-	ParamAttribute,             // ParamAttribute : 'nest'
-	ParamAttribute,             // ParamAttribute : 'noalias'
-	ParamAttribute,             // ParamAttribute : 'nocapture'
-	ParamAttribute,             // ParamAttribute : 'nonnull'
-	ParamAttribute,             // ParamAttribute : 'readnone'
-	ParamAttribute,             // ParamAttribute : 'readonly'
-	ParamAttribute,             // ParamAttribute : 'returned'
-	ParamAttribute,             // ParamAttribute : 'signext'
-	ParamAttribute,             // ParamAttribute : 'sret'
-	ParamAttribute,             // ParamAttribute : 'swifterror'
-	ParamAttribute,             // ParamAttribute : 'swiftself'
-	ParamAttribute,             // ParamAttribute : 'writeonly'
-	ParamAttribute,             // ParamAttribute : 'zeroext'
-	Preemption,                 // Preemption : 'dso_local'
-	Preemption,                 // Preemption : 'dso_preemptable'
-	0,                          // ReturnAttr : Alignment
-	0,                          // ReturnAttr : Dereferenceable
-	0,                          // ReturnAttr : ReturnAttribute
-	ReturnAttribute,            // ReturnAttribute : 'inreg'
-	ReturnAttribute,            // ReturnAttribute : 'noalias'
-	ReturnAttribute,            // ReturnAttribute : 'nonnull'
-	ReturnAttribute,            // ReturnAttribute : 'signext'
-	ReturnAttribute,            // ReturnAttribute : 'zeroext'
-	Section,                    // Section : 'section' StringLit
-	StackAlignment,             // StackAlignment : 'alignstack' '(' UintLit ')'
-	SyncScope,                  // SyncScope : 'syncscope' '(' StringLit ')'
-	ThreadLocal,                // ThreadLocal : 'thread_local'
-	ThreadLocal,                // ThreadLocal : 'thread_local' '(' TLSModel ')'
-	TLSModel,                   // TLSModel : 'initialexec'
-	TLSModel,                   // TLSModel : 'localdynamic'
-	TLSModel,                   // TLSModel : 'localexec'
-	TypeConst,                  // TypeConst : FirstClassType Constant
-	TypeValue,                  // TypeValue : FirstClassType Value
-	UnnamedAddr,                // UnnamedAddr : 'local_unnamed_addr'
-	UnnamedAddr,                // UnnamedAddr : 'unnamed_addr'
-	UnwindTarget,               // UnwindTarget : 'to' 'caller'
-	UnwindTarget,               // UnwindTarget : Label
-	Visibility,                 // Visibility : 'default'
-	Visibility,                 // Visibility : 'hidden'
-	Visibility,                 // Visibility : 'protected'
-	Volatile,                   // Volatile : 'volatile'
-	0,                          // Preemptionopt : Preemption
-	0,                          // Preemptionopt :
-	0,                          // Visibilityopt : Visibility
-	0,                          // Visibilityopt :
-	0,                          // DLLStorageClassopt : DLLStorageClass
-	0,                          // DLLStorageClassopt :
-	0,                          // ThreadLocalopt : ThreadLocal
-	0,                          // ThreadLocalopt :
-	0,                          // UnnamedAddropt : UnnamedAddr
-	0,                          // UnnamedAddropt :
-	0,                          // AddrSpaceopt : AddrSpace
-	0,                          // AddrSpaceopt :
-	0,                          // ExternallyInitializedopt : ExternallyInitialized
-	0,                          // ExternallyInitializedopt :
-	0,                          // Linkageopt : Linkage
-	0,                          // Linkageopt :
-	0,                          // CallingConvopt : CallingConv
-	0,                          // CallingConvopt :
-	0,                          // Sectionopt : Section
-	0,                          // Sectionopt :
-	0,                          // Comdatopt : Comdat
-	0,                          // Comdatopt :
-	0,                          // GCopt : GC
-	0,                          // GCopt :
-	0,                          // Prefixopt : Prefix
-	0,                          // Prefixopt :
-	0,                          // Prologueopt : Prologue
-	0,                          // Prologueopt :
-	0,                          // Personalityopt : Personality
-	0,                          // Personalityopt :
-	0,                          // Distinctopt : Distinct
-	0,                          // Distinctopt :
-	0,                          // SideEffectopt : SideEffect
-	0,                          // SideEffectopt :
-	0,                          // AlignStackopt : AlignStack
-	0,                          // AlignStackopt :
-	0,                          // IntelDialectopt : IntelDialect
-	0,                          // IntelDialectopt :
-	0,                          // Exactopt : Exact
-	0,                          // Exactopt :
-	0,                          // InBoundsopt : InBounds
-	0,                          // InBoundsopt :
-	0,                          // InRangeopt : InRange
-	0,                          // InRangeopt :
-	0,                          // LabelIdentopt : LabelIdent
-	0,                          // LabelIdentopt :
-	0,                          // InAllocaopt : InAlloca
-	0,                          // InAllocaopt :
-	0,                          // SwiftErroropt : SwiftError
-	0,                          // SwiftErroropt :
-	0,                          // Volatileopt : Volatile
-	0,                          // Volatileopt :
-	0,                          // SyncScopeopt : SyncScope
-	0,                          // SyncScopeopt :
-	0,                          // Weakopt : Weak
-	0,                          // Weakopt :
-	0,                          // Tailopt : Tail
-	0,                          // Tailopt :
-	0,                          // Cleanupopt : Cleanup
-	0,                          // Cleanupopt :
-	0,                          // Ellipsisopt : Ellipsis
-	0,                          // Ellipsisopt :
+	DeclarationField, // DeclarationField : 'declaration:' MDField
+	DirectoryField, // DirectoryField : 'directory:' StringLit
+	DiscriminatorField, // DiscriminatorField : 'discriminator:' MDField
+	DiscriminatorIntField, // DiscriminatorIntField : 'discriminator:' IntLit
+	DwarfAddressSpaceField, // DwarfAddressSpaceField : 'dwarfAddressSpace:' IntLit
+	DwoIdField, // DwoIdField : 'dwoId:' IntLit
+	ElementsField, // ElementsField : 'elements:' MDField
+	EmissionKindField, // EmissionKindField : 'emissionKind:' EmissionKind
+	EncodingField, // EncodingField : 'encoding:' DwarfAttEncoding
+	EntityField, // EntityField : 'entity:' MDField
+	EnumsField, // EnumsField : 'enums:' MDField
+	ExportSymbolsField, // ExportSymbolsField : 'exportSymbols:' BoolLit
+	ExprField, // ExprField : 'expr:' MDField
+	ExtraDataField, // ExtraDataField : 'extraData:' MDField
+	FileField, // FileField : 'file:' MDField
+	FilenameField, // FilenameField : 'filename:' StringLit
+	FlagsField, // FlagsField : 'flags:' DIFlags
+	FlagsStringField, // FlagsStringField : 'flags:' StringLit
+	GetterField, // GetterField : 'getter:' StringLit
+	GlobalsField, // GlobalsField : 'globals:' MDField
+	HeaderField, // HeaderField : 'header:' StringLit
+	IdentifierField, // IdentifierField : 'identifier:' StringLit
+	ImportsField, // ImportsField : 'imports:' MDField
+	IncludePathField, // IncludePathField : 'includePath:' StringLit
+	InlinedAtField, // InlinedAtField : 'inlinedAt:' MDField
+	IsDefinitionField, // IsDefinitionField : 'isDefinition:' BoolLit
+	IsImplicitCodeField, // IsImplicitCodeField : 'isImplicitCode:' BoolLit
+	IsLocalField, // IsLocalField : 'isLocal:' BoolLit
+	IsOptimizedField, // IsOptimizedField : 'isOptimized:' BoolLit
+	IsUnsignedField, // IsUnsignedField : 'isUnsigned:' BoolLit
+	IsysrootField, // IsysrootField : 'isysroot:' StringLit
+	LanguageField, // LanguageField : 'language:' DwarfLang
+	LineField, // LineField : 'line:' IntLit
+	LinkageNameField, // LinkageNameField : 'linkageName:' StringLit
+	LowerBoundField, // LowerBoundField : 'lowerBound:' IntLit
+	MacrosField, // MacrosField : 'macros:' MDField
+	NameField, // NameField : 'name:' StringLit
+	NameTableKindField, // NameTableKindField : 'nameTableKind:' NameTableKind
+	NodesField, // NodesField : 'nodes:' MDField
+	OffsetField, // OffsetField : 'offset:' IntLit
+	OperandsField, // OperandsField : 'operands:' MDFields
+	ProducerField, // ProducerField : 'producer:' StringLit
+	RetainedNodesField, // RetainedNodesField : 'retainedNodes:' MDField
+	RetainedTypesField, // RetainedTypesField : 'retainedTypes:' MDField
+	RuntimeLangField, // RuntimeLangField : 'runtimeLang:' DwarfLang
+	RuntimeVersionField, // RuntimeVersionField : 'runtimeVersion:' IntLit
+	ScopeField, // ScopeField : 'scope:' MDField
+	ScopeLineField, // ScopeLineField : 'scopeLine:' IntLit
+	SetterField, // SetterField : 'setter:' StringLit
+	SizeField, // SizeField : 'size:' IntLit
+	SourceField, // SourceField : 'source:' StringLit
+	SplitDebugFilenameField, // SplitDebugFilenameField : 'splitDebugFilename:' StringLit
+	SplitDebugInliningField, // SplitDebugInliningField : 'splitDebugInlining:' BoolLit
+	TagField, // TagField : 'tag:' DwarfTag
+	TemplateParamsField, // TemplateParamsField : 'templateParams:' MDField
+	ThisAdjustmentField, // ThisAdjustmentField : 'thisAdjustment:' IntLit
+	ThrownTypesField, // ThrownTypesField : 'thrownTypes:' MDField
+	TypeField, // TypeField : 'type:' MDField
+	TypeMacinfoField, // TypeMacinfoField : 'type:' DwarfMacinfo
+	TypesField, // TypesField : 'types:' MDField
+	UnitField, // UnitField : 'unit:' MDField
+	ValueField, // ValueField : 'value:' MDField
+	ValueIntField, // ValueIntField : 'value:' IntLit
+	ValueStringField, // ValueStringField : 'value:' StringLit
+	VarField, // VarField : 'var:' MDField
+	VirtualIndexField, // VirtualIndexField : 'virtualIndex:' IntLit
+	VirtualityField, // VirtualityField : 'virtuality:' DwarfVirtuality
+	VtableHolderField, // VtableHolderField : 'vtableHolder:' MDField
+	0, // MDFieldOrInt : MDField
+	0, // MDFieldOrInt : IntLit
+	ChecksumKind, // ChecksumKind : checksum_kind_tok
+	0, // DIFlag_list_withsep : DIFlag_list_withsep '|' DIFlag
+	0, // DIFlag_list_withsep : DIFlag
+	DIFlags, // DIFlags : DIFlag_list_withsep
+	DIFlag, // DIFlag : UintLit
+	DIFlag, // DIFlag : di_flag_tok
+	DwarfAttEncoding, // DwarfAttEncoding : UintLit
+	DwarfAttEncoding, // DwarfAttEncoding : dwarf_att_encoding_tok
+	DwarfCC, // DwarfCC : UintLit
+	DwarfCC, // DwarfCC : dwarf_cc_tok
+	DwarfLang, // DwarfLang : UintLit
+	DwarfLang, // DwarfLang : dwarf_lang_tok
+	DwarfMacinfo, // DwarfMacinfo : UintLit
+	DwarfMacinfo, // DwarfMacinfo : dwarf_macinfo_tok
+	DwarfOp, // DwarfOp : dwarf_op_tok
+	DwarfTag, // DwarfTag : UintLit
+	DwarfTag, // DwarfTag : dwarf_tag_tok
+	DwarfVirtuality, // DwarfVirtuality : UintLit
+	DwarfVirtuality, // DwarfVirtuality : dwarf_virtuality_tok
+	EmissionKind, // EmissionKind : UintLit
+	EmissionKind, // EmissionKind : emission_kind_tok
+	NameTableKind, // NameTableKind : UintLit
+	NameTableKind, // NameTableKind : name_table_kind_tok
+	AddrSpace, // AddrSpace : 'addrspace' '(' UintLit ')'
+	Alignment, // Alignment : 'align' UintLit
+	AlignPair, // AlignPair : 'align' '=' UintLit
+	AlignStackPair, // AlignStackPair : 'alignstack' '=' UintLit
+	AllocSize, // AllocSize : 'allocsize' '(' UintLit ')'
+	AllocSize, // AllocSize : 'allocsize' '(' UintLit ',' UintLit ')'
+	0, // Arg_list_withsep : Arg_list_withsep ',' Arg
+	0, // Arg_list_withsep : Arg
+	Args, // Args : '...'
+	Args, // Args :
+	Args, // Args : Arg_list_withsep ',' '...'
+	Args, // Args : Arg_list_withsep
+	Arg, // Arg : ConcreteType ParamAttr_optlist Value
+	Arg, // Arg : MetadataType Metadata
+	0, // ParamAttr_optlist : ParamAttr_optlist ParamAttr
+	0, // ParamAttr_optlist :
+	Atomic, // Atomic : 'atomic'
+	AtomicOrdering, // AtomicOrdering : 'acq_rel'
+	AtomicOrdering, // AtomicOrdering : 'acquire'
+	AtomicOrdering, // AtomicOrdering : 'monotonic'
+	AtomicOrdering, // AtomicOrdering : 'release'
+	AtomicOrdering, // AtomicOrdering : 'seq_cst'
+	AtomicOrdering, // AtomicOrdering : 'unordered'
+	AttrPair, // AttrPair : StringLit '=' StringLit
+	AttrString, // AttrString : StringLit
+	0, // CallingConv : CallingConvEnum
+	0, // CallingConv : CallingConvInt
+	CallingConvEnum, // CallingConvEnum : 'aarch64_vector_pcs'
+	CallingConvEnum, // CallingConvEnum : 'amdgpu_cs'
+	CallingConvEnum, // CallingConvEnum : 'amdgpu_es'
+	CallingConvEnum, // CallingConvEnum : 'amdgpu_gs'
+	CallingConvEnum, // CallingConvEnum : 'amdgpu_hs'
+	CallingConvEnum, // CallingConvEnum : 'amdgpu_kernel'
+	CallingConvEnum, // CallingConvEnum : 'amdgpu_ls'
+	CallingConvEnum, // CallingConvEnum : 'amdgpu_ps'
+	CallingConvEnum, // CallingConvEnum : 'amdgpu_vs'
+	CallingConvEnum, // CallingConvEnum : 'anyregcc'
+	CallingConvEnum, // CallingConvEnum : 'arm_aapcs_vfpcc'
+	CallingConvEnum, // CallingConvEnum : 'arm_aapcscc'
+	CallingConvEnum, // CallingConvEnum : 'arm_apcscc'
+	CallingConvEnum, // CallingConvEnum : 'avr_intrcc'
+	CallingConvEnum, // CallingConvEnum : 'avr_signalcc'
+	CallingConvEnum, // CallingConvEnum : 'ccc'
+	CallingConvEnum, // CallingConvEnum : 'coldcc'
+	CallingConvEnum, // CallingConvEnum : 'cxx_fast_tlscc'
+	CallingConvEnum, // CallingConvEnum : 'fastcc'
+	CallingConvEnum, // CallingConvEnum : 'ghccc'
+	CallingConvEnum, // CallingConvEnum : 'hhvm_ccc'
+	CallingConvEnum, // CallingConvEnum : 'hhvmcc'
+	CallingConvEnum, // CallingConvEnum : 'intel_ocl_bicc'
+	CallingConvEnum, // CallingConvEnum : 'msp430_intrcc'
+	CallingConvEnum, // CallingConvEnum : 'preserve_allcc'
+	CallingConvEnum, // CallingConvEnum : 'preserve_mostcc'
+	CallingConvEnum, // CallingConvEnum : 'ptx_device'
+	CallingConvEnum, // CallingConvEnum : 'ptx_kernel'
+	CallingConvEnum, // CallingConvEnum : 'spir_func'
+	CallingConvEnum, // CallingConvEnum : 'spir_kernel'
+	CallingConvEnum, // CallingConvEnum : 'swiftcc'
+	CallingConvEnum, // CallingConvEnum : 'webkit_jscc'
+	CallingConvEnum, // CallingConvEnum : 'win64cc'
+	CallingConvEnum, // CallingConvEnum : 'x86_64_sysvcc'
+	CallingConvEnum, // CallingConvEnum : 'x86_fastcallcc'
+	CallingConvEnum, // CallingConvEnum : 'x86_intrcc'
+	CallingConvEnum, // CallingConvEnum : 'x86_regcallcc'
+	CallingConvEnum, // CallingConvEnum : 'x86_stdcallcc'
+	CallingConvEnum, // CallingConvEnum : 'x86_thiscallcc'
+	CallingConvEnum, // CallingConvEnum : 'x86_vectorcallcc'
+	CallingConvInt, // CallingConvInt : 'cc' UintLit
+	Comdat, // Comdat : 'comdat'
+	Comdat, // Comdat : 'comdat' '(' ComdatName ')'
+	Dereferenceable, // Dereferenceable : 'dereferenceable' '(' UintLit ')'
+	Dereferenceable, // Dereferenceable : 'dereferenceable_or_null' '(' UintLit ')'
+	DLLStorageClass, // DLLStorageClass : 'dllexport'
+	DLLStorageClass, // DLLStorageClass : 'dllimport'
+	Ellipsis, // Ellipsis : '...'
+	Exact, // Exact : 'exact'
+	ExceptionArg, // ExceptionArg : ConcreteType Value
+	ExceptionArg, // ExceptionArg : MetadataType Metadata
+	0, // ExceptionScope : NoneConst
+	0, // ExceptionScope : LocalIdent
+	FastMathFlag, // FastMathFlag : 'afn'
+	FastMathFlag, // FastMathFlag : 'arcp'
+	FastMathFlag, // FastMathFlag : 'contract'
+	FastMathFlag, // FastMathFlag : 'fast'
+	FastMathFlag, // FastMathFlag : 'ninf'
+	FastMathFlag, // FastMathFlag : 'nnan'
+	FastMathFlag, // FastMathFlag : 'nsz'
+	FastMathFlag, // FastMathFlag : 'reassoc'
+	FPred, // FPred : 'false'
+	FPred, // FPred : 'oeq'
+	FPred, // FPred : 'oge'
+	FPred, // FPred : 'ogt'
+	FPred, // FPred : 'ole'
+	FPred, // FPred : 'olt'
+	FPred, // FPred : 'one'
+	FPred, // FPred : 'ord'
+	FPred, // FPred : 'true'
+	FPred, // FPred : 'ueq'
+	FPred, // FPred : 'uge'
+	FPred, // FPred : 'ugt'
+	FPred, // FPred : 'ule'
+	FPred, // FPred : 'ult'
+	FPred, // FPred : 'une'
+	FPred, // FPred : 'uno'
+	0, // FuncAttr : AttrString
+	0, // FuncAttr : AttrPair
+	0, // FuncAttr : AttrGroupID
+	0, // FuncAttr : AlignPair
+	0, // FuncAttr : AlignStackPair
+	0, // FuncAttr : AllocSize
+	0, // FuncAttr : StackAlignment
+	0, // FuncAttr : FuncAttribute
+	FuncAttribute, // FuncAttribute : 'alwaysinline'
+	FuncAttribute, // FuncAttribute : 'argmemonly'
+	FuncAttribute, // FuncAttribute : 'builtin'
+	FuncAttribute, // FuncAttribute : 'cold'
+	FuncAttribute, // FuncAttribute : 'convergent'
+	FuncAttribute, // FuncAttribute : 'inaccessiblemem_or_argmemonly'
+	FuncAttribute, // FuncAttribute : 'inaccessiblememonly'
+	FuncAttribute, // FuncAttribute : 'inlinehint'
+	FuncAttribute, // FuncAttribute : 'jumptable'
+	FuncAttribute, // FuncAttribute : 'minsize'
+	FuncAttribute, // FuncAttribute : 'naked'
+	FuncAttribute, // FuncAttribute : 'nobuiltin'
+	FuncAttribute, // FuncAttribute : 'nocf_check'
+	FuncAttribute, // FuncAttribute : 'noduplicate'
+	FuncAttribute, // FuncAttribute : 'noimplicitfloat'
+	FuncAttribute, // FuncAttribute : 'noinline'
+	FuncAttribute, // FuncAttribute : 'nonlazybind'
+	FuncAttribute, // FuncAttribute : 'norecurse'
+	FuncAttribute, // FuncAttribute : 'noredzone'
+	FuncAttribute, // FuncAttribute : 'noreturn'
+	FuncAttribute, // FuncAttribute : 'nounwind'
+	FuncAttribute, // FuncAttribute : 'optforfuzzing'
+	FuncAttribute, // FuncAttribute : 'optnone'
+	FuncAttribute, // FuncAttribute : 'optsize'
+	FuncAttribute, // FuncAttribute : 'readnone'
+	FuncAttribute, // FuncAttribute : 'readonly'
+	FuncAttribute, // FuncAttribute : 'returns_twice'
+	FuncAttribute, // FuncAttribute : 'safestack'
+	FuncAttribute, // FuncAttribute : 'sanitize_address'
+	FuncAttribute, // FuncAttribute : 'sanitize_hwaddress'
+	FuncAttribute, // FuncAttribute : 'sanitize_memory'
+	FuncAttribute, // FuncAttribute : 'sanitize_thread'
+	FuncAttribute, // FuncAttribute : 'shadowcallstack'
+	FuncAttribute, // FuncAttribute : 'speculatable'
+	FuncAttribute, // FuncAttribute : 'speculative_load_hardening'
+	FuncAttribute, // FuncAttribute : 'ssp'
+	FuncAttribute, // FuncAttribute : 'sspreq'
+	FuncAttribute, // FuncAttribute : 'sspstrong'
+	FuncAttribute, // FuncAttribute : 'strictfp'
+	FuncAttribute, // FuncAttribute : 'uwtable'
+	FuncAttribute, // FuncAttribute : 'writeonly'
+	0, // GlobalAttr : Section
+	0, // GlobalAttr : Comdat
+	0, // GlobalAttr : Alignment
+	0, // GlobalAttr : MetadataAttachment
+	InBounds, // InBounds : 'inbounds'
+	IPred, // IPred : 'eq'
+	IPred, // IPred : 'ne'
+	IPred, // IPred : 'sge'
+	IPred, // IPred : 'sgt'
+	IPred, // IPred : 'sle'
+	IPred, // IPred : 'slt'
+	IPred, // IPred : 'uge'
+	IPred, // IPred : 'ugt'
+	IPred, // IPred : 'ule'
+	IPred, // IPred : 'ult'
+	Label, // Label : LabelType LocalIdent
+	Linkage, // Linkage : 'appending'
+	Linkage, // Linkage : 'available_externally'
+	Linkage, // Linkage : 'common'
+	Linkage, // Linkage : 'internal'
+	Linkage, // Linkage : 'linkonce'
+	Linkage, // Linkage : 'linkonce_odr'
+	Linkage, // Linkage : 'private'
+	Linkage, // Linkage : 'weak'
+	Linkage, // Linkage : 'weak_odr'
+	ExternLinkage, // ExternLinkage : 'extern_weak'
+	ExternLinkage, // ExternLinkage : 'external'
+	OperandBundle, // OperandBundle : StringLit '(' TypeValue_list_withsep_opt ')'
+	0, // TypeValue_list_withsep : TypeValue_list_withsep ',' TypeValue
+	0, // TypeValue_list_withsep : TypeValue
+	0, // TypeValue_list_withsep_opt : TypeValue_list_withsep
+	0, // TypeValue_list_withsep_opt :
+	OverflowFlag, // OverflowFlag : 'nsw'
+	OverflowFlag, // OverflowFlag : 'nuw'
+	0, // Param_list_withsep : Param_list_withsep ',' Param
+	0, // Param_list_withsep : Param
+	Params, // Params : Ellipsisopt
+	Params, // Params : Param_list_withsep ',' Ellipsis
+	Params, // Params : Param_list_withsep
+	Param, // Param : Type ParamAttr_optlist LocalIdent
+	Param, // Param : Type ParamAttr_optlist
+	0, // ParamAttr : AttrString
+	0, // ParamAttr : AttrPair
+	0, // ParamAttr : Alignment
+	0, // ParamAttr : Dereferenceable
+	0, // ParamAttr : ParamAttribute
+	ParamAttribute, // ParamAttribute : 'byval'
+	ParamAttribute, // ParamAttribute : 'inalloca'
+	ParamAttribute, // ParamAttribute : 'inreg'
+	ParamAttribute, // ParamAttribute : 'nest'
+	ParamAttribute, // ParamAttribute : 'noalias'
+	ParamAttribute, // ParamAttribute : 'nocapture'
+	ParamAttribute, // ParamAttribute : 'nonnull'
+	ParamAttribute, // ParamAttribute : 'readnone'
+	ParamAttribute, // ParamAttribute : 'readonly'
+	ParamAttribute, // ParamAttribute : 'returned'
+	ParamAttribute, // ParamAttribute : 'signext'
+	ParamAttribute, // ParamAttribute : 'sret'
+	ParamAttribute, // ParamAttribute : 'swifterror'
+	ParamAttribute, // ParamAttribute : 'swiftself'
+	ParamAttribute, // ParamAttribute : 'writeonly'
+	ParamAttribute, // ParamAttribute : 'zeroext'
+	Preemption, // Preemption : 'dso_local'
+	Preemption, // Preemption : 'dso_preemptable'
+	0, // ReturnAttr : Alignment
+	0, // ReturnAttr : Dereferenceable
+	0, // ReturnAttr : ReturnAttribute
+	ReturnAttribute, // ReturnAttribute : 'inreg'
+	ReturnAttribute, // ReturnAttribute : 'noalias'
+	ReturnAttribute, // ReturnAttribute : 'nonnull'
+	ReturnAttribute, // ReturnAttribute : 'signext'
+	ReturnAttribute, // ReturnAttribute : 'zeroext'
+	Section, // Section : 'section' StringLit
+	StackAlignment, // StackAlignment : 'alignstack' '(' UintLit ')'
+	SyncScope, // SyncScope : 'syncscope' '(' StringLit ')'
+	ThreadLocal, // ThreadLocal : 'thread_local'
+	ThreadLocal, // ThreadLocal : 'thread_local' '(' TLSModel ')'
+	TLSModel, // TLSModel : 'initialexec'
+	TLSModel, // TLSModel : 'localdynamic'
+	TLSModel, // TLSModel : 'localexec'
+	TypeConst, // TypeConst : FirstClassType Constant
+	TypeValue, // TypeValue : FirstClassType Value
+	UnnamedAddr, // UnnamedAddr : 'local_unnamed_addr'
+	UnnamedAddr, // UnnamedAddr : 'unnamed_addr'
+	UnwindTarget, // UnwindTarget : 'to' 'caller'
+	UnwindTarget, // UnwindTarget : Label
+	Visibility, // Visibility : 'default'
+	Visibility, // Visibility : 'hidden'
+	Visibility, // Visibility : 'protected'
+	Volatile, // Volatile : 'volatile'
+	0, // Preemptionopt : Preemption
+	0, // Preemptionopt :
+	0, // Visibilityopt : Visibility
+	0, // Visibilityopt :
+	0, // DLLStorageClassopt : DLLStorageClass
+	0, // DLLStorageClassopt :
+	0, // ThreadLocalopt : ThreadLocal
+	0, // ThreadLocalopt :
+	0, // UnnamedAddropt : UnnamedAddr
+	0, // UnnamedAddropt :
+	0, // AddrSpaceopt : AddrSpace
+	0, // AddrSpaceopt :
+	0, // ExternallyInitializedopt : ExternallyInitialized
+	0, // ExternallyInitializedopt :
+	0, // Linkageopt : Linkage
+	0, // Linkageopt :
+	0, // CallingConvopt : CallingConv
+	0, // CallingConvopt :
+	0, // Sectionopt : Section
+	0, // Sectionopt :
+	0, // Comdatopt : Comdat
+	0, // Comdatopt :
+	0, // GCopt : GC
+	0, // GCopt :
+	0, // Prefixopt : Prefix
+	0, // Prefixopt :
+	0, // Prologueopt : Prologue
+	0, // Prologueopt :
+	0, // Personalityopt : Personality
+	0, // Personalityopt :
+	0, // Distinctopt : Distinct
+	0, // Distinctopt :
+	0, // SideEffectopt : SideEffect
+	0, // SideEffectopt :
+	0, // AlignStackopt : AlignStack
+	0, // AlignStackopt :
+	0, // IntelDialectopt : IntelDialect
+	0, // IntelDialectopt :
+	0, // Exactopt : Exact
+	0, // Exactopt :
+	0, // InBoundsopt : InBounds
+	0, // InBoundsopt :
+	0, // InRangeopt : InRange
+	0, // InRangeopt :
+	0, // LabelIdentopt : LabelIdent
+	0, // LabelIdentopt :
+	0, // InAllocaopt : InAlloca
+	0, // InAllocaopt :
+	0, // SwiftErroropt : SwiftError
+	0, // SwiftErroropt :
+	0, // Volatileopt : Volatile
+	0, // Volatileopt :
+	0, // SyncScopeopt : SyncScope
+	0, // SyncScopeopt :
+	0, // Weakopt : Weak
+	0, // Weakopt :
+	0, // Tailopt : Tail
+	0, // Tailopt :
+	0, // Cleanupopt : Cleanup
+	0, // Cleanupopt :
+	0, // Ellipsisopt : Ellipsis
+	0, // Ellipsisopt :
 }
+
