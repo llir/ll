@@ -97,8 +97,6 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &CallingConvInt{n}
 	case ll.Case:
 		return &Case{n}
-	case ll.CatchClause:
-		return &CatchClause{n}
 	case ll.CatchPadInst:
 		return &CatchPadInst{n}
 	case ll.CatchRetTerm:
@@ -113,6 +111,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &ChecksumKind{n}
 	case ll.ChecksumkindField:
 		return &ChecksumkindField{n}
+	case ll.Clause:
+		return &Clause{n}
 	case ll.Cleanup:
 		return &Cleanup{n}
 	case ll.CleanupPadInst:
@@ -313,8 +313,6 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &FileField{n}
 	case ll.FilenameField:
 		return &FilenameField{n}
-	case ll.FilterClause:
-		return &FilterClause{n}
 	case ll.FlagsField:
 		return &FlagsField{n}
 	case ll.FlagsStringField:

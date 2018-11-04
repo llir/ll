@@ -58,7 +58,6 @@ func (n CallInst) LlvmNode() *Node                   { return n.Node }
 func (n CallingConvEnum) LlvmNode() *Node            { return n.Node }
 func (n CallingConvInt) LlvmNode() *Node             { return n.Node }
 func (n Case) LlvmNode() *Node                       { return n.Node }
-func (n CatchClause) LlvmNode() *Node                { return n.Node }
 func (n CatchPadInst) LlvmNode() *Node               { return n.Node }
 func (n CatchRetTerm) LlvmNode() *Node               { return n.Node }
 func (n CatchSwitchTerm) LlvmNode() *Node            { return n.Node }
@@ -66,6 +65,7 @@ func (n CharArrayConst) LlvmNode() *Node             { return n.Node }
 func (n ChecksumField) LlvmNode() *Node              { return n.Node }
 func (n ChecksumKind) LlvmNode() *Node               { return n.Node }
 func (n ChecksumkindField) LlvmNode() *Node          { return n.Node }
+func (n Clause) LlvmNode() *Node                     { return n.Node }
 func (n Cleanup) LlvmNode() *Node                    { return n.Node }
 func (n CleanupPadInst) LlvmNode() *Node             { return n.Node }
 func (n CleanupRetTerm) LlvmNode() *Node             { return n.Node }
@@ -166,7 +166,6 @@ func (n FastMathFlag) LlvmNode() *Node               { return n.Node }
 func (n FenceInst) LlvmNode() *Node                  { return n.Node }
 func (n FileField) LlvmNode() *Node                  { return n.Node }
 func (n FilenameField) LlvmNode() *Node              { return n.Node }
-func (n FilterClause) LlvmNode() *Node               { return n.Node }
 func (n FlagsField) LlvmNode() *Node                 { return n.Node }
 func (n FlagsStringField) LlvmNode() *Node           { return n.Node }
 func (n FloatConst) LlvmNode() *Node                 { return n.Node }
@@ -384,17 +383,6 @@ type CallingConv interface {
 //
 func (CallingConvEnum) callingConvNode() {}
 func (CallingConvInt) callingConvNode()  {}
-
-type Clause interface {
-	LlvmNode
-	clauseNode()
-}
-
-// clauseNode() ensures that only the following types can be
-// assigned to Clause.
-//
-func (CatchClause) clauseNode()  {}
-func (FilterClause) clauseNode() {}
 
 type ConcreteType interface {
 	LlvmNode
@@ -2227,14 +2215,6 @@ func (n Case) Target() Label {
 	return Label{n.Child(selector.Label)}
 }
 
-type CatchClause struct {
-	*Node
-}
-
-func (n CatchClause) X() TypeValue {
-	return TypeValue{n.Child(selector.TypeValue)}
-}
-
 type CatchPadInst struct {
 	*Node
 }
@@ -2338,6 +2318,14 @@ type ChecksumkindField struct {
 
 func (n ChecksumkindField) ChecksumKind() ChecksumKind {
 	return ChecksumKind{n.Child(selector.ChecksumKind)}
+}
+
+type Clause struct {
+	*Node
+}
+
+func (n Clause) X() TypeValue {
+	return TypeValue{n.Child(selector.TypeValue)}
 }
 
 type Cleanup struct {
@@ -3661,18 +3649,6 @@ func (n FilenameField) StringLit() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
-type FilterClause struct {
-	*Node
-}
-
-func (n FilterClause) XTyp() Type {
-	return ToLlvmNode(n.Child(selector.Type)).(Type)
-}
-
-func (n FilterClause) X() LlvmNode {
-	return ToLlvmNode(n.Child(selector.OneOf(ll.ArrayConst, ll.CharArrayConst))).(LlvmNode)
-}
-
 type FlagsField struct {
 	*Node
 }
@@ -4817,7 +4793,7 @@ func (n LandingPadInst) Clauses() []Clause {
 	nodes := n.Children(selector.Clause)
 	var result = make([]Clause, 0, len(nodes))
 	for _, node := range nodes {
-		result = append(result, ToLlvmNode(node).(Clause))
+		result = append(result, Clause{node})
 	}
 	return result
 }

@@ -54,7 +54,6 @@ var (
 	CallingConvEnum                 = func(t ll.NodeType) bool { return t == ll.CallingConvEnum }
 	CallingConvInt                  = func(t ll.NodeType) bool { return t == ll.CallingConvInt }
 	Case                            = func(t ll.NodeType) bool { return t == ll.Case }
-	CatchClause                     = func(t ll.NodeType) bool { return t == ll.CatchClause }
 	CatchPadInst                    = func(t ll.NodeType) bool { return t == ll.CatchPadInst }
 	CatchRetTerm                    = func(t ll.NodeType) bool { return t == ll.CatchRetTerm }
 	CatchSwitchTerm                 = func(t ll.NodeType) bool { return t == ll.CatchSwitchTerm }
@@ -62,6 +61,7 @@ var (
 	ChecksumField                   = func(t ll.NodeType) bool { return t == ll.ChecksumField }
 	ChecksumKind                    = func(t ll.NodeType) bool { return t == ll.ChecksumKind }
 	ChecksumkindField               = func(t ll.NodeType) bool { return t == ll.ChecksumkindField }
+	Clause                          = func(t ll.NodeType) bool { return t == ll.Clause }
 	Cleanup                         = func(t ll.NodeType) bool { return t == ll.Cleanup }
 	CleanupPadInst                  = func(t ll.NodeType) bool { return t == ll.CleanupPadInst }
 	CleanupRetTerm                  = func(t ll.NodeType) bool { return t == ll.CleanupRetTerm }
@@ -162,7 +162,6 @@ var (
 	FenceInst                       = func(t ll.NodeType) bool { return t == ll.FenceInst }
 	FileField                       = func(t ll.NodeType) bool { return t == ll.FileField }
 	FilenameField                   = func(t ll.NodeType) bool { return t == ll.FilenameField }
-	FilterClause                    = func(t ll.NodeType) bool { return t == ll.FilterClause }
 	FlagsField                      = func(t ll.NodeType) bool { return t == ll.FlagsField }
 	FlagsStringField                = func(t ll.NodeType) bool { return t == ll.FlagsStringField }
 	FloatConst                      = func(t ll.NodeType) bool { return t == ll.FloatConst }
@@ -370,7 +369,6 @@ var (
 	ZExtInst                        = func(t ll.NodeType) bool { return t == ll.ZExtInst }
 	ZeroInitializerConst            = func(t ll.NodeType) bool { return t == ll.ZeroInitializerConst }
 	CallingConv                     = OneOf(ll.CallingConv...)
-	Clause                          = OneOf(ll.Clause...)
 	ConcreteType                    = OneOf(ll.ConcreteType...)
 	Constant                        = OneOf(ll.Constant...)
 	ConstantExpr                    = OneOf(ll.ConstantExpr...)

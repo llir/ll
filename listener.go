@@ -186,8 +186,7 @@ const (
 	VAArgInst      // ArgList=TypeValue ArgType=Type Metadata=(MetadataAttachment)*
 	LandingPadInst // ResultType=Type Cleanup? Clauses=(Clause)* Metadata=(MetadataAttachment)*
 	Cleanup
-	CatchClause                // X=TypeValue
-	FilterClause               // XTyp=Type X=(ArrayConst | CharArrayConst)
+	Clause                     // X=TypeValue
 	CatchPadInst               // Scope=LocalIdent Args=(ExceptionArg)* Metadata=(MetadataAttachment)*
 	CleanupPadInst             // Scope=ExceptionScope Args=(ExceptionArg)* Metadata=(MetadataAttachment)*
 	LocalDefTerm               // Name=LocalIdent Term=ValueTerminator
@@ -550,8 +549,7 @@ var nodeTypeStr = [...]string{
 	"VAArgInst",
 	"LandingPadInst",
 	"Cleanup",
-	"CatchClause",
-	"FilterClause",
+	"Clause",
 	"CatchPadInst",
 	"CleanupPadInst",
 	"LocalDefTerm",
@@ -747,11 +745,6 @@ func (t NodeType) String() string {
 var CallingConv = []NodeType{
 	CallingConvEnum,
 	CallingConvInt,
-}
-
-var Clause = []NodeType{
-	CatchClause,
-	FilterClause,
 }
 
 var ConcreteType = []NodeType{
@@ -2043,10 +2036,9 @@ var ruleNodeType = [...]NodeType{
 	LandingPadInst,             // LandingPadInst : 'landingpad' Type Cleanupopt Clause_optlist list_of_','_and_1_elements4
 	LandingPadInst,             // LandingPadInst : 'landingpad' Type Cleanupopt Clause_optlist
 	Cleanup,                    // Cleanup : 'cleanup'
-	0,                          // Clause : CatchClause
-	0,                          // Clause : FilterClause
-	CatchClause,                // CatchClause : 'catch' TypeValue
-	FilterClause,               // FilterClause : 'filter' Type ArrayConst
+	Clause,                     // Clause : ClauseKind TypeValue
+	0,                          // ClauseKind : 'catch'
+	0,                          // ClauseKind : 'filter'
 	CatchPadInst,               // CatchPadInst : 'catchpad' 'within' LocalIdent '[' ExceptionArg_list_withsep_opt ']' list_of_','_and_1_elements4
 	CatchPadInst,               // CatchPadInst : 'catchpad' 'within' LocalIdent '[' ExceptionArg_list_withsep_opt ']'
 	0,                          // ExceptionArg_list_withsep : ExceptionArg_list_withsep ',' ExceptionArg
