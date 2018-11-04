@@ -220,7 +220,7 @@ var symbolStr = [...]string{
 	"LandingPadInst",
 	"Cleanup",
 	"Clause",
-	"ClauseKind",
+	"ClauseType",
 	"CatchPadInst",
 	"ExceptionArg_list_withsep",
 	"ExceptionArg_list_withsep_opt",

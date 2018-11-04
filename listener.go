@@ -2036,9 +2036,9 @@ var ruleNodeType = [...]NodeType{
 	LandingPadInst,             // LandingPadInst : 'landingpad' Type Cleanupopt Clause_optlist list_of_','_and_1_elements4
 	LandingPadInst,             // LandingPadInst : 'landingpad' Type Cleanupopt Clause_optlist
 	Cleanup,                    // Cleanup : 'cleanup'
-	Clause,                     // Clause : ClauseKind TypeValue
-	0,                          // ClauseKind : 'catch'
-	0,                          // ClauseKind : 'filter'
+	Clause,                     // Clause : ClauseType TypeValue
+	0,                          // ClauseType : 'catch'
+	0,                          // ClauseType : 'filter'
 	CatchPadInst,               // CatchPadInst : 'catchpad' 'within' LocalIdent '[' ExceptionArg_list_withsep_opt ']' list_of_','_and_1_elements4
 	CatchPadInst,               // CatchPadInst : 'catchpad' 'within' LocalIdent '[' ExceptionArg_list_withsep_opt ']'
 	0,                          // ExceptionArg_list_withsep : ExceptionArg_list_withsep ',' ExceptionArg
