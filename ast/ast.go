@@ -132,7 +132,6 @@ func (n EntityField) LlvmNode() *Node                { return n.Node }
 func (n EnumsField) LlvmNode() *Node                 { return n.Node }
 func (n Exact) LlvmNode() *Node                      { return n.Node }
 func (n ExceptionArg) LlvmNode() *Node               { return n.Node }
-func (n ExceptionScope) LlvmNode() *Node             { return n.Node }
 func (n ExportSymbolsField) LlvmNode() *Node         { return n.Node }
 func (n ExprField) LlvmNode() *Node                  { return n.Node }
 func (n ExternLinkage) LlvmNode() *Node              { return n.Node }
@@ -898,6 +897,17 @@ func (NameField) dITemplateValueParameterFieldNode()  {}
 func (TagField) dITemplateValueParameterFieldNode()   {}
 func (TypeField) dITemplateValueParameterFieldNode()  {}
 func (ValueField) dITemplateValueParameterFieldNode() {}
+
+type ExceptionScope interface {
+	LlvmNode
+	exceptionScopeNode()
+}
+
+// exceptionScopeNode() ensures that only the following types can be
+// assigned to ExceptionScope.
+//
+func (LocalIdent) exceptionScopeNode() {}
+func (NoneConst) exceptionScopeNode()  {}
 
 type FirstClassType interface {
 	LlvmNode
@@ -2268,7 +2278,7 @@ type CatchSwitchTerm struct {
 }
 
 func (n CatchSwitchTerm) Scope() ExceptionScope {
-	return ExceptionScope{n.Child(selector.ExceptionScope)}
+	return ToLlvmNode(n.Child(selector.ExceptionScope)).(ExceptionScope)
 }
 
 func (n CatchSwitchTerm) Handlers() []Label {
@@ -2346,7 +2356,7 @@ type CleanupPadInst struct {
 }
 
 func (n CleanupPadInst) Scope() ExceptionScope {
-	return ExceptionScope{n.Child(selector.ExceptionScope)}
+	return ToLlvmNode(n.Child(selector.ExceptionScope)).(ExceptionScope)
 }
 
 func (n CleanupPadInst) Args() []ExceptionArg {
@@ -3090,24 +3100,6 @@ func (n ExceptionArg) Typ() LlvmNode {
 
 func (n ExceptionArg) Val() LlvmNode {
 	return ToLlvmNode(n.Child(selector.OneOf(ll.AShrExpr, ll.AddExpr, ll.AddrSpaceCastExpr, ll.AndExpr, ll.ArrayConst, ll.BitCastExpr, ll.BlockAddressConst, ll.BoolConst, ll.CharArrayConst, ll.DIBasicType, ll.DICompileUnit, ll.DICompositeType, ll.DIDerivedType, ll.DIEnumerator, ll.DIExpression, ll.DIFile, ll.DIGlobalVariable, ll.DIGlobalVariableExpression, ll.DIImportedEntity, ll.DILabel, ll.DILexicalBlock, ll.DILexicalBlockFile, ll.DILocalVariable, ll.DILocation, ll.DIMacro, ll.DIMacroFile, ll.DIModule, ll.DINamespace, ll.DIObjCProperty, ll.DISubprogram, ll.DISubrange, ll.DISubroutineType, ll.DITemplateTypeParameter, ll.DITemplateValueParameter, ll.ExtractElementExpr, ll.ExtractValueExpr, ll.FAddExpr, ll.FCmpExpr, ll.FDivExpr, ll.FMulExpr, ll.FPExtExpr, ll.FPToSIExpr, ll.FPToUIExpr, ll.FPTruncExpr, ll.FRemExpr, ll.FSubExpr, ll.FloatConst, ll.GenericDINode, ll.GetElementPtrExpr, ll.GlobalIdent, ll.ICmpExpr, ll.InlineAsm, ll.InsertElementExpr, ll.InsertValueExpr, ll.IntConst, ll.IntToPtrExpr, ll.LShrExpr, ll.LocalIdent, ll.MDString, ll.MDTuple, ll.MetadataID, ll.MulExpr, ll.NoneConst, ll.NullConst, ll.OrExpr, ll.PtrToIntExpr, ll.SDivExpr, ll.SExtExpr, ll.SIToFPExpr, ll.SRemExpr, ll.SelectExpr, ll.ShlExpr, ll.ShuffleVectorExpr, ll.StructConst, ll.SubExpr, ll.TruncExpr, ll.TypeValue, ll.UDivExpr, ll.UIToFPExpr, ll.URemExpr, ll.UndefConst, ll.VectorConst, ll.XorExpr, ll.ZExtExpr, ll.ZeroInitializerConst))).(LlvmNode)
-}
-
-type ExceptionScope struct {
-	*Node
-}
-
-func (n ExceptionScope) LocalIdent() *LocalIdent {
-	if child := n.Child(selector.LocalIdent); child != nil {
-		return &LocalIdent{child}
-	}
-	return nil
-}
-
-func (n ExceptionScope) NoneConst() *NoneConst {
-	if child := n.Child(selector.NoneConst); child != nil {
-		return &NoneConst{child}
-	}
-	return nil
 }
 
 type ExportSymbolsField struct {

@@ -245,8 +245,6 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &Exact{n}
 	case ll.ExceptionArg:
 		return &ExceptionArg{n}
-	case ll.ExceptionScope:
-		return &ExceptionScope{n}
 	case ll.ExportSymbolsField:
 		return &ExportSymbolsField{n}
 	case ll.ExprField:

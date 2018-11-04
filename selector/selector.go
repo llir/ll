@@ -128,7 +128,6 @@ var (
 	EnumsField                      = func(t ll.NodeType) bool { return t == ll.EnumsField }
 	Exact                           = func(t ll.NodeType) bool { return t == ll.Exact }
 	ExceptionArg                    = func(t ll.NodeType) bool { return t == ll.ExceptionArg }
-	ExceptionScope                  = func(t ll.NodeType) bool { return t == ll.ExceptionScope }
 	ExportSymbolsField              = func(t ll.NodeType) bool { return t == ll.ExportSymbolsField }
 	ExprField                       = func(t ll.NodeType) bool { return t == ll.ExprField }
 	ExternLinkage                   = func(t ll.NodeType) bool { return t == ll.ExternLinkage }
@@ -398,6 +397,7 @@ var (
 	DISubroutineTypeField           = OneOf(ll.DISubroutineTypeField...)
 	DITemplateTypeParameterField    = OneOf(ll.DITemplateTypeParameterField...)
 	DITemplateValueParameterField   = OneOf(ll.DITemplateValueParameterField...)
+	ExceptionScope                  = OneOf(ll.ExceptionScope...)
 	FirstClassType                  = OneOf(ll.FirstClassType...)
 	FuncAttr                        = OneOf(ll.FuncAttr...)
 	GenericDINodeField              = OneOf(ll.GenericDINodeField...)

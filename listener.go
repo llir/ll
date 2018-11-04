@@ -343,8 +343,7 @@ const (
 	DLLStorageClass
 	Ellipsis
 	Exact
-	ExceptionArg   // Typ=(ConcreteType | MetadataType) Val=(Metadata | Value)
-	ExceptionScope // LocalIdent? NoneConst?
+	ExceptionArg // Typ=(ConcreteType | MetadataType) Val=(Metadata | Value)
 	FastMathFlag
 	FPred
 	FuncAttribute
@@ -708,7 +707,6 @@ var nodeTypeStr = [...]string{
 	"Ellipsis",
 	"Exact",
 	"ExceptionArg",
-	"ExceptionScope",
 	"FastMathFlag",
 	"FPred",
 	"FuncAttribute",
@@ -1093,6 +1091,11 @@ var DITemplateValueParameterField = []NodeType{
 	TagField,
 	TypeField,
 	ValueField,
+}
+
+var ExceptionScope = []NodeType{
+	LocalIdent,
+	NoneConst,
 }
 
 var FirstClassType = []NodeType{
@@ -2612,8 +2615,8 @@ var ruleNodeType = [...]NodeType{
 	Exact,                      // Exact : 'exact'
 	ExceptionArg,               // ExceptionArg : ConcreteType Value
 	ExceptionArg,               // ExceptionArg : MetadataType Metadata
-	ExceptionScope,             // ExceptionScope : NoneConst
-	ExceptionScope,             // ExceptionScope : LocalIdent
+	0,                          // ExceptionScope : NoneConst
+	0,                          // ExceptionScope : LocalIdent
 	FastMathFlag,               // FastMathFlag : 'afn'
 	FastMathFlag,               // FastMathFlag : 'arcp'
 	FastMathFlag,               // FastMathFlag : 'contract'
