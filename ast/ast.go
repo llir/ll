@@ -66,6 +66,7 @@ func (n ChecksumField) LlvmNode() *Node              { return n.Node }
 func (n ChecksumKind) LlvmNode() *Node               { return n.Node }
 func (n ChecksumkindField) LlvmNode() *Node          { return n.Node }
 func (n Clause) LlvmNode() *Node                     { return n.Node }
+func (n ClauseType) LlvmNode() *Node                 { return n.Node }
 func (n Cleanup) LlvmNode() *Node                    { return n.Node }
 func (n CleanupPadInst) LlvmNode() *Node             { return n.Node }
 func (n CleanupRetTerm) LlvmNode() *Node             { return n.Node }
@@ -2324,8 +2325,16 @@ type Clause struct {
 	*Node
 }
 
+func (n Clause) ClauseType() ClauseType {
+	return ClauseType{n.Child(selector.ClauseType)}
+}
+
 func (n Clause) X() TypeValue {
 	return TypeValue{n.Child(selector.TypeValue)}
+}
+
+type ClauseType struct {
+	*Node
 }
 
 type Cleanup struct {

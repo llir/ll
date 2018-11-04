@@ -186,7 +186,8 @@ const (
 	VAArgInst      // ArgList=TypeValue ArgType=Type Metadata=(MetadataAttachment)*
 	LandingPadInst // ResultType=Type Cleanup? Clauses=(Clause)* Metadata=(MetadataAttachment)*
 	Cleanup
-	Clause                     // X=TypeValue
+	Clause // ClauseType X=TypeValue
+	ClauseType
 	CatchPadInst               // Scope=LocalIdent Args=(ExceptionArg)* Metadata=(MetadataAttachment)*
 	CleanupPadInst             // Scope=ExceptionScope Args=(ExceptionArg)* Metadata=(MetadataAttachment)*
 	LocalDefTerm               // Name=LocalIdent Term=ValueTerminator
@@ -550,6 +551,7 @@ var nodeTypeStr = [...]string{
 	"LandingPadInst",
 	"Cleanup",
 	"Clause",
+	"ClauseType",
 	"CatchPadInst",
 	"CleanupPadInst",
 	"LocalDefTerm",
@@ -2037,8 +2039,8 @@ var ruleNodeType = [...]NodeType{
 	LandingPadInst,             // LandingPadInst : 'landingpad' Type Cleanupopt Clause_optlist
 	Cleanup,                    // Cleanup : 'cleanup'
 	Clause,                     // Clause : ClauseType TypeValue
-	0,                          // ClauseType : 'catch'
-	0,                          // ClauseType : 'filter'
+	ClauseType,                 // ClauseType : 'catch'
+	ClauseType,                 // ClauseType : 'filter'
 	CatchPadInst,               // CatchPadInst : 'catchpad' 'within' LocalIdent '[' ExceptionArg_list_withsep_opt ']' list_of_','_and_1_elements4
 	CatchPadInst,               // CatchPadInst : 'catchpad' 'within' LocalIdent '[' ExceptionArg_list_withsep_opt ']'
 	0,                          // ExceptionArg_list_withsep : ExceptionArg_list_withsep ',' ExceptionArg

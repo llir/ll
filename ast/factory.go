@@ -113,6 +113,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &ChecksumkindField{n}
 	case ll.Clause:
 		return &Clause{n}
+	case ll.ClauseType:
+		return &ClauseType{n}
 	case ll.Cleanup:
 		return &Cleanup{n}
 	case ll.CleanupPadInst:

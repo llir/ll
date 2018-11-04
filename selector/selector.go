@@ -62,6 +62,7 @@ var (
 	ChecksumKind                    = func(t ll.NodeType) bool { return t == ll.ChecksumKind }
 	ChecksumkindField               = func(t ll.NodeType) bool { return t == ll.ChecksumkindField }
 	Clause                          = func(t ll.NodeType) bool { return t == ll.Clause }
+	ClauseType                      = func(t ll.NodeType) bool { return t == ll.ClauseType }
 	Cleanup                         = func(t ll.NodeType) bool { return t == ll.Cleanup }
 	CleanupPadInst                  = func(t ll.NodeType) bool { return t == ll.CleanupPadInst }
 	CleanupRetTerm                  = func(t ll.NodeType) bool { return t == ll.CleanupRetTerm }
