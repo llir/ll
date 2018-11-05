@@ -14,364 +14,365 @@ type LlvmNode interface {
 }
 
 // All types implement LlvmNode.
-func (n AShrExpr) LlvmNode() *Node { return n.Node }
-func (n AShrInst) LlvmNode() *Node { return n.Node }
-func (n AddExpr) LlvmNode() *Node { return n.Node }
-func (n AddInst) LlvmNode() *Node { return n.Node }
-func (n AddrSpace) LlvmNode() *Node { return n.Node }
-func (n AddrSpaceCastExpr) LlvmNode() *Node { return n.Node }
-func (n AddrSpaceCastInst) LlvmNode() *Node { return n.Node }
-func (n AliasDef) LlvmNode() *Node { return n.Node }
-func (n AlignField) LlvmNode() *Node { return n.Node }
-func (n AlignPair) LlvmNode() *Node { return n.Node }
-func (n AlignStack) LlvmNode() *Node { return n.Node }
-func (n AlignStackPair) LlvmNode() *Node { return n.Node }
-func (n Alignment) LlvmNode() *Node { return n.Node }
-func (n AllocSize) LlvmNode() *Node { return n.Node }
-func (n AllocaInst) LlvmNode() *Node { return n.Node }
-func (n AndExpr) LlvmNode() *Node { return n.Node }
-func (n AndInst) LlvmNode() *Node { return n.Node }
-func (n Arg) LlvmNode() *Node { return n.Node }
-func (n ArgField) LlvmNode() *Node { return n.Node }
-func (n Args) LlvmNode() *Node { return n.Node }
-func (n ArrayConst) LlvmNode() *Node { return n.Node }
-func (n ArrayType) LlvmNode() *Node { return n.Node }
-func (n Atomic) LlvmNode() *Node { return n.Node }
-func (n AtomicOp) LlvmNode() *Node { return n.Node }
-func (n AtomicOrdering) LlvmNode() *Node { return n.Node }
-func (n AtomicRMWInst) LlvmNode() *Node { return n.Node }
-func (n AttrGroupDef) LlvmNode() *Node { return n.Node }
-func (n AttrGroupID) LlvmNode() *Node { return n.Node }
-func (n AttrPair) LlvmNode() *Node { return n.Node }
-func (n AttrString) LlvmNode() *Node { return n.Node }
-func (n AttributesField) LlvmNode() *Node { return n.Node }
-func (n BaseTypeField) LlvmNode() *Node { return n.Node }
-func (n BasicBlock) LlvmNode() *Node { return n.Node }
-func (n BitCastExpr) LlvmNode() *Node { return n.Node }
-func (n BitCastInst) LlvmNode() *Node { return n.Node }
-func (n BlockAddressConst) LlvmNode() *Node { return n.Node }
-func (n BoolConst) LlvmNode() *Node { return n.Node }
-func (n BoolLit) LlvmNode() *Node { return n.Node }
-func (n BrTerm) LlvmNode() *Node { return n.Node }
-func (n CCField) LlvmNode() *Node { return n.Node }
-func (n CallInst) LlvmNode() *Node { return n.Node }
-func (n CallingConvEnum) LlvmNode() *Node { return n.Node }
-func (n CallingConvInt) LlvmNode() *Node { return n.Node }
-func (n Case) LlvmNode() *Node { return n.Node }
-func (n CatchPadInst) LlvmNode() *Node { return n.Node }
-func (n CatchRetTerm) LlvmNode() *Node { return n.Node }
-func (n CatchSwitchTerm) LlvmNode() *Node { return n.Node }
-func (n CharArrayConst) LlvmNode() *Node { return n.Node }
-func (n ChecksumField) LlvmNode() *Node { return n.Node }
-func (n ChecksumKind) LlvmNode() *Node { return n.Node }
-func (n ChecksumkindField) LlvmNode() *Node { return n.Node }
-func (n Clause) LlvmNode() *Node { return n.Node }
-func (n ClauseType) LlvmNode() *Node { return n.Node }
-func (n Cleanup) LlvmNode() *Node { return n.Node }
-func (n CleanupPadInst) LlvmNode() *Node { return n.Node }
-func (n CleanupRetTerm) LlvmNode() *Node { return n.Node }
-func (n CmpXchgInst) LlvmNode() *Node { return n.Node }
-func (n ColumnField) LlvmNode() *Node { return n.Node }
-func (n Comdat) LlvmNode() *Node { return n.Node }
-func (n ComdatDef) LlvmNode() *Node { return n.Node }
-func (n ComdatName) LlvmNode() *Node { return n.Node }
-func (n CondBrTerm) LlvmNode() *Node { return n.Node }
-func (n ConfigMacrosField) LlvmNode() *Node { return n.Node }
-func (n ContainingTypeField) LlvmNode() *Node { return n.Node }
-func (n CountField) LlvmNode() *Node { return n.Node }
-func (n DIBasicType) LlvmNode() *Node { return n.Node }
-func (n DICompileUnit) LlvmNode() *Node { return n.Node }
-func (n DICompositeType) LlvmNode() *Node { return n.Node }
-func (n DIDerivedType) LlvmNode() *Node { return n.Node }
-func (n DIEnumerator) LlvmNode() *Node { return n.Node }
-func (n DIExpression) LlvmNode() *Node { return n.Node }
-func (n DIFile) LlvmNode() *Node { return n.Node }
-func (n DIFlag) LlvmNode() *Node { return n.Node }
-func (n DIFlags) LlvmNode() *Node { return n.Node }
-func (n DIGlobalVariable) LlvmNode() *Node { return n.Node }
+func (n AShrExpr) LlvmNode() *Node                   { return n.Node }
+func (n AShrInst) LlvmNode() *Node                   { return n.Node }
+func (n AddExpr) LlvmNode() *Node                    { return n.Node }
+func (n AddInst) LlvmNode() *Node                    { return n.Node }
+func (n AddrSpace) LlvmNode() *Node                  { return n.Node }
+func (n AddrSpaceCastExpr) LlvmNode() *Node          { return n.Node }
+func (n AddrSpaceCastInst) LlvmNode() *Node          { return n.Node }
+func (n AliasDef) LlvmNode() *Node                   { return n.Node }
+func (n AlignField) LlvmNode() *Node                 { return n.Node }
+func (n AlignPair) LlvmNode() *Node                  { return n.Node }
+func (n AlignStack) LlvmNode() *Node                 { return n.Node }
+func (n AlignStackPair) LlvmNode() *Node             { return n.Node }
+func (n Alignment) LlvmNode() *Node                  { return n.Node }
+func (n AllocSize) LlvmNode() *Node                  { return n.Node }
+func (n AllocaInst) LlvmNode() *Node                 { return n.Node }
+func (n AndExpr) LlvmNode() *Node                    { return n.Node }
+func (n AndInst) LlvmNode() *Node                    { return n.Node }
+func (n Arg) LlvmNode() *Node                        { return n.Node }
+func (n ArgField) LlvmNode() *Node                   { return n.Node }
+func (n Args) LlvmNode() *Node                       { return n.Node }
+func (n ArrayConst) LlvmNode() *Node                 { return n.Node }
+func (n ArrayType) LlvmNode() *Node                  { return n.Node }
+func (n Atomic) LlvmNode() *Node                     { return n.Node }
+func (n AtomicOp) LlvmNode() *Node                   { return n.Node }
+func (n AtomicOrdering) LlvmNode() *Node             { return n.Node }
+func (n AtomicRMWInst) LlvmNode() *Node              { return n.Node }
+func (n AttrGroupDef) LlvmNode() *Node               { return n.Node }
+func (n AttrGroupID) LlvmNode() *Node                { return n.Node }
+func (n AttrPair) LlvmNode() *Node                   { return n.Node }
+func (n AttrString) LlvmNode() *Node                 { return n.Node }
+func (n AttributesField) LlvmNode() *Node            { return n.Node }
+func (n BaseTypeField) LlvmNode() *Node              { return n.Node }
+func (n BasicBlock) LlvmNode() *Node                 { return n.Node }
+func (n BitCastExpr) LlvmNode() *Node                { return n.Node }
+func (n BitCastInst) LlvmNode() *Node                { return n.Node }
+func (n BlockAddressConst) LlvmNode() *Node          { return n.Node }
+func (n BoolConst) LlvmNode() *Node                  { return n.Node }
+func (n BoolLit) LlvmNode() *Node                    { return n.Node }
+func (n BrTerm) LlvmNode() *Node                     { return n.Node }
+func (n CCField) LlvmNode() *Node                    { return n.Node }
+func (n CallInst) LlvmNode() *Node                   { return n.Node }
+func (n CallingConvEnum) LlvmNode() *Node            { return n.Node }
+func (n CallingConvInt) LlvmNode() *Node             { return n.Node }
+func (n Case) LlvmNode() *Node                       { return n.Node }
+func (n CatchPadInst) LlvmNode() *Node               { return n.Node }
+func (n CatchRetTerm) LlvmNode() *Node               { return n.Node }
+func (n CatchSwitchTerm) LlvmNode() *Node            { return n.Node }
+func (n CharArrayConst) LlvmNode() *Node             { return n.Node }
+func (n ChecksumField) LlvmNode() *Node              { return n.Node }
+func (n ChecksumKind) LlvmNode() *Node               { return n.Node }
+func (n ChecksumkindField) LlvmNode() *Node          { return n.Node }
+func (n Clause) LlvmNode() *Node                     { return n.Node }
+func (n ClauseType) LlvmNode() *Node                 { return n.Node }
+func (n Cleanup) LlvmNode() *Node                    { return n.Node }
+func (n CleanupPadInst) LlvmNode() *Node             { return n.Node }
+func (n CleanupRetTerm) LlvmNode() *Node             { return n.Node }
+func (n CmpXchgInst) LlvmNode() *Node                { return n.Node }
+func (n ColumnField) LlvmNode() *Node                { return n.Node }
+func (n Comdat) LlvmNode() *Node                     { return n.Node }
+func (n ComdatDef) LlvmNode() *Node                  { return n.Node }
+func (n ComdatName) LlvmNode() *Node                 { return n.Node }
+func (n CondBrTerm) LlvmNode() *Node                 { return n.Node }
+func (n ConfigMacrosField) LlvmNode() *Node          { return n.Node }
+func (n ContainingTypeField) LlvmNode() *Node        { return n.Node }
+func (n CountField) LlvmNode() *Node                 { return n.Node }
+func (n DIBasicType) LlvmNode() *Node                { return n.Node }
+func (n DICompileUnit) LlvmNode() *Node              { return n.Node }
+func (n DICompositeType) LlvmNode() *Node            { return n.Node }
+func (n DIDerivedType) LlvmNode() *Node              { return n.Node }
+func (n DIEnumerator) LlvmNode() *Node               { return n.Node }
+func (n DIExpression) LlvmNode() *Node               { return n.Node }
+func (n DIFile) LlvmNode() *Node                     { return n.Node }
+func (n DIFlag) LlvmNode() *Node                     { return n.Node }
+func (n DIFlags) LlvmNode() *Node                    { return n.Node }
+func (n DIGlobalVariable) LlvmNode() *Node           { return n.Node }
 func (n DIGlobalVariableExpression) LlvmNode() *Node { return n.Node }
-func (n DIImportedEntity) LlvmNode() *Node { return n.Node }
-func (n DILabel) LlvmNode() *Node { return n.Node }
-func (n DILexicalBlock) LlvmNode() *Node { return n.Node }
-func (n DILexicalBlockFile) LlvmNode() *Node { return n.Node }
-func (n DILocalVariable) LlvmNode() *Node { return n.Node }
-func (n DILocation) LlvmNode() *Node { return n.Node }
-func (n DIMacro) LlvmNode() *Node { return n.Node }
-func (n DIMacroFile) LlvmNode() *Node { return n.Node }
-func (n DIModule) LlvmNode() *Node { return n.Node }
-func (n DINamespace) LlvmNode() *Node { return n.Node }
-func (n DIObjCProperty) LlvmNode() *Node { return n.Node }
-func (n DISubprogram) LlvmNode() *Node { return n.Node }
-func (n DISubrange) LlvmNode() *Node { return n.Node }
-func (n DISubroutineType) LlvmNode() *Node { return n.Node }
-func (n DITemplateTypeParameter) LlvmNode() *Node { return n.Node }
-func (n DITemplateValueParameter) LlvmNode() *Node { return n.Node }
-func (n DLLStorageClass) LlvmNode() *Node { return n.Node }
+func (n DIImportedEntity) LlvmNode() *Node           { return n.Node }
+func (n DILabel) LlvmNode() *Node                    { return n.Node }
+func (n DILexicalBlock) LlvmNode() *Node             { return n.Node }
+func (n DILexicalBlockFile) LlvmNode() *Node         { return n.Node }
+func (n DILocalVariable) LlvmNode() *Node            { return n.Node }
+func (n DILocation) LlvmNode() *Node                 { return n.Node }
+func (n DIMacro) LlvmNode() *Node                    { return n.Node }
+func (n DIMacroFile) LlvmNode() *Node                { return n.Node }
+func (n DIModule) LlvmNode() *Node                   { return n.Node }
+func (n DINamespace) LlvmNode() *Node                { return n.Node }
+func (n DIObjCProperty) LlvmNode() *Node             { return n.Node }
+func (n DISubprogram) LlvmNode() *Node               { return n.Node }
+func (n DISubrange) LlvmNode() *Node                 { return n.Node }
+func (n DISubroutineType) LlvmNode() *Node           { return n.Node }
+func (n DITemplateTypeParameter) LlvmNode() *Node    { return n.Node }
+func (n DITemplateValueParameter) LlvmNode() *Node   { return n.Node }
+func (n DLLStorageClass) LlvmNode() *Node            { return n.Node }
 func (n DebugInfoForProfilingField) LlvmNode() *Node { return n.Node }
-func (n DeclarationField) LlvmNode() *Node { return n.Node }
-func (n Dereferenceable) LlvmNode() *Node { return n.Node }
-func (n DirectoryField) LlvmNode() *Node { return n.Node }
-func (n DiscriminatorField) LlvmNode() *Node { return n.Node }
-func (n DiscriminatorIntField) LlvmNode() *Node { return n.Node }
-func (n Distinct) LlvmNode() *Node { return n.Node }
-func (n DwarfAddressSpaceField) LlvmNode() *Node { return n.Node }
-func (n DwarfAttEncoding) LlvmNode() *Node { return n.Node }
-func (n DwarfCC) LlvmNode() *Node { return n.Node }
-func (n DwarfLang) LlvmNode() *Node { return n.Node }
-func (n DwarfMacinfo) LlvmNode() *Node { return n.Node }
-func (n DwarfOp) LlvmNode() *Node { return n.Node }
-func (n DwarfTag) LlvmNode() *Node { return n.Node }
-func (n DwarfVirtuality) LlvmNode() *Node { return n.Node }
-func (n DwoIdField) LlvmNode() *Node { return n.Node }
-func (n ElementsField) LlvmNode() *Node { return n.Node }
-func (n Ellipsis) LlvmNode() *Node { return n.Node }
-func (n EmissionKind) LlvmNode() *Node { return n.Node }
-func (n EmissionKindField) LlvmNode() *Node { return n.Node }
-func (n EncodingField) LlvmNode() *Node { return n.Node }
-func (n EntityField) LlvmNode() *Node { return n.Node }
-func (n EnumsField) LlvmNode() *Node { return n.Node }
-func (n Exact) LlvmNode() *Node { return n.Node }
-func (n ExceptionArg) LlvmNode() *Node { return n.Node }
-func (n ExportSymbolsField) LlvmNode() *Node { return n.Node }
-func (n ExprField) LlvmNode() *Node { return n.Node }
-func (n ExternLinkage) LlvmNode() *Node { return n.Node }
-func (n ExternallyInitialized) LlvmNode() *Node { return n.Node }
-func (n ExtraDataField) LlvmNode() *Node { return n.Node }
-func (n ExtractElementExpr) LlvmNode() *Node { return n.Node }
-func (n ExtractElementInst) LlvmNode() *Node { return n.Node }
-func (n ExtractValueExpr) LlvmNode() *Node { return n.Node }
-func (n ExtractValueInst) LlvmNode() *Node { return n.Node }
-func (n FAddExpr) LlvmNode() *Node { return n.Node }
-func (n FAddInst) LlvmNode() *Node { return n.Node }
-func (n FCmpExpr) LlvmNode() *Node { return n.Node }
-func (n FCmpInst) LlvmNode() *Node { return n.Node }
-func (n FDivExpr) LlvmNode() *Node { return n.Node }
-func (n FDivInst) LlvmNode() *Node { return n.Node }
-func (n FMulExpr) LlvmNode() *Node { return n.Node }
-func (n FMulInst) LlvmNode() *Node { return n.Node }
-func (n FPExtExpr) LlvmNode() *Node { return n.Node }
-func (n FPExtInst) LlvmNode() *Node { return n.Node }
-func (n FPToSIExpr) LlvmNode() *Node { return n.Node }
-func (n FPToSIInst) LlvmNode() *Node { return n.Node }
-func (n FPToUIExpr) LlvmNode() *Node { return n.Node }
-func (n FPToUIInst) LlvmNode() *Node { return n.Node }
-func (n FPTruncExpr) LlvmNode() *Node { return n.Node }
-func (n FPTruncInst) LlvmNode() *Node { return n.Node }
-func (n FPred) LlvmNode() *Node { return n.Node }
-func (n FRemExpr) LlvmNode() *Node { return n.Node }
-func (n FRemInst) LlvmNode() *Node { return n.Node }
-func (n FSubExpr) LlvmNode() *Node { return n.Node }
-func (n FSubInst) LlvmNode() *Node { return n.Node }
-func (n FastMathFlag) LlvmNode() *Node { return n.Node }
-func (n FenceInst) LlvmNode() *Node { return n.Node }
-func (n FileField) LlvmNode() *Node { return n.Node }
-func (n FilenameField) LlvmNode() *Node { return n.Node }
-func (n FlagsField) LlvmNode() *Node { return n.Node }
-func (n FlagsStringField) LlvmNode() *Node { return n.Node }
-func (n FloatConst) LlvmNode() *Node { return n.Node }
-func (n FloatKind) LlvmNode() *Node { return n.Node }
-func (n FloatLit) LlvmNode() *Node { return n.Node }
-func (n FloatType) LlvmNode() *Node { return n.Node }
-func (n FuncAttribute) LlvmNode() *Node { return n.Node }
-func (n FuncBody) LlvmNode() *Node { return n.Node }
-func (n FuncDecl) LlvmNode() *Node { return n.Node }
-func (n FuncDef) LlvmNode() *Node { return n.Node }
-func (n FuncHeader) LlvmNode() *Node { return n.Node }
-func (n FuncType) LlvmNode() *Node { return n.Node }
-func (n GCNode) LlvmNode() *Node { return n.Node }
-func (n GEPIndex) LlvmNode() *Node { return n.Node }
-func (n GenericDINode) LlvmNode() *Node { return n.Node }
-func (n GetElementPtrExpr) LlvmNode() *Node { return n.Node }
-func (n GetElementPtrInst) LlvmNode() *Node { return n.Node }
-func (n GetterField) LlvmNode() *Node { return n.Node }
-func (n GlobalDecl) LlvmNode() *Node { return n.Node }
-func (n GlobalDef) LlvmNode() *Node { return n.Node }
-func (n GlobalIdent) LlvmNode() *Node { return n.Node }
-func (n GlobalsField) LlvmNode() *Node { return n.Node }
-func (n HeaderField) LlvmNode() *Node { return n.Node }
-func (n ICmpExpr) LlvmNode() *Node { return n.Node }
-func (n ICmpInst) LlvmNode() *Node { return n.Node }
-func (n IFuncDef) LlvmNode() *Node { return n.Node }
-func (n IPred) LlvmNode() *Node { return n.Node }
-func (n IdentifierField) LlvmNode() *Node { return n.Node }
-func (n Immutable) LlvmNode() *Node { return n.Node }
-func (n ImportsField) LlvmNode() *Node { return n.Node }
-func (n InAlloca) LlvmNode() *Node { return n.Node }
-func (n InBounds) LlvmNode() *Node { return n.Node }
-func (n InRange) LlvmNode() *Node { return n.Node }
-func (n Inc) LlvmNode() *Node { return n.Node }
-func (n IncludePathField) LlvmNode() *Node { return n.Node }
-func (n IndirectBrTerm) LlvmNode() *Node { return n.Node }
-func (n InlineAsm) LlvmNode() *Node { return n.Node }
-func (n InlinedAtField) LlvmNode() *Node { return n.Node }
-func (n InsertElementExpr) LlvmNode() *Node { return n.Node }
-func (n InsertElementInst) LlvmNode() *Node { return n.Node }
-func (n InsertValueExpr) LlvmNode() *Node { return n.Node }
-func (n InsertValueInst) LlvmNode() *Node { return n.Node }
-func (n IntConst) LlvmNode() *Node { return n.Node }
-func (n IntLit) LlvmNode() *Node { return n.Node }
-func (n IntToPtrExpr) LlvmNode() *Node { return n.Node }
-func (n IntToPtrInst) LlvmNode() *Node { return n.Node }
-func (n IntType) LlvmNode() *Node { return n.Node }
-func (n IntelDialect) LlvmNode() *Node { return n.Node }
-func (n InvokeTerm) LlvmNode() *Node { return n.Node }
-func (n IsDefinitionField) LlvmNode() *Node { return n.Node }
-func (n IsImplicitCodeField) LlvmNode() *Node { return n.Node }
-func (n IsLocalField) LlvmNode() *Node { return n.Node }
-func (n IsOptimizedField) LlvmNode() *Node { return n.Node }
-func (n IsUnsignedField) LlvmNode() *Node { return n.Node }
-func (n IsysrootField) LlvmNode() *Node { return n.Node }
-func (n LShrExpr) LlvmNode() *Node { return n.Node }
-func (n LShrInst) LlvmNode() *Node { return n.Node }
-func (n Label) LlvmNode() *Node { return n.Node }
-func (n LabelIdent) LlvmNode() *Node { return n.Node }
-func (n LabelType) LlvmNode() *Node { return n.Node }
-func (n LandingPadInst) LlvmNode() *Node { return n.Node }
-func (n LanguageField) LlvmNode() *Node { return n.Node }
-func (n LineField) LlvmNode() *Node { return n.Node }
-func (n Linkage) LlvmNode() *Node { return n.Node }
-func (n LinkageNameField) LlvmNode() *Node { return n.Node }
-func (n LoadInst) LlvmNode() *Node { return n.Node }
-func (n LocalDefInst) LlvmNode() *Node { return n.Node }
-func (n LocalDefTerm) LlvmNode() *Node { return n.Node }
-func (n LocalIdent) LlvmNode() *Node { return n.Node }
-func (n LowerBoundField) LlvmNode() *Node { return n.Node }
-func (n MDFields) LlvmNode() *Node { return n.Node }
-func (n MDString) LlvmNode() *Node { return n.Node }
-func (n MDTuple) LlvmNode() *Node { return n.Node }
-func (n MMXType) LlvmNode() *Node { return n.Node }
-func (n MacrosField) LlvmNode() *Node { return n.Node }
-func (n MetadataAttachment) LlvmNode() *Node { return n.Node }
-func (n MetadataDef) LlvmNode() *Node { return n.Node }
-func (n MetadataID) LlvmNode() *Node { return n.Node }
-func (n MetadataName) LlvmNode() *Node { return n.Node }
-func (n MetadataType) LlvmNode() *Node { return n.Node }
-func (n Module) LlvmNode() *Node { return n.Node }
-func (n ModuleAsm) LlvmNode() *Node { return n.Node }
-func (n MulExpr) LlvmNode() *Node { return n.Node }
-func (n MulInst) LlvmNode() *Node { return n.Node }
-func (n NameField) LlvmNode() *Node { return n.Node }
-func (n NameTableKind) LlvmNode() *Node { return n.Node }
-func (n NameTableKindField) LlvmNode() *Node { return n.Node }
-func (n NamedMetadataDef) LlvmNode() *Node { return n.Node }
-func (n NamedType) LlvmNode() *Node { return n.Node }
-func (n NodesField) LlvmNode() *Node { return n.Node }
-func (n NoneConst) LlvmNode() *Node { return n.Node }
-func (n NullConst) LlvmNode() *Node { return n.Node }
-func (n NullLit) LlvmNode() *Node { return n.Node }
-func (n OffsetField) LlvmNode() *Node { return n.Node }
-func (n OpaqueType) LlvmNode() *Node { return n.Node }
-func (n OperandBundle) LlvmNode() *Node { return n.Node }
-func (n OperandsField) LlvmNode() *Node { return n.Node }
-func (n OrExpr) LlvmNode() *Node { return n.Node }
-func (n OrInst) LlvmNode() *Node { return n.Node }
-func (n OverflowFlag) LlvmNode() *Node { return n.Node }
-func (n PackedStructType) LlvmNode() *Node { return n.Node }
-func (n Param) LlvmNode() *Node { return n.Node }
-func (n ParamAttribute) LlvmNode() *Node { return n.Node }
-func (n Params) LlvmNode() *Node { return n.Node }
-func (n Personality) LlvmNode() *Node { return n.Node }
-func (n PhiInst) LlvmNode() *Node { return n.Node }
-func (n PointerType) LlvmNode() *Node { return n.Node }
-func (n Preemption) LlvmNode() *Node { return n.Node }
-func (n Prefix) LlvmNode() *Node { return n.Node }
-func (n ProducerField) LlvmNode() *Node { return n.Node }
-func (n Prologue) LlvmNode() *Node { return n.Node }
-func (n PtrToIntExpr) LlvmNode() *Node { return n.Node }
-func (n PtrToIntInst) LlvmNode() *Node { return n.Node }
-func (n ResumeTerm) LlvmNode() *Node { return n.Node }
-func (n RetTerm) LlvmNode() *Node { return n.Node }
-func (n RetainedNodesField) LlvmNode() *Node { return n.Node }
-func (n RetainedTypesField) LlvmNode() *Node { return n.Node }
-func (n ReturnAttribute) LlvmNode() *Node { return n.Node }
-func (n RuntimeLangField) LlvmNode() *Node { return n.Node }
-func (n RuntimeVersionField) LlvmNode() *Node { return n.Node }
-func (n SDivExpr) LlvmNode() *Node { return n.Node }
-func (n SDivInst) LlvmNode() *Node { return n.Node }
-func (n SExtExpr) LlvmNode() *Node { return n.Node }
-func (n SExtInst) LlvmNode() *Node { return n.Node }
-func (n SIToFPExpr) LlvmNode() *Node { return n.Node }
-func (n SIToFPInst) LlvmNode() *Node { return n.Node }
-func (n SRemExpr) LlvmNode() *Node { return n.Node }
-func (n SRemInst) LlvmNode() *Node { return n.Node }
-func (n ScopeField) LlvmNode() *Node { return n.Node }
-func (n ScopeLineField) LlvmNode() *Node { return n.Node }
-func (n Section) LlvmNode() *Node { return n.Node }
-func (n SelectExpr) LlvmNode() *Node { return n.Node }
-func (n SelectInst) LlvmNode() *Node { return n.Node }
-func (n SelectionKind) LlvmNode() *Node { return n.Node }
-func (n SetterField) LlvmNode() *Node { return n.Node }
-func (n ShlExpr) LlvmNode() *Node { return n.Node }
-func (n ShlInst) LlvmNode() *Node { return n.Node }
-func (n ShuffleVectorExpr) LlvmNode() *Node { return n.Node }
-func (n ShuffleVectorInst) LlvmNode() *Node { return n.Node }
-func (n SideEffect) LlvmNode() *Node { return n.Node }
-func (n SizeField) LlvmNode() *Node { return n.Node }
-func (n SourceField) LlvmNode() *Node { return n.Node }
-func (n SourceFilename) LlvmNode() *Node { return n.Node }
-func (n SplitDebugFilenameField) LlvmNode() *Node { return n.Node }
-func (n SplitDebugInliningField) LlvmNode() *Node { return n.Node }
-func (n StackAlignment) LlvmNode() *Node { return n.Node }
-func (n StoreInst) LlvmNode() *Node { return n.Node }
-func (n StringLit) LlvmNode() *Node { return n.Node }
-func (n StructConst) LlvmNode() *Node { return n.Node }
-func (n StructType) LlvmNode() *Node { return n.Node }
-func (n SubExpr) LlvmNode() *Node { return n.Node }
-func (n SubInst) LlvmNode() *Node { return n.Node }
-func (n SwiftError) LlvmNode() *Node { return n.Node }
-func (n SwitchTerm) LlvmNode() *Node { return n.Node }
-func (n SyncScope) LlvmNode() *Node { return n.Node }
-func (n TLSModel) LlvmNode() *Node { return n.Node }
-func (n TagField) LlvmNode() *Node { return n.Node }
-func (n Tail) LlvmNode() *Node { return n.Node }
-func (n TargetDataLayout) LlvmNode() *Node { return n.Node }
-func (n TargetTriple) LlvmNode() *Node { return n.Node }
-func (n TemplateParamsField) LlvmNode() *Node { return n.Node }
-func (n ThisAdjustmentField) LlvmNode() *Node { return n.Node }
-func (n ThreadLocal) LlvmNode() *Node { return n.Node }
-func (n ThrownTypesField) LlvmNode() *Node { return n.Node }
-func (n TokenType) LlvmNode() *Node { return n.Node }
-func (n TruncExpr) LlvmNode() *Node { return n.Node }
-func (n TruncInst) LlvmNode() *Node { return n.Node }
-func (n TypeConst) LlvmNode() *Node { return n.Node }
-func (n TypeDef) LlvmNode() *Node { return n.Node }
-func (n TypeField) LlvmNode() *Node { return n.Node }
-func (n TypeMacinfoField) LlvmNode() *Node { return n.Node }
-func (n TypeValue) LlvmNode() *Node { return n.Node }
-func (n TypesField) LlvmNode() *Node { return n.Node }
-func (n UDivExpr) LlvmNode() *Node { return n.Node }
-func (n UDivInst) LlvmNode() *Node { return n.Node }
-func (n UIToFPExpr) LlvmNode() *Node { return n.Node }
-func (n UIToFPInst) LlvmNode() *Node { return n.Node }
-func (n URemExpr) LlvmNode() *Node { return n.Node }
-func (n URemInst) LlvmNode() *Node { return n.Node }
-func (n UintLit) LlvmNode() *Node { return n.Node }
-func (n UndefConst) LlvmNode() *Node { return n.Node }
-func (n UnitField) LlvmNode() *Node { return n.Node }
-func (n UnnamedAddr) LlvmNode() *Node { return n.Node }
-func (n UnreachableTerm) LlvmNode() *Node { return n.Node }
-func (n UnwindTarget) LlvmNode() *Node { return n.Node }
-func (n UseListOrder) LlvmNode() *Node { return n.Node }
-func (n UseListOrderBB) LlvmNode() *Node { return n.Node }
-func (n VAArgInst) LlvmNode() *Node { return n.Node }
-func (n ValueField) LlvmNode() *Node { return n.Node }
-func (n ValueIntField) LlvmNode() *Node { return n.Node }
-func (n ValueStringField) LlvmNode() *Node { return n.Node }
-func (n VarField) LlvmNode() *Node { return n.Node }
-func (n VectorConst) LlvmNode() *Node { return n.Node }
-func (n VectorType) LlvmNode() *Node { return n.Node }
-func (n VirtualIndexField) LlvmNode() *Node { return n.Node }
-func (n VirtualityField) LlvmNode() *Node { return n.Node }
-func (n Visibility) LlvmNode() *Node { return n.Node }
-func (n VoidType) LlvmNode() *Node { return n.Node }
-func (n Volatile) LlvmNode() *Node { return n.Node }
-func (n VtableHolderField) LlvmNode() *Node { return n.Node }
-func (n Weak) LlvmNode() *Node { return n.Node }
-func (n XorExpr) LlvmNode() *Node { return n.Node }
-func (n XorInst) LlvmNode() *Node { return n.Node }
-func (n ZExtExpr) LlvmNode() *Node { return n.Node }
-func (n ZExtInst) LlvmNode() *Node { return n.Node }
-func (n ZeroInitializerConst) LlvmNode() *Node { return n.Node }
+func (n DeclarationField) LlvmNode() *Node           { return n.Node }
+func (n Dereferenceable) LlvmNode() *Node            { return n.Node }
+func (n DirectoryField) LlvmNode() *Node             { return n.Node }
+func (n DiscriminatorField) LlvmNode() *Node         { return n.Node }
+func (n DiscriminatorIntField) LlvmNode() *Node      { return n.Node }
+func (n Distinct) LlvmNode() *Node                   { return n.Node }
+func (n DwarfAddressSpaceField) LlvmNode() *Node     { return n.Node }
+func (n DwarfAttEncoding) LlvmNode() *Node           { return n.Node }
+func (n DwarfCC) LlvmNode() *Node                    { return n.Node }
+func (n DwarfLang) LlvmNode() *Node                  { return n.Node }
+func (n DwarfMacinfo) LlvmNode() *Node               { return n.Node }
+func (n DwarfOp) LlvmNode() *Node                    { return n.Node }
+func (n DwarfTag) LlvmNode() *Node                   { return n.Node }
+func (n DwarfVirtuality) LlvmNode() *Node            { return n.Node }
+func (n DwoIdField) LlvmNode() *Node                 { return n.Node }
+func (n ElementsField) LlvmNode() *Node              { return n.Node }
+func (n Ellipsis) LlvmNode() *Node                   { return n.Node }
+func (n EmissionKind) LlvmNode() *Node               { return n.Node }
+func (n EmissionKindField) LlvmNode() *Node          { return n.Node }
+func (n EncodingField) LlvmNode() *Node              { return n.Node }
+func (n EntityField) LlvmNode() *Node                { return n.Node }
+func (n EnumsField) LlvmNode() *Node                 { return n.Node }
+func (n Exact) LlvmNode() *Node                      { return n.Node }
+func (n ExceptionArg) LlvmNode() *Node               { return n.Node }
+func (n ExportSymbolsField) LlvmNode() *Node         { return n.Node }
+func (n ExprField) LlvmNode() *Node                  { return n.Node }
+func (n ExternLinkage) LlvmNode() *Node              { return n.Node }
+func (n ExternallyInitialized) LlvmNode() *Node      { return n.Node }
+func (n ExtraDataField) LlvmNode() *Node             { return n.Node }
+func (n ExtractElementExpr) LlvmNode() *Node         { return n.Node }
+func (n ExtractElementInst) LlvmNode() *Node         { return n.Node }
+func (n ExtractValueExpr) LlvmNode() *Node           { return n.Node }
+func (n ExtractValueInst) LlvmNode() *Node           { return n.Node }
+func (n FAddExpr) LlvmNode() *Node                   { return n.Node }
+func (n FAddInst) LlvmNode() *Node                   { return n.Node }
+func (n FCmpExpr) LlvmNode() *Node                   { return n.Node }
+func (n FCmpInst) LlvmNode() *Node                   { return n.Node }
+func (n FDivExpr) LlvmNode() *Node                   { return n.Node }
+func (n FDivInst) LlvmNode() *Node                   { return n.Node }
+func (n FMulExpr) LlvmNode() *Node                   { return n.Node }
+func (n FMulInst) LlvmNode() *Node                   { return n.Node }
+func (n FPExtExpr) LlvmNode() *Node                  { return n.Node }
+func (n FPExtInst) LlvmNode() *Node                  { return n.Node }
+func (n FPToSIExpr) LlvmNode() *Node                 { return n.Node }
+func (n FPToSIInst) LlvmNode() *Node                 { return n.Node }
+func (n FPToUIExpr) LlvmNode() *Node                 { return n.Node }
+func (n FPToUIInst) LlvmNode() *Node                 { return n.Node }
+func (n FPTruncExpr) LlvmNode() *Node                { return n.Node }
+func (n FPTruncInst) LlvmNode() *Node                { return n.Node }
+func (n FPred) LlvmNode() *Node                      { return n.Node }
+func (n FRemExpr) LlvmNode() *Node                   { return n.Node }
+func (n FRemInst) LlvmNode() *Node                   { return n.Node }
+func (n FSubExpr) LlvmNode() *Node                   { return n.Node }
+func (n FSubInst) LlvmNode() *Node                   { return n.Node }
+func (n FastMathFlag) LlvmNode() *Node               { return n.Node }
+func (n FenceInst) LlvmNode() *Node                  { return n.Node }
+func (n FileField) LlvmNode() *Node                  { return n.Node }
+func (n FilenameField) LlvmNode() *Node              { return n.Node }
+func (n FlagsField) LlvmNode() *Node                 { return n.Node }
+func (n FlagsStringField) LlvmNode() *Node           { return n.Node }
+func (n FloatConst) LlvmNode() *Node                 { return n.Node }
+func (n FloatKind) LlvmNode() *Node                  { return n.Node }
+func (n FloatLit) LlvmNode() *Node                   { return n.Node }
+func (n FloatType) LlvmNode() *Node                  { return n.Node }
+func (n FuncAttribute) LlvmNode() *Node              { return n.Node }
+func (n FuncBody) LlvmNode() *Node                   { return n.Node }
+func (n FuncDecl) LlvmNode() *Node                   { return n.Node }
+func (n FuncDef) LlvmNode() *Node                    { return n.Node }
+func (n FuncHeader) LlvmNode() *Node                 { return n.Node }
+func (n FuncType) LlvmNode() *Node                   { return n.Node }
+func (n GCNode) LlvmNode() *Node                     { return n.Node }
+func (n GEPIndex) LlvmNode() *Node                   { return n.Node }
+func (n GenericDINode) LlvmNode() *Node              { return n.Node }
+func (n GetElementPtrExpr) LlvmNode() *Node          { return n.Node }
+func (n GetElementPtrInst) LlvmNode() *Node          { return n.Node }
+func (n GetterField) LlvmNode() *Node                { return n.Node }
+func (n GlobalDecl) LlvmNode() *Node                 { return n.Node }
+func (n GlobalDef) LlvmNode() *Node                  { return n.Node }
+func (n GlobalIdent) LlvmNode() *Node                { return n.Node }
+func (n GlobalsField) LlvmNode() *Node               { return n.Node }
+func (n HeaderField) LlvmNode() *Node                { return n.Node }
+func (n ICmpExpr) LlvmNode() *Node                   { return n.Node }
+func (n ICmpInst) LlvmNode() *Node                   { return n.Node }
+func (n IFuncDef) LlvmNode() *Node                   { return n.Node }
+func (n IPred) LlvmNode() *Node                      { return n.Node }
+func (n IdentifierField) LlvmNode() *Node            { return n.Node }
+func (n Immutable) LlvmNode() *Node                  { return n.Node }
+func (n ImportsField) LlvmNode() *Node               { return n.Node }
+func (n InAlloca) LlvmNode() *Node                   { return n.Node }
+func (n InBounds) LlvmNode() *Node                   { return n.Node }
+func (n InRange) LlvmNode() *Node                    { return n.Node }
+func (n Inc) LlvmNode() *Node                        { return n.Node }
+func (n IncludePathField) LlvmNode() *Node           { return n.Node }
+func (n IndirectBrTerm) LlvmNode() *Node             { return n.Node }
+func (n InlineAsm) LlvmNode() *Node                  { return n.Node }
+func (n InlinedAtField) LlvmNode() *Node             { return n.Node }
+func (n InsertElementExpr) LlvmNode() *Node          { return n.Node }
+func (n InsertElementInst) LlvmNode() *Node          { return n.Node }
+func (n InsertValueExpr) LlvmNode() *Node            { return n.Node }
+func (n InsertValueInst) LlvmNode() *Node            { return n.Node }
+func (n IntConst) LlvmNode() *Node                   { return n.Node }
+func (n IntLit) LlvmNode() *Node                     { return n.Node }
+func (n IntToPtrExpr) LlvmNode() *Node               { return n.Node }
+func (n IntToPtrInst) LlvmNode() *Node               { return n.Node }
+func (n IntType) LlvmNode() *Node                    { return n.Node }
+func (n IntelDialect) LlvmNode() *Node               { return n.Node }
+func (n InvokeTerm) LlvmNode() *Node                 { return n.Node }
+func (n IsDefinitionField) LlvmNode() *Node          { return n.Node }
+func (n IsImplicitCodeField) LlvmNode() *Node        { return n.Node }
+func (n IsLocalField) LlvmNode() *Node               { return n.Node }
+func (n IsOptimizedField) LlvmNode() *Node           { return n.Node }
+func (n IsUnsignedField) LlvmNode() *Node            { return n.Node }
+func (n IsysrootField) LlvmNode() *Node              { return n.Node }
+func (n LShrExpr) LlvmNode() *Node                   { return n.Node }
+func (n LShrInst) LlvmNode() *Node                   { return n.Node }
+func (n Label) LlvmNode() *Node                      { return n.Node }
+func (n LabelIdent) LlvmNode() *Node                 { return n.Node }
+func (n LabelType) LlvmNode() *Node                  { return n.Node }
+func (n LandingPadInst) LlvmNode() *Node             { return n.Node }
+func (n LanguageField) LlvmNode() *Node              { return n.Node }
+func (n LineField) LlvmNode() *Node                  { return n.Node }
+func (n Linkage) LlvmNode() *Node                    { return n.Node }
+func (n LinkageNameField) LlvmNode() *Node           { return n.Node }
+func (n LoadInst) LlvmNode() *Node                   { return n.Node }
+func (n LocalDefInst) LlvmNode() *Node               { return n.Node }
+func (n LocalDefTerm) LlvmNode() *Node               { return n.Node }
+func (n LocalIdent) LlvmNode() *Node                 { return n.Node }
+func (n LowerBoundField) LlvmNode() *Node            { return n.Node }
+func (n MDFields) LlvmNode() *Node                   { return n.Node }
+func (n MDString) LlvmNode() *Node                   { return n.Node }
+func (n MDTuple) LlvmNode() *Node                    { return n.Node }
+func (n MMXType) LlvmNode() *Node                    { return n.Node }
+func (n MacrosField) LlvmNode() *Node                { return n.Node }
+func (n MetadataAttachment) LlvmNode() *Node         { return n.Node }
+func (n MetadataDef) LlvmNode() *Node                { return n.Node }
+func (n MetadataID) LlvmNode() *Node                 { return n.Node }
+func (n MetadataName) LlvmNode() *Node               { return n.Node }
+func (n MetadataType) LlvmNode() *Node               { return n.Node }
+func (n Module) LlvmNode() *Node                     { return n.Node }
+func (n ModuleAsm) LlvmNode() *Node                  { return n.Node }
+func (n MulExpr) LlvmNode() *Node                    { return n.Node }
+func (n MulInst) LlvmNode() *Node                    { return n.Node }
+func (n NameField) LlvmNode() *Node                  { return n.Node }
+func (n NameTableKind) LlvmNode() *Node              { return n.Node }
+func (n NameTableKindField) LlvmNode() *Node         { return n.Node }
+func (n NamedMetadataDef) LlvmNode() *Node           { return n.Node }
+func (n NamedType) LlvmNode() *Node                  { return n.Node }
+func (n NodesField) LlvmNode() *Node                 { return n.Node }
+func (n NoneConst) LlvmNode() *Node                  { return n.Node }
+func (n NullConst) LlvmNode() *Node                  { return n.Node }
+func (n NullLit) LlvmNode() *Node                    { return n.Node }
+func (n OffsetField) LlvmNode() *Node                { return n.Node }
+func (n OpaqueType) LlvmNode() *Node                 { return n.Node }
+func (n OperandBundle) LlvmNode() *Node              { return n.Node }
+func (n OperandsField) LlvmNode() *Node              { return n.Node }
+func (n OrExpr) LlvmNode() *Node                     { return n.Node }
+func (n OrInst) LlvmNode() *Node                     { return n.Node }
+func (n OverflowFlag) LlvmNode() *Node               { return n.Node }
+func (n PackedStructType) LlvmNode() *Node           { return n.Node }
+func (n Param) LlvmNode() *Node                      { return n.Node }
+func (n ParamAttribute) LlvmNode() *Node             { return n.Node }
+func (n Params) LlvmNode() *Node                     { return n.Node }
+func (n Personality) LlvmNode() *Node                { return n.Node }
+func (n PhiInst) LlvmNode() *Node                    { return n.Node }
+func (n PointerType) LlvmNode() *Node                { return n.Node }
+func (n Preemption) LlvmNode() *Node                 { return n.Node }
+func (n Prefix) LlvmNode() *Node                     { return n.Node }
+func (n ProducerField) LlvmNode() *Node              { return n.Node }
+func (n Prologue) LlvmNode() *Node                   { return n.Node }
+func (n PtrToIntExpr) LlvmNode() *Node               { return n.Node }
+func (n PtrToIntInst) LlvmNode() *Node               { return n.Node }
+func (n ResumeTerm) LlvmNode() *Node                 { return n.Node }
+func (n RetTerm) LlvmNode() *Node                    { return n.Node }
+func (n RetainedNodesField) LlvmNode() *Node         { return n.Node }
+func (n RetainedTypesField) LlvmNode() *Node         { return n.Node }
+func (n ReturnAttribute) LlvmNode() *Node            { return n.Node }
+func (n RuntimeLangField) LlvmNode() *Node           { return n.Node }
+func (n RuntimeVersionField) LlvmNode() *Node        { return n.Node }
+func (n SDivExpr) LlvmNode() *Node                   { return n.Node }
+func (n SDivInst) LlvmNode() *Node                   { return n.Node }
+func (n SExtExpr) LlvmNode() *Node                   { return n.Node }
+func (n SExtInst) LlvmNode() *Node                   { return n.Node }
+func (n SIToFPExpr) LlvmNode() *Node                 { return n.Node }
+func (n SIToFPInst) LlvmNode() *Node                 { return n.Node }
+func (n SRemExpr) LlvmNode() *Node                   { return n.Node }
+func (n SRemInst) LlvmNode() *Node                   { return n.Node }
+func (n ScopeField) LlvmNode() *Node                 { return n.Node }
+func (n ScopeLineField) LlvmNode() *Node             { return n.Node }
+func (n Section) LlvmNode() *Node                    { return n.Node }
+func (n SelectExpr) LlvmNode() *Node                 { return n.Node }
+func (n SelectInst) LlvmNode() *Node                 { return n.Node }
+func (n SelectionKind) LlvmNode() *Node              { return n.Node }
+func (n SetterField) LlvmNode() *Node                { return n.Node }
+func (n ShlExpr) LlvmNode() *Node                    { return n.Node }
+func (n ShlInst) LlvmNode() *Node                    { return n.Node }
+func (n ShuffleVectorExpr) LlvmNode() *Node          { return n.Node }
+func (n ShuffleVectorInst) LlvmNode() *Node          { return n.Node }
+func (n SideEffect) LlvmNode() *Node                 { return n.Node }
+func (n SizeField) LlvmNode() *Node                  { return n.Node }
+func (n SourceField) LlvmNode() *Node                { return n.Node }
+func (n SourceFilename) LlvmNode() *Node             { return n.Node }
+func (n SplitDebugFilenameField) LlvmNode() *Node    { return n.Node }
+func (n SplitDebugInliningField) LlvmNode() *Node    { return n.Node }
+func (n StackAlignment) LlvmNode() *Node             { return n.Node }
+func (n StoreInst) LlvmNode() *Node                  { return n.Node }
+func (n StringLit) LlvmNode() *Node                  { return n.Node }
+func (n StructConst) LlvmNode() *Node                { return n.Node }
+func (n StructType) LlvmNode() *Node                 { return n.Node }
+func (n SubExpr) LlvmNode() *Node                    { return n.Node }
+func (n SubInst) LlvmNode() *Node                    { return n.Node }
+func (n SwiftError) LlvmNode() *Node                 { return n.Node }
+func (n SwitchTerm) LlvmNode() *Node                 { return n.Node }
+func (n SyncScope) LlvmNode() *Node                  { return n.Node }
+func (n TLSModel) LlvmNode() *Node                   { return n.Node }
+func (n TagField) LlvmNode() *Node                   { return n.Node }
+func (n Tail) LlvmNode() *Node                       { return n.Node }
+func (n TargetDataLayout) LlvmNode() *Node           { return n.Node }
+func (n TargetTriple) LlvmNode() *Node               { return n.Node }
+func (n TemplateParamsField) LlvmNode() *Node        { return n.Node }
+func (n ThisAdjustmentField) LlvmNode() *Node        { return n.Node }
+func (n ThreadLocal) LlvmNode() *Node                { return n.Node }
+func (n ThrownTypesField) LlvmNode() *Node           { return n.Node }
+func (n TokenType) LlvmNode() *Node                  { return n.Node }
+func (n TruncExpr) LlvmNode() *Node                  { return n.Node }
+func (n TruncInst) LlvmNode() *Node                  { return n.Node }
+func (n TypeConst) LlvmNode() *Node                  { return n.Node }
+func (n TypeDef) LlvmNode() *Node                    { return n.Node }
+func (n TypeField) LlvmNode() *Node                  { return n.Node }
+func (n TypeMacinfoField) LlvmNode() *Node           { return n.Node }
+func (n TypeValue) LlvmNode() *Node                  { return n.Node }
+func (n TypesField) LlvmNode() *Node                 { return n.Node }
+func (n UDivExpr) LlvmNode() *Node                   { return n.Node }
+func (n UDivInst) LlvmNode() *Node                   { return n.Node }
+func (n UIToFPExpr) LlvmNode() *Node                 { return n.Node }
+func (n UIToFPInst) LlvmNode() *Node                 { return n.Node }
+func (n URemExpr) LlvmNode() *Node                   { return n.Node }
+func (n URemInst) LlvmNode() *Node                   { return n.Node }
+func (n UintLit) LlvmNode() *Node                    { return n.Node }
+func (n UndefConst) LlvmNode() *Node                 { return n.Node }
+func (n UnitField) LlvmNode() *Node                  { return n.Node }
+func (n UnnamedAddr) LlvmNode() *Node                { return n.Node }
+func (n UnreachableTerm) LlvmNode() *Node            { return n.Node }
+func (n UnwindTarget) LlvmNode() *Node               { return n.Node }
+func (n UnwindToCaller) LlvmNode() *Node             { return n.Node }
+func (n UseListOrder) LlvmNode() *Node               { return n.Node }
+func (n UseListOrderBB) LlvmNode() *Node             { return n.Node }
+func (n VAArgInst) LlvmNode() *Node                  { return n.Node }
+func (n ValueField) LlvmNode() *Node                 { return n.Node }
+func (n ValueIntField) LlvmNode() *Node              { return n.Node }
+func (n ValueStringField) LlvmNode() *Node           { return n.Node }
+func (n VarField) LlvmNode() *Node                   { return n.Node }
+func (n VectorConst) LlvmNode() *Node                { return n.Node }
+func (n VectorType) LlvmNode() *Node                 { return n.Node }
+func (n VirtualIndexField) LlvmNode() *Node          { return n.Node }
+func (n VirtualityField) LlvmNode() *Node            { return n.Node }
+func (n Visibility) LlvmNode() *Node                 { return n.Node }
+func (n VoidType) LlvmNode() *Node                   { return n.Node }
+func (n Volatile) LlvmNode() *Node                   { return n.Node }
+func (n VtableHolderField) LlvmNode() *Node          { return n.Node }
+func (n Weak) LlvmNode() *Node                       { return n.Node }
+func (n XorExpr) LlvmNode() *Node                    { return n.Node }
+func (n XorInst) LlvmNode() *Node                    { return n.Node }
+func (n ZExtExpr) LlvmNode() *Node                   { return n.Node }
+func (n ZExtInst) LlvmNode() *Node                   { return n.Node }
+func (n ZeroInitializerConst) LlvmNode() *Node       { return n.Node }
 
 type CallingConv interface {
 	LlvmNode
@@ -382,7 +383,7 @@ type CallingConv interface {
 // assigned to CallingConv.
 //
 func (CallingConvEnum) callingConvNode() {}
-func (CallingConvInt) callingConvNode() {}
+func (CallingConvInt) callingConvNode()  {}
 
 type ConcreteType interface {
 	LlvmNode
@@ -392,17 +393,17 @@ type ConcreteType interface {
 // concreteTypeNode() ensures that only the following types can be
 // assigned to ConcreteType.
 //
-func (ArrayType) concreteTypeNode() {}
-func (FloatType) concreteTypeNode() {}
-func (IntType) concreteTypeNode() {}
-func (LabelType) concreteTypeNode() {}
-func (MMXType) concreteTypeNode() {}
-func (NamedType) concreteTypeNode() {}
+func (ArrayType) concreteTypeNode()        {}
+func (FloatType) concreteTypeNode()        {}
+func (IntType) concreteTypeNode()          {}
+func (LabelType) concreteTypeNode()        {}
+func (MMXType) concreteTypeNode()          {}
+func (NamedType) concreteTypeNode()        {}
 func (PackedStructType) concreteTypeNode() {}
-func (PointerType) concreteTypeNode() {}
-func (StructType) concreteTypeNode() {}
-func (TokenType) concreteTypeNode() {}
-func (VectorType) concreteTypeNode() {}
+func (PointerType) concreteTypeNode()      {}
+func (StructType) concreteTypeNode()       {}
+func (TokenType) concreteTypeNode()        {}
+func (VectorType) concreteTypeNode()       {}
 
 type Constant interface {
 	LlvmNode
@@ -412,58 +413,58 @@ type Constant interface {
 // constantNode() ensures that only the following types can be
 // assigned to Constant.
 //
-func (AShrExpr) constantNode() {}
-func (AddExpr) constantNode() {}
-func (AddrSpaceCastExpr) constantNode() {}
-func (AndExpr) constantNode() {}
-func (ArrayConst) constantNode() {}
-func (BitCastExpr) constantNode() {}
-func (BlockAddressConst) constantNode() {}
-func (BoolConst) constantNode() {}
-func (CharArrayConst) constantNode() {}
-func (ExtractElementExpr) constantNode() {}
-func (ExtractValueExpr) constantNode() {}
-func (FAddExpr) constantNode() {}
-func (FCmpExpr) constantNode() {}
-func (FDivExpr) constantNode() {}
-func (FMulExpr) constantNode() {}
-func (FPExtExpr) constantNode() {}
-func (FPToSIExpr) constantNode() {}
-func (FPToUIExpr) constantNode() {}
-func (FPTruncExpr) constantNode() {}
-func (FRemExpr) constantNode() {}
-func (FSubExpr) constantNode() {}
-func (FloatConst) constantNode() {}
-func (GetElementPtrExpr) constantNode() {}
-func (GlobalIdent) constantNode() {}
-func (ICmpExpr) constantNode() {}
-func (InsertElementExpr) constantNode() {}
-func (InsertValueExpr) constantNode() {}
-func (IntConst) constantNode() {}
-func (IntToPtrExpr) constantNode() {}
-func (LShrExpr) constantNode() {}
-func (MulExpr) constantNode() {}
-func (NoneConst) constantNode() {}
-func (NullConst) constantNode() {}
-func (OrExpr) constantNode() {}
-func (PtrToIntExpr) constantNode() {}
-func (SDivExpr) constantNode() {}
-func (SExtExpr) constantNode() {}
-func (SIToFPExpr) constantNode() {}
-func (SRemExpr) constantNode() {}
-func (SelectExpr) constantNode() {}
-func (ShlExpr) constantNode() {}
-func (ShuffleVectorExpr) constantNode() {}
-func (StructConst) constantNode() {}
-func (SubExpr) constantNode() {}
-func (TruncExpr) constantNode() {}
-func (UDivExpr) constantNode() {}
-func (UIToFPExpr) constantNode() {}
-func (URemExpr) constantNode() {}
-func (UndefConst) constantNode() {}
-func (VectorConst) constantNode() {}
-func (XorExpr) constantNode() {}
-func (ZExtExpr) constantNode() {}
+func (AShrExpr) constantNode()             {}
+func (AddExpr) constantNode()              {}
+func (AddrSpaceCastExpr) constantNode()    {}
+func (AndExpr) constantNode()              {}
+func (ArrayConst) constantNode()           {}
+func (BitCastExpr) constantNode()          {}
+func (BlockAddressConst) constantNode()    {}
+func (BoolConst) constantNode()            {}
+func (CharArrayConst) constantNode()       {}
+func (ExtractElementExpr) constantNode()   {}
+func (ExtractValueExpr) constantNode()     {}
+func (FAddExpr) constantNode()             {}
+func (FCmpExpr) constantNode()             {}
+func (FDivExpr) constantNode()             {}
+func (FMulExpr) constantNode()             {}
+func (FPExtExpr) constantNode()            {}
+func (FPToSIExpr) constantNode()           {}
+func (FPToUIExpr) constantNode()           {}
+func (FPTruncExpr) constantNode()          {}
+func (FRemExpr) constantNode()             {}
+func (FSubExpr) constantNode()             {}
+func (FloatConst) constantNode()           {}
+func (GetElementPtrExpr) constantNode()    {}
+func (GlobalIdent) constantNode()          {}
+func (ICmpExpr) constantNode()             {}
+func (InsertElementExpr) constantNode()    {}
+func (InsertValueExpr) constantNode()      {}
+func (IntConst) constantNode()             {}
+func (IntToPtrExpr) constantNode()         {}
+func (LShrExpr) constantNode()             {}
+func (MulExpr) constantNode()              {}
+func (NoneConst) constantNode()            {}
+func (NullConst) constantNode()            {}
+func (OrExpr) constantNode()               {}
+func (PtrToIntExpr) constantNode()         {}
+func (SDivExpr) constantNode()             {}
+func (SExtExpr) constantNode()             {}
+func (SIToFPExpr) constantNode()           {}
+func (SRemExpr) constantNode()             {}
+func (SelectExpr) constantNode()           {}
+func (ShlExpr) constantNode()              {}
+func (ShuffleVectorExpr) constantNode()    {}
+func (StructConst) constantNode()          {}
+func (SubExpr) constantNode()              {}
+func (TruncExpr) constantNode()            {}
+func (UDivExpr) constantNode()             {}
+func (UIToFPExpr) constantNode()           {}
+func (URemExpr) constantNode()             {}
+func (UndefConst) constantNode()           {}
+func (VectorConst) constantNode()          {}
+func (XorExpr) constantNode()              {}
+func (ZExtExpr) constantNode()             {}
 func (ZeroInitializerConst) constantNode() {}
 
 type ConstantExpr interface {
@@ -474,46 +475,46 @@ type ConstantExpr interface {
 // constantExprNode() ensures that only the following types can be
 // assigned to ConstantExpr.
 //
-func (AShrExpr) constantExprNode() {}
-func (AddExpr) constantExprNode() {}
-func (AddrSpaceCastExpr) constantExprNode() {}
-func (AndExpr) constantExprNode() {}
-func (BitCastExpr) constantExprNode() {}
+func (AShrExpr) constantExprNode()           {}
+func (AddExpr) constantExprNode()            {}
+func (AddrSpaceCastExpr) constantExprNode()  {}
+func (AndExpr) constantExprNode()            {}
+func (BitCastExpr) constantExprNode()        {}
 func (ExtractElementExpr) constantExprNode() {}
-func (ExtractValueExpr) constantExprNode() {}
-func (FAddExpr) constantExprNode() {}
-func (FCmpExpr) constantExprNode() {}
-func (FDivExpr) constantExprNode() {}
-func (FMulExpr) constantExprNode() {}
-func (FPExtExpr) constantExprNode() {}
-func (FPToSIExpr) constantExprNode() {}
-func (FPToUIExpr) constantExprNode() {}
-func (FPTruncExpr) constantExprNode() {}
-func (FRemExpr) constantExprNode() {}
-func (FSubExpr) constantExprNode() {}
-func (GetElementPtrExpr) constantExprNode() {}
-func (ICmpExpr) constantExprNode() {}
-func (InsertElementExpr) constantExprNode() {}
-func (InsertValueExpr) constantExprNode() {}
-func (IntToPtrExpr) constantExprNode() {}
-func (LShrExpr) constantExprNode() {}
-func (MulExpr) constantExprNode() {}
-func (OrExpr) constantExprNode() {}
-func (PtrToIntExpr) constantExprNode() {}
-func (SDivExpr) constantExprNode() {}
-func (SExtExpr) constantExprNode() {}
-func (SIToFPExpr) constantExprNode() {}
-func (SRemExpr) constantExprNode() {}
-func (SelectExpr) constantExprNode() {}
-func (ShlExpr) constantExprNode() {}
-func (ShuffleVectorExpr) constantExprNode() {}
-func (SubExpr) constantExprNode() {}
-func (TruncExpr) constantExprNode() {}
-func (UDivExpr) constantExprNode() {}
-func (UIToFPExpr) constantExprNode() {}
-func (URemExpr) constantExprNode() {}
-func (XorExpr) constantExprNode() {}
-func (ZExtExpr) constantExprNode() {}
+func (ExtractValueExpr) constantExprNode()   {}
+func (FAddExpr) constantExprNode()           {}
+func (FCmpExpr) constantExprNode()           {}
+func (FDivExpr) constantExprNode()           {}
+func (FMulExpr) constantExprNode()           {}
+func (FPExtExpr) constantExprNode()          {}
+func (FPToSIExpr) constantExprNode()         {}
+func (FPToUIExpr) constantExprNode()         {}
+func (FPTruncExpr) constantExprNode()        {}
+func (FRemExpr) constantExprNode()           {}
+func (FSubExpr) constantExprNode()           {}
+func (GetElementPtrExpr) constantExprNode()  {}
+func (ICmpExpr) constantExprNode()           {}
+func (InsertElementExpr) constantExprNode()  {}
+func (InsertValueExpr) constantExprNode()    {}
+func (IntToPtrExpr) constantExprNode()       {}
+func (LShrExpr) constantExprNode()           {}
+func (MulExpr) constantExprNode()            {}
+func (OrExpr) constantExprNode()             {}
+func (PtrToIntExpr) constantExprNode()       {}
+func (SDivExpr) constantExprNode()           {}
+func (SExtExpr) constantExprNode()           {}
+func (SIToFPExpr) constantExprNode()         {}
+func (SRemExpr) constantExprNode()           {}
+func (SelectExpr) constantExprNode()         {}
+func (ShlExpr) constantExprNode()            {}
+func (ShuffleVectorExpr) constantExprNode()  {}
+func (SubExpr) constantExprNode()            {}
+func (TruncExpr) constantExprNode()          {}
+func (UDivExpr) constantExprNode()           {}
+func (UIToFPExpr) constantExprNode()         {}
+func (URemExpr) constantExprNode()           {}
+func (XorExpr) constantExprNode()            {}
+func (ZExtExpr) constantExprNode()           {}
 
 type DIBasicTypeField interface {
 	LlvmNode
@@ -523,12 +524,12 @@ type DIBasicTypeField interface {
 // dIBasicTypeFieldNode() ensures that only the following types can be
 // assigned to DIBasicTypeField.
 //
-func (AlignField) dIBasicTypeFieldNode() {}
+func (AlignField) dIBasicTypeFieldNode()    {}
 func (EncodingField) dIBasicTypeFieldNode() {}
-func (FlagsField) dIBasicTypeFieldNode() {}
-func (NameField) dIBasicTypeFieldNode() {}
-func (SizeField) dIBasicTypeFieldNode() {}
-func (TagField) dIBasicTypeFieldNode() {}
+func (FlagsField) dIBasicTypeFieldNode()    {}
+func (NameField) dIBasicTypeFieldNode()     {}
+func (SizeField) dIBasicTypeFieldNode()     {}
+func (TagField) dIBasicTypeFieldNode()      {}
 
 type DICompileUnitField interface {
 	LlvmNode
@@ -539,22 +540,22 @@ type DICompileUnitField interface {
 // assigned to DICompileUnitField.
 //
 func (DebugInfoForProfilingField) dICompileUnitFieldNode() {}
-func (DwoIdField) dICompileUnitFieldNode() {}
-func (EmissionKindField) dICompileUnitFieldNode() {}
-func (EnumsField) dICompileUnitFieldNode() {}
-func (FileField) dICompileUnitFieldNode() {}
-func (FlagsStringField) dICompileUnitFieldNode() {}
-func (GlobalsField) dICompileUnitFieldNode() {}
-func (ImportsField) dICompileUnitFieldNode() {}
-func (IsOptimizedField) dICompileUnitFieldNode() {}
-func (LanguageField) dICompileUnitFieldNode() {}
-func (MacrosField) dICompileUnitFieldNode() {}
-func (NameTableKindField) dICompileUnitFieldNode() {}
-func (ProducerField) dICompileUnitFieldNode() {}
-func (RetainedTypesField) dICompileUnitFieldNode() {}
-func (RuntimeVersionField) dICompileUnitFieldNode() {}
-func (SplitDebugFilenameField) dICompileUnitFieldNode() {}
-func (SplitDebugInliningField) dICompileUnitFieldNode() {}
+func (DwoIdField) dICompileUnitFieldNode()                 {}
+func (EmissionKindField) dICompileUnitFieldNode()          {}
+func (EnumsField) dICompileUnitFieldNode()                 {}
+func (FileField) dICompileUnitFieldNode()                  {}
+func (FlagsStringField) dICompileUnitFieldNode()           {}
+func (GlobalsField) dICompileUnitFieldNode()               {}
+func (ImportsField) dICompileUnitFieldNode()               {}
+func (IsOptimizedField) dICompileUnitFieldNode()           {}
+func (LanguageField) dICompileUnitFieldNode()              {}
+func (MacrosField) dICompileUnitFieldNode()                {}
+func (NameTableKindField) dICompileUnitFieldNode()         {}
+func (ProducerField) dICompileUnitFieldNode()              {}
+func (RetainedTypesField) dICompileUnitFieldNode()         {}
+func (RuntimeVersionField) dICompileUnitFieldNode()        {}
+func (SplitDebugFilenameField) dICompileUnitFieldNode()    {}
+func (SplitDebugInliningField) dICompileUnitFieldNode()    {}
 
 type DICompositeTypeField interface {
 	LlvmNode
@@ -564,22 +565,22 @@ type DICompositeTypeField interface {
 // dICompositeTypeFieldNode() ensures that only the following types can be
 // assigned to DICompositeTypeField.
 //
-func (AlignField) dICompositeTypeFieldNode() {}
-func (BaseTypeField) dICompositeTypeFieldNode() {}
-func (DiscriminatorField) dICompositeTypeFieldNode() {}
-func (ElementsField) dICompositeTypeFieldNode() {}
-func (FileField) dICompositeTypeFieldNode() {}
-func (FlagsField) dICompositeTypeFieldNode() {}
-func (IdentifierField) dICompositeTypeFieldNode() {}
-func (LineField) dICompositeTypeFieldNode() {}
-func (NameField) dICompositeTypeFieldNode() {}
-func (OffsetField) dICompositeTypeFieldNode() {}
-func (RuntimeLangField) dICompositeTypeFieldNode() {}
-func (ScopeField) dICompositeTypeFieldNode() {}
-func (SizeField) dICompositeTypeFieldNode() {}
-func (TagField) dICompositeTypeFieldNode() {}
+func (AlignField) dICompositeTypeFieldNode()          {}
+func (BaseTypeField) dICompositeTypeFieldNode()       {}
+func (DiscriminatorField) dICompositeTypeFieldNode()  {}
+func (ElementsField) dICompositeTypeFieldNode()       {}
+func (FileField) dICompositeTypeFieldNode()           {}
+func (FlagsField) dICompositeTypeFieldNode()          {}
+func (IdentifierField) dICompositeTypeFieldNode()     {}
+func (LineField) dICompositeTypeFieldNode()           {}
+func (NameField) dICompositeTypeFieldNode()           {}
+func (OffsetField) dICompositeTypeFieldNode()         {}
+func (RuntimeLangField) dICompositeTypeFieldNode()    {}
+func (ScopeField) dICompositeTypeFieldNode()          {}
+func (SizeField) dICompositeTypeFieldNode()           {}
+func (TagField) dICompositeTypeFieldNode()            {}
 func (TemplateParamsField) dICompositeTypeFieldNode() {}
-func (VtableHolderField) dICompositeTypeFieldNode() {}
+func (VtableHolderField) dICompositeTypeFieldNode()   {}
 
 type DIDerivedTypeField interface {
 	LlvmNode
@@ -589,18 +590,18 @@ type DIDerivedTypeField interface {
 // dIDerivedTypeFieldNode() ensures that only the following types can be
 // assigned to DIDerivedTypeField.
 //
-func (AlignField) dIDerivedTypeFieldNode() {}
-func (BaseTypeField) dIDerivedTypeFieldNode() {}
+func (AlignField) dIDerivedTypeFieldNode()             {}
+func (BaseTypeField) dIDerivedTypeFieldNode()          {}
 func (DwarfAddressSpaceField) dIDerivedTypeFieldNode() {}
-func (ExtraDataField) dIDerivedTypeFieldNode() {}
-func (FileField) dIDerivedTypeFieldNode() {}
-func (FlagsField) dIDerivedTypeFieldNode() {}
-func (LineField) dIDerivedTypeFieldNode() {}
-func (NameField) dIDerivedTypeFieldNode() {}
-func (OffsetField) dIDerivedTypeFieldNode() {}
-func (ScopeField) dIDerivedTypeFieldNode() {}
-func (SizeField) dIDerivedTypeFieldNode() {}
-func (TagField) dIDerivedTypeFieldNode() {}
+func (ExtraDataField) dIDerivedTypeFieldNode()         {}
+func (FileField) dIDerivedTypeFieldNode()              {}
+func (FlagsField) dIDerivedTypeFieldNode()             {}
+func (LineField) dIDerivedTypeFieldNode()              {}
+func (NameField) dIDerivedTypeFieldNode()              {}
+func (OffsetField) dIDerivedTypeFieldNode()            {}
+func (ScopeField) dIDerivedTypeFieldNode()             {}
+func (SizeField) dIDerivedTypeFieldNode()              {}
+func (TagField) dIDerivedTypeFieldNode()               {}
 
 type DIEnumeratorField interface {
 	LlvmNode
@@ -611,8 +612,8 @@ type DIEnumeratorField interface {
 // assigned to DIEnumeratorField.
 //
 func (IsUnsignedField) dIEnumeratorFieldNode() {}
-func (NameField) dIEnumeratorFieldNode() {}
-func (ValueIntField) dIEnumeratorFieldNode() {}
+func (NameField) dIEnumeratorFieldNode()       {}
+func (ValueIntField) dIEnumeratorFieldNode()   {}
 
 type DIExpressionField interface {
 	LlvmNode
@@ -623,7 +624,7 @@ type DIExpressionField interface {
 // assigned to DIExpressionField.
 //
 func (DwarfOp) dIExpressionFieldNode() {}
-func (IntLit) dIExpressionFieldNode() {}
+func (IntLit) dIExpressionFieldNode()  {}
 
 type DIFileField interface {
 	LlvmNode
@@ -633,11 +634,11 @@ type DIFileField interface {
 // dIFileFieldNode() ensures that only the following types can be
 // assigned to DIFileField.
 //
-func (ChecksumField) dIFileFieldNode() {}
+func (ChecksumField) dIFileFieldNode()     {}
 func (ChecksumkindField) dIFileFieldNode() {}
-func (DirectoryField) dIFileFieldNode() {}
-func (FilenameField) dIFileFieldNode() {}
-func (SourceField) dIFileFieldNode() {}
+func (DirectoryField) dIFileFieldNode()    {}
+func (FilenameField) dIFileFieldNode()     {}
+func (SourceField) dIFileFieldNode()       {}
 
 type DIGlobalVariableExpressionField interface {
 	LlvmNode
@@ -648,7 +649,7 @@ type DIGlobalVariableExpressionField interface {
 // assigned to DIGlobalVariableExpressionField.
 //
 func (ExprField) dIGlobalVariableExpressionFieldNode() {}
-func (VarField) dIGlobalVariableExpressionFieldNode() {}
+func (VarField) dIGlobalVariableExpressionFieldNode()  {}
 
 type DIGlobalVariableField interface {
 	LlvmNode
@@ -658,17 +659,17 @@ type DIGlobalVariableField interface {
 // dIGlobalVariableFieldNode() ensures that only the following types can be
 // assigned to DIGlobalVariableField.
 //
-func (AlignField) dIGlobalVariableFieldNode() {}
-func (DeclarationField) dIGlobalVariableFieldNode() {}
-func (FileField) dIGlobalVariableFieldNode() {}
-func (IsDefinitionField) dIGlobalVariableFieldNode() {}
-func (IsLocalField) dIGlobalVariableFieldNode() {}
-func (LineField) dIGlobalVariableFieldNode() {}
-func (LinkageNameField) dIGlobalVariableFieldNode() {}
-func (NameField) dIGlobalVariableFieldNode() {}
-func (ScopeField) dIGlobalVariableFieldNode() {}
+func (AlignField) dIGlobalVariableFieldNode()          {}
+func (DeclarationField) dIGlobalVariableFieldNode()    {}
+func (FileField) dIGlobalVariableFieldNode()           {}
+func (IsDefinitionField) dIGlobalVariableFieldNode()   {}
+func (IsLocalField) dIGlobalVariableFieldNode()        {}
+func (LineField) dIGlobalVariableFieldNode()           {}
+func (LinkageNameField) dIGlobalVariableFieldNode()    {}
+func (NameField) dIGlobalVariableFieldNode()           {}
+func (ScopeField) dIGlobalVariableFieldNode()          {}
 func (TemplateParamsField) dIGlobalVariableFieldNode() {}
-func (TypeField) dIGlobalVariableFieldNode() {}
+func (TypeField) dIGlobalVariableFieldNode()           {}
 
 type DIImportedEntityField interface {
 	LlvmNode
@@ -679,11 +680,11 @@ type DIImportedEntityField interface {
 // assigned to DIImportedEntityField.
 //
 func (EntityField) dIImportedEntityFieldNode() {}
-func (FileField) dIImportedEntityFieldNode() {}
-func (LineField) dIImportedEntityFieldNode() {}
-func (NameField) dIImportedEntityFieldNode() {}
-func (ScopeField) dIImportedEntityFieldNode() {}
-func (TagField) dIImportedEntityFieldNode() {}
+func (FileField) dIImportedEntityFieldNode()   {}
+func (LineField) dIImportedEntityFieldNode()   {}
+func (NameField) dIImportedEntityFieldNode()   {}
+func (ScopeField) dIImportedEntityFieldNode()  {}
+func (TagField) dIImportedEntityFieldNode()    {}
 
 type DILabelField interface {
 	LlvmNode
@@ -693,9 +694,9 @@ type DILabelField interface {
 // dILabelFieldNode() ensures that only the following types can be
 // assigned to DILabelField.
 //
-func (FileField) dILabelFieldNode() {}
-func (LineField) dILabelFieldNode() {}
-func (NameField) dILabelFieldNode() {}
+func (FileField) dILabelFieldNode()  {}
+func (LineField) dILabelFieldNode()  {}
+func (NameField) dILabelFieldNode()  {}
 func (ScopeField) dILabelFieldNode() {}
 
 type DILexicalBlockField interface {
@@ -707,9 +708,9 @@ type DILexicalBlockField interface {
 // assigned to DILexicalBlockField.
 //
 func (ColumnField) dILexicalBlockFieldNode() {}
-func (FileField) dILexicalBlockFieldNode() {}
-func (LineField) dILexicalBlockFieldNode() {}
-func (ScopeField) dILexicalBlockFieldNode() {}
+func (FileField) dILexicalBlockFieldNode()   {}
+func (LineField) dILexicalBlockFieldNode()   {}
+func (ScopeField) dILexicalBlockFieldNode()  {}
 
 type DILexicalBlockFileField interface {
 	LlvmNode
@@ -720,8 +721,8 @@ type DILexicalBlockFileField interface {
 // assigned to DILexicalBlockFileField.
 //
 func (DiscriminatorIntField) dILexicalBlockFileFieldNode() {}
-func (FileField) dILexicalBlockFileFieldNode() {}
-func (ScopeField) dILexicalBlockFileFieldNode() {}
+func (FileField) dILexicalBlockFileFieldNode()             {}
+func (ScopeField) dILexicalBlockFileFieldNode()            {}
 
 type DILocalVariableField interface {
 	LlvmNode
@@ -732,13 +733,13 @@ type DILocalVariableField interface {
 // assigned to DILocalVariableField.
 //
 func (AlignField) dILocalVariableFieldNode() {}
-func (ArgField) dILocalVariableFieldNode() {}
-func (FileField) dILocalVariableFieldNode() {}
+func (ArgField) dILocalVariableFieldNode()   {}
+func (FileField) dILocalVariableFieldNode()  {}
 func (FlagsField) dILocalVariableFieldNode() {}
-func (LineField) dILocalVariableFieldNode() {}
-func (NameField) dILocalVariableFieldNode() {}
+func (LineField) dILocalVariableFieldNode()  {}
+func (NameField) dILocalVariableFieldNode()  {}
 func (ScopeField) dILocalVariableFieldNode() {}
-func (TypeField) dILocalVariableFieldNode() {}
+func (TypeField) dILocalVariableFieldNode()  {}
 
 type DILocationField interface {
 	LlvmNode
@@ -748,11 +749,11 @@ type DILocationField interface {
 // dILocationFieldNode() ensures that only the following types can be
 // assigned to DILocationField.
 //
-func (ColumnField) dILocationFieldNode() {}
-func (InlinedAtField) dILocationFieldNode() {}
+func (ColumnField) dILocationFieldNode()         {}
+func (InlinedAtField) dILocationFieldNode()      {}
 func (IsImplicitCodeField) dILocationFieldNode() {}
-func (LineField) dILocationFieldNode() {}
-func (ScopeField) dILocationFieldNode() {}
+func (LineField) dILocationFieldNode()           {}
+func (ScopeField) dILocationFieldNode()          {}
 
 type DIMacroField interface {
 	LlvmNode
@@ -762,8 +763,8 @@ type DIMacroField interface {
 // dIMacroFieldNode() ensures that only the following types can be
 // assigned to DIMacroField.
 //
-func (LineField) dIMacroFieldNode() {}
-func (NameField) dIMacroFieldNode() {}
+func (LineField) dIMacroFieldNode()        {}
+func (NameField) dIMacroFieldNode()        {}
 func (TypeMacinfoField) dIMacroFieldNode() {}
 func (ValueStringField) dIMacroFieldNode() {}
 
@@ -775,9 +776,9 @@ type DIMacroFileField interface {
 // dIMacroFileFieldNode() ensures that only the following types can be
 // assigned to DIMacroFileField.
 //
-func (FileField) dIMacroFileFieldNode() {}
-func (LineField) dIMacroFileFieldNode() {}
-func (NodesField) dIMacroFileFieldNode() {}
+func (FileField) dIMacroFileFieldNode()        {}
+func (LineField) dIMacroFileFieldNode()        {}
+func (NodesField) dIMacroFileFieldNode()       {}
 func (TypeMacinfoField) dIMacroFileFieldNode() {}
 
 type DIModuleField interface {
@@ -789,10 +790,10 @@ type DIModuleField interface {
 // assigned to DIModuleField.
 //
 func (ConfigMacrosField) dIModuleFieldNode() {}
-func (IncludePathField) dIModuleFieldNode() {}
-func (IsysrootField) dIModuleFieldNode() {}
-func (NameField) dIModuleFieldNode() {}
-func (ScopeField) dIModuleFieldNode() {}
+func (IncludePathField) dIModuleFieldNode()  {}
+func (IsysrootField) dIModuleFieldNode()     {}
+func (NameField) dIModuleFieldNode()         {}
+func (ScopeField) dIModuleFieldNode()        {}
 
 type DINamespaceField interface {
 	LlvmNode
@@ -803,8 +804,8 @@ type DINamespaceField interface {
 // assigned to DINamespaceField.
 //
 func (ExportSymbolsField) dINamespaceFieldNode() {}
-func (NameField) dINamespaceFieldNode() {}
-func (ScopeField) dINamespaceFieldNode() {}
+func (NameField) dINamespaceFieldNode()          {}
+func (ScopeField) dINamespaceFieldNode()         {}
 
 type DIObjCPropertyField interface {
 	LlvmNode
@@ -815,12 +816,12 @@ type DIObjCPropertyField interface {
 // assigned to DIObjCPropertyField.
 //
 func (AttributesField) dIObjCPropertyFieldNode() {}
-func (FileField) dIObjCPropertyFieldNode() {}
-func (GetterField) dIObjCPropertyFieldNode() {}
-func (LineField) dIObjCPropertyFieldNode() {}
-func (NameField) dIObjCPropertyFieldNode() {}
-func (SetterField) dIObjCPropertyFieldNode() {}
-func (TypeField) dIObjCPropertyFieldNode() {}
+func (FileField) dIObjCPropertyFieldNode()       {}
+func (GetterField) dIObjCPropertyFieldNode()     {}
+func (LineField) dIObjCPropertyFieldNode()       {}
+func (NameField) dIObjCPropertyFieldNode()       {}
+func (SetterField) dIObjCPropertyFieldNode()     {}
+func (TypeField) dIObjCPropertyFieldNode()       {}
 
 type DISubprogramField interface {
 	LlvmNode
@@ -831,25 +832,25 @@ type DISubprogramField interface {
 // assigned to DISubprogramField.
 //
 func (ContainingTypeField) dISubprogramFieldNode() {}
-func (DeclarationField) dISubprogramFieldNode() {}
-func (FileField) dISubprogramFieldNode() {}
-func (FlagsField) dISubprogramFieldNode() {}
-func (IsDefinitionField) dISubprogramFieldNode() {}
-func (IsLocalField) dISubprogramFieldNode() {}
-func (IsOptimizedField) dISubprogramFieldNode() {}
-func (LineField) dISubprogramFieldNode() {}
-func (LinkageNameField) dISubprogramFieldNode() {}
-func (NameField) dISubprogramFieldNode() {}
-func (RetainedNodesField) dISubprogramFieldNode() {}
-func (ScopeField) dISubprogramFieldNode() {}
-func (ScopeLineField) dISubprogramFieldNode() {}
+func (DeclarationField) dISubprogramFieldNode()    {}
+func (FileField) dISubprogramFieldNode()           {}
+func (FlagsField) dISubprogramFieldNode()          {}
+func (IsDefinitionField) dISubprogramFieldNode()   {}
+func (IsLocalField) dISubprogramFieldNode()        {}
+func (IsOptimizedField) dISubprogramFieldNode()    {}
+func (LineField) dISubprogramFieldNode()           {}
+func (LinkageNameField) dISubprogramFieldNode()    {}
+func (NameField) dISubprogramFieldNode()           {}
+func (RetainedNodesField) dISubprogramFieldNode()  {}
+func (ScopeField) dISubprogramFieldNode()          {}
+func (ScopeLineField) dISubprogramFieldNode()      {}
 func (TemplateParamsField) dISubprogramFieldNode() {}
 func (ThisAdjustmentField) dISubprogramFieldNode() {}
-func (ThrownTypesField) dISubprogramFieldNode() {}
-func (TypeField) dISubprogramFieldNode() {}
-func (UnitField) dISubprogramFieldNode() {}
-func (VirtualIndexField) dISubprogramFieldNode() {}
-func (VirtualityField) dISubprogramFieldNode() {}
+func (ThrownTypesField) dISubprogramFieldNode()    {}
+func (TypeField) dISubprogramFieldNode()           {}
+func (UnitField) dISubprogramFieldNode()           {}
+func (VirtualIndexField) dISubprogramFieldNode()   {}
+func (VirtualityField) dISubprogramFieldNode()     {}
 
 type DISubrangeField interface {
 	LlvmNode
@@ -859,7 +860,7 @@ type DISubrangeField interface {
 // dISubrangeFieldNode() ensures that only the following types can be
 // assigned to DISubrangeField.
 //
-func (CountField) dISubrangeFieldNode() {}
+func (CountField) dISubrangeFieldNode()      {}
 func (LowerBoundField) dISubrangeFieldNode() {}
 
 type DISubroutineTypeField interface {
@@ -870,7 +871,7 @@ type DISubroutineTypeField interface {
 // dISubroutineTypeFieldNode() ensures that only the following types can be
 // assigned to DISubroutineTypeField.
 //
-func (CCField) dISubroutineTypeFieldNode() {}
+func (CCField) dISubroutineTypeFieldNode()    {}
 func (FlagsField) dISubroutineTypeFieldNode() {}
 func (TypesField) dISubroutineTypeFieldNode() {}
 
@@ -893,9 +894,9 @@ type DITemplateValueParameterField interface {
 // dITemplateValueParameterFieldNode() ensures that only the following types can be
 // assigned to DITemplateValueParameterField.
 //
-func (NameField) dITemplateValueParameterFieldNode() {}
-func (TagField) dITemplateValueParameterFieldNode() {}
-func (TypeField) dITemplateValueParameterFieldNode() {}
+func (NameField) dITemplateValueParameterFieldNode()  {}
+func (TagField) dITemplateValueParameterFieldNode()   {}
+func (TypeField) dITemplateValueParameterFieldNode()  {}
 func (ValueField) dITemplateValueParameterFieldNode() {}
 
 type ExceptionScope interface {
@@ -907,7 +908,7 @@ type ExceptionScope interface {
 // assigned to ExceptionScope.
 //
 func (LocalIdent) exceptionScopeNode() {}
-func (NoneConst) exceptionScopeNode() {}
+func (NoneConst) exceptionScopeNode()  {}
 
 type FirstClassType interface {
 	LlvmNode
@@ -917,18 +918,18 @@ type FirstClassType interface {
 // firstClassTypeNode() ensures that only the following types can be
 // assigned to FirstClassType.
 //
-func (ArrayType) firstClassTypeNode() {}
-func (FloatType) firstClassTypeNode() {}
-func (IntType) firstClassTypeNode() {}
-func (LabelType) firstClassTypeNode() {}
-func (MMXType) firstClassTypeNode() {}
-func (MetadataType) firstClassTypeNode() {}
-func (NamedType) firstClassTypeNode() {}
+func (ArrayType) firstClassTypeNode()        {}
+func (FloatType) firstClassTypeNode()        {}
+func (IntType) firstClassTypeNode()          {}
+func (LabelType) firstClassTypeNode()        {}
+func (MMXType) firstClassTypeNode()          {}
+func (MetadataType) firstClassTypeNode()     {}
+func (NamedType) firstClassTypeNode()        {}
 func (PackedStructType) firstClassTypeNode() {}
-func (PointerType) firstClassTypeNode() {}
-func (StructType) firstClassTypeNode() {}
-func (TokenType) firstClassTypeNode() {}
-func (VectorType) firstClassTypeNode() {}
+func (PointerType) firstClassTypeNode()      {}
+func (StructType) firstClassTypeNode()       {}
+func (TokenType) firstClassTypeNode()        {}
+func (VectorType) firstClassTypeNode()       {}
 
 type FuncAttr interface {
 	LlvmNode
@@ -938,13 +939,13 @@ type FuncAttr interface {
 // funcAttrNode() ensures that only the following types can be
 // assigned to FuncAttr.
 //
-func (AlignPair) funcAttrNode() {}
+func (AlignPair) funcAttrNode()      {}
 func (AlignStackPair) funcAttrNode() {}
-func (AllocSize) funcAttrNode() {}
-func (AttrGroupID) funcAttrNode() {}
-func (AttrPair) funcAttrNode() {}
-func (AttrString) funcAttrNode() {}
-func (FuncAttribute) funcAttrNode() {}
+func (AllocSize) funcAttrNode()      {}
+func (AttrGroupID) funcAttrNode()    {}
+func (AttrPair) funcAttrNode()       {}
+func (AttrString) funcAttrNode()     {}
+func (FuncAttribute) funcAttrNode()  {}
 func (StackAlignment) funcAttrNode() {}
 
 type GenericDINodeField interface {
@@ -955,9 +956,9 @@ type GenericDINodeField interface {
 // genericDINodeFieldNode() ensures that only the following types can be
 // assigned to GenericDINodeField.
 //
-func (HeaderField) genericDINodeFieldNode() {}
+func (HeaderField) genericDINodeFieldNode()   {}
 func (OperandsField) genericDINodeFieldNode() {}
-func (TagField) genericDINodeFieldNode() {}
+func (TagField) genericDINodeFieldNode()      {}
 
 type GlobalAttr interface {
 	LlvmNode
@@ -967,10 +968,10 @@ type GlobalAttr interface {
 // globalAttrNode() ensures that only the following types can be
 // assigned to GlobalAttr.
 //
-func (Alignment) globalAttrNode() {}
-func (Comdat) globalAttrNode() {}
+func (Alignment) globalAttrNode()          {}
+func (Comdat) globalAttrNode()             {}
 func (MetadataAttachment) globalAttrNode() {}
-func (Section) globalAttrNode() {}
+func (Section) globalAttrNode()            {}
 
 type IndirectSymbolDef interface {
 	LlvmNode
@@ -991,59 +992,59 @@ type Instruction interface {
 // instructionNode() ensures that only the following types can be
 // assigned to Instruction.
 //
-func (AShrInst) instructionNode() {}
-func (AddInst) instructionNode() {}
-func (AddrSpaceCastInst) instructionNode() {}
-func (AllocaInst) instructionNode() {}
-func (AndInst) instructionNode() {}
-func (AtomicRMWInst) instructionNode() {}
-func (BitCastInst) instructionNode() {}
-func (CallInst) instructionNode() {}
-func (CatchPadInst) instructionNode() {}
-func (CleanupPadInst) instructionNode() {}
-func (CmpXchgInst) instructionNode() {}
+func (AShrInst) instructionNode()           {}
+func (AddInst) instructionNode()            {}
+func (AddrSpaceCastInst) instructionNode()  {}
+func (AllocaInst) instructionNode()         {}
+func (AndInst) instructionNode()            {}
+func (AtomicRMWInst) instructionNode()      {}
+func (BitCastInst) instructionNode()        {}
+func (CallInst) instructionNode()           {}
+func (CatchPadInst) instructionNode()       {}
+func (CleanupPadInst) instructionNode()     {}
+func (CmpXchgInst) instructionNode()        {}
 func (ExtractElementInst) instructionNode() {}
-func (ExtractValueInst) instructionNode() {}
-func (FAddInst) instructionNode() {}
-func (FCmpInst) instructionNode() {}
-func (FDivInst) instructionNode() {}
-func (FMulInst) instructionNode() {}
-func (FPExtInst) instructionNode() {}
-func (FPToSIInst) instructionNode() {}
-func (FPToUIInst) instructionNode() {}
-func (FPTruncInst) instructionNode() {}
-func (FRemInst) instructionNode() {}
-func (FSubInst) instructionNode() {}
-func (FenceInst) instructionNode() {}
-func (GetElementPtrInst) instructionNode() {}
-func (ICmpInst) instructionNode() {}
-func (InsertElementInst) instructionNode() {}
-func (InsertValueInst) instructionNode() {}
-func (IntToPtrInst) instructionNode() {}
-func (LShrInst) instructionNode() {}
-func (LandingPadInst) instructionNode() {}
-func (LoadInst) instructionNode() {}
-func (LocalDefInst) instructionNode() {}
-func (MulInst) instructionNode() {}
-func (OrInst) instructionNode() {}
-func (PhiInst) instructionNode() {}
-func (PtrToIntInst) instructionNode() {}
-func (SDivInst) instructionNode() {}
-func (SExtInst) instructionNode() {}
-func (SIToFPInst) instructionNode() {}
-func (SRemInst) instructionNode() {}
-func (SelectInst) instructionNode() {}
-func (ShlInst) instructionNode() {}
-func (ShuffleVectorInst) instructionNode() {}
-func (StoreInst) instructionNode() {}
-func (SubInst) instructionNode() {}
-func (TruncInst) instructionNode() {}
-func (UDivInst) instructionNode() {}
-func (UIToFPInst) instructionNode() {}
-func (URemInst) instructionNode() {}
-func (VAArgInst) instructionNode() {}
-func (XorInst) instructionNode() {}
-func (ZExtInst) instructionNode() {}
+func (ExtractValueInst) instructionNode()   {}
+func (FAddInst) instructionNode()           {}
+func (FCmpInst) instructionNode()           {}
+func (FDivInst) instructionNode()           {}
+func (FMulInst) instructionNode()           {}
+func (FPExtInst) instructionNode()          {}
+func (FPToSIInst) instructionNode()         {}
+func (FPToUIInst) instructionNode()         {}
+func (FPTruncInst) instructionNode()        {}
+func (FRemInst) instructionNode()           {}
+func (FSubInst) instructionNode()           {}
+func (FenceInst) instructionNode()          {}
+func (GetElementPtrInst) instructionNode()  {}
+func (ICmpInst) instructionNode()           {}
+func (InsertElementInst) instructionNode()  {}
+func (InsertValueInst) instructionNode()    {}
+func (IntToPtrInst) instructionNode()       {}
+func (LShrInst) instructionNode()           {}
+func (LandingPadInst) instructionNode()     {}
+func (LoadInst) instructionNode()           {}
+func (LocalDefInst) instructionNode()       {}
+func (MulInst) instructionNode()            {}
+func (OrInst) instructionNode()             {}
+func (PhiInst) instructionNode()            {}
+func (PtrToIntInst) instructionNode()       {}
+func (SDivInst) instructionNode()           {}
+func (SExtInst) instructionNode()           {}
+func (SIToFPInst) instructionNode()         {}
+func (SRemInst) instructionNode()           {}
+func (SelectInst) instructionNode()         {}
+func (ShlInst) instructionNode()            {}
+func (ShuffleVectorInst) instructionNode()  {}
+func (StoreInst) instructionNode()          {}
+func (SubInst) instructionNode()            {}
+func (TruncInst) instructionNode()          {}
+func (UDivInst) instructionNode()           {}
+func (UIToFPInst) instructionNode()         {}
+func (URemInst) instructionNode()           {}
+func (VAArgInst) instructionNode()          {}
+func (XorInst) instructionNode()            {}
+func (ZExtInst) instructionNode()           {}
 
 type MDField interface {
 	LlvmNode
@@ -1053,37 +1054,37 @@ type MDField interface {
 // mDFieldNode() ensures that only the following types can be
 // assigned to MDField.
 //
-func (DIBasicType) mDFieldNode() {}
-func (DICompileUnit) mDFieldNode() {}
-func (DICompositeType) mDFieldNode() {}
-func (DIDerivedType) mDFieldNode() {}
-func (DIEnumerator) mDFieldNode() {}
-func (DIExpression) mDFieldNode() {}
-func (DIFile) mDFieldNode() {}
-func (DIGlobalVariable) mDFieldNode() {}
+func (DIBasicType) mDFieldNode()                {}
+func (DICompileUnit) mDFieldNode()              {}
+func (DICompositeType) mDFieldNode()            {}
+func (DIDerivedType) mDFieldNode()              {}
+func (DIEnumerator) mDFieldNode()               {}
+func (DIExpression) mDFieldNode()               {}
+func (DIFile) mDFieldNode()                     {}
+func (DIGlobalVariable) mDFieldNode()           {}
 func (DIGlobalVariableExpression) mDFieldNode() {}
-func (DIImportedEntity) mDFieldNode() {}
-func (DILabel) mDFieldNode() {}
-func (DILexicalBlock) mDFieldNode() {}
-func (DILexicalBlockFile) mDFieldNode() {}
-func (DILocalVariable) mDFieldNode() {}
-func (DILocation) mDFieldNode() {}
-func (DIMacro) mDFieldNode() {}
-func (DIMacroFile) mDFieldNode() {}
-func (DIModule) mDFieldNode() {}
-func (DINamespace) mDFieldNode() {}
-func (DIObjCProperty) mDFieldNode() {}
-func (DISubprogram) mDFieldNode() {}
-func (DISubrange) mDFieldNode() {}
-func (DISubroutineType) mDFieldNode() {}
-func (DITemplateTypeParameter) mDFieldNode() {}
-func (DITemplateValueParameter) mDFieldNode() {}
-func (GenericDINode) mDFieldNode() {}
-func (MDString) mDFieldNode() {}
-func (MDTuple) mDFieldNode() {}
-func (MetadataID) mDFieldNode() {}
-func (NullLit) mDFieldNode() {}
-func (TypeValue) mDFieldNode() {}
+func (DIImportedEntity) mDFieldNode()           {}
+func (DILabel) mDFieldNode()                    {}
+func (DILexicalBlock) mDFieldNode()             {}
+func (DILexicalBlockFile) mDFieldNode()         {}
+func (DILocalVariable) mDFieldNode()            {}
+func (DILocation) mDFieldNode()                 {}
+func (DIMacro) mDFieldNode()                    {}
+func (DIMacroFile) mDFieldNode()                {}
+func (DIModule) mDFieldNode()                   {}
+func (DINamespace) mDFieldNode()                {}
+func (DIObjCProperty) mDFieldNode()             {}
+func (DISubprogram) mDFieldNode()               {}
+func (DISubrange) mDFieldNode()                 {}
+func (DISubroutineType) mDFieldNode()           {}
+func (DITemplateTypeParameter) mDFieldNode()    {}
+func (DITemplateValueParameter) mDFieldNode()   {}
+func (GenericDINode) mDFieldNode()              {}
+func (MDString) mDFieldNode()                   {}
+func (MDTuple) mDFieldNode()                    {}
+func (MetadataID) mDFieldNode()                 {}
+func (NullLit) mDFieldNode()                    {}
+func (TypeValue) mDFieldNode()                  {}
 
 type MDFieldOrInt interface {
 	LlvmNode
@@ -1093,38 +1094,38 @@ type MDFieldOrInt interface {
 // mDFieldOrIntNode() ensures that only the following types can be
 // assigned to MDFieldOrInt.
 //
-func (DIBasicType) mDFieldOrIntNode() {}
-func (DICompileUnit) mDFieldOrIntNode() {}
-func (DICompositeType) mDFieldOrIntNode() {}
-func (DIDerivedType) mDFieldOrIntNode() {}
-func (DIEnumerator) mDFieldOrIntNode() {}
-func (DIExpression) mDFieldOrIntNode() {}
-func (DIFile) mDFieldOrIntNode() {}
-func (DIGlobalVariable) mDFieldOrIntNode() {}
+func (DIBasicType) mDFieldOrIntNode()                {}
+func (DICompileUnit) mDFieldOrIntNode()              {}
+func (DICompositeType) mDFieldOrIntNode()            {}
+func (DIDerivedType) mDFieldOrIntNode()              {}
+func (DIEnumerator) mDFieldOrIntNode()               {}
+func (DIExpression) mDFieldOrIntNode()               {}
+func (DIFile) mDFieldOrIntNode()                     {}
+func (DIGlobalVariable) mDFieldOrIntNode()           {}
 func (DIGlobalVariableExpression) mDFieldOrIntNode() {}
-func (DIImportedEntity) mDFieldOrIntNode() {}
-func (DILabel) mDFieldOrIntNode() {}
-func (DILexicalBlock) mDFieldOrIntNode() {}
-func (DILexicalBlockFile) mDFieldOrIntNode() {}
-func (DILocalVariable) mDFieldOrIntNode() {}
-func (DILocation) mDFieldOrIntNode() {}
-func (DIMacro) mDFieldOrIntNode() {}
-func (DIMacroFile) mDFieldOrIntNode() {}
-func (DIModule) mDFieldOrIntNode() {}
-func (DINamespace) mDFieldOrIntNode() {}
-func (DIObjCProperty) mDFieldOrIntNode() {}
-func (DISubprogram) mDFieldOrIntNode() {}
-func (DISubrange) mDFieldOrIntNode() {}
-func (DISubroutineType) mDFieldOrIntNode() {}
-func (DITemplateTypeParameter) mDFieldOrIntNode() {}
-func (DITemplateValueParameter) mDFieldOrIntNode() {}
-func (GenericDINode) mDFieldOrIntNode() {}
-func (IntLit) mDFieldOrIntNode() {}
-func (MDString) mDFieldOrIntNode() {}
-func (MDTuple) mDFieldOrIntNode() {}
-func (MetadataID) mDFieldOrIntNode() {}
-func (NullLit) mDFieldOrIntNode() {}
-func (TypeValue) mDFieldOrIntNode() {}
+func (DIImportedEntity) mDFieldOrIntNode()           {}
+func (DILabel) mDFieldOrIntNode()                    {}
+func (DILexicalBlock) mDFieldOrIntNode()             {}
+func (DILexicalBlockFile) mDFieldOrIntNode()         {}
+func (DILocalVariable) mDFieldOrIntNode()            {}
+func (DILocation) mDFieldOrIntNode()                 {}
+func (DIMacro) mDFieldOrIntNode()                    {}
+func (DIMacroFile) mDFieldOrIntNode()                {}
+func (DIModule) mDFieldOrIntNode()                   {}
+func (DINamespace) mDFieldOrIntNode()                {}
+func (DIObjCProperty) mDFieldOrIntNode()             {}
+func (DISubprogram) mDFieldOrIntNode()               {}
+func (DISubrange) mDFieldOrIntNode()                 {}
+func (DISubroutineType) mDFieldOrIntNode()           {}
+func (DITemplateTypeParameter) mDFieldOrIntNode()    {}
+func (DITemplateValueParameter) mDFieldOrIntNode()   {}
+func (GenericDINode) mDFieldOrIntNode()              {}
+func (IntLit) mDFieldOrIntNode()                     {}
+func (MDString) mDFieldOrIntNode()                   {}
+func (MDTuple) mDFieldOrIntNode()                    {}
+func (MetadataID) mDFieldOrIntNode()                 {}
+func (NullLit) mDFieldOrIntNode()                    {}
+func (TypeValue) mDFieldOrIntNode()                  {}
 
 type MDNode interface {
 	LlvmNode
@@ -1134,34 +1135,34 @@ type MDNode interface {
 // mDNodeNode() ensures that only the following types can be
 // assigned to MDNode.
 //
-func (DIBasicType) mDNodeNode() {}
-func (DICompileUnit) mDNodeNode() {}
-func (DICompositeType) mDNodeNode() {}
-func (DIDerivedType) mDNodeNode() {}
-func (DIEnumerator) mDNodeNode() {}
-func (DIExpression) mDNodeNode() {}
-func (DIFile) mDNodeNode() {}
-func (DIGlobalVariable) mDNodeNode() {}
+func (DIBasicType) mDNodeNode()                {}
+func (DICompileUnit) mDNodeNode()              {}
+func (DICompositeType) mDNodeNode()            {}
+func (DIDerivedType) mDNodeNode()              {}
+func (DIEnumerator) mDNodeNode()               {}
+func (DIExpression) mDNodeNode()               {}
+func (DIFile) mDNodeNode()                     {}
+func (DIGlobalVariable) mDNodeNode()           {}
 func (DIGlobalVariableExpression) mDNodeNode() {}
-func (DIImportedEntity) mDNodeNode() {}
-func (DILabel) mDNodeNode() {}
-func (DILexicalBlock) mDNodeNode() {}
-func (DILexicalBlockFile) mDNodeNode() {}
-func (DILocalVariable) mDNodeNode() {}
-func (DILocation) mDNodeNode() {}
-func (DIMacro) mDNodeNode() {}
-func (DIMacroFile) mDNodeNode() {}
-func (DIModule) mDNodeNode() {}
-func (DINamespace) mDNodeNode() {}
-func (DIObjCProperty) mDNodeNode() {}
-func (DISubprogram) mDNodeNode() {}
-func (DISubrange) mDNodeNode() {}
-func (DISubroutineType) mDNodeNode() {}
-func (DITemplateTypeParameter) mDNodeNode() {}
-func (DITemplateValueParameter) mDNodeNode() {}
-func (GenericDINode) mDNodeNode() {}
-func (MDTuple) mDNodeNode() {}
-func (MetadataID) mDNodeNode() {}
+func (DIImportedEntity) mDNodeNode()           {}
+func (DILabel) mDNodeNode()                    {}
+func (DILexicalBlock) mDNodeNode()             {}
+func (DILexicalBlockFile) mDNodeNode()         {}
+func (DILocalVariable) mDNodeNode()            {}
+func (DILocation) mDNodeNode()                 {}
+func (DIMacro) mDNodeNode()                    {}
+func (DIMacroFile) mDNodeNode()                {}
+func (DIModule) mDNodeNode()                   {}
+func (DINamespace) mDNodeNode()                {}
+func (DIObjCProperty) mDNodeNode()             {}
+func (DISubprogram) mDNodeNode()               {}
+func (DISubrange) mDNodeNode()                 {}
+func (DISubroutineType) mDNodeNode()           {}
+func (DITemplateTypeParameter) mDNodeNode()    {}
+func (DITemplateValueParameter) mDNodeNode()   {}
+func (GenericDINode) mDNodeNode()              {}
+func (MDTuple) mDNodeNode()                    {}
+func (MetadataID) mDNodeNode()                 {}
 
 type Metadata interface {
 	LlvmNode
@@ -1171,36 +1172,36 @@ type Metadata interface {
 // metadataNode() ensures that only the following types can be
 // assigned to Metadata.
 //
-func (DIBasicType) metadataNode() {}
-func (DICompileUnit) metadataNode() {}
-func (DICompositeType) metadataNode() {}
-func (DIDerivedType) metadataNode() {}
-func (DIEnumerator) metadataNode() {}
-func (DIExpression) metadataNode() {}
-func (DIFile) metadataNode() {}
-func (DIGlobalVariable) metadataNode() {}
+func (DIBasicType) metadataNode()                {}
+func (DICompileUnit) metadataNode()              {}
+func (DICompositeType) metadataNode()            {}
+func (DIDerivedType) metadataNode()              {}
+func (DIEnumerator) metadataNode()               {}
+func (DIExpression) metadataNode()               {}
+func (DIFile) metadataNode()                     {}
+func (DIGlobalVariable) metadataNode()           {}
 func (DIGlobalVariableExpression) metadataNode() {}
-func (DIImportedEntity) metadataNode() {}
-func (DILabel) metadataNode() {}
-func (DILexicalBlock) metadataNode() {}
-func (DILexicalBlockFile) metadataNode() {}
-func (DILocalVariable) metadataNode() {}
-func (DILocation) metadataNode() {}
-func (DIMacro) metadataNode() {}
-func (DIMacroFile) metadataNode() {}
-func (DIModule) metadataNode() {}
-func (DINamespace) metadataNode() {}
-func (DIObjCProperty) metadataNode() {}
-func (DISubprogram) metadataNode() {}
-func (DISubrange) metadataNode() {}
-func (DISubroutineType) metadataNode() {}
-func (DITemplateTypeParameter) metadataNode() {}
-func (DITemplateValueParameter) metadataNode() {}
-func (GenericDINode) metadataNode() {}
-func (MDString) metadataNode() {}
-func (MDTuple) metadataNode() {}
-func (MetadataID) metadataNode() {}
-func (TypeValue) metadataNode() {}
+func (DIImportedEntity) metadataNode()           {}
+func (DILabel) metadataNode()                    {}
+func (DILexicalBlock) metadataNode()             {}
+func (DILexicalBlockFile) metadataNode()         {}
+func (DILocalVariable) metadataNode()            {}
+func (DILocation) metadataNode()                 {}
+func (DIMacro) metadataNode()                    {}
+func (DIMacroFile) metadataNode()                {}
+func (DIModule) metadataNode()                   {}
+func (DINamespace) metadataNode()                {}
+func (DIObjCProperty) metadataNode()             {}
+func (DISubprogram) metadataNode()               {}
+func (DISubrange) metadataNode()                 {}
+func (DISubroutineType) metadataNode()           {}
+func (DITemplateTypeParameter) metadataNode()    {}
+func (DITemplateValueParameter) metadataNode()   {}
+func (GenericDINode) metadataNode()              {}
+func (MDString) metadataNode()                   {}
+func (MDTuple) metadataNode()                    {}
+func (MetadataID) metadataNode()                 {}
+func (TypeValue) metadataNode()                  {}
 
 type MetadataNode interface {
 	LlvmNode
@@ -1211,7 +1212,7 @@ type MetadataNode interface {
 // assigned to MetadataNode.
 //
 func (DIExpression) metadataNodeNode() {}
-func (MetadataID) metadataNodeNode() {}
+func (MetadataID) metadataNodeNode()   {}
 
 type ParamAttr interface {
 	LlvmNode
@@ -1221,11 +1222,11 @@ type ParamAttr interface {
 // paramAttrNode() ensures that only the following types can be
 // assigned to ParamAttr.
 //
-func (Alignment) paramAttrNode() {}
-func (AttrPair) paramAttrNode() {}
-func (AttrString) paramAttrNode() {}
+func (Alignment) paramAttrNode()       {}
+func (AttrPair) paramAttrNode()        {}
+func (AttrString) paramAttrNode()      {}
 func (Dereferenceable) paramAttrNode() {}
-func (ParamAttribute) paramAttrNode() {}
+func (ParamAttribute) paramAttrNode()  {}
 
 type ReturnAttr interface {
 	LlvmNode
@@ -1235,7 +1236,7 @@ type ReturnAttr interface {
 // returnAttrNode() ensures that only the following types can be
 // assigned to ReturnAttr.
 //
-func (Alignment) returnAttrNode() {}
+func (Alignment) returnAttrNode()       {}
 func (Dereferenceable) returnAttrNode() {}
 func (ReturnAttribute) returnAttrNode() {}
 
@@ -1247,32 +1248,32 @@ type SpecializedMDNode interface {
 // specializedMDNodeNode() ensures that only the following types can be
 // assigned to SpecializedMDNode.
 //
-func (DIBasicType) specializedMDNodeNode() {}
-func (DICompileUnit) specializedMDNodeNode() {}
-func (DICompositeType) specializedMDNodeNode() {}
-func (DIDerivedType) specializedMDNodeNode() {}
-func (DIEnumerator) specializedMDNodeNode() {}
-func (DIExpression) specializedMDNodeNode() {}
-func (DIFile) specializedMDNodeNode() {}
-func (DIGlobalVariable) specializedMDNodeNode() {}
+func (DIBasicType) specializedMDNodeNode()                {}
+func (DICompileUnit) specializedMDNodeNode()              {}
+func (DICompositeType) specializedMDNodeNode()            {}
+func (DIDerivedType) specializedMDNodeNode()              {}
+func (DIEnumerator) specializedMDNodeNode()               {}
+func (DIExpression) specializedMDNodeNode()               {}
+func (DIFile) specializedMDNodeNode()                     {}
+func (DIGlobalVariable) specializedMDNodeNode()           {}
 func (DIGlobalVariableExpression) specializedMDNodeNode() {}
-func (DIImportedEntity) specializedMDNodeNode() {}
-func (DILabel) specializedMDNodeNode() {}
-func (DILexicalBlock) specializedMDNodeNode() {}
-func (DILexicalBlockFile) specializedMDNodeNode() {}
-func (DILocalVariable) specializedMDNodeNode() {}
-func (DILocation) specializedMDNodeNode() {}
-func (DIMacro) specializedMDNodeNode() {}
-func (DIMacroFile) specializedMDNodeNode() {}
-func (DIModule) specializedMDNodeNode() {}
-func (DINamespace) specializedMDNodeNode() {}
-func (DIObjCProperty) specializedMDNodeNode() {}
-func (DISubprogram) specializedMDNodeNode() {}
-func (DISubrange) specializedMDNodeNode() {}
-func (DISubroutineType) specializedMDNodeNode() {}
-func (DITemplateTypeParameter) specializedMDNodeNode() {}
-func (DITemplateValueParameter) specializedMDNodeNode() {}
-func (GenericDINode) specializedMDNodeNode() {}
+func (DIImportedEntity) specializedMDNodeNode()           {}
+func (DILabel) specializedMDNodeNode()                    {}
+func (DILexicalBlock) specializedMDNodeNode()             {}
+func (DILexicalBlockFile) specializedMDNodeNode()         {}
+func (DILocalVariable) specializedMDNodeNode()            {}
+func (DILocation) specializedMDNodeNode()                 {}
+func (DIMacro) specializedMDNodeNode()                    {}
+func (DIMacroFile) specializedMDNodeNode()                {}
+func (DIModule) specializedMDNodeNode()                   {}
+func (DINamespace) specializedMDNodeNode()                {}
+func (DIObjCProperty) specializedMDNodeNode()             {}
+func (DISubprogram) specializedMDNodeNode()               {}
+func (DISubrange) specializedMDNodeNode()                 {}
+func (DISubroutineType) specializedMDNodeNode()           {}
+func (DITemplateTypeParameter) specializedMDNodeNode()    {}
+func (DITemplateValueParameter) specializedMDNodeNode()   {}
+func (GenericDINode) specializedMDNodeNode()              {}
 
 type TargetDef interface {
 	LlvmNode
@@ -1283,7 +1284,7 @@ type TargetDef interface {
 // assigned to TargetDef.
 //
 func (TargetDataLayout) targetDefNode() {}
-func (TargetTriple) targetDefNode() {}
+func (TargetTriple) targetDefNode()     {}
 
 type Terminator interface {
 	LlvmNode
@@ -1293,17 +1294,17 @@ type Terminator interface {
 // terminatorNode() ensures that only the following types can be
 // assigned to Terminator.
 //
-func (BrTerm) terminatorNode() {}
-func (CatchRetTerm) terminatorNode() {}
+func (BrTerm) terminatorNode()          {}
+func (CatchRetTerm) terminatorNode()    {}
 func (CatchSwitchTerm) terminatorNode() {}
-func (CleanupRetTerm) terminatorNode() {}
-func (CondBrTerm) terminatorNode() {}
-func (IndirectBrTerm) terminatorNode() {}
-func (InvokeTerm) terminatorNode() {}
-func (LocalDefTerm) terminatorNode() {}
-func (ResumeTerm) terminatorNode() {}
-func (RetTerm) terminatorNode() {}
-func (SwitchTerm) terminatorNode() {}
+func (CleanupRetTerm) terminatorNode()  {}
+func (CondBrTerm) terminatorNode()      {}
+func (IndirectBrTerm) terminatorNode()  {}
+func (InvokeTerm) terminatorNode()      {}
+func (LocalDefTerm) terminatorNode()    {}
+func (ResumeTerm) terminatorNode()      {}
+func (RetTerm) terminatorNode()         {}
+func (SwitchTerm) terminatorNode()      {}
 func (UnreachableTerm) terminatorNode() {}
 
 type TopLevelEntity interface {
@@ -1314,23 +1315,23 @@ type TopLevelEntity interface {
 // topLevelEntityNode() ensures that only the following types can be
 // assigned to TopLevelEntity.
 //
-func (AliasDef) topLevelEntityNode() {}
-func (AttrGroupDef) topLevelEntityNode() {}
-func (ComdatDef) topLevelEntityNode() {}
-func (FuncDecl) topLevelEntityNode() {}
-func (FuncDef) topLevelEntityNode() {}
-func (GlobalDecl) topLevelEntityNode() {}
-func (GlobalDef) topLevelEntityNode() {}
-func (IFuncDef) topLevelEntityNode() {}
-func (MetadataDef) topLevelEntityNode() {}
-func (ModuleAsm) topLevelEntityNode() {}
+func (AliasDef) topLevelEntityNode()         {}
+func (AttrGroupDef) topLevelEntityNode()     {}
+func (ComdatDef) topLevelEntityNode()        {}
+func (FuncDecl) topLevelEntityNode()         {}
+func (FuncDef) topLevelEntityNode()          {}
+func (GlobalDecl) topLevelEntityNode()       {}
+func (GlobalDef) topLevelEntityNode()        {}
+func (IFuncDef) topLevelEntityNode()         {}
+func (MetadataDef) topLevelEntityNode()      {}
+func (ModuleAsm) topLevelEntityNode()        {}
 func (NamedMetadataDef) topLevelEntityNode() {}
-func (SourceFilename) topLevelEntityNode() {}
+func (SourceFilename) topLevelEntityNode()   {}
 func (TargetDataLayout) topLevelEntityNode() {}
-func (TargetTriple) topLevelEntityNode() {}
-func (TypeDef) topLevelEntityNode() {}
-func (UseListOrder) topLevelEntityNode() {}
-func (UseListOrderBB) topLevelEntityNode() {}
+func (TargetTriple) topLevelEntityNode()     {}
+func (TypeDef) topLevelEntityNode()          {}
+func (UseListOrder) topLevelEntityNode()     {}
+func (UseListOrderBB) topLevelEntityNode()   {}
 
 type Type interface {
 	LlvmNode
@@ -1340,20 +1341,20 @@ type Type interface {
 // typeNode() ensures that only the following types can be
 // assigned to Type.
 //
-func (ArrayType) typeNode() {}
-func (FloatType) typeNode() {}
-func (FuncType) typeNode() {}
-func (IntType) typeNode() {}
-func (LabelType) typeNode() {}
-func (MMXType) typeNode() {}
-func (MetadataType) typeNode() {}
-func (NamedType) typeNode() {}
+func (ArrayType) typeNode()        {}
+func (FloatType) typeNode()        {}
+func (FuncType) typeNode()         {}
+func (IntType) typeNode()          {}
+func (LabelType) typeNode()        {}
+func (MMXType) typeNode()          {}
+func (MetadataType) typeNode()     {}
+func (NamedType) typeNode()        {}
 func (PackedStructType) typeNode() {}
-func (PointerType) typeNode() {}
-func (StructType) typeNode() {}
-func (TokenType) typeNode() {}
-func (VectorType) typeNode() {}
-func (VoidType) typeNode() {}
+func (PointerType) typeNode()      {}
+func (StructType) typeNode()       {}
+func (TokenType) typeNode()        {}
+func (VectorType) typeNode()       {}
+func (VoidType) typeNode()         {}
 
 type Value interface {
 	LlvmNode
@@ -1363,60 +1364,60 @@ type Value interface {
 // valueNode() ensures that only the following types can be
 // assigned to Value.
 //
-func (AShrExpr) valueNode() {}
-func (AddExpr) valueNode() {}
-func (AddrSpaceCastExpr) valueNode() {}
-func (AndExpr) valueNode() {}
-func (ArrayConst) valueNode() {}
-func (BitCastExpr) valueNode() {}
-func (BlockAddressConst) valueNode() {}
-func (BoolConst) valueNode() {}
-func (CharArrayConst) valueNode() {}
-func (ExtractElementExpr) valueNode() {}
-func (ExtractValueExpr) valueNode() {}
-func (FAddExpr) valueNode() {}
-func (FCmpExpr) valueNode() {}
-func (FDivExpr) valueNode() {}
-func (FMulExpr) valueNode() {}
-func (FPExtExpr) valueNode() {}
-func (FPToSIExpr) valueNode() {}
-func (FPToUIExpr) valueNode() {}
-func (FPTruncExpr) valueNode() {}
-func (FRemExpr) valueNode() {}
-func (FSubExpr) valueNode() {}
-func (FloatConst) valueNode() {}
-func (GetElementPtrExpr) valueNode() {}
-func (GlobalIdent) valueNode() {}
-func (ICmpExpr) valueNode() {}
-func (InlineAsm) valueNode() {}
-func (InsertElementExpr) valueNode() {}
-func (InsertValueExpr) valueNode() {}
-func (IntConst) valueNode() {}
-func (IntToPtrExpr) valueNode() {}
-func (LShrExpr) valueNode() {}
-func (LocalIdent) valueNode() {}
-func (MulExpr) valueNode() {}
-func (NoneConst) valueNode() {}
-func (NullConst) valueNode() {}
-func (OrExpr) valueNode() {}
-func (PtrToIntExpr) valueNode() {}
-func (SDivExpr) valueNode() {}
-func (SExtExpr) valueNode() {}
-func (SIToFPExpr) valueNode() {}
-func (SRemExpr) valueNode() {}
-func (SelectExpr) valueNode() {}
-func (ShlExpr) valueNode() {}
-func (ShuffleVectorExpr) valueNode() {}
-func (StructConst) valueNode() {}
-func (SubExpr) valueNode() {}
-func (TruncExpr) valueNode() {}
-func (UDivExpr) valueNode() {}
-func (UIToFPExpr) valueNode() {}
-func (URemExpr) valueNode() {}
-func (UndefConst) valueNode() {}
-func (VectorConst) valueNode() {}
-func (XorExpr) valueNode() {}
-func (ZExtExpr) valueNode() {}
+func (AShrExpr) valueNode()             {}
+func (AddExpr) valueNode()              {}
+func (AddrSpaceCastExpr) valueNode()    {}
+func (AndExpr) valueNode()              {}
+func (ArrayConst) valueNode()           {}
+func (BitCastExpr) valueNode()          {}
+func (BlockAddressConst) valueNode()    {}
+func (BoolConst) valueNode()            {}
+func (CharArrayConst) valueNode()       {}
+func (ExtractElementExpr) valueNode()   {}
+func (ExtractValueExpr) valueNode()     {}
+func (FAddExpr) valueNode()             {}
+func (FCmpExpr) valueNode()             {}
+func (FDivExpr) valueNode()             {}
+func (FMulExpr) valueNode()             {}
+func (FPExtExpr) valueNode()            {}
+func (FPToSIExpr) valueNode()           {}
+func (FPToUIExpr) valueNode()           {}
+func (FPTruncExpr) valueNode()          {}
+func (FRemExpr) valueNode()             {}
+func (FSubExpr) valueNode()             {}
+func (FloatConst) valueNode()           {}
+func (GetElementPtrExpr) valueNode()    {}
+func (GlobalIdent) valueNode()          {}
+func (ICmpExpr) valueNode()             {}
+func (InlineAsm) valueNode()            {}
+func (InsertElementExpr) valueNode()    {}
+func (InsertValueExpr) valueNode()      {}
+func (IntConst) valueNode()             {}
+func (IntToPtrExpr) valueNode()         {}
+func (LShrExpr) valueNode()             {}
+func (LocalIdent) valueNode()           {}
+func (MulExpr) valueNode()              {}
+func (NoneConst) valueNode()            {}
+func (NullConst) valueNode()            {}
+func (OrExpr) valueNode()               {}
+func (PtrToIntExpr) valueNode()         {}
+func (SDivExpr) valueNode()             {}
+func (SExtExpr) valueNode()             {}
+func (SIToFPExpr) valueNode()           {}
+func (SRemExpr) valueNode()             {}
+func (SelectExpr) valueNode()           {}
+func (ShlExpr) valueNode()              {}
+func (ShuffleVectorExpr) valueNode()    {}
+func (StructConst) valueNode()          {}
+func (SubExpr) valueNode()              {}
+func (TruncExpr) valueNode()            {}
+func (UDivExpr) valueNode()             {}
+func (UIToFPExpr) valueNode()           {}
+func (URemExpr) valueNode()             {}
+func (UndefConst) valueNode()           {}
+func (VectorConst) valueNode()          {}
+func (XorExpr) valueNode()              {}
+func (ZExtExpr) valueNode()             {}
 func (ZeroInitializerConst) valueNode() {}
 
 type ValueInstruction interface {
@@ -1427,56 +1428,56 @@ type ValueInstruction interface {
 // valueInstructionNode() ensures that only the following types can be
 // assigned to ValueInstruction.
 //
-func (AShrInst) valueInstructionNode() {}
-func (AddInst) valueInstructionNode() {}
-func (AddrSpaceCastInst) valueInstructionNode() {}
-func (AllocaInst) valueInstructionNode() {}
-func (AndInst) valueInstructionNode() {}
-func (AtomicRMWInst) valueInstructionNode() {}
-func (BitCastInst) valueInstructionNode() {}
-func (CallInst) valueInstructionNode() {}
-func (CatchPadInst) valueInstructionNode() {}
-func (CleanupPadInst) valueInstructionNode() {}
-func (CmpXchgInst) valueInstructionNode() {}
+func (AShrInst) valueInstructionNode()           {}
+func (AddInst) valueInstructionNode()            {}
+func (AddrSpaceCastInst) valueInstructionNode()  {}
+func (AllocaInst) valueInstructionNode()         {}
+func (AndInst) valueInstructionNode()            {}
+func (AtomicRMWInst) valueInstructionNode()      {}
+func (BitCastInst) valueInstructionNode()        {}
+func (CallInst) valueInstructionNode()           {}
+func (CatchPadInst) valueInstructionNode()       {}
+func (CleanupPadInst) valueInstructionNode()     {}
+func (CmpXchgInst) valueInstructionNode()        {}
 func (ExtractElementInst) valueInstructionNode() {}
-func (ExtractValueInst) valueInstructionNode() {}
-func (FAddInst) valueInstructionNode() {}
-func (FCmpInst) valueInstructionNode() {}
-func (FDivInst) valueInstructionNode() {}
-func (FMulInst) valueInstructionNode() {}
-func (FPExtInst) valueInstructionNode() {}
-func (FPToSIInst) valueInstructionNode() {}
-func (FPToUIInst) valueInstructionNode() {}
-func (FPTruncInst) valueInstructionNode() {}
-func (FRemInst) valueInstructionNode() {}
-func (FSubInst) valueInstructionNode() {}
-func (GetElementPtrInst) valueInstructionNode() {}
-func (ICmpInst) valueInstructionNode() {}
-func (InsertElementInst) valueInstructionNode() {}
-func (InsertValueInst) valueInstructionNode() {}
-func (IntToPtrInst) valueInstructionNode() {}
-func (LShrInst) valueInstructionNode() {}
-func (LandingPadInst) valueInstructionNode() {}
-func (LoadInst) valueInstructionNode() {}
-func (MulInst) valueInstructionNode() {}
-func (OrInst) valueInstructionNode() {}
-func (PhiInst) valueInstructionNode() {}
-func (PtrToIntInst) valueInstructionNode() {}
-func (SDivInst) valueInstructionNode() {}
-func (SExtInst) valueInstructionNode() {}
-func (SIToFPInst) valueInstructionNode() {}
-func (SRemInst) valueInstructionNode() {}
-func (SelectInst) valueInstructionNode() {}
-func (ShlInst) valueInstructionNode() {}
-func (ShuffleVectorInst) valueInstructionNode() {}
-func (SubInst) valueInstructionNode() {}
-func (TruncInst) valueInstructionNode() {}
-func (UDivInst) valueInstructionNode() {}
-func (UIToFPInst) valueInstructionNode() {}
-func (URemInst) valueInstructionNode() {}
-func (VAArgInst) valueInstructionNode() {}
-func (XorInst) valueInstructionNode() {}
-func (ZExtInst) valueInstructionNode() {}
+func (ExtractValueInst) valueInstructionNode()   {}
+func (FAddInst) valueInstructionNode()           {}
+func (FCmpInst) valueInstructionNode()           {}
+func (FDivInst) valueInstructionNode()           {}
+func (FMulInst) valueInstructionNode()           {}
+func (FPExtInst) valueInstructionNode()          {}
+func (FPToSIInst) valueInstructionNode()         {}
+func (FPToUIInst) valueInstructionNode()         {}
+func (FPTruncInst) valueInstructionNode()        {}
+func (FRemInst) valueInstructionNode()           {}
+func (FSubInst) valueInstructionNode()           {}
+func (GetElementPtrInst) valueInstructionNode()  {}
+func (ICmpInst) valueInstructionNode()           {}
+func (InsertElementInst) valueInstructionNode()  {}
+func (InsertValueInst) valueInstructionNode()    {}
+func (IntToPtrInst) valueInstructionNode()       {}
+func (LShrInst) valueInstructionNode()           {}
+func (LandingPadInst) valueInstructionNode()     {}
+func (LoadInst) valueInstructionNode()           {}
+func (MulInst) valueInstructionNode()            {}
+func (OrInst) valueInstructionNode()             {}
+func (PhiInst) valueInstructionNode()            {}
+func (PtrToIntInst) valueInstructionNode()       {}
+func (SDivInst) valueInstructionNode()           {}
+func (SExtInst) valueInstructionNode()           {}
+func (SIToFPInst) valueInstructionNode()         {}
+func (SRemInst) valueInstructionNode()           {}
+func (SelectInst) valueInstructionNode()         {}
+func (ShlInst) valueInstructionNode()            {}
+func (ShuffleVectorInst) valueInstructionNode()  {}
+func (SubInst) valueInstructionNode()            {}
+func (TruncInst) valueInstructionNode()          {}
+func (UDivInst) valueInstructionNode()           {}
+func (UIToFPInst) valueInstructionNode()         {}
+func (URemInst) valueInstructionNode()           {}
+func (VAArgInst) valueInstructionNode()          {}
+func (XorInst) valueInstructionNode()            {}
+func (ZExtInst) valueInstructionNode()           {}
 
 type ValueTerminator interface {
 	LlvmNode
@@ -1487,7 +1488,7 @@ type ValueTerminator interface {
 // assigned to ValueTerminator.
 //
 func (CatchSwitchTerm) valueTerminatorNode() {}
-func (InvokeTerm) valueTerminatorNode() {}
+func (InvokeTerm) valueTerminatorNode()      {}
 
 // Types.
 
@@ -6361,6 +6362,17 @@ func (n UnwindTarget) Label() *Label {
 	return nil
 }
 
+func (n UnwindTarget) UnwindToCaller() *UnwindToCaller {
+	if child := n.Child(selector.UnwindToCaller); child != nil {
+		return &UnwindToCaller{child}
+	}
+	return nil
+}
+
+type UnwindToCaller struct {
+	*Node
+}
+
 type UseListOrder struct {
 	*Node
 }
@@ -6590,5 +6602,3 @@ func (n ZExtInst) Metadata() []MetadataAttachment {
 type ZeroInitializerConst struct {
 	*Node
 }
-
-

@@ -683,6 +683,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &UnreachableTerm{n}
 	case ll.UnwindTarget:
 		return &UnwindTarget{n}
+	case ll.UnwindToCaller:
+		return &UnwindToCaller{n}
 	case ll.UseListOrder:
 		return &UseListOrder{n}
 	case ll.UseListOrderBB:
