@@ -43,15 +43,15 @@ const (
 	FuncDef          // Header=FuncHeader Metadata=(MetadataAttachment)* Body=FuncBody
 	FuncHeader       // ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? CallingConv? ReturnAttrs=(ReturnAttribute)* RetType=Type Name=GlobalIdent Params UnnamedAddr? AddrSpace? FuncAttrs=(FuncAttribute)* Section? Comdat? GCNode? Prefix? Prologue? Personality?
 	GCNode           // Name=StringLit
-	Prefix           // Typ=Type Val=Constant
-	Prologue         // Typ=Type Val=Constant
-	Personality      // Typ=Type Val=Constant
+	Prefix           // TypeConst
+	Prologue         // TypeConst
+	Personality      // TypeConst
 	FuncBody         // Blocks=(BasicBlock)+ UseListOrders=(UseListOrder)*
 	AttrGroupDef     // Name=AttrGroupID Attrs=(FuncAttribute)*
 	NamedMetadataDef // Name=MetadataName MDNodes=(MetadataNode)*
 	MetadataDef      // Name=MetadataID Distinct? MDNode=(MDTuple | SpecializedMDNode)
 	Distinct
-	UseListOrder   // Typ=Type Val=Value Indicies=(UintLit)+
+	UseListOrder   // TypeValue Indicies=(UintLit)+
 	UseListOrderBB // Func=GlobalIdent Block=LocalIdent Indicies=(UintLit)+
 	VoidType
 	FuncType // RetType=Type Params
@@ -1683,9 +1683,9 @@ var ruleNodeType = [...]NodeType{
 	0,                          // ReturnAttribute_optlist : ReturnAttribute_optlist ReturnAttribute
 	0,                          // ReturnAttribute_optlist :
 	GCNode,                     // GC : 'gc' StringLit
-	Prefix,                     // Prefix : 'prefix' Type Constant
-	Prologue,                   // Prologue : 'prologue' Type Constant
-	Personality,                // Personality : 'personality' Type Constant
+	Prefix,                     // Prefix : 'prefix' TypeConst
+	Prologue,                   // Prologue : 'prologue' TypeConst
+	Personality,                // Personality : 'personality' TypeConst
 	0,                          // BasicBlock_list : BasicBlock_list BasicBlock
 	0,                          // BasicBlock_list : BasicBlock
 	FuncBody,                   // FuncBody : '{' BasicBlock_list UseListOrder_optlist '}'
@@ -1704,7 +1704,7 @@ var ruleNodeType = [...]NodeType{
 	Distinct,                   // Distinct : 'distinct'
 	0,                          // UintLit_list_withsep : UintLit_list_withsep ',' UintLit
 	0,                          // UintLit_list_withsep : UintLit
-	UseListOrder,               // UseListOrder : 'uselistorder' Type Value ',' '{' UintLit_list_withsep '}'
+	UseListOrder,               // UseListOrder : 'uselistorder' TypeValue ',' '{' UintLit_list_withsep '}'
 	UseListOrderBB,             // UseListOrderBB : 'uselistorder_bb' GlobalIdent ',' LocalIdent ',' '{' UintLit_list_withsep '}'
 	0,                          // Type : VoidType
 	0,                          // Type : FuncType

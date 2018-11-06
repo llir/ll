@@ -5329,12 +5329,8 @@ type Personality struct {
 	*Node
 }
 
-func (n Personality) Typ() Type {
-	return ToLlvmNode(n.Child(selector.Type)).(Type)
-}
-
-func (n Personality) Val() Constant {
-	return ToLlvmNode(n.Child(selector.Constant)).(Constant)
+func (n Personality) TypeConst() TypeConst {
+	return TypeConst{n.Child(selector.TypeConst)}
 }
 
 type PhiInst struct {
@@ -5386,12 +5382,8 @@ type Prefix struct {
 	*Node
 }
 
-func (n Prefix) Typ() Type {
-	return ToLlvmNode(n.Child(selector.Type)).(Type)
-}
-
-func (n Prefix) Val() Constant {
-	return ToLlvmNode(n.Child(selector.Constant)).(Constant)
+func (n Prefix) TypeConst() TypeConst {
+	return TypeConst{n.Child(selector.TypeConst)}
 }
 
 type ProducerField struct {
@@ -5406,12 +5398,8 @@ type Prologue struct {
 	*Node
 }
 
-func (n Prologue) Typ() Type {
-	return ToLlvmNode(n.Child(selector.Type)).(Type)
-}
-
-func (n Prologue) Val() Constant {
-	return ToLlvmNode(n.Child(selector.Constant)).(Constant)
+func (n Prologue) TypeConst() TypeConst {
+	return TypeConst{n.Child(selector.TypeConst)}
 }
 
 type PtrToIntExpr struct {
@@ -6406,12 +6394,8 @@ type UseListOrder struct {
 	*Node
 }
 
-func (n UseListOrder) Typ() Type {
-	return ToLlvmNode(n.Child(selector.Type)).(Type)
-}
-
-func (n UseListOrder) Val() Value {
-	return ToLlvmNode(n.Child(selector.Value)).(Value)
+func (n UseListOrder) TypeValue() TypeValue {
+	return TypeValue{n.Child(selector.TypeValue)}
 }
 
 func (n UseListOrder) Indicies() []UintLit {
