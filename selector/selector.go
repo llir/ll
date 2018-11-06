@@ -402,7 +402,6 @@ var (
 	FirstClassType                  = OneOf(ll.FirstClassType...)
 	FuncAttribute                   = OneOf(ll.FuncAttribute...)
 	GenericDINodeField              = OneOf(ll.GenericDINodeField...)
-	GlobalAttr                      = OneOf(ll.GlobalAttr...)
 	IndirectSymbolDef               = OneOf(ll.IndirectSymbolDef...)
 	Instruction                     = OneOf(ll.Instruction...)
 	MDField                         = OneOf(ll.MDField...)

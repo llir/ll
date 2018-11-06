@@ -960,19 +960,6 @@ func (HeaderField) genericDINodeFieldNode()   {}
 func (OperandsField) genericDINodeFieldNode() {}
 func (TagField) genericDINodeFieldNode()      {}
 
-type GlobalAttr interface {
-	LlvmNode
-	globalAttrNode()
-}
-
-// globalAttrNode() ensures that only the following types can be
-// assigned to GlobalAttr.
-//
-func (Alignment) globalAttrNode()          {}
-func (Comdat) globalAttrNode()             {}
-func (MetadataAttachment) globalAttrNode() {}
-func (Section) globalAttrNode()            {}
-
 type IndirectSymbolDef interface {
 	LlvmNode
 	indirectSymbolDefNode()
@@ -4077,11 +4064,32 @@ func (n GlobalDecl) ContentType() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
-func (n GlobalDecl) GlobalAttrs() []GlobalAttr {
-	nodes := n.Children(selector.GlobalAttr)
-	var ret = make([]GlobalAttr, 0, len(nodes))
+func (n GlobalDecl) Section() *Section {
+	if child := n.Child(selector.Section); child != nil {
+		return &Section{child}
+	}
+	return nil
+}
+
+func (n GlobalDecl) Comdat() *Comdat {
+	if child := n.Child(selector.Comdat); child != nil {
+		return &Comdat{child}
+	}
+	return nil
+}
+
+func (n GlobalDecl) Alignment() *Alignment {
+	if child := n.Child(selector.Alignment); child != nil {
+		return &Alignment{child}
+	}
+	return nil
+}
+
+func (n GlobalDecl) Metadata() []MetadataAttachment {
+	nodes := n.Children(selector.MetadataAttachment)
+	var ret = make([]MetadataAttachment, 0, len(nodes))
 	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(GlobalAttr))
+		ret = append(ret, MetadataAttachment{node})
 	}
 	return ret
 }
@@ -4171,11 +4179,32 @@ func (n GlobalDef) Init() Constant {
 	return ToLlvmNode(n.Child(selector.GlobalIdent).Next(selector.Constant)).(Constant)
 }
 
-func (n GlobalDef) GlobalAttrs() []GlobalAttr {
-	nodes := n.Children(selector.GlobalAttr)
-	var ret = make([]GlobalAttr, 0, len(nodes))
+func (n GlobalDef) Section() *Section {
+	if child := n.Child(selector.Section); child != nil {
+		return &Section{child}
+	}
+	return nil
+}
+
+func (n GlobalDef) Comdat() *Comdat {
+	if child := n.Child(selector.Comdat); child != nil {
+		return &Comdat{child}
+	}
+	return nil
+}
+
+func (n GlobalDef) Alignment() *Alignment {
+	if child := n.Child(selector.Alignment); child != nil {
+		return &Alignment{child}
+	}
+	return nil
+}
+
+func (n GlobalDef) Metadata() []MetadataAttachment {
+	nodes := n.Children(selector.MetadataAttachment)
+	var ret = make([]MetadataAttachment, 0, len(nodes))
 	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(GlobalAttr))
+		ret = append(ret, MetadataAttachment{node})
 	}
 	return ret
 }
