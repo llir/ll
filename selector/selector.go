@@ -168,7 +168,7 @@ var (
 	FloatKind                       = func(t ll.NodeType) bool { return t == ll.FloatKind }
 	FloatLit                        = func(t ll.NodeType) bool { return t == ll.FloatLit }
 	FloatType                       = func(t ll.NodeType) bool { return t == ll.FloatType }
-	FuncAttribute                   = func(t ll.NodeType) bool { return t == ll.FuncAttribute }
+	FuncAttr                        = func(t ll.NodeType) bool { return t == ll.FuncAttr }
 	FuncBody                        = func(t ll.NodeType) bool { return t == ll.FuncBody }
 	FuncDecl                        = func(t ll.NodeType) bool { return t == ll.FuncDecl }
 	FuncDef                         = func(t ll.NodeType) bool { return t == ll.FuncDef }
@@ -264,7 +264,7 @@ var (
 	OverflowFlag                    = func(t ll.NodeType) bool { return t == ll.OverflowFlag }
 	PackedStructType                = func(t ll.NodeType) bool { return t == ll.PackedStructType }
 	Param                           = func(t ll.NodeType) bool { return t == ll.Param }
-	ParamAttribute                  = func(t ll.NodeType) bool { return t == ll.ParamAttribute }
+	ParamAttr                       = func(t ll.NodeType) bool { return t == ll.ParamAttr }
 	Params                          = func(t ll.NodeType) bool { return t == ll.Params }
 	Personality                     = func(t ll.NodeType) bool { return t == ll.Personality }
 	PhiInst                         = func(t ll.NodeType) bool { return t == ll.PhiInst }
@@ -279,7 +279,7 @@ var (
 	RetTerm                         = func(t ll.NodeType) bool { return t == ll.RetTerm }
 	RetainedNodesField              = func(t ll.NodeType) bool { return t == ll.RetainedNodesField }
 	RetainedTypesField              = func(t ll.NodeType) bool { return t == ll.RetainedTypesField }
-	ReturnAttribute                 = func(t ll.NodeType) bool { return t == ll.ReturnAttribute }
+	ReturnAttr                      = func(t ll.NodeType) bool { return t == ll.ReturnAttr }
 	RuntimeLangField                = func(t ll.NodeType) bool { return t == ll.RuntimeLangField }
 	RuntimeVersionField             = func(t ll.NodeType) bool { return t == ll.RuntimeVersionField }
 	SDivExpr                        = func(t ll.NodeType) bool { return t == ll.SDivExpr }
@@ -400,7 +400,7 @@ var (
 	DITemplateValueParameterField   = OneOf(ll.DITemplateValueParameterField...)
 	ExceptionScope                  = OneOf(ll.ExceptionScope...)
 	FirstClassType                  = OneOf(ll.FirstClassType...)
-	FuncAttr                        = OneOf(ll.FuncAttr...)
+	FuncAttribute                   = OneOf(ll.FuncAttribute...)
 	GenericDINodeField              = OneOf(ll.GenericDINodeField...)
 	GlobalAttr                      = OneOf(ll.GlobalAttr...)
 	IndirectSymbolDef               = OneOf(ll.IndirectSymbolDef...)
@@ -410,8 +410,8 @@ var (
 	MDNode                          = OneOf(ll.MDNode...)
 	Metadata                        = OneOf(ll.Metadata...)
 	MetadataNode                    = OneOf(ll.MetadataNode...)
-	ParamAttr                       = OneOf(ll.ParamAttr...)
-	ReturnAttr                      = OneOf(ll.ReturnAttr...)
+	ParamAttribute                  = OneOf(ll.ParamAttribute...)
+	ReturnAttribute                 = OneOf(ll.ReturnAttribute...)
 	SpecializedMDNode               = OneOf(ll.SpecializedMDNode...)
 	TargetDef                       = OneOf(ll.TargetDef...)
 	Terminator                      = OneOf(ll.Terminator...)

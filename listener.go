@@ -33,21 +33,21 @@ const (
 	TypeDef          // Alias=LocalIdent Typ=(OpaqueType | Type)
 	ComdatDef        // Name=ComdatName Kind=SelectionKind
 	SelectionKind
-	GlobalDecl // Name=GlobalIdent ExternLinkage Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? AddrSpace? ExternallyInitialized? Immutable ContentType=Type GlobalAttrs=(GlobalAttr)* FuncAttrs=(FuncAttr)*
-	GlobalDef  // Name=GlobalIdent Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? AddrSpace? ExternallyInitialized? Immutable ContentType=Type Init=Constant GlobalAttrs=(GlobalAttr)* FuncAttrs=(FuncAttr)*
+	GlobalDecl // Name=GlobalIdent ExternLinkage Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? AddrSpace? ExternallyInitialized? Immutable ContentType=Type GlobalAttrs=(GlobalAttr)* FuncAttrs=(FuncAttribute)*
+	GlobalDef  // Name=GlobalIdent Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? AddrSpace? ExternallyInitialized? Immutable ContentType=Type Init=Constant GlobalAttrs=(GlobalAttr)* FuncAttrs=(FuncAttribute)*
 	ExternallyInitialized
 	Immutable
 	AliasDef         // Name=GlobalIdent ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? Typ=Type AliaseeType=Type Aliasee=Constant
 	IFuncDef         // Name=GlobalIdent ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? Typ=Type ResolverType=Type Resolver=Constant
 	FuncDecl         // Metadata=(MetadataAttachment)* Header=FuncHeader
 	FuncDef          // Header=FuncHeader Metadata=(MetadataAttachment)* Body=FuncBody
-	FuncHeader       // ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? CallingConv? ReturnAttrs=(ReturnAttr)* RetType=Type Name=GlobalIdent Params UnnamedAddr? AddrSpace? FuncAttrs=(FuncAttr)* Section? Comdat? GCNode? Prefix? Prologue? Personality?
+	FuncHeader       // ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? CallingConv? ReturnAttrs=(ReturnAttribute)* RetType=Type Name=GlobalIdent Params UnnamedAddr? AddrSpace? FuncAttrs=(FuncAttribute)* Section? Comdat? GCNode? Prefix? Prologue? Personality?
 	GCNode           // Name=StringLit
 	Prefix           // Typ=Type Val=Constant
 	Prologue         // Typ=Type Val=Constant
 	Personality      // Typ=Type Val=Constant
 	FuncBody         // Blocks=(BasicBlock)+ UseListOrders=(UseListOrder)*
-	AttrGroupDef     // Name=AttrGroupID Attrs=(FuncAttr)*
+	AttrGroupDef     // Name=AttrGroupID Attrs=(FuncAttribute)*
 	NamedMetadataDef // Name=MetadataName MDNodes=(MetadataNode)*
 	MetadataDef      // Name=MetadataID Distinct? MDNode=(MDTuple | SpecializedMDNode)
 	Distinct
@@ -181,7 +181,7 @@ const (
 	PhiInst           // Typ=Type Incs=(Inc)+ Metadata=(MetadataAttachment)*
 	Inc               // X=Value Pred=LocalIdent
 	SelectInst        // Cond=TypeValue X=TypeValue Y=TypeValue Metadata=(MetadataAttachment)*
-	CallInst          // Tail? FastMathFlags=(FastMathFlag)* CallingConv? ReturnAttrs=(ReturnAttr)* AddrSpace? Typ=Type Callee=Value Args FuncAttrs=(FuncAttr)* OperandBundles=(OperandBundle)* Metadata=(MetadataAttachment)*
+	CallInst          // Tail? FastMathFlags=(FastMathFlag)* CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Callee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* Metadata=(MetadataAttachment)*
 	Tail
 	VAArgInst      // ArgList=TypeValue ArgType=Type Metadata=(MetadataAttachment)*
 	LandingPadInst // ResultType=Type Cleanup? Clauses=(Clause)* Metadata=(MetadataAttachment)*
@@ -197,7 +197,7 @@ const (
 	SwitchTerm                 // X=TypeValue Default=Label Cases=(Case)* Metadata=(MetadataAttachment)*
 	Case                       // X=TypeConst Target=Label
 	IndirectBrTerm             // Addr=TypeValue ValidTargets=(Label)+ Metadata=(MetadataAttachment)*
-	InvokeTerm                 // CallingConv? ReturnAttrs=(ReturnAttr)* AddrSpace? Typ=Type Invokee=Value Args FuncAttrs=(FuncAttr)* OperandBundles=(OperandBundle)* Normal=Label Exception=Label Metadata=(MetadataAttachment)*
+	InvokeTerm                 // CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Invokee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* Normal=Label Exception=Label Metadata=(MetadataAttachment)*
 	ResumeTerm                 // X=TypeValue Metadata=(MetadataAttachment)*
 	CatchSwitchTerm            // Scope=ExceptionScope Handlers=(Label)+ UnwindTarget Metadata=(MetadataAttachment)*
 	CatchRetTerm               // From=Value To=Label Metadata=(MetadataAttachment)*
@@ -331,7 +331,7 @@ const (
 	AlignStackPair  // N=UintLit
 	AllocSize       // ElemSize=UintLit N=UintLit?
 	Args            // Args=(Arg)*
-	Arg             // Typ=(ConcreteType | MetadataType) Attrs=(ParamAttr)* Val=(Metadata | Value)
+	Arg             // Typ=(ConcreteType | MetadataType) Attrs=(ParamAttribute)* Val=(Metadata | Value)
 	Atomic
 	AtomicOrdering
 	AttrPair   // Key=StringLit Val=StringLit
@@ -346,7 +346,7 @@ const (
 	ExceptionArg // Typ=(ConcreteType | MetadataType) Val=(Metadata | Value)
 	FastMathFlag
 	FPred
-	FuncAttribute
+	FuncAttr
 	InBounds
 	IPred
 	Label // Typ=LabelType Name=LocalIdent
@@ -355,10 +355,10 @@ const (
 	OperandBundle // Tag=StringLit Inputs=(TypeValue)*
 	OverflowFlag
 	Params // Params=(Param)* Variadic=Ellipsis?
-	Param  // Typ=Type Attrs=(ParamAttr)* Name=LocalIdent?
-	ParamAttribute
+	Param  // Typ=Type Attrs=(ParamAttribute)* Name=LocalIdent?
+	ParamAttr
 	Preemption
-	ReturnAttribute
+	ReturnAttr
 	Section        // Name=StringLit
 	StackAlignment // N=UintLit
 	SyncScope      // Scope=StringLit
@@ -710,7 +710,7 @@ var nodeTypeStr = [...]string{
 	"ExceptionArg",
 	"FastMathFlag",
 	"FPred",
-	"FuncAttribute",
+	"FuncAttr",
 	"InBounds",
 	"IPred",
 	"Label",
@@ -720,9 +720,9 @@ var nodeTypeStr = [...]string{
 	"OverflowFlag",
 	"Params",
 	"Param",
-	"ParamAttribute",
+	"ParamAttr",
 	"Preemption",
-	"ReturnAttribute",
+	"ReturnAttr",
 	"Section",
 	"StackAlignment",
 	"SyncScope",
@@ -1115,14 +1115,14 @@ var FirstClassType = []NodeType{
 	VectorType,
 }
 
-var FuncAttr = []NodeType{
+var FuncAttribute = []NodeType{
 	AlignPair,
 	AlignStackPair,
 	AllocSize,
 	AttrGroupID,
 	AttrPair,
 	AttrString,
-	FuncAttribute,
+	FuncAttr,
 	StackAlignment,
 }
 
@@ -1338,18 +1338,18 @@ var MetadataNode = []NodeType{
 	MetadataID,
 }
 
-var ParamAttr = []NodeType{
+var ParamAttribute = []NodeType{
 	Alignment,
 	AttrPair,
 	AttrString,
 	Dereferenceable,
-	ParamAttribute,
+	ParamAttr,
 }
 
-var ReturnAttr = []NodeType{
+var ReturnAttribute = []NodeType{
 	Alignment,
 	Dereferenceable,
-	ReturnAttribute,
+	ReturnAttr,
 }
 
 var SpecializedMDNode = []NodeType{
@@ -1607,8 +1607,8 @@ var ruleNodeType = [...]NodeType{
 	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type
 	0,                          // list_of_','_and_1_elements : list_of_','_and_1_elements ',' GlobalAttr
 	0,                          // list_of_','_and_1_elements : ',' GlobalAttr
-	0,                          // list_of_','_and_1_elements1 : list_of_','_and_1_elements1 ',' FuncAttr
-	0,                          // list_of_','_and_1_elements1 : ',' FuncAttr
+	0,                          // list_of_','_and_1_elements1 : list_of_','_and_1_elements1 ',' FuncAttribute
+	0,                          // list_of_','_and_1_elements1 : ',' FuncAttribute
 	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements list_of_','_and_1_elements1
 	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements
 	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements1
@@ -1626,13 +1626,13 @@ var ruleNodeType = [...]NodeType{
 	0,                          // MetadataAttachment_optlist : MetadataAttachment_optlist MetadataAttachment
 	0,                          // MetadataAttachment_optlist :
 	FuncDef,                    // FuncDef : 'define' FuncHeader MetadataAttachment_optlist FuncBody
-	0,                          // FuncAttr_optlist : FuncAttr_optlist FuncAttr
-	0,                          // FuncAttr_optlist :
-	FuncHeader,                 // FuncHeader : Linkage Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttr_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttr_optlist Sectionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
-	FuncHeader,                 // FuncHeader : ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttr_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttr_optlist Sectionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
-	FuncHeader,                 // FuncHeader : Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttr_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttr_optlist Sectionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
-	0,                          // ReturnAttr_optlist : ReturnAttr_optlist ReturnAttr
-	0,                          // ReturnAttr_optlist :
+	0,                          // FuncAttribute_optlist : FuncAttribute_optlist FuncAttribute
+	0,                          // FuncAttribute_optlist :
+	FuncHeader,                 // FuncHeader : Linkage Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttribute_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttribute_optlist Sectionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
+	FuncHeader,                 // FuncHeader : ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttribute_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttribute_optlist Sectionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
+	FuncHeader,                 // FuncHeader : Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttribute_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttribute_optlist Sectionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
+	0,                          // ReturnAttribute_optlist : ReturnAttribute_optlist ReturnAttribute
+	0,                          // ReturnAttribute_optlist :
 	GCNode,                     // GC : 'gc' StringLit
 	Prefix,                     // Prefix : 'prefix' Type Constant
 	Prologue,                   // Prologue : 'prologue' Type Constant
@@ -1642,7 +1642,7 @@ var ruleNodeType = [...]NodeType{
 	FuncBody,                   // FuncBody : '{' BasicBlock_list UseListOrder_optlist '}'
 	0,                          // UseListOrder_optlist : UseListOrder_optlist UseListOrder
 	0,                          // UseListOrder_optlist :
-	AttrGroupDef,               // AttrGroupDef : 'attributes' AttrGroupID '=' '{' FuncAttr_optlist '}'
+	AttrGroupDef,               // AttrGroupDef : 'attributes' AttrGroupID '=' '{' FuncAttribute_optlist '}'
 	0,                          // MetadataNode_list_withsep : MetadataNode_list_withsep ',' MetadataNode
 	0,                          // MetadataNode_list_withsep : MetadataNode
 	0,                          // MetadataNode_list_withsep_opt : MetadataNode_list_withsep
@@ -2027,10 +2027,10 @@ var ruleNodeType = [...]NodeType{
 	Inc,                        // Inc : '[' Value ',' LocalIdent ']'
 	SelectInst,                 // SelectInst : 'select' TypeValue ',' TypeValue ',' TypeValue list_of_','_and_1_elements4
 	SelectInst,                 // SelectInst : 'select' TypeValue ',' TypeValue ',' TypeValue
-	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist '[' OperandBundle_list_withsep ']' list_of_','_and_1_elements4
-	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist '[' OperandBundle_list_withsep ']'
-	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist list_of_','_and_1_elements4
-	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist
+	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']' list_of_','_and_1_elements4
+	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']'
+	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist list_of_','_and_1_elements4
+	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist
 	0,                          // OperandBundle_list_withsep : OperandBundle_list_withsep ',' OperandBundle
 	0,                          // OperandBundle_list_withsep : OperandBundle
 	Tail,                       // Tail : 'musttail'
@@ -2085,10 +2085,10 @@ var ruleNodeType = [...]NodeType{
 	IndirectBrTerm,             // IndirectBrTerm : 'indirectbr' TypeValue ',' '[' Label_list_withsep ']'
 	0,                          // Label_list_withsep : Label_list_withsep ',' Label
 	0,                          // Label_list_withsep : Label
-	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist '[' OperandBundle_list_withsep ']' 'to' Label 'unwind' Label list_of_','_and_1_elements4
-	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist '[' OperandBundle_list_withsep ']' 'to' Label 'unwind' Label
-	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist 'to' Label 'unwind' Label list_of_','_and_1_elements4
-	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttr_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttr_optlist 'to' Label 'unwind' Label
+	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']' 'to' Label 'unwind' Label list_of_','_and_1_elements4
+	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']' 'to' Label 'unwind' Label
+	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist 'to' Label 'unwind' Label list_of_','_and_1_elements4
+	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist 'to' Label 'unwind' Label
 	ResumeTerm,                 // ResumeTerm : 'resume' TypeValue list_of_','_and_1_elements4
 	ResumeTerm,                 // ResumeTerm : 'resume' TypeValue
 	CatchSwitchTerm,            // CatchSwitchTerm : 'catchswitch' 'within' ExceptionScope '[' Label_list_withsep ']' 'unwind' UnwindTarget list_of_','_and_1_elements4
@@ -2551,10 +2551,10 @@ var ruleNodeType = [...]NodeType{
 	Args,                       // Args :
 	Args,                       // Args : Arg_list_withsep ',' '...'
 	Args,                       // Args : Arg_list_withsep
-	Arg,                        // Arg : ConcreteType ParamAttr_optlist Value
+	Arg,                        // Arg : ConcreteType ParamAttribute_optlist Value
 	Arg,                        // Arg : MetadataType Metadata
-	0,                          // ParamAttr_optlist : ParamAttr_optlist ParamAttr
-	0,                          // ParamAttr_optlist :
+	0,                          // ParamAttribute_optlist : ParamAttribute_optlist ParamAttribute
+	0,                          // ParamAttribute_optlist :
 	Atomic,                     // Atomic : 'atomic'
 	AtomicOrdering,             // AtomicOrdering : 'acq_rel'
 	AtomicOrdering,             // AtomicOrdering : 'acquire'
@@ -2643,55 +2643,55 @@ var ruleNodeType = [...]NodeType{
 	FPred,                      // FPred : 'ult'
 	FPred,                      // FPred : 'une'
 	FPred,                      // FPred : 'uno'
-	0,                          // FuncAttr : AttrString
-	0,                          // FuncAttr : AttrPair
-	0,                          // FuncAttr : AttrGroupID
-	0,                          // FuncAttr : AlignPair
-	0,                          // FuncAttr : AlignStackPair
-	0,                          // FuncAttr : AllocSize
-	0,                          // FuncAttr : StackAlignment
-	0,                          // FuncAttr : FuncAttribute
-	FuncAttribute,              // FuncAttribute : 'alwaysinline'
-	FuncAttribute,              // FuncAttribute : 'argmemonly'
-	FuncAttribute,              // FuncAttribute : 'builtin'
-	FuncAttribute,              // FuncAttribute : 'cold'
-	FuncAttribute,              // FuncAttribute : 'convergent'
-	FuncAttribute,              // FuncAttribute : 'inaccessiblemem_or_argmemonly'
-	FuncAttribute,              // FuncAttribute : 'inaccessiblememonly'
-	FuncAttribute,              // FuncAttribute : 'inlinehint'
-	FuncAttribute,              // FuncAttribute : 'jumptable'
-	FuncAttribute,              // FuncAttribute : 'minsize'
-	FuncAttribute,              // FuncAttribute : 'naked'
-	FuncAttribute,              // FuncAttribute : 'nobuiltin'
-	FuncAttribute,              // FuncAttribute : 'nocf_check'
-	FuncAttribute,              // FuncAttribute : 'noduplicate'
-	FuncAttribute,              // FuncAttribute : 'noimplicitfloat'
-	FuncAttribute,              // FuncAttribute : 'noinline'
-	FuncAttribute,              // FuncAttribute : 'nonlazybind'
-	FuncAttribute,              // FuncAttribute : 'norecurse'
-	FuncAttribute,              // FuncAttribute : 'noredzone'
-	FuncAttribute,              // FuncAttribute : 'noreturn'
-	FuncAttribute,              // FuncAttribute : 'nounwind'
-	FuncAttribute,              // FuncAttribute : 'optforfuzzing'
-	FuncAttribute,              // FuncAttribute : 'optnone'
-	FuncAttribute,              // FuncAttribute : 'optsize'
-	FuncAttribute,              // FuncAttribute : 'readnone'
-	FuncAttribute,              // FuncAttribute : 'readonly'
-	FuncAttribute,              // FuncAttribute : 'returns_twice'
-	FuncAttribute,              // FuncAttribute : 'safestack'
-	FuncAttribute,              // FuncAttribute : 'sanitize_address'
-	FuncAttribute,              // FuncAttribute : 'sanitize_hwaddress'
-	FuncAttribute,              // FuncAttribute : 'sanitize_memory'
-	FuncAttribute,              // FuncAttribute : 'sanitize_thread'
-	FuncAttribute,              // FuncAttribute : 'shadowcallstack'
-	FuncAttribute,              // FuncAttribute : 'speculatable'
-	FuncAttribute,              // FuncAttribute : 'speculative_load_hardening'
-	FuncAttribute,              // FuncAttribute : 'ssp'
-	FuncAttribute,              // FuncAttribute : 'sspreq'
-	FuncAttribute,              // FuncAttribute : 'sspstrong'
-	FuncAttribute,              // FuncAttribute : 'strictfp'
-	FuncAttribute,              // FuncAttribute : 'uwtable'
-	FuncAttribute,              // FuncAttribute : 'writeonly'
+	0,                          // FuncAttribute : AttrString
+	0,                          // FuncAttribute : AttrPair
+	0,                          // FuncAttribute : AttrGroupID
+	0,                          // FuncAttribute : AlignPair
+	0,                          // FuncAttribute : AlignStackPair
+	0,                          // FuncAttribute : AllocSize
+	0,                          // FuncAttribute : StackAlignment
+	0,                          // FuncAttribute : FuncAttr
+	FuncAttr,                   // FuncAttr : 'alwaysinline'
+	FuncAttr,                   // FuncAttr : 'argmemonly'
+	FuncAttr,                   // FuncAttr : 'builtin'
+	FuncAttr,                   // FuncAttr : 'cold'
+	FuncAttr,                   // FuncAttr : 'convergent'
+	FuncAttr,                   // FuncAttr : 'inaccessiblemem_or_argmemonly'
+	FuncAttr,                   // FuncAttr : 'inaccessiblememonly'
+	FuncAttr,                   // FuncAttr : 'inlinehint'
+	FuncAttr,                   // FuncAttr : 'jumptable'
+	FuncAttr,                   // FuncAttr : 'minsize'
+	FuncAttr,                   // FuncAttr : 'naked'
+	FuncAttr,                   // FuncAttr : 'nobuiltin'
+	FuncAttr,                   // FuncAttr : 'nocf_check'
+	FuncAttr,                   // FuncAttr : 'noduplicate'
+	FuncAttr,                   // FuncAttr : 'noimplicitfloat'
+	FuncAttr,                   // FuncAttr : 'noinline'
+	FuncAttr,                   // FuncAttr : 'nonlazybind'
+	FuncAttr,                   // FuncAttr : 'norecurse'
+	FuncAttr,                   // FuncAttr : 'noredzone'
+	FuncAttr,                   // FuncAttr : 'noreturn'
+	FuncAttr,                   // FuncAttr : 'nounwind'
+	FuncAttr,                   // FuncAttr : 'optforfuzzing'
+	FuncAttr,                   // FuncAttr : 'optnone'
+	FuncAttr,                   // FuncAttr : 'optsize'
+	FuncAttr,                   // FuncAttr : 'readnone'
+	FuncAttr,                   // FuncAttr : 'readonly'
+	FuncAttr,                   // FuncAttr : 'returns_twice'
+	FuncAttr,                   // FuncAttr : 'safestack'
+	FuncAttr,                   // FuncAttr : 'sanitize_address'
+	FuncAttr,                   // FuncAttr : 'sanitize_hwaddress'
+	FuncAttr,                   // FuncAttr : 'sanitize_memory'
+	FuncAttr,                   // FuncAttr : 'sanitize_thread'
+	FuncAttr,                   // FuncAttr : 'shadowcallstack'
+	FuncAttr,                   // FuncAttr : 'speculatable'
+	FuncAttr,                   // FuncAttr : 'speculative_load_hardening'
+	FuncAttr,                   // FuncAttr : 'ssp'
+	FuncAttr,                   // FuncAttr : 'sspreq'
+	FuncAttr,                   // FuncAttr : 'sspstrong'
+	FuncAttr,                   // FuncAttr : 'strictfp'
+	FuncAttr,                   // FuncAttr : 'uwtable'
+	FuncAttr,                   // FuncAttr : 'writeonly'
 	0,                          // GlobalAttr : Section
 	0,                          // GlobalAttr : Comdat
 	0,                          // GlobalAttr : Alignment
@@ -2731,39 +2731,39 @@ var ruleNodeType = [...]NodeType{
 	Params,                     // Params : Ellipsisopt
 	Params,                     // Params : Param_list_withsep ',' Ellipsis
 	Params,                     // Params : Param_list_withsep
-	Param,                      // Param : Type ParamAttr_optlist LocalIdent
-	Param,                      // Param : Type ParamAttr_optlist
-	0,                          // ParamAttr : AttrString
-	0,                          // ParamAttr : AttrPair
-	0,                          // ParamAttr : Alignment
-	0,                          // ParamAttr : Dereferenceable
-	0,                          // ParamAttr : ParamAttribute
-	ParamAttribute,             // ParamAttribute : 'byval'
-	ParamAttribute,             // ParamAttribute : 'inalloca'
-	ParamAttribute,             // ParamAttribute : 'inreg'
-	ParamAttribute,             // ParamAttribute : 'nest'
-	ParamAttribute,             // ParamAttribute : 'noalias'
-	ParamAttribute,             // ParamAttribute : 'nocapture'
-	ParamAttribute,             // ParamAttribute : 'nonnull'
-	ParamAttribute,             // ParamAttribute : 'readnone'
-	ParamAttribute,             // ParamAttribute : 'readonly'
-	ParamAttribute,             // ParamAttribute : 'returned'
-	ParamAttribute,             // ParamAttribute : 'signext'
-	ParamAttribute,             // ParamAttribute : 'sret'
-	ParamAttribute,             // ParamAttribute : 'swifterror'
-	ParamAttribute,             // ParamAttribute : 'swiftself'
-	ParamAttribute,             // ParamAttribute : 'writeonly'
-	ParamAttribute,             // ParamAttribute : 'zeroext'
+	Param,                      // Param : Type ParamAttribute_optlist LocalIdent
+	Param,                      // Param : Type ParamAttribute_optlist
+	0,                          // ParamAttribute : AttrString
+	0,                          // ParamAttribute : AttrPair
+	0,                          // ParamAttribute : Alignment
+	0,                          // ParamAttribute : Dereferenceable
+	0,                          // ParamAttribute : ParamAttr
+	ParamAttr,                  // ParamAttr : 'byval'
+	ParamAttr,                  // ParamAttr : 'inalloca'
+	ParamAttr,                  // ParamAttr : 'inreg'
+	ParamAttr,                  // ParamAttr : 'nest'
+	ParamAttr,                  // ParamAttr : 'noalias'
+	ParamAttr,                  // ParamAttr : 'nocapture'
+	ParamAttr,                  // ParamAttr : 'nonnull'
+	ParamAttr,                  // ParamAttr : 'readnone'
+	ParamAttr,                  // ParamAttr : 'readonly'
+	ParamAttr,                  // ParamAttr : 'returned'
+	ParamAttr,                  // ParamAttr : 'signext'
+	ParamAttr,                  // ParamAttr : 'sret'
+	ParamAttr,                  // ParamAttr : 'swifterror'
+	ParamAttr,                  // ParamAttr : 'swiftself'
+	ParamAttr,                  // ParamAttr : 'writeonly'
+	ParamAttr,                  // ParamAttr : 'zeroext'
 	Preemption,                 // Preemption : 'dso_local'
 	Preemption,                 // Preemption : 'dso_preemptable'
-	0,                          // ReturnAttr : Alignment
-	0,                          // ReturnAttr : Dereferenceable
-	0,                          // ReturnAttr : ReturnAttribute
-	ReturnAttribute,            // ReturnAttribute : 'inreg'
-	ReturnAttribute,            // ReturnAttribute : 'noalias'
-	ReturnAttribute,            // ReturnAttribute : 'nonnull'
-	ReturnAttribute,            // ReturnAttribute : 'signext'
-	ReturnAttribute,            // ReturnAttribute : 'zeroext'
+	0,                          // ReturnAttribute : Alignment
+	0,                          // ReturnAttribute : Dereferenceable
+	0,                          // ReturnAttribute : ReturnAttr
+	ReturnAttr,                 // ReturnAttr : 'inreg'
+	ReturnAttr,                 // ReturnAttr : 'noalias'
+	ReturnAttr,                 // ReturnAttr : 'nonnull'
+	ReturnAttr,                 // ReturnAttr : 'signext'
+	ReturnAttr,                 // ReturnAttr : 'zeroext'
 	Section,                    // Section : 'section' StringLit
 	StackAlignment,             // StackAlignment : 'alignstack' '(' UintLit ')'
 	SyncScope,                  // SyncScope : 'syncscope' '(' StringLit ')'

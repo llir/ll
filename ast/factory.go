@@ -325,8 +325,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &FloatLit{n}
 	case ll.FloatType:
 		return &FloatType{n}
-	case ll.FuncAttribute:
-		return &FuncAttribute{n}
+	case ll.FuncAttr:
+		return &FuncAttr{n}
 	case ll.FuncBody:
 		return &FuncBody{n}
 	case ll.FuncDecl:
@@ -517,8 +517,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &PackedStructType{n}
 	case ll.Param:
 		return &Param{n}
-	case ll.ParamAttribute:
-		return &ParamAttribute{n}
+	case ll.ParamAttr:
+		return &ParamAttr{n}
 	case ll.Params:
 		return &Params{n}
 	case ll.Personality:
@@ -547,8 +547,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &RetainedNodesField{n}
 	case ll.RetainedTypesField:
 		return &RetainedTypesField{n}
-	case ll.ReturnAttribute:
-		return &ReturnAttribute{n}
+	case ll.ReturnAttr:
+		return &ReturnAttr{n}
 	case ll.RuntimeLangField:
 		return &RuntimeLangField{n}
 	case ll.RuntimeVersionField:

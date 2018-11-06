@@ -172,7 +172,7 @@ func (n FloatConst) LlvmNode() *Node                 { return n.Node }
 func (n FloatKind) LlvmNode() *Node                  { return n.Node }
 func (n FloatLit) LlvmNode() *Node                   { return n.Node }
 func (n FloatType) LlvmNode() *Node                  { return n.Node }
-func (n FuncAttribute) LlvmNode() *Node              { return n.Node }
+func (n FuncAttr) LlvmNode() *Node                   { return n.Node }
 func (n FuncBody) LlvmNode() *Node                   { return n.Node }
 func (n FuncDecl) LlvmNode() *Node                   { return n.Node }
 func (n FuncDef) LlvmNode() *Node                    { return n.Node }
@@ -268,7 +268,7 @@ func (n OrInst) LlvmNode() *Node                     { return n.Node }
 func (n OverflowFlag) LlvmNode() *Node               { return n.Node }
 func (n PackedStructType) LlvmNode() *Node           { return n.Node }
 func (n Param) LlvmNode() *Node                      { return n.Node }
-func (n ParamAttribute) LlvmNode() *Node             { return n.Node }
+func (n ParamAttr) LlvmNode() *Node                  { return n.Node }
 func (n Params) LlvmNode() *Node                     { return n.Node }
 func (n Personality) LlvmNode() *Node                { return n.Node }
 func (n PhiInst) LlvmNode() *Node                    { return n.Node }
@@ -283,7 +283,7 @@ func (n ResumeTerm) LlvmNode() *Node                 { return n.Node }
 func (n RetTerm) LlvmNode() *Node                    { return n.Node }
 func (n RetainedNodesField) LlvmNode() *Node         { return n.Node }
 func (n RetainedTypesField) LlvmNode() *Node         { return n.Node }
-func (n ReturnAttribute) LlvmNode() *Node            { return n.Node }
+func (n ReturnAttr) LlvmNode() *Node                 { return n.Node }
 func (n RuntimeLangField) LlvmNode() *Node           { return n.Node }
 func (n RuntimeVersionField) LlvmNode() *Node        { return n.Node }
 func (n SDivExpr) LlvmNode() *Node                   { return n.Node }
@@ -931,22 +931,22 @@ func (StructType) firstClassTypeNode()       {}
 func (TokenType) firstClassTypeNode()        {}
 func (VectorType) firstClassTypeNode()       {}
 
-type FuncAttr interface {
+type FuncAttribute interface {
 	LlvmNode
-	funcAttrNode()
+	funcAttributeNode()
 }
 
-// funcAttrNode() ensures that only the following types can be
-// assigned to FuncAttr.
+// funcAttributeNode() ensures that only the following types can be
+// assigned to FuncAttribute.
 //
-func (AlignPair) funcAttrNode()      {}
-func (AlignStackPair) funcAttrNode() {}
-func (AllocSize) funcAttrNode()      {}
-func (AttrGroupID) funcAttrNode()    {}
-func (AttrPair) funcAttrNode()       {}
-func (AttrString) funcAttrNode()     {}
-func (FuncAttribute) funcAttrNode()  {}
-func (StackAlignment) funcAttrNode() {}
+func (AlignPair) funcAttributeNode()      {}
+func (AlignStackPair) funcAttributeNode() {}
+func (AllocSize) funcAttributeNode()      {}
+func (AttrGroupID) funcAttributeNode()    {}
+func (AttrPair) funcAttributeNode()       {}
+func (AttrString) funcAttributeNode()     {}
+func (FuncAttr) funcAttributeNode()       {}
+func (StackAlignment) funcAttributeNode() {}
 
 type GenericDINodeField interface {
 	LlvmNode
@@ -1214,31 +1214,31 @@ type MetadataNode interface {
 func (DIExpression) metadataNodeNode() {}
 func (MetadataID) metadataNodeNode()   {}
 
-type ParamAttr interface {
+type ParamAttribute interface {
 	LlvmNode
-	paramAttrNode()
+	paramAttributeNode()
 }
 
-// paramAttrNode() ensures that only the following types can be
-// assigned to ParamAttr.
+// paramAttributeNode() ensures that only the following types can be
+// assigned to ParamAttribute.
 //
-func (Alignment) paramAttrNode()       {}
-func (AttrPair) paramAttrNode()        {}
-func (AttrString) paramAttrNode()      {}
-func (Dereferenceable) paramAttrNode() {}
-func (ParamAttribute) paramAttrNode()  {}
+func (Alignment) paramAttributeNode()       {}
+func (AttrPair) paramAttributeNode()        {}
+func (AttrString) paramAttributeNode()      {}
+func (Dereferenceable) paramAttributeNode() {}
+func (ParamAttr) paramAttributeNode()       {}
 
-type ReturnAttr interface {
+type ReturnAttribute interface {
 	LlvmNode
-	returnAttrNode()
+	returnAttributeNode()
 }
 
-// returnAttrNode() ensures that only the following types can be
-// assigned to ReturnAttr.
+// returnAttributeNode() ensures that only the following types can be
+// assigned to ReturnAttribute.
 //
-func (Alignment) returnAttrNode()       {}
-func (Dereferenceable) returnAttrNode() {}
-func (ReturnAttribute) returnAttrNode() {}
+func (Alignment) returnAttributeNode()       {}
+func (Dereferenceable) returnAttributeNode() {}
+func (ReturnAttr) returnAttributeNode()      {}
 
 type SpecializedMDNode interface {
 	LlvmNode
@@ -1844,11 +1844,11 @@ func (n Arg) Typ() LlvmNode {
 	return ToLlvmNode(n.Child(selector.OneOf(ll.ArrayType, ll.FloatType, ll.IntType, ll.LabelType, ll.MMXType, ll.MetadataType, ll.NamedType, ll.PackedStructType, ll.PointerType, ll.StructType, ll.TokenType, ll.VectorType))).(LlvmNode)
 }
 
-func (n Arg) Attrs() []ParamAttr {
-	nodes := n.Children(selector.ParamAttr)
-	var ret = make([]ParamAttr, 0, len(nodes))
+func (n Arg) Attrs() []ParamAttribute {
+	nodes := n.Children(selector.ParamAttribute)
+	var ret = make([]ParamAttribute, 0, len(nodes))
 	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(ParamAttr))
+		ret = append(ret, ToLlvmNode(node).(ParamAttribute))
 	}
 	return ret
 }
@@ -1966,11 +1966,11 @@ func (n AttrGroupDef) Name() AttrGroupID {
 	return AttrGroupID{n.Child(selector.AttrGroupID)}
 }
 
-func (n AttrGroupDef) Attrs() []FuncAttr {
-	nodes := n.Child(selector.AttrGroupID).NextAll(selector.FuncAttr)
-	var ret = make([]FuncAttr, 0, len(nodes))
+func (n AttrGroupDef) Attrs() []FuncAttribute {
+	nodes := n.Child(selector.AttrGroupID).NextAll(selector.FuncAttribute)
+	var ret = make([]FuncAttribute, 0, len(nodes))
 	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(FuncAttr))
+		ret = append(ret, ToLlvmNode(node).(FuncAttribute))
 	}
 	return ret
 }
@@ -2148,11 +2148,11 @@ func (n CallInst) CallingConv() CallingConv {
 	return nil
 }
 
-func (n CallInst) ReturnAttrs() []ReturnAttr {
-	nodes := n.Children(selector.ReturnAttr)
-	var ret = make([]ReturnAttr, 0, len(nodes))
+func (n CallInst) ReturnAttrs() []ReturnAttribute {
+	nodes := n.Children(selector.ReturnAttribute)
+	var ret = make([]ReturnAttribute, 0, len(nodes))
 	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(ReturnAttr))
+		ret = append(ret, ToLlvmNode(node).(ReturnAttribute))
 	}
 	return ret
 }
@@ -2176,11 +2176,11 @@ func (n CallInst) Args() Args {
 	return Args{n.Child(selector.Args)}
 }
 
-func (n CallInst) FuncAttrs() []FuncAttr {
-	nodes := n.Children(selector.FuncAttr)
-	var ret = make([]FuncAttr, 0, len(nodes))
+func (n CallInst) FuncAttrs() []FuncAttribute {
+	nodes := n.Children(selector.FuncAttribute)
+	var ret = make([]FuncAttribute, 0, len(nodes))
 	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(FuncAttr))
+		ret = append(ret, ToLlvmNode(node).(FuncAttribute))
 	}
 	return ret
 }
@@ -3691,7 +3691,7 @@ func (n FloatType) FloatKind() FloatKind {
 	return FloatKind{n.Child(selector.FloatKind)}
 }
 
-type FuncAttribute struct {
+type FuncAttr struct {
 	*Node
 }
 
@@ -3801,11 +3801,11 @@ func (n FuncHeader) CallingConv() CallingConv {
 	return nil
 }
 
-func (n FuncHeader) ReturnAttrs() []ReturnAttr {
-	nodes := n.Children(selector.ReturnAttr)
-	var ret = make([]ReturnAttr, 0, len(nodes))
+func (n FuncHeader) ReturnAttrs() []ReturnAttribute {
+	nodes := n.Children(selector.ReturnAttribute)
+	var ret = make([]ReturnAttribute, 0, len(nodes))
 	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(ReturnAttr))
+		ret = append(ret, ToLlvmNode(node).(ReturnAttribute))
 	}
 	return ret
 }
@@ -3836,11 +3836,11 @@ func (n FuncHeader) AddrSpace() *AddrSpace {
 	return nil
 }
 
-func (n FuncHeader) FuncAttrs() []FuncAttr {
-	nodes := n.Children(selector.FuncAttr)
-	var ret = make([]FuncAttr, 0, len(nodes))
+func (n FuncHeader) FuncAttrs() []FuncAttribute {
+	nodes := n.Children(selector.FuncAttribute)
+	var ret = make([]FuncAttribute, 0, len(nodes))
 	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(FuncAttr))
+		ret = append(ret, ToLlvmNode(node).(FuncAttribute))
 	}
 	return ret
 }
@@ -4086,11 +4086,11 @@ func (n GlobalDecl) GlobalAttrs() []GlobalAttr {
 	return ret
 }
 
-func (n GlobalDecl) FuncAttrs() []FuncAttr {
-	nodes := n.Children(selector.FuncAttr)
-	var ret = make([]FuncAttr, 0, len(nodes))
+func (n GlobalDecl) FuncAttrs() []FuncAttribute {
+	nodes := n.Children(selector.FuncAttribute)
+	var ret = make([]FuncAttribute, 0, len(nodes))
 	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(FuncAttr))
+		ret = append(ret, ToLlvmNode(node).(FuncAttribute))
 	}
 	return ret
 }
@@ -4180,11 +4180,11 @@ func (n GlobalDef) GlobalAttrs() []GlobalAttr {
 	return ret
 }
 
-func (n GlobalDef) FuncAttrs() []FuncAttr {
-	nodes := n.Children(selector.FuncAttr)
-	var ret = make([]FuncAttr, 0, len(nodes))
+func (n GlobalDef) FuncAttrs() []FuncAttribute {
+	nodes := n.Children(selector.FuncAttribute)
+	var ret = make([]FuncAttribute, 0, len(nodes))
 	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(FuncAttr))
+		ret = append(ret, ToLlvmNode(node).(FuncAttribute))
 	}
 	return ret
 }
@@ -4598,11 +4598,11 @@ func (n InvokeTerm) CallingConv() CallingConv {
 	return nil
 }
 
-func (n InvokeTerm) ReturnAttrs() []ReturnAttr {
-	nodes := n.Children(selector.ReturnAttr)
-	var ret = make([]ReturnAttr, 0, len(nodes))
+func (n InvokeTerm) ReturnAttrs() []ReturnAttribute {
+	nodes := n.Children(selector.ReturnAttribute)
+	var ret = make([]ReturnAttribute, 0, len(nodes))
 	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(ReturnAttr))
+		ret = append(ret, ToLlvmNode(node).(ReturnAttribute))
 	}
 	return ret
 }
@@ -4626,11 +4626,11 @@ func (n InvokeTerm) Args() Args {
 	return Args{n.Child(selector.Args)}
 }
 
-func (n InvokeTerm) FuncAttrs() []FuncAttr {
-	nodes := n.Children(selector.FuncAttr)
-	var ret = make([]FuncAttr, 0, len(nodes))
+func (n InvokeTerm) FuncAttrs() []FuncAttribute {
+	nodes := n.Children(selector.FuncAttribute)
+	var ret = make([]FuncAttribute, 0, len(nodes))
 	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(FuncAttr))
+		ret = append(ret, ToLlvmNode(node).(FuncAttribute))
 	}
 	return ret
 }
@@ -5256,11 +5256,11 @@ func (n Param) Typ() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
-func (n Param) Attrs() []ParamAttr {
-	nodes := n.Children(selector.ParamAttr)
-	var ret = make([]ParamAttr, 0, len(nodes))
+func (n Param) Attrs() []ParamAttribute {
+	nodes := n.Children(selector.ParamAttribute)
+	var ret = make([]ParamAttribute, 0, len(nodes))
 	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(ParamAttr))
+		ret = append(ret, ToLlvmNode(node).(ParamAttribute))
 	}
 	return ret
 }
@@ -5272,7 +5272,7 @@ func (n Param) Name() *LocalIdent {
 	return nil
 }
 
-type ParamAttribute struct {
+type ParamAttr struct {
 	*Node
 }
 
@@ -5475,7 +5475,7 @@ func (n RetainedTypesField) MDField() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
-type ReturnAttribute struct {
+type ReturnAttr struct {
 	*Node
 }
 
