@@ -1675,7 +1675,7 @@ func (n AliasDef) UnnamedAddr() *UnnamedAddr {
 	return nil
 }
 
-func (n AliasDef) Typ() Type {
+func (n AliasDef) ContentType() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
@@ -4336,7 +4336,7 @@ func (n IFuncDef) UnnamedAddr() *UnnamedAddr {
 	return nil
 }
 
-func (n IFuncDef) Typ() Type {
+func (n IFuncDef) ContentType() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
