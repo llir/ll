@@ -5007,7 +5007,7 @@ type MetadataDef struct {
 	*Node
 }
 
-func (n MetadataDef) Name() MetadataID {
+func (n MetadataDef) ID() MetadataID {
 	return MetadataID{n.Child(selector.MetadataID)}
 }
 

@@ -49,7 +49,7 @@ const (
 	FuncBody         // Blocks=(BasicBlock)+ UseListOrders=(UseListOrder)*
 	AttrGroupDef     // Name=AttrGroupID Attrs=(FuncAttribute)*
 	NamedMetadataDef // Name=MetadataName MDNodes=(MetadataNode)*
-	MetadataDef      // Name=MetadataID Distinct? MDNode=(MDTuple | SpecializedMDNode)
+	MetadataDef      // ID=MetadataID Distinct? MDNode=(MDTuple | SpecializedMDNode)
 	Distinct
 	UseListOrder   // TypeValue Indicies=(UintLit)+
 	UseListOrderBB // Func=GlobalIdent Block=LocalIdent Indicies=(UintLit)+
