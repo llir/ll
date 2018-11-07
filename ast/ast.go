@@ -1679,12 +1679,8 @@ func (n AliasDef) ContentType() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
-func (n AliasDef) AliaseeType() Type {
-	return ToLlvmNode(n.Child(selector.Type).Next(selector.Type)).(Type)
-}
-
-func (n AliasDef) Aliasee() Constant {
-	return ToLlvmNode(n.Child(selector.GlobalIdent).Next(selector.Constant)).(Constant)
+func (n AliasDef) Aliasee() TypeConst {
+	return TypeConst{n.Child(selector.TypeConst)}
 }
 
 type AlignField struct {
@@ -4340,12 +4336,8 @@ func (n IFuncDef) ContentType() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
-func (n IFuncDef) ResolverType() Type {
-	return ToLlvmNode(n.Child(selector.Type).Next(selector.Type)).(Type)
-}
-
-func (n IFuncDef) Resolver() Constant {
-	return ToLlvmNode(n.Child(selector.GlobalIdent).Next(selector.Constant)).(Constant)
+func (n IFuncDef) Resolver() TypeConst {
+	return TypeConst{n.Child(selector.TypeConst)}
 }
 
 type IPred struct {

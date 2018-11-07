@@ -37,8 +37,8 @@ const (
 	GlobalDef  // Name=GlobalIdent Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? AddrSpace? ExternallyInitialized? Immutable ContentType=Type Init=Constant Section? Comdat? Alignment? Metadata=(MetadataAttachment)* FuncAttrs=(FuncAttribute)*
 	ExternallyInitialized
 	Immutable
-	AliasDef         // Name=GlobalIdent ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? ContentType=Type AliaseeType=Type Aliasee=Constant
-	IFuncDef         // Name=GlobalIdent ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? ContentType=Type ResolverType=Type Resolver=Constant
+	AliasDef         // Name=GlobalIdent ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? ContentType=Type Aliasee=TypeConst
+	IFuncDef         // Name=GlobalIdent ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? ContentType=Type Resolver=TypeConst
 	FuncDecl         // Metadata=(MetadataAttachment)* Header=FuncHeader
 	FuncDef          // Header=FuncHeader Metadata=(MetadataAttachment)* Body=FuncBody
 	FuncHeader       // ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? CallingConv? ReturnAttrs=(ReturnAttribute)* RetType=Type Name=GlobalIdent Params UnnamedAddr? AddrSpace? FuncAttrs=(FuncAttribute)* Section? Comdat? GCNode? Prefix? Prologue? Personality?
@@ -1667,10 +1667,10 @@ var ruleNodeType = [...]NodeType{
 	Immutable,                  // Immutable : 'global'
 	0,                          // IndirectSymbolDef : AliasDef
 	0,                          // IndirectSymbolDef : IFuncDef
-	AliasDef,                   // AliasDef : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'alias' Type ',' Type Constant
-	AliasDef,                   // AliasDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'alias' Type ',' Type Constant
-	IFuncDef,                   // IFuncDef : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'ifunc' Type ',' Type Constant
-	IFuncDef,                   // IFuncDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'ifunc' Type ',' Type Constant
+	AliasDef,                   // AliasDef : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'alias' Type ',' TypeConst
+	AliasDef,                   // AliasDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'alias' Type ',' TypeConst
+	IFuncDef,                   // IFuncDef : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'ifunc' Type ',' TypeConst
+	IFuncDef,                   // IFuncDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'ifunc' Type ',' TypeConst
 	FuncDecl,                   // FuncDecl : 'declare' MetadataAttachment_optlist FuncHeader
 	0,                          // MetadataAttachment_optlist : MetadataAttachment_optlist MetadataAttachment
 	0,                          // MetadataAttachment_optlist :
