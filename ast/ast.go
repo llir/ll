@@ -1945,7 +1945,7 @@ type AttrGroupDef struct {
 	*Node
 }
 
-func (n AttrGroupDef) Name() AttrGroupID {
+func (n AttrGroupDef) ID() AttrGroupID {
 	return AttrGroupID{n.Child(selector.AttrGroupID)}
 }
 
