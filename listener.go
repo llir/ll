@@ -933,7 +933,7 @@ var DIEnumeratorField = []NodeType{
 
 var DIExpressionField = []NodeType{
 	DwarfOp,
-	IntLit,
+	UintLit,
 }
 
 var DIFileField = []NodeType{
@@ -2274,7 +2274,7 @@ var ruleNodeType = [...]NodeType{
 	0,                          // DIExpressionField_list_withsep : DIExpressionField
 	0,                          // DIExpressionField_list_withsep_opt : DIExpressionField_list_withsep
 	0,                          // DIExpressionField_list_withsep_opt :
-	0,                          // DIExpressionField : IntLit
+	0,                          // DIExpressionField : UintLit
 	0,                          // DIExpressionField : DwarfOp
 	DIFile,                     // DIFile : '!DIFile' '(' DIFileField_list_withsep_opt ')'
 	0,                          // DIFileField_list_withsep : DIFileField_list_withsep ',' DIFileField

@@ -624,7 +624,7 @@ type DIExpressionField interface {
 // assigned to DIExpressionField.
 //
 func (DwarfOp) dIExpressionFieldNode() {}
-func (IntLit) dIExpressionFieldNode()  {}
+func (UintLit) dIExpressionFieldNode() {}
 
 type DIFileField interface {
 	LlvmNode
