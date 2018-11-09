@@ -284,7 +284,7 @@ const (
 	NameField                  // Name=StringLit
 	NameTableKindField         // NameTableKind
 	NodesField                 // Nodes=MDField
-	OffsetField                // Offset=IntLit
+	OffsetField                // OffsetField=IntLit
 	OperandsField              // Operands=MDFields
 	ProducerField              // Producer=StringLit
 	RetainedNodesField         // RetainedNodes=MDField

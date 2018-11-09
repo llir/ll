@@ -5186,7 +5186,7 @@ type OffsetField struct {
 	*Node
 }
 
-func (n OffsetField) _Offset() IntLit {
+func (n OffsetField) OffsetField() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
