@@ -1687,7 +1687,7 @@ type AlignField struct {
 	*Node
 }
 
-func (n AlignField) IntLit() IntLit {
+func (n AlignField) Align() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -1844,7 +1844,7 @@ type ArgField struct {
 	*Node
 }
 
-func (n ArgField) IntLit() IntLit {
+func (n ArgField) Arg() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -1986,7 +1986,7 @@ type AttributesField struct {
 	*Node
 }
 
-func (n AttributesField) IntLit() IntLit {
+func (n AttributesField) Attributes() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -1994,7 +1994,7 @@ type BaseTypeField struct {
 	*Node
 }
 
-func (n BaseTypeField) MDField() MDField {
+func (n BaseTypeField) BaseType() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -2100,7 +2100,7 @@ type CCField struct {
 	*Node
 }
 
-func (n CCField) DwarfCC() DwarfCC {
+func (n CCField) CC() DwarfCC {
 	return DwarfCC{n.Child(selector.DwarfCC)}
 }
 
@@ -2299,7 +2299,7 @@ type ChecksumField struct {
 	*Node
 }
 
-func (n ChecksumField) StringLit() StringLit {
+func (n ChecksumField) Checksum() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -2311,7 +2311,7 @@ type ChecksumkindField struct {
 	*Node
 }
 
-func (n ChecksumkindField) ChecksumKind() ChecksumKind {
+func (n ChecksumkindField) Checksumkind() ChecksumKind {
 	return ChecksumKind{n.Child(selector.ChecksumKind)}
 }
 
@@ -2440,7 +2440,7 @@ type ColumnField struct {
 	*Node
 }
 
-func (n ColumnField) IntLit() IntLit {
+func (n ColumnField) Column() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -2504,7 +2504,7 @@ type ConfigMacrosField struct {
 	*Node
 }
 
-func (n ConfigMacrosField) StringLit() StringLit {
+func (n ConfigMacrosField) ConfigMacros() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -2512,7 +2512,7 @@ type ContainingTypeField struct {
 	*Node
 }
 
-func (n ContainingTypeField) MDField() MDField {
+func (n ContainingTypeField) ContainingType() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -2520,7 +2520,7 @@ type CountField struct {
 	*Node
 }
 
-func (n CountField) MDFieldOrInt() MDFieldOrInt {
+func (n CountField) Count() MDFieldOrInt {
 	return ToLlvmNode(n.Child(selector.MDFieldOrInt)).(MDFieldOrInt)
 }
 
@@ -2881,7 +2881,7 @@ type DebugInfoForProfilingField struct {
 	*Node
 }
 
-func (n DebugInfoForProfilingField) BoolLit() BoolLit {
+func (n DebugInfoForProfilingField) DebugInfoForProfiling() BoolLit {
 	return BoolLit{n.Child(selector.BoolLit)}
 }
 
@@ -2889,7 +2889,7 @@ type DeclarationField struct {
 	*Node
 }
 
-func (n DeclarationField) MDField() MDField {
+func (n DeclarationField) Declaration() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -2905,7 +2905,7 @@ type DirectoryField struct {
 	*Node
 }
 
-func (n DirectoryField) StringLit() StringLit {
+func (n DirectoryField) Directory() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -2913,7 +2913,7 @@ type DiscriminatorField struct {
 	*Node
 }
 
-func (n DiscriminatorField) MDField() MDField {
+func (n DiscriminatorField) Discriminator() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -2921,7 +2921,7 @@ type DiscriminatorIntField struct {
 	*Node
 }
 
-func (n DiscriminatorIntField) IntLit() IntLit {
+func (n DiscriminatorIntField) DiscriminatorInt() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -2933,7 +2933,7 @@ type DwarfAddressSpaceField struct {
 	*Node
 }
 
-func (n DwarfAddressSpaceField) IntLit() IntLit {
+func (n DwarfAddressSpaceField) DwarfAddressSpace() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -3011,7 +3011,7 @@ type DwoIdField struct {
 	*Node
 }
 
-func (n DwoIdField) IntLit() IntLit {
+func (n DwoIdField) DwoId() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -3019,7 +3019,7 @@ type ElementsField struct {
 	*Node
 }
 
-func (n ElementsField) MDField() MDField {
+func (n ElementsField) Elements() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -3050,7 +3050,7 @@ type EncodingField struct {
 	*Node
 }
 
-func (n EncodingField) DwarfAttEncoding() DwarfAttEncoding {
+func (n EncodingField) Encoding() DwarfAttEncoding {
 	return DwarfAttEncoding{n.Child(selector.DwarfAttEncoding)}
 }
 
@@ -3058,7 +3058,7 @@ type EntityField struct {
 	*Node
 }
 
-func (n EntityField) MDField() MDField {
+func (n EntityField) Entity() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -3066,7 +3066,7 @@ type EnumsField struct {
 	*Node
 }
 
-func (n EnumsField) MDField() MDField {
+func (n EnumsField) Enums() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -3090,7 +3090,7 @@ type ExportSymbolsField struct {
 	*Node
 }
 
-func (n ExportSymbolsField) BoolLit() BoolLit {
+func (n ExportSymbolsField) ExportSymbols() BoolLit {
 	return BoolLit{n.Child(selector.BoolLit)}
 }
 
@@ -3098,7 +3098,7 @@ type ExprField struct {
 	*Node
 }
 
-func (n ExprField) MDField() MDField {
+func (n ExprField) Expr() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -3114,7 +3114,7 @@ type ExtraDataField struct {
 	*Node
 }
 
-func (n ExtraDataField) MDField() MDField {
+func (n ExtraDataField) ExtraData() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -3622,7 +3622,7 @@ type FileField struct {
 	*Node
 }
 
-func (n FileField) MDField() MDField {
+func (n FileField) File() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -3630,7 +3630,7 @@ type FilenameField struct {
 	*Node
 }
 
-func (n FilenameField) StringLit() StringLit {
+func (n FilenameField) Filename() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -3638,7 +3638,7 @@ type FlagsField struct {
 	*Node
 }
 
-func (n FlagsField) DIFlags() DIFlags {
+func (n FlagsField) Flags() DIFlags {
 	return DIFlags{n.Child(selector.DIFlags)}
 }
 
@@ -3646,7 +3646,7 @@ type FlagsStringField struct {
 	*Node
 }
 
-func (n FlagsStringField) StringLit() StringLit {
+func (n FlagsStringField) FlagsString() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -3987,7 +3987,7 @@ type GetterField struct {
 	*Node
 }
 
-func (n GetterField) StringLit() StringLit {
+func (n GetterField) Getter() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -4222,7 +4222,7 @@ type GlobalsField struct {
 	*Node
 }
 
-func (n GlobalsField) MDField() MDField {
+func (n GlobalsField) Globals() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -4230,7 +4230,7 @@ type HeaderField struct {
 	*Node
 }
 
-func (n HeaderField) StringLit() StringLit {
+func (n HeaderField) Header() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -4348,7 +4348,7 @@ type IdentifierField struct {
 	*Node
 }
 
-func (n IdentifierField) StringLit() StringLit {
+func (n IdentifierField) Identifier() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -4360,7 +4360,7 @@ type ImportsField struct {
 	*Node
 }
 
-func (n ImportsField) MDField() MDField {
+func (n ImportsField) Imports() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -4392,7 +4392,7 @@ type IncludePathField struct {
 	*Node
 }
 
-func (n IncludePathField) StringLit() StringLit {
+func (n IncludePathField) IncludePath() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -4459,7 +4459,7 @@ type InlinedAtField struct {
 	*Node
 }
 
-func (n InlinedAtField) MDField() MDField {
+func (n InlinedAtField) InlinedAt() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -4686,7 +4686,7 @@ type IsDefinitionField struct {
 	*Node
 }
 
-func (n IsDefinitionField) BoolLit() BoolLit {
+func (n IsDefinitionField) IsDefinition() BoolLit {
 	return BoolLit{n.Child(selector.BoolLit)}
 }
 
@@ -4694,7 +4694,7 @@ type IsImplicitCodeField struct {
 	*Node
 }
 
-func (n IsImplicitCodeField) BoolLit() BoolLit {
+func (n IsImplicitCodeField) IsImplicitCode() BoolLit {
 	return BoolLit{n.Child(selector.BoolLit)}
 }
 
@@ -4702,7 +4702,7 @@ type IsLocalField struct {
 	*Node
 }
 
-func (n IsLocalField) BoolLit() BoolLit {
+func (n IsLocalField) IsLocal() BoolLit {
 	return BoolLit{n.Child(selector.BoolLit)}
 }
 
@@ -4710,7 +4710,7 @@ type IsOptimizedField struct {
 	*Node
 }
 
-func (n IsOptimizedField) BoolLit() BoolLit {
+func (n IsOptimizedField) IsOptimized() BoolLit {
 	return BoolLit{n.Child(selector.BoolLit)}
 }
 
@@ -4718,7 +4718,7 @@ type IsUnsignedField struct {
 	*Node
 }
 
-func (n IsUnsignedField) BoolLit() BoolLit {
+func (n IsUnsignedField) IsUnsigned() BoolLit {
 	return BoolLit{n.Child(selector.BoolLit)}
 }
 
@@ -4726,7 +4726,7 @@ type IsysrootField struct {
 	*Node
 }
 
-func (n IsysrootField) StringLit() StringLit {
+func (n IsysrootField) Isysroot() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -4834,7 +4834,7 @@ type LanguageField struct {
 	*Node
 }
 
-func (n LanguageField) DwarfLang() DwarfLang {
+func (n LanguageField) Language() DwarfLang {
 	return DwarfLang{n.Child(selector.DwarfLang)}
 }
 
@@ -4842,7 +4842,7 @@ type LineField struct {
 	*Node
 }
 
-func (n LineField) IntLit() IntLit {
+func (n LineField) Line() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -4854,7 +4854,7 @@ type LinkageNameField struct {
 	*Node
 }
 
-func (n LinkageNameField) StringLit() StringLit {
+func (n LinkageNameField) LinkageName() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -4946,7 +4946,7 @@ type LowerBoundField struct {
 	*Node
 }
 
-func (n LowerBoundField) IntLit() IntLit {
+func (n LowerBoundField) LowerBound() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -4987,7 +4987,7 @@ type MacrosField struct {
 	*Node
 }
 
-func (n MacrosField) MDField() MDField {
+func (n MacrosField) Macros() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -5110,7 +5110,7 @@ type NameField struct {
 	*Node
 }
 
-func (n NameField) StringLit() StringLit {
+func (n NameField) Name() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -5162,7 +5162,7 @@ type NodesField struct {
 	*Node
 }
 
-func (n NodesField) MDField() MDField {
+func (n NodesField) Nodes() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -5186,7 +5186,7 @@ type OffsetField struct {
 	*Node
 }
 
-func (n OffsetField) IntLit() IntLit {
+func (n OffsetField) _Offset() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -5215,7 +5215,7 @@ type OperandsField struct {
 	*Node
 }
 
-func (n OperandsField) MDFields() MDFields {
+func (n OperandsField) Operands() MDFields {
 	return MDFields{n.Child(selector.MDFields)}
 }
 
@@ -5382,7 +5382,7 @@ type ProducerField struct {
 	*Node
 }
 
-func (n ProducerField) StringLit() StringLit {
+func (n ProducerField) Producer() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -5472,7 +5472,7 @@ type RetainedNodesField struct {
 	*Node
 }
 
-func (n RetainedNodesField) MDField() MDField {
+func (n RetainedNodesField) RetainedNodes() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -5480,7 +5480,7 @@ type RetainedTypesField struct {
 	*Node
 }
 
-func (n RetainedTypesField) MDField() MDField {
+func (n RetainedTypesField) RetainedTypes() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -5492,7 +5492,7 @@ type RuntimeLangField struct {
 	*Node
 }
 
-func (n RuntimeLangField) DwarfLang() DwarfLang {
+func (n RuntimeLangField) RuntimeLang() DwarfLang {
 	return DwarfLang{n.Child(selector.DwarfLang)}
 }
 
@@ -5500,7 +5500,7 @@ type RuntimeVersionField struct {
 	*Node
 }
 
-func (n RuntimeVersionField) IntLit() IntLit {
+func (n RuntimeVersionField) RuntimeVersion() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -5654,7 +5654,7 @@ type ScopeField struct {
 	*Node
 }
 
-func (n ScopeField) MDField() MDField {
+func (n ScopeField) Scope() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -5662,7 +5662,7 @@ type ScopeLineField struct {
 	*Node
 }
 
-func (n ScopeLineField) IntLit() IntLit {
+func (n ScopeLineField) ScopeLine() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -5723,7 +5723,7 @@ type SetterField struct {
 	*Node
 }
 
-func (n SetterField) StringLit() StringLit {
+func (n SetterField) Setter() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -5827,7 +5827,7 @@ type SizeField struct {
 	*Node
 }
 
-func (n SizeField) IntLit() IntLit {
+func (n SizeField) Size() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -5835,7 +5835,7 @@ type SourceField struct {
 	*Node
 }
 
-func (n SourceField) StringLit() StringLit {
+func (n SourceField) Source() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -5851,7 +5851,7 @@ type SplitDebugFilenameField struct {
 	*Node
 }
 
-func (n SplitDebugFilenameField) StringLit() StringLit {
+func (n SplitDebugFilenameField) SplitDebugFilename() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -5859,7 +5859,7 @@ type SplitDebugInliningField struct {
 	*Node
 }
 
-func (n SplitDebugInliningField) BoolLit() BoolLit {
+func (n SplitDebugInliningField) SplitDebugInlining() BoolLit {
 	return BoolLit{n.Child(selector.BoolLit)}
 }
 
@@ -6058,7 +6058,7 @@ type TagField struct {
 	*Node
 }
 
-func (n TagField) DwarfTag() DwarfTag {
+func (n TagField) Tag() DwarfTag {
 	return DwarfTag{n.Child(selector.DwarfTag)}
 }
 
@@ -6086,7 +6086,7 @@ type TemplateParamsField struct {
 	*Node
 }
 
-func (n TemplateParamsField) MDField() MDField {
+func (n TemplateParamsField) TemplateParams() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -6094,7 +6094,7 @@ type ThisAdjustmentField struct {
 	*Node
 }
 
-func (n ThisAdjustmentField) IntLit() IntLit {
+func (n ThisAdjustmentField) ThisAdjustment() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -6113,7 +6113,7 @@ type ThrownTypesField struct {
 	*Node
 }
 
-func (n ThrownTypesField) MDField() MDField {
+func (n ThrownTypesField) ThrownTypes() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -6182,7 +6182,7 @@ type TypeField struct {
 	*Node
 }
 
-func (n TypeField) MDField() MDField {
+func (n TypeField) Type() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -6190,7 +6190,7 @@ type TypeMacinfoField struct {
 	*Node
 }
 
-func (n TypeMacinfoField) DwarfMacinfo() DwarfMacinfo {
+func (n TypeMacinfoField) TypeMacinfo() DwarfMacinfo {
 	return DwarfMacinfo{n.Child(selector.DwarfMacinfo)}
 }
 
@@ -6210,7 +6210,7 @@ type TypesField struct {
 	*Node
 }
 
-func (n TypesField) MDField() MDField {
+func (n TypesField) Types() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -6339,7 +6339,7 @@ type UnitField struct {
 	*Node
 }
 
-func (n UnitField) MDField() MDField {
+func (n UnitField) Unit() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -6445,7 +6445,7 @@ type ValueField struct {
 	*Node
 }
 
-func (n ValueField) MDField() MDField {
+func (n ValueField) Value() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -6453,7 +6453,7 @@ type ValueIntField struct {
 	*Node
 }
 
-func (n ValueIntField) IntLit() IntLit {
+func (n ValueIntField) ValueInt() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -6461,7 +6461,7 @@ type ValueStringField struct {
 	*Node
 }
 
-func (n ValueStringField) StringLit() StringLit {
+func (n ValueStringField) ValueString() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -6469,7 +6469,7 @@ type VarField struct {
 	*Node
 }
 
-func (n VarField) MDField() MDField {
+func (n VarField) Var() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -6502,7 +6502,7 @@ type VirtualIndexField struct {
 	*Node
 }
 
-func (n VirtualIndexField) IntLit() IntLit {
+func (n VirtualIndexField) VirtualIndex() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -6510,7 +6510,7 @@ type VirtualityField struct {
 	*Node
 }
 
-func (n VirtualityField) DwarfVirtuality() DwarfVirtuality {
+func (n VirtualityField) Virtuality() DwarfVirtuality {
 	return DwarfVirtuality{n.Child(selector.DwarfVirtuality)}
 }
 
@@ -6530,7 +6530,7 @@ type VtableHolderField struct {
 	*Node
 }
 
-func (n VtableHolderField) MDField() MDField {
+func (n VtableHolderField) VtableHolder() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
