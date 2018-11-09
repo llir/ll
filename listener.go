@@ -248,7 +248,7 @@ const (
 	DeclarationField           // Declaration=MDField
 	DirectoryField             // Directory=StringLit
 	DiscriminatorField         // Discriminator=MDField
-	DiscriminatorIntField      // DiscriminatorInt=IntLit
+	DiscriminatorIntField      // Discriminator=IntLit
 	DwarfAddressSpaceField     // DwarfAddressSpace=IntLit
 	DwoIdField                 // DwoId=IntLit
 	ElementsField              // Elements=MDField
@@ -262,7 +262,7 @@ const (
 	FileField                  // File=MDField
 	FilenameField              // Filename=StringLit
 	FlagsField                 // Flags=DIFlags
-	FlagsStringField           // FlagsString=StringLit
+	FlagsStringField           // Flags=StringLit
 	GetterField                // Getter=StringLit
 	GlobalsField               // Globals=MDField
 	HeaderField                // Header=StringLit
@@ -302,13 +302,13 @@ const (
 	TemplateParamsField        // TemplateParams=MDField
 	ThisAdjustmentField        // ThisAdjustment=IntLit
 	ThrownTypesField           // ThrownTypes=MDField
-	TypeField                  // Type=MDField
+	TypeField                  // Typ=MDField
 	TypeMacinfoField           // TypeMacinfo=DwarfMacinfo
 	TypesField                 // Types=MDField
 	UnitField                  // Unit=MDField
 	ValueField                 // Value=MDField
-	ValueIntField              // ValueInt=IntLit
-	ValueStringField           // ValueString=StringLit
+	ValueIntField              // Value=IntLit
+	ValueStringField           // Value=StringLit
 	VarField                   // Var=MDField
 	VirtualIndexField          // VirtualIndex=IntLit
 	VirtualityField            // Virtuality=DwarfVirtuality

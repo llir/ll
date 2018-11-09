@@ -2921,7 +2921,7 @@ type DiscriminatorIntField struct {
 	*Node
 }
 
-func (n DiscriminatorIntField) DiscriminatorInt() IntLit {
+func (n DiscriminatorIntField) Discriminator() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -3646,7 +3646,7 @@ type FlagsStringField struct {
 	*Node
 }
 
-func (n FlagsStringField) FlagsString() StringLit {
+func (n FlagsStringField) Flags() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
@@ -6182,7 +6182,7 @@ type TypeField struct {
 	*Node
 }
 
-func (n TypeField) Type() MDField {
+func (n TypeField) Typ() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
@@ -6453,7 +6453,7 @@ type ValueIntField struct {
 	*Node
 }
 
-func (n ValueIntField) ValueInt() IntLit {
+func (n ValueIntField) Value() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
@@ -6461,7 +6461,7 @@ type ValueStringField struct {
 	*Node
 }
 
-func (n ValueStringField) ValueString() StringLit {
+func (n ValueStringField) Value() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
