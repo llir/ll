@@ -155,8 +155,10 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &DIExpression{n}
 	case ll.DIFile:
 		return &DIFile{n}
-	case ll.DIFlag:
-		return &DIFlag{n}
+	case ll.DIFlagEnum:
+		return &DIFlagEnum{n}
+	case ll.DIFlagInt:
+		return &DIFlagInt{n}
 	case ll.DIFlags:
 		return &DIFlags{n}
 	case ll.DIGlobalVariable:
@@ -213,30 +215,44 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &Distinct{n}
 	case ll.DwarfAddressSpaceField:
 		return &DwarfAddressSpaceField{n}
-	case ll.DwarfAttEncoding:
-		return &DwarfAttEncoding{n}
-	case ll.DwarfCC:
-		return &DwarfCC{n}
-	case ll.DwarfLang:
-		return &DwarfLang{n}
-	case ll.DwarfMacinfo:
-		return &DwarfMacinfo{n}
+	case ll.DwarfAttEncodingEnum:
+		return &DwarfAttEncodingEnum{n}
+	case ll.DwarfAttEncodingInt:
+		return &DwarfAttEncodingInt{n}
+	case ll.DwarfCCEnum:
+		return &DwarfCCEnum{n}
+	case ll.DwarfCCInt:
+		return &DwarfCCInt{n}
+	case ll.DwarfLangEnum:
+		return &DwarfLangEnum{n}
+	case ll.DwarfLangInt:
+		return &DwarfLangInt{n}
+	case ll.DwarfMacinfoEnum:
+		return &DwarfMacinfoEnum{n}
+	case ll.DwarfMacinfoInt:
+		return &DwarfMacinfoInt{n}
 	case ll.DwarfOp:
 		return &DwarfOp{n}
-	case ll.DwarfTag:
-		return &DwarfTag{n}
-	case ll.DwarfVirtuality:
-		return &DwarfVirtuality{n}
+	case ll.DwarfTagEnum:
+		return &DwarfTagEnum{n}
+	case ll.DwarfTagInt:
+		return &DwarfTagInt{n}
+	case ll.DwarfVirtualityEnum:
+		return &DwarfVirtualityEnum{n}
+	case ll.DwarfVirtualityInt:
+		return &DwarfVirtualityInt{n}
 	case ll.DwoIdField:
 		return &DwoIdField{n}
 	case ll.ElementsField:
 		return &ElementsField{n}
 	case ll.Ellipsis:
 		return &Ellipsis{n}
-	case ll.EmissionKind:
-		return &EmissionKind{n}
+	case ll.EmissionKindEnum:
+		return &EmissionKindEnum{n}
 	case ll.EmissionKindField:
 		return &EmissionKindField{n}
+	case ll.EmissionKindInt:
+		return &EmissionKindInt{n}
 	case ll.EncodingField:
 		return &EncodingField{n}
 	case ll.EntityField:
@@ -485,10 +501,12 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &MulInst{n}
 	case ll.NameField:
 		return &NameField{n}
-	case ll.NameTableKind:
-		return &NameTableKind{n}
+	case ll.NameTableKindEnum:
+		return &NameTableKindEnum{n}
 	case ll.NameTableKindField:
 		return &NameTableKindField{n}
+	case ll.NameTableKindInt:
+		return &NameTableKindInt{n}
 	case ll.NamedMetadataDef:
 		return &NamedMetadataDef{n}
 	case ll.NamedType:

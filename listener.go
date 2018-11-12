@@ -314,25 +314,34 @@ const (
 	VirtualityField            // Virtuality=DwarfVirtuality
 	VtableHolderField          // VtableHolder=MDField
 	ChecksumKind
-	DIFlags          // Flags=(DIFlag)+
-	DIFlag           // UintLit?
-	DwarfAttEncoding // UintLit?
-	DwarfCC          // UintLit?
-	DwarfLang        // UintLit?
-	DwarfMacinfo     // UintLit?
+	DIFlags // Flags=(DIFlag)+
+	DIFlagEnum
+	DIFlagInt // UintLit
+	DwarfAttEncodingEnum
+	DwarfAttEncodingInt // UintLit
+	DwarfCCEnum
+	DwarfCCInt // UintLit
+	DwarfLangEnum
+	DwarfLangInt // UintLit
+	DwarfMacinfoEnum
+	DwarfMacinfoInt // UintLit
 	DwarfOp
-	DwarfTag        // UintLit?
-	DwarfVirtuality // UintLit?
-	EmissionKind    // UintLit?
-	NameTableKind   // UintLit?
-	AddrSpace       // N=UintLit
-	Align           // N=UintLit
-	AlignPair       // N=UintLit
-	AlignStack      // N=UintLit
-	AlignStackPair  // N=UintLit
-	AllocSize       // ElemSize=UintLit N=UintLit?
-	Args            // Args=(Arg)*
-	Arg             // Typ=(ConcreteType | MetadataType) Attrs=(ParamAttribute)* Val=(Metadata | Value)
+	DwarfTagEnum
+	DwarfTagInt // UintLit
+	DwarfVirtualityEnum
+	DwarfVirtualityInt // UintLit
+	EmissionKindEnum
+	EmissionKindInt // UintLit
+	NameTableKindEnum
+	NameTableKindInt // UintLit
+	AddrSpace        // N=UintLit
+	Align            // N=UintLit
+	AlignPair        // N=UintLit
+	AlignStack       // N=UintLit
+	AlignStackPair   // N=UintLit
+	AllocSize        // ElemSize=UintLit N=UintLit?
+	Args             // Args=(Arg)*
+	Arg              // Typ=(ConcreteType | MetadataType) Attrs=(ParamAttribute)* Val=(Metadata | Value)
 	Atomic
 	AtomicOrdering
 	AttrPair   // Key=StringLit Val=StringLit
@@ -679,16 +688,25 @@ var nodeTypeStr = [...]string{
 	"VtableHolderField",
 	"ChecksumKind",
 	"DIFlags",
-	"DIFlag",
-	"DwarfAttEncoding",
-	"DwarfCC",
-	"DwarfLang",
-	"DwarfMacinfo",
+	"DIFlagEnum",
+	"DIFlagInt",
+	"DwarfAttEncodingEnum",
+	"DwarfAttEncodingInt",
+	"DwarfCCEnum",
+	"DwarfCCInt",
+	"DwarfLangEnum",
+	"DwarfLangInt",
+	"DwarfMacinfoEnum",
+	"DwarfMacinfoInt",
 	"DwarfOp",
-	"DwarfTag",
-	"DwarfVirtuality",
-	"EmissionKind",
-	"NameTableKind",
+	"DwarfTagEnum",
+	"DwarfTagInt",
+	"DwarfVirtualityEnum",
+	"DwarfVirtualityInt",
+	"EmissionKindEnum",
+	"EmissionKindInt",
+	"NameTableKindEnum",
+	"NameTableKindInt",
 	"AddrSpace",
 	"Align",
 	"AlignPair",
@@ -944,6 +962,11 @@ var DIFileField = []NodeType{
 	SourceField,
 }
 
+var DIFlag = []NodeType{
+	DIFlagEnum,
+	DIFlagInt,
+}
+
 var DIGlobalVariableExpressionField = []NodeType{
 	ExprField,
 	VarField,
@@ -1093,6 +1116,41 @@ var DITemplateValueParameterField = []NodeType{
 	TagField,
 	TypeField,
 	ValueField,
+}
+
+var DwarfAttEncoding = []NodeType{
+	DwarfAttEncodingEnum,
+	DwarfAttEncodingInt,
+}
+
+var DwarfCC = []NodeType{
+	DwarfCCEnum,
+	DwarfCCInt,
+}
+
+var DwarfLang = []NodeType{
+	DwarfLangEnum,
+	DwarfLangInt,
+}
+
+var DwarfMacinfo = []NodeType{
+	DwarfMacinfoEnum,
+	DwarfMacinfoInt,
+}
+
+var DwarfTag = []NodeType{
+	DwarfTagEnum,
+	DwarfTagInt,
+}
+
+var DwarfVirtuality = []NodeType{
+	DwarfVirtualityEnum,
+	DwarfVirtualityInt,
+}
+
+var EmissionKind = []NodeType{
+	EmissionKindEnum,
+	EmissionKindInt,
 }
 
 var ExceptionScope = []NodeType{
@@ -1329,6 +1387,11 @@ var Metadata = []NodeType{
 var MetadataNode = []NodeType{
 	DIExpression,
 	MetadataID,
+}
+
+var NameTableKind = []NodeType{
+	NameTableKindEnum,
+	NameTableKindInt,
 }
 
 var ParamAttribute = []NodeType{
@@ -2567,25 +2630,25 @@ var ruleNodeType = [...]NodeType{
 	0,                          // DIFlag_list_withsep : DIFlag_list_withsep '|' DIFlag
 	0,                          // DIFlag_list_withsep : DIFlag
 	DIFlags,                    // DIFlags : DIFlag_list_withsep
-	DIFlag,                     // DIFlag : UintLit
-	DIFlag,                     // DIFlag : di_flag_tok
-	DwarfAttEncoding,           // DwarfAttEncoding : UintLit
-	DwarfAttEncoding,           // DwarfAttEncoding : dwarf_att_encoding_tok
-	DwarfCC,                    // DwarfCC : UintLit
-	DwarfCC,                    // DwarfCC : dwarf_cc_tok
-	DwarfLang,                  // DwarfLang : UintLit
-	DwarfLang,                  // DwarfLang : dwarf_lang_tok
-	DwarfMacinfo,               // DwarfMacinfo : UintLit
-	DwarfMacinfo,               // DwarfMacinfo : dwarf_macinfo_tok
+	DIFlagEnum,                 // DIFlag : di_flag_tok
+	DIFlagInt,                  // DIFlag : UintLit
+	DwarfAttEncodingEnum,       // DwarfAttEncoding : dwarf_att_encoding_tok
+	DwarfAttEncodingInt,        // DwarfAttEncoding : UintLit
+	DwarfCCEnum,                // DwarfCC : dwarf_cc_tok
+	DwarfCCInt,                 // DwarfCC : UintLit
+	DwarfLangEnum,              // DwarfLang : dwarf_lang_tok
+	DwarfLangInt,               // DwarfLang : UintLit
+	DwarfMacinfoEnum,           // DwarfMacinfo : dwarf_macinfo_tok
+	DwarfMacinfoInt,            // DwarfMacinfo : UintLit
 	DwarfOp,                    // DwarfOp : dwarf_op_tok
-	DwarfTag,                   // DwarfTag : UintLit
-	DwarfTag,                   // DwarfTag : dwarf_tag_tok
-	DwarfVirtuality,            // DwarfVirtuality : UintLit
-	DwarfVirtuality,            // DwarfVirtuality : dwarf_virtuality_tok
-	EmissionKind,               // EmissionKind : UintLit
-	EmissionKind,               // EmissionKind : emission_kind_tok
-	NameTableKind,              // NameTableKind : UintLit
-	NameTableKind,              // NameTableKind : name_table_kind_tok
+	DwarfTagEnum,               // DwarfTag : dwarf_tag_tok
+	DwarfTagInt,                // DwarfTag : UintLit
+	DwarfVirtualityEnum,        // DwarfVirtuality : dwarf_virtuality_tok
+	DwarfVirtualityInt,         // DwarfVirtuality : UintLit
+	EmissionKindEnum,           // EmissionKind : emission_kind_tok
+	EmissionKindInt,            // EmissionKind : UintLit
+	NameTableKindEnum,          // NameTableKind : name_table_kind_tok
+	NameTableKindInt,           // NameTableKind : UintLit
 	AddrSpace,                  // AddrSpace : 'addrspace' '(' UintLit ')'
 	Align,                      // Align : 'align' UintLit
 	AlignPair,                  // AlignPair : 'align' '=' UintLit

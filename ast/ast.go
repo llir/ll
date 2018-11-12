@@ -91,7 +91,8 @@ func (n DIDerivedType) LlvmNode() *Node              { return n.Node }
 func (n DIEnumerator) LlvmNode() *Node               { return n.Node }
 func (n DIExpression) LlvmNode() *Node               { return n.Node }
 func (n DIFile) LlvmNode() *Node                     { return n.Node }
-func (n DIFlag) LlvmNode() *Node                     { return n.Node }
+func (n DIFlagEnum) LlvmNode() *Node                 { return n.Node }
+func (n DIFlagInt) LlvmNode() *Node                  { return n.Node }
 func (n DIFlags) LlvmNode() *Node                    { return n.Node }
 func (n DIGlobalVariable) LlvmNode() *Node           { return n.Node }
 func (n DIGlobalVariableExpression) LlvmNode() *Node { return n.Node }
@@ -120,18 +121,25 @@ func (n DiscriminatorField) LlvmNode() *Node         { return n.Node }
 func (n DiscriminatorIntField) LlvmNode() *Node      { return n.Node }
 func (n Distinct) LlvmNode() *Node                   { return n.Node }
 func (n DwarfAddressSpaceField) LlvmNode() *Node     { return n.Node }
-func (n DwarfAttEncoding) LlvmNode() *Node           { return n.Node }
-func (n DwarfCC) LlvmNode() *Node                    { return n.Node }
-func (n DwarfLang) LlvmNode() *Node                  { return n.Node }
-func (n DwarfMacinfo) LlvmNode() *Node               { return n.Node }
+func (n DwarfAttEncodingEnum) LlvmNode() *Node       { return n.Node }
+func (n DwarfAttEncodingInt) LlvmNode() *Node        { return n.Node }
+func (n DwarfCCEnum) LlvmNode() *Node                { return n.Node }
+func (n DwarfCCInt) LlvmNode() *Node                 { return n.Node }
+func (n DwarfLangEnum) LlvmNode() *Node              { return n.Node }
+func (n DwarfLangInt) LlvmNode() *Node               { return n.Node }
+func (n DwarfMacinfoEnum) LlvmNode() *Node           { return n.Node }
+func (n DwarfMacinfoInt) LlvmNode() *Node            { return n.Node }
 func (n DwarfOp) LlvmNode() *Node                    { return n.Node }
-func (n DwarfTag) LlvmNode() *Node                   { return n.Node }
-func (n DwarfVirtuality) LlvmNode() *Node            { return n.Node }
+func (n DwarfTagEnum) LlvmNode() *Node               { return n.Node }
+func (n DwarfTagInt) LlvmNode() *Node                { return n.Node }
+func (n DwarfVirtualityEnum) LlvmNode() *Node        { return n.Node }
+func (n DwarfVirtualityInt) LlvmNode() *Node         { return n.Node }
 func (n DwoIdField) LlvmNode() *Node                 { return n.Node }
 func (n ElementsField) LlvmNode() *Node              { return n.Node }
 func (n Ellipsis) LlvmNode() *Node                   { return n.Node }
-func (n EmissionKind) LlvmNode() *Node               { return n.Node }
+func (n EmissionKindEnum) LlvmNode() *Node           { return n.Node }
 func (n EmissionKindField) LlvmNode() *Node          { return n.Node }
+func (n EmissionKindInt) LlvmNode() *Node            { return n.Node }
 func (n EncodingField) LlvmNode() *Node              { return n.Node }
 func (n EntityField) LlvmNode() *Node                { return n.Node }
 func (n EnumsField) LlvmNode() *Node                 { return n.Node }
@@ -256,8 +264,9 @@ func (n ModuleAsm) LlvmNode() *Node                  { return n.Node }
 func (n MulExpr) LlvmNode() *Node                    { return n.Node }
 func (n MulInst) LlvmNode() *Node                    { return n.Node }
 func (n NameField) LlvmNode() *Node                  { return n.Node }
-func (n NameTableKind) LlvmNode() *Node              { return n.Node }
+func (n NameTableKindEnum) LlvmNode() *Node          { return n.Node }
 func (n NameTableKindField) LlvmNode() *Node         { return n.Node }
+func (n NameTableKindInt) LlvmNode() *Node           { return n.Node }
 func (n NamedMetadataDef) LlvmNode() *Node           { return n.Node }
 func (n NamedType) LlvmNode() *Node                  { return n.Node }
 func (n NodesField) LlvmNode() *Node                 { return n.Node }
@@ -656,6 +665,18 @@ func (FilenameField) dIFileFieldNode()     {}
 func (SourceField) dIFileFieldNode()       {}
 func (NilNode) dIFileFieldNode()           {}
 
+type DIFlag interface {
+	LlvmNode
+	dIFlagNode()
+}
+
+// dIFlagNode() ensures that only the following types can be
+// assigned to DIFlag.
+//
+func (DIFlagEnum) dIFlagNode() {}
+func (DIFlagInt) dIFlagNode()  {}
+func (NilNode) dIFlagNode()    {}
+
 type DIGlobalVariableExpressionField interface {
 	LlvmNode
 	dIGlobalVariableExpressionFieldNode()
@@ -932,6 +953,90 @@ func (TagField) dITemplateValueParameterFieldNode()   {}
 func (TypeField) dITemplateValueParameterFieldNode()  {}
 func (ValueField) dITemplateValueParameterFieldNode() {}
 func (NilNode) dITemplateValueParameterFieldNode()    {}
+
+type DwarfAttEncoding interface {
+	LlvmNode
+	dwarfAttEncodingNode()
+}
+
+// dwarfAttEncodingNode() ensures that only the following types can be
+// assigned to DwarfAttEncoding.
+//
+func (DwarfAttEncodingEnum) dwarfAttEncodingNode() {}
+func (DwarfAttEncodingInt) dwarfAttEncodingNode()  {}
+func (NilNode) dwarfAttEncodingNode()              {}
+
+type DwarfCC interface {
+	LlvmNode
+	dwarfCCNode()
+}
+
+// dwarfCCNode() ensures that only the following types can be
+// assigned to DwarfCC.
+//
+func (DwarfCCEnum) dwarfCCNode() {}
+func (DwarfCCInt) dwarfCCNode()  {}
+func (NilNode) dwarfCCNode()     {}
+
+type DwarfLang interface {
+	LlvmNode
+	dwarfLangNode()
+}
+
+// dwarfLangNode() ensures that only the following types can be
+// assigned to DwarfLang.
+//
+func (DwarfLangEnum) dwarfLangNode() {}
+func (DwarfLangInt) dwarfLangNode()  {}
+func (NilNode) dwarfLangNode()       {}
+
+type DwarfMacinfo interface {
+	LlvmNode
+	dwarfMacinfoNode()
+}
+
+// dwarfMacinfoNode() ensures that only the following types can be
+// assigned to DwarfMacinfo.
+//
+func (DwarfMacinfoEnum) dwarfMacinfoNode() {}
+func (DwarfMacinfoInt) dwarfMacinfoNode()  {}
+func (NilNode) dwarfMacinfoNode()          {}
+
+type DwarfTag interface {
+	LlvmNode
+	dwarfTagNode()
+}
+
+// dwarfTagNode() ensures that only the following types can be
+// assigned to DwarfTag.
+//
+func (DwarfTagEnum) dwarfTagNode() {}
+func (DwarfTagInt) dwarfTagNode()  {}
+func (NilNode) dwarfTagNode()      {}
+
+type DwarfVirtuality interface {
+	LlvmNode
+	dwarfVirtualityNode()
+}
+
+// dwarfVirtualityNode() ensures that only the following types can be
+// assigned to DwarfVirtuality.
+//
+func (DwarfVirtualityEnum) dwarfVirtualityNode() {}
+func (DwarfVirtualityInt) dwarfVirtualityNode()  {}
+func (NilNode) dwarfVirtualityNode()             {}
+
+type EmissionKind interface {
+	LlvmNode
+	emissionKindNode()
+}
+
+// emissionKindNode() ensures that only the following types can be
+// assigned to EmissionKind.
+//
+func (EmissionKindEnum) emissionKindNode() {}
+func (EmissionKindInt) emissionKindNode()  {}
+func (NilNode) emissionKindNode()          {}
 
 type ExceptionScope interface {
 	LlvmNode
@@ -1245,6 +1350,18 @@ type MetadataNode interface {
 func (DIExpression) metadataNodeNode() {}
 func (MetadataID) metadataNodeNode()   {}
 func (NilNode) metadataNodeNode()      {}
+
+type NameTableKind interface {
+	LlvmNode
+	nameTableKindNode()
+}
+
+// nameTableKindNode() ensures that only the following types can be
+// assigned to NameTableKind.
+//
+func (NameTableKindEnum) nameTableKindNode() {}
+func (NameTableKindInt) nameTableKindNode()  {}
+func (NilNode) nameTableKindNode()           {}
 
 type ParamAttribute interface {
 	LlvmNode
@@ -2110,7 +2227,7 @@ type CCField struct {
 }
 
 func (n CCField) CC() DwarfCC {
-	return DwarfCC{n.Child(selector.DwarfCC)}
+	return ToLlvmNode(n.Child(selector.DwarfCC)).(DwarfCC)
 }
 
 type CallInst struct {
@@ -2603,11 +2720,15 @@ func (n DIFile) Fields() []DIFileField {
 	return ret
 }
 
-type DIFlag struct {
+type DIFlagEnum struct {
 	*Node
 }
 
-func (n DIFlag) UintLit() /*opt*/ UintLit {
+type DIFlagInt struct {
+	*Node
+}
+
+func (n DIFlagInt) UintLit() UintLit {
 	return UintLit{n.Child(selector.UintLit)}
 }
 
@@ -2619,7 +2740,7 @@ func (n DIFlags) Flags() []DIFlag {
 	nodes := n.Children(selector.DIFlag)
 	var ret = make([]DIFlag, 0, len(nodes))
 	for _, node := range nodes {
-		ret = append(ret, DIFlag{node})
+		ret = append(ret, ToLlvmNode(node).(DIFlag))
 	}
 	return ret
 }
@@ -2922,35 +3043,51 @@ func (n DwarfAddressSpaceField) DwarfAddressSpace() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
-type DwarfAttEncoding struct {
+type DwarfAttEncodingEnum struct {
 	*Node
 }
 
-func (n DwarfAttEncoding) UintLit() /*opt*/ UintLit {
+type DwarfAttEncodingInt struct {
+	*Node
+}
+
+func (n DwarfAttEncodingInt) UintLit() UintLit {
 	return UintLit{n.Child(selector.UintLit)}
 }
 
-type DwarfCC struct {
+type DwarfCCEnum struct {
 	*Node
 }
 
-func (n DwarfCC) UintLit() /*opt*/ UintLit {
+type DwarfCCInt struct {
+	*Node
+}
+
+func (n DwarfCCInt) UintLit() UintLit {
 	return UintLit{n.Child(selector.UintLit)}
 }
 
-type DwarfLang struct {
+type DwarfLangEnum struct {
 	*Node
 }
 
-func (n DwarfLang) UintLit() /*opt*/ UintLit {
+type DwarfLangInt struct {
+	*Node
+}
+
+func (n DwarfLangInt) UintLit() UintLit {
 	return UintLit{n.Child(selector.UintLit)}
 }
 
-type DwarfMacinfo struct {
+type DwarfMacinfoEnum struct {
 	*Node
 }
 
-func (n DwarfMacinfo) UintLit() /*opt*/ UintLit {
+type DwarfMacinfoInt struct {
+	*Node
+}
+
+func (n DwarfMacinfoInt) UintLit() UintLit {
 	return UintLit{n.Child(selector.UintLit)}
 }
 
@@ -2958,19 +3095,27 @@ type DwarfOp struct {
 	*Node
 }
 
-type DwarfTag struct {
+type DwarfTagEnum struct {
 	*Node
 }
 
-func (n DwarfTag) UintLit() /*opt*/ UintLit {
+type DwarfTagInt struct {
+	*Node
+}
+
+func (n DwarfTagInt) UintLit() UintLit {
 	return UintLit{n.Child(selector.UintLit)}
 }
 
-type DwarfVirtuality struct {
+type DwarfVirtualityEnum struct {
 	*Node
 }
 
-func (n DwarfVirtuality) UintLit() /*opt*/ UintLit {
+type DwarfVirtualityInt struct {
+	*Node
+}
+
+func (n DwarfVirtualityInt) UintLit() UintLit {
 	return UintLit{n.Child(selector.UintLit)}
 }
 
@@ -2994,12 +3139,8 @@ type Ellipsis struct {
 	*Node
 }
 
-type EmissionKind struct {
+type EmissionKindEnum struct {
 	*Node
-}
-
-func (n EmissionKind) UintLit() /*opt*/ UintLit {
-	return UintLit{n.Child(selector.UintLit)}
 }
 
 type EmissionKindField struct {
@@ -3007,7 +3148,15 @@ type EmissionKindField struct {
 }
 
 func (n EmissionKindField) EmissionKind() EmissionKind {
-	return EmissionKind{n.Child(selector.EmissionKind)}
+	return ToLlvmNode(n.Child(selector.EmissionKind)).(EmissionKind)
+}
+
+type EmissionKindInt struct {
+	*Node
+}
+
+func (n EmissionKindInt) UintLit() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type EncodingField struct {
@@ -3015,7 +3164,7 @@ type EncodingField struct {
 }
 
 func (n EncodingField) Encoding() DwarfAttEncoding {
-	return DwarfAttEncoding{n.Child(selector.DwarfAttEncoding)}
+	return ToLlvmNode(n.Child(selector.DwarfAttEncoding)).(DwarfAttEncoding)
 }
 
 type EntityField struct {
@@ -4637,7 +4786,7 @@ type LanguageField struct {
 }
 
 func (n LanguageField) Language() DwarfLang {
-	return DwarfLang{n.Child(selector.DwarfLang)}
+	return ToLlvmNode(n.Child(selector.DwarfLang)).(DwarfLang)
 }
 
 type LineField struct {
@@ -4898,12 +5047,8 @@ func (n NameField) Name() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
-type NameTableKind struct {
+type NameTableKindEnum struct {
 	*Node
-}
-
-func (n NameTableKind) UintLit() /*opt*/ UintLit {
-	return UintLit{n.Child(selector.UintLit)}
 }
 
 type NameTableKindField struct {
@@ -4911,7 +5056,15 @@ type NameTableKindField struct {
 }
 
 func (n NameTableKindField) NameTableKind() NameTableKind {
-	return NameTableKind{n.Child(selector.NameTableKind)}
+	return ToLlvmNode(n.Child(selector.NameTableKind)).(NameTableKind)
+}
+
+type NameTableKindInt struct {
+	*Node
+}
+
+func (n NameTableKindInt) UintLit() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type NamedMetadataDef struct {
@@ -5262,7 +5415,7 @@ type RuntimeLangField struct {
 }
 
 func (n RuntimeLangField) RuntimeLang() DwarfLang {
-	return DwarfLang{n.Child(selector.DwarfLang)}
+	return ToLlvmNode(n.Child(selector.DwarfLang)).(DwarfLang)
 }
 
 type RuntimeVersionField struct {
@@ -5799,7 +5952,7 @@ type TagField struct {
 }
 
 func (n TagField) Tag() DwarfTag {
-	return DwarfTag{n.Child(selector.DwarfTag)}
+	return ToLlvmNode(n.Child(selector.DwarfTag)).(DwarfTag)
 }
 
 type Tail struct {
@@ -5928,7 +6081,7 @@ type TypeMacinfoField struct {
 }
 
 func (n TypeMacinfoField) Typ() DwarfMacinfo {
-	return DwarfMacinfo{n.Child(selector.DwarfMacinfo)}
+	return ToLlvmNode(n.Child(selector.DwarfMacinfo)).(DwarfMacinfo)
 }
 
 type TypeValue struct {
@@ -6236,7 +6389,7 @@ type VirtualityField struct {
 }
 
 func (n VirtualityField) Virtuality() DwarfVirtuality {
-	return DwarfVirtuality{n.Child(selector.DwarfVirtuality)}
+	return ToLlvmNode(n.Child(selector.DwarfVirtuality)).(DwarfVirtuality)
 }
 
 type Visibility struct {

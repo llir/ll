@@ -83,7 +83,8 @@ var (
 	DIEnumerator                    = func(t ll.NodeType) bool { return t == ll.DIEnumerator }
 	DIExpression                    = func(t ll.NodeType) bool { return t == ll.DIExpression }
 	DIFile                          = func(t ll.NodeType) bool { return t == ll.DIFile }
-	DIFlag                          = func(t ll.NodeType) bool { return t == ll.DIFlag }
+	DIFlagEnum                      = func(t ll.NodeType) bool { return t == ll.DIFlagEnum }
+	DIFlagInt                       = func(t ll.NodeType) bool { return t == ll.DIFlagInt }
 	DIFlags                         = func(t ll.NodeType) bool { return t == ll.DIFlags }
 	DIGlobalVariable                = func(t ll.NodeType) bool { return t == ll.DIGlobalVariable }
 	DIGlobalVariableExpression      = func(t ll.NodeType) bool { return t == ll.DIGlobalVariableExpression }
@@ -112,18 +113,25 @@ var (
 	DiscriminatorIntField           = func(t ll.NodeType) bool { return t == ll.DiscriminatorIntField }
 	Distinct                        = func(t ll.NodeType) bool { return t == ll.Distinct }
 	DwarfAddressSpaceField          = func(t ll.NodeType) bool { return t == ll.DwarfAddressSpaceField }
-	DwarfAttEncoding                = func(t ll.NodeType) bool { return t == ll.DwarfAttEncoding }
-	DwarfCC                         = func(t ll.NodeType) bool { return t == ll.DwarfCC }
-	DwarfLang                       = func(t ll.NodeType) bool { return t == ll.DwarfLang }
-	DwarfMacinfo                    = func(t ll.NodeType) bool { return t == ll.DwarfMacinfo }
+	DwarfAttEncodingEnum            = func(t ll.NodeType) bool { return t == ll.DwarfAttEncodingEnum }
+	DwarfAttEncodingInt             = func(t ll.NodeType) bool { return t == ll.DwarfAttEncodingInt }
+	DwarfCCEnum                     = func(t ll.NodeType) bool { return t == ll.DwarfCCEnum }
+	DwarfCCInt                      = func(t ll.NodeType) bool { return t == ll.DwarfCCInt }
+	DwarfLangEnum                   = func(t ll.NodeType) bool { return t == ll.DwarfLangEnum }
+	DwarfLangInt                    = func(t ll.NodeType) bool { return t == ll.DwarfLangInt }
+	DwarfMacinfoEnum                = func(t ll.NodeType) bool { return t == ll.DwarfMacinfoEnum }
+	DwarfMacinfoInt                 = func(t ll.NodeType) bool { return t == ll.DwarfMacinfoInt }
 	DwarfOp                         = func(t ll.NodeType) bool { return t == ll.DwarfOp }
-	DwarfTag                        = func(t ll.NodeType) bool { return t == ll.DwarfTag }
-	DwarfVirtuality                 = func(t ll.NodeType) bool { return t == ll.DwarfVirtuality }
+	DwarfTagEnum                    = func(t ll.NodeType) bool { return t == ll.DwarfTagEnum }
+	DwarfTagInt                     = func(t ll.NodeType) bool { return t == ll.DwarfTagInt }
+	DwarfVirtualityEnum             = func(t ll.NodeType) bool { return t == ll.DwarfVirtualityEnum }
+	DwarfVirtualityInt              = func(t ll.NodeType) bool { return t == ll.DwarfVirtualityInt }
 	DwoIdField                      = func(t ll.NodeType) bool { return t == ll.DwoIdField }
 	ElementsField                   = func(t ll.NodeType) bool { return t == ll.ElementsField }
 	Ellipsis                        = func(t ll.NodeType) bool { return t == ll.Ellipsis }
-	EmissionKind                    = func(t ll.NodeType) bool { return t == ll.EmissionKind }
+	EmissionKindEnum                = func(t ll.NodeType) bool { return t == ll.EmissionKindEnum }
 	EmissionKindField               = func(t ll.NodeType) bool { return t == ll.EmissionKindField }
+	EmissionKindInt                 = func(t ll.NodeType) bool { return t == ll.EmissionKindInt }
 	EncodingField                   = func(t ll.NodeType) bool { return t == ll.EncodingField }
 	EntityField                     = func(t ll.NodeType) bool { return t == ll.EntityField }
 	EnumsField                      = func(t ll.NodeType) bool { return t == ll.EnumsField }
@@ -248,8 +256,9 @@ var (
 	MulExpr                         = func(t ll.NodeType) bool { return t == ll.MulExpr }
 	MulInst                         = func(t ll.NodeType) bool { return t == ll.MulInst }
 	NameField                       = func(t ll.NodeType) bool { return t == ll.NameField }
-	NameTableKind                   = func(t ll.NodeType) bool { return t == ll.NameTableKind }
+	NameTableKindEnum               = func(t ll.NodeType) bool { return t == ll.NameTableKindEnum }
 	NameTableKindField              = func(t ll.NodeType) bool { return t == ll.NameTableKindField }
+	NameTableKindInt                = func(t ll.NodeType) bool { return t == ll.NameTableKindInt }
 	NamedMetadataDef                = func(t ll.NodeType) bool { return t == ll.NamedMetadataDef }
 	NamedType                       = func(t ll.NodeType) bool { return t == ll.NamedType }
 	NodesField                      = func(t ll.NodeType) bool { return t == ll.NodesField }
@@ -380,6 +389,7 @@ var (
 	DIEnumeratorField               = OneOf(ll.DIEnumeratorField...)
 	DIExpressionField               = OneOf(ll.DIExpressionField...)
 	DIFileField                     = OneOf(ll.DIFileField...)
+	DIFlag                          = OneOf(ll.DIFlag...)
 	DIGlobalVariableExpressionField = OneOf(ll.DIGlobalVariableExpressionField...)
 	DIGlobalVariableField           = OneOf(ll.DIGlobalVariableField...)
 	DIImportedEntityField           = OneOf(ll.DIImportedEntityField...)
@@ -398,6 +408,13 @@ var (
 	DISubroutineTypeField           = OneOf(ll.DISubroutineTypeField...)
 	DITemplateTypeParameterField    = OneOf(ll.DITemplateTypeParameterField...)
 	DITemplateValueParameterField   = OneOf(ll.DITemplateValueParameterField...)
+	DwarfAttEncoding                = OneOf(ll.DwarfAttEncoding...)
+	DwarfCC                         = OneOf(ll.DwarfCC...)
+	DwarfLang                       = OneOf(ll.DwarfLang...)
+	DwarfMacinfo                    = OneOf(ll.DwarfMacinfo...)
+	DwarfTag                        = OneOf(ll.DwarfTag...)
+	DwarfVirtuality                 = OneOf(ll.DwarfVirtuality...)
+	EmissionKind                    = OneOf(ll.EmissionKind...)
 	ExceptionScope                  = OneOf(ll.ExceptionScope...)
 	FirstClassType                  = OneOf(ll.FirstClassType...)
 	FuncAttribute                   = OneOf(ll.FuncAttribute...)
@@ -409,6 +426,7 @@ var (
 	MDNode                          = OneOf(ll.MDNode...)
 	Metadata                        = OneOf(ll.Metadata...)
 	MetadataNode                    = OneOf(ll.MetadataNode...)
+	NameTableKind                   = OneOf(ll.NameTableKind...)
 	ParamAttribute                  = OneOf(ll.ParamAttribute...)
 	ReturnAttribute                 = OneOf(ll.ReturnAttribute...)
 	SpecializedMDNode               = OneOf(ll.SpecializedMDNode...)
