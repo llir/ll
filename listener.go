@@ -303,7 +303,7 @@ const (
 	ThisAdjustmentField        // ThisAdjustment=IntLit
 	ThrownTypesField           // ThrownTypes=MDField
 	TypeField                  // Typ=MDField
-	TypeMacinfoField           // TypeMacinfo=DwarfMacinfo
+	TypeMacinfoField           // Typ=DwarfMacinfo
 	TypesField                 // Types=MDField
 	UnitField                  // Unit=MDField
 	ValueField                 // Value=MDField

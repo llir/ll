@@ -5927,7 +5927,7 @@ type TypeMacinfoField struct {
 	*Node
 }
 
-func (n TypeMacinfoField) TypeMacinfo() DwarfMacinfo {
+func (n TypeMacinfoField) Typ() DwarfMacinfo {
 	return DwarfMacinfo{n.Child(selector.DwarfMacinfo)}
 }
 
