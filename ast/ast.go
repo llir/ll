@@ -13,6 +13,10 @@ type LlvmNode interface {
 	LlvmNode() *Node
 }
 
+type NilNode struct{}
+
+var nilInstance = &NilNode{}
+
 // All types implement LlvmNode.
 func (n AShrExpr) LlvmNode() *Node                   { return n.Node }
 func (n AShrInst) LlvmNode() *Node                   { return n.Node }
@@ -22,11 +26,12 @@ func (n AddrSpace) LlvmNode() *Node                  { return n.Node }
 func (n AddrSpaceCastExpr) LlvmNode() *Node          { return n.Node }
 func (n AddrSpaceCastInst) LlvmNode() *Node          { return n.Node }
 func (n AliasDef) LlvmNode() *Node                   { return n.Node }
+func (n Align) LlvmNode() *Node                      { return n.Node }
 func (n AlignField) LlvmNode() *Node                 { return n.Node }
 func (n AlignPair) LlvmNode() *Node                  { return n.Node }
 func (n AlignStack) LlvmNode() *Node                 { return n.Node }
 func (n AlignStackPair) LlvmNode() *Node             { return n.Node }
-func (n Alignment) LlvmNode() *Node                  { return n.Node }
+func (n AlignStackTok) LlvmNode() *Node              { return n.Node }
 func (n AllocSize) LlvmNode() *Node                  { return n.Node }
 func (n AllocaInst) LlvmNode() *Node                 { return n.Node }
 func (n AndExpr) LlvmNode() *Node                    { return n.Node }
@@ -311,7 +316,6 @@ func (n SourceField) LlvmNode() *Node                { return n.Node }
 func (n SourceFilename) LlvmNode() *Node             { return n.Node }
 func (n SplitDebugFilenameField) LlvmNode() *Node    { return n.Node }
 func (n SplitDebugInliningField) LlvmNode() *Node    { return n.Node }
-func (n StackAlignment) LlvmNode() *Node             { return n.Node }
 func (n StoreInst) LlvmNode() *Node                  { return n.Node }
 func (n StringLit) LlvmNode() *Node                  { return n.Node }
 func (n StructConst) LlvmNode() *Node                { return n.Node }
@@ -373,6 +377,7 @@ func (n XorInst) LlvmNode() *Node                    { return n.Node }
 func (n ZExtExpr) LlvmNode() *Node                   { return n.Node }
 func (n ZExtInst) LlvmNode() *Node                   { return n.Node }
 func (n ZeroInitializerConst) LlvmNode() *Node       { return n.Node }
+func (NilNode) LlvmNode() *Node                      { return nil }
 
 type CallingConv interface {
 	LlvmNode
@@ -384,6 +389,7 @@ type CallingConv interface {
 //
 func (CallingConvEnum) callingConvNode() {}
 func (CallingConvInt) callingConvNode()  {}
+func (NilNode) callingConvNode()         {}
 
 type ConcreteType interface {
 	LlvmNode
@@ -404,6 +410,7 @@ func (PointerType) concreteTypeNode()      {}
 func (StructType) concreteTypeNode()       {}
 func (TokenType) concreteTypeNode()        {}
 func (VectorType) concreteTypeNode()       {}
+func (NilNode) concreteTypeNode()          {}
 
 type Constant interface {
 	LlvmNode
@@ -466,6 +473,7 @@ func (VectorConst) constantNode()          {}
 func (XorExpr) constantNode()              {}
 func (ZExtExpr) constantNode()             {}
 func (ZeroInitializerConst) constantNode() {}
+func (NilNode) constantNode()              {}
 
 type ConstantExpr interface {
 	LlvmNode
@@ -515,6 +523,7 @@ func (UIToFPExpr) constantExprNode()         {}
 func (URemExpr) constantExprNode()           {}
 func (XorExpr) constantExprNode()            {}
 func (ZExtExpr) constantExprNode()           {}
+func (NilNode) constantExprNode()            {}
 
 type DIBasicTypeField interface {
 	LlvmNode
@@ -530,6 +539,7 @@ func (FlagsField) dIBasicTypeFieldNode()    {}
 func (NameField) dIBasicTypeFieldNode()     {}
 func (SizeField) dIBasicTypeFieldNode()     {}
 func (TagField) dIBasicTypeFieldNode()      {}
+func (NilNode) dIBasicTypeFieldNode()       {}
 
 type DICompileUnitField interface {
 	LlvmNode
@@ -556,6 +566,7 @@ func (RetainedTypesField) dICompileUnitFieldNode()         {}
 func (RuntimeVersionField) dICompileUnitFieldNode()        {}
 func (SplitDebugFilenameField) dICompileUnitFieldNode()    {}
 func (SplitDebugInliningField) dICompileUnitFieldNode()    {}
+func (NilNode) dICompileUnitFieldNode()                    {}
 
 type DICompositeTypeField interface {
 	LlvmNode
@@ -581,6 +592,7 @@ func (SizeField) dICompositeTypeFieldNode()           {}
 func (TagField) dICompositeTypeFieldNode()            {}
 func (TemplateParamsField) dICompositeTypeFieldNode() {}
 func (VtableHolderField) dICompositeTypeFieldNode()   {}
+func (NilNode) dICompositeTypeFieldNode()             {}
 
 type DIDerivedTypeField interface {
 	LlvmNode
@@ -602,6 +614,7 @@ func (OffsetField) dIDerivedTypeFieldNode()            {}
 func (ScopeField) dIDerivedTypeFieldNode()             {}
 func (SizeField) dIDerivedTypeFieldNode()              {}
 func (TagField) dIDerivedTypeFieldNode()               {}
+func (NilNode) dIDerivedTypeFieldNode()                {}
 
 type DIEnumeratorField interface {
 	LlvmNode
@@ -614,6 +627,7 @@ type DIEnumeratorField interface {
 func (IsUnsignedField) dIEnumeratorFieldNode() {}
 func (NameField) dIEnumeratorFieldNode()       {}
 func (ValueIntField) dIEnumeratorFieldNode()   {}
+func (NilNode) dIEnumeratorFieldNode()         {}
 
 type DIExpressionField interface {
 	LlvmNode
@@ -625,6 +639,7 @@ type DIExpressionField interface {
 //
 func (DwarfOp) dIExpressionFieldNode() {}
 func (UintLit) dIExpressionFieldNode() {}
+func (NilNode) dIExpressionFieldNode() {}
 
 type DIFileField interface {
 	LlvmNode
@@ -639,6 +654,7 @@ func (ChecksumkindField) dIFileFieldNode() {}
 func (DirectoryField) dIFileFieldNode()    {}
 func (FilenameField) dIFileFieldNode()     {}
 func (SourceField) dIFileFieldNode()       {}
+func (NilNode) dIFileFieldNode()           {}
 
 type DIGlobalVariableExpressionField interface {
 	LlvmNode
@@ -650,6 +666,7 @@ type DIGlobalVariableExpressionField interface {
 //
 func (ExprField) dIGlobalVariableExpressionFieldNode() {}
 func (VarField) dIGlobalVariableExpressionFieldNode()  {}
+func (NilNode) dIGlobalVariableExpressionFieldNode()   {}
 
 type DIGlobalVariableField interface {
 	LlvmNode
@@ -670,6 +687,7 @@ func (NameField) dIGlobalVariableFieldNode()           {}
 func (ScopeField) dIGlobalVariableFieldNode()          {}
 func (TemplateParamsField) dIGlobalVariableFieldNode() {}
 func (TypeField) dIGlobalVariableFieldNode()           {}
+func (NilNode) dIGlobalVariableFieldNode()             {}
 
 type DIImportedEntityField interface {
 	LlvmNode
@@ -685,6 +703,7 @@ func (LineField) dIImportedEntityFieldNode()   {}
 func (NameField) dIImportedEntityFieldNode()   {}
 func (ScopeField) dIImportedEntityFieldNode()  {}
 func (TagField) dIImportedEntityFieldNode()    {}
+func (NilNode) dIImportedEntityFieldNode()     {}
 
 type DILabelField interface {
 	LlvmNode
@@ -698,6 +717,7 @@ func (FileField) dILabelFieldNode()  {}
 func (LineField) dILabelFieldNode()  {}
 func (NameField) dILabelFieldNode()  {}
 func (ScopeField) dILabelFieldNode() {}
+func (NilNode) dILabelFieldNode()    {}
 
 type DILexicalBlockField interface {
 	LlvmNode
@@ -711,6 +731,7 @@ func (ColumnField) dILexicalBlockFieldNode() {}
 func (FileField) dILexicalBlockFieldNode()   {}
 func (LineField) dILexicalBlockFieldNode()   {}
 func (ScopeField) dILexicalBlockFieldNode()  {}
+func (NilNode) dILexicalBlockFieldNode()     {}
 
 type DILexicalBlockFileField interface {
 	LlvmNode
@@ -723,6 +744,7 @@ type DILexicalBlockFileField interface {
 func (DiscriminatorIntField) dILexicalBlockFileFieldNode() {}
 func (FileField) dILexicalBlockFileFieldNode()             {}
 func (ScopeField) dILexicalBlockFileFieldNode()            {}
+func (NilNode) dILexicalBlockFileFieldNode()               {}
 
 type DILocalVariableField interface {
 	LlvmNode
@@ -740,6 +762,7 @@ func (LineField) dILocalVariableFieldNode()  {}
 func (NameField) dILocalVariableFieldNode()  {}
 func (ScopeField) dILocalVariableFieldNode() {}
 func (TypeField) dILocalVariableFieldNode()  {}
+func (NilNode) dILocalVariableFieldNode()    {}
 
 type DILocationField interface {
 	LlvmNode
@@ -754,6 +777,7 @@ func (InlinedAtField) dILocationFieldNode()      {}
 func (IsImplicitCodeField) dILocationFieldNode() {}
 func (LineField) dILocationFieldNode()           {}
 func (ScopeField) dILocationFieldNode()          {}
+func (NilNode) dILocationFieldNode()             {}
 
 type DIMacroField interface {
 	LlvmNode
@@ -767,6 +791,7 @@ func (LineField) dIMacroFieldNode()        {}
 func (NameField) dIMacroFieldNode()        {}
 func (TypeMacinfoField) dIMacroFieldNode() {}
 func (ValueStringField) dIMacroFieldNode() {}
+func (NilNode) dIMacroFieldNode()          {}
 
 type DIMacroFileField interface {
 	LlvmNode
@@ -780,6 +805,7 @@ func (FileField) dIMacroFileFieldNode()        {}
 func (LineField) dIMacroFileFieldNode()        {}
 func (NodesField) dIMacroFileFieldNode()       {}
 func (TypeMacinfoField) dIMacroFileFieldNode() {}
+func (NilNode) dIMacroFileFieldNode()          {}
 
 type DIModuleField interface {
 	LlvmNode
@@ -794,6 +820,7 @@ func (IncludePathField) dIModuleFieldNode()  {}
 func (IsysrootField) dIModuleFieldNode()     {}
 func (NameField) dIModuleFieldNode()         {}
 func (ScopeField) dIModuleFieldNode()        {}
+func (NilNode) dIModuleFieldNode()           {}
 
 type DINamespaceField interface {
 	LlvmNode
@@ -806,6 +833,7 @@ type DINamespaceField interface {
 func (ExportSymbolsField) dINamespaceFieldNode() {}
 func (NameField) dINamespaceFieldNode()          {}
 func (ScopeField) dINamespaceFieldNode()         {}
+func (NilNode) dINamespaceFieldNode()            {}
 
 type DIObjCPropertyField interface {
 	LlvmNode
@@ -822,6 +850,7 @@ func (LineField) dIObjCPropertyFieldNode()       {}
 func (NameField) dIObjCPropertyFieldNode()       {}
 func (SetterField) dIObjCPropertyFieldNode()     {}
 func (TypeField) dIObjCPropertyFieldNode()       {}
+func (NilNode) dIObjCPropertyFieldNode()         {}
 
 type DISubprogramField interface {
 	LlvmNode
@@ -851,6 +880,7 @@ func (TypeField) dISubprogramFieldNode()           {}
 func (UnitField) dISubprogramFieldNode()           {}
 func (VirtualIndexField) dISubprogramFieldNode()   {}
 func (VirtualityField) dISubprogramFieldNode()     {}
+func (NilNode) dISubprogramFieldNode()             {}
 
 type DISubrangeField interface {
 	LlvmNode
@@ -862,6 +892,7 @@ type DISubrangeField interface {
 //
 func (CountField) dISubrangeFieldNode()      {}
 func (LowerBoundField) dISubrangeFieldNode() {}
+func (NilNode) dISubrangeFieldNode()         {}
 
 type DISubroutineTypeField interface {
 	LlvmNode
@@ -874,6 +905,7 @@ type DISubroutineTypeField interface {
 func (CCField) dISubroutineTypeFieldNode()    {}
 func (FlagsField) dISubroutineTypeFieldNode() {}
 func (TypesField) dISubroutineTypeFieldNode() {}
+func (NilNode) dISubroutineTypeFieldNode()    {}
 
 type DITemplateTypeParameterField interface {
 	LlvmNode
@@ -885,6 +917,7 @@ type DITemplateTypeParameterField interface {
 //
 func (NameField) dITemplateTypeParameterFieldNode() {}
 func (TypeField) dITemplateTypeParameterFieldNode() {}
+func (NilNode) dITemplateTypeParameterFieldNode()   {}
 
 type DITemplateValueParameterField interface {
 	LlvmNode
@@ -898,6 +931,7 @@ func (NameField) dITemplateValueParameterFieldNode()  {}
 func (TagField) dITemplateValueParameterFieldNode()   {}
 func (TypeField) dITemplateValueParameterFieldNode()  {}
 func (ValueField) dITemplateValueParameterFieldNode() {}
+func (NilNode) dITemplateValueParameterFieldNode()    {}
 
 type ExceptionScope interface {
 	LlvmNode
@@ -909,6 +943,7 @@ type ExceptionScope interface {
 //
 func (LocalIdent) exceptionScopeNode() {}
 func (NoneConst) exceptionScopeNode()  {}
+func (NilNode) exceptionScopeNode()    {}
 
 type FirstClassType interface {
 	LlvmNode
@@ -930,6 +965,7 @@ func (PointerType) firstClassTypeNode()      {}
 func (StructType) firstClassTypeNode()       {}
 func (TokenType) firstClassTypeNode()        {}
 func (VectorType) firstClassTypeNode()       {}
+func (NilNode) firstClassTypeNode()          {}
 
 type FuncAttribute interface {
 	LlvmNode
@@ -940,13 +976,14 @@ type FuncAttribute interface {
 // assigned to FuncAttribute.
 //
 func (AlignPair) funcAttributeNode()      {}
+func (AlignStack) funcAttributeNode()     {}
 func (AlignStackPair) funcAttributeNode() {}
 func (AllocSize) funcAttributeNode()      {}
 func (AttrGroupID) funcAttributeNode()    {}
 func (AttrPair) funcAttributeNode()       {}
 func (AttrString) funcAttributeNode()     {}
 func (FuncAttr) funcAttributeNode()       {}
-func (StackAlignment) funcAttributeNode() {}
+func (NilNode) funcAttributeNode()        {}
 
 type GenericDINodeField interface {
 	LlvmNode
@@ -959,6 +996,7 @@ type GenericDINodeField interface {
 func (HeaderField) genericDINodeFieldNode()   {}
 func (OperandsField) genericDINodeFieldNode() {}
 func (TagField) genericDINodeFieldNode()      {}
+func (NilNode) genericDINodeFieldNode()       {}
 
 type IndirectSymbolDef interface {
 	LlvmNode
@@ -970,6 +1008,7 @@ type IndirectSymbolDef interface {
 //
 func (AliasDef) indirectSymbolDefNode() {}
 func (IFuncDef) indirectSymbolDefNode() {}
+func (NilNode) indirectSymbolDefNode()  {}
 
 type Instruction interface {
 	LlvmNode
@@ -1032,6 +1071,7 @@ func (URemInst) instructionNode()           {}
 func (VAArgInst) instructionNode()          {}
 func (XorInst) instructionNode()            {}
 func (ZExtInst) instructionNode()           {}
+func (NilNode) instructionNode()            {}
 
 type MDField interface {
 	LlvmNode
@@ -1072,6 +1112,7 @@ func (MDTuple) mDFieldNode()                    {}
 func (MetadataID) mDFieldNode()                 {}
 func (NullLit) mDFieldNode()                    {}
 func (TypeValue) mDFieldNode()                  {}
+func (NilNode) mDFieldNode()                    {}
 
 type MDFieldOrInt interface {
 	LlvmNode
@@ -1113,6 +1154,7 @@ func (MDTuple) mDFieldOrIntNode()                    {}
 func (MetadataID) mDFieldOrIntNode()                 {}
 func (NullLit) mDFieldOrIntNode()                    {}
 func (TypeValue) mDFieldOrIntNode()                  {}
+func (NilNode) mDFieldOrIntNode()                    {}
 
 type MDNode interface {
 	LlvmNode
@@ -1150,6 +1192,7 @@ func (DITemplateValueParameter) mDNodeNode()   {}
 func (GenericDINode) mDNodeNode()              {}
 func (MDTuple) mDNodeNode()                    {}
 func (MetadataID) mDNodeNode()                 {}
+func (NilNode) mDNodeNode()                    {}
 
 type Metadata interface {
 	LlvmNode
@@ -1189,6 +1232,7 @@ func (MDString) metadataNode()                   {}
 func (MDTuple) metadataNode()                    {}
 func (MetadataID) metadataNode()                 {}
 func (TypeValue) metadataNode()                  {}
+func (NilNode) metadataNode()                    {}
 
 type MetadataNode interface {
 	LlvmNode
@@ -1200,6 +1244,7 @@ type MetadataNode interface {
 //
 func (DIExpression) metadataNodeNode() {}
 func (MetadataID) metadataNodeNode()   {}
+func (NilNode) metadataNodeNode()      {}
 
 type ParamAttribute interface {
 	LlvmNode
@@ -1209,11 +1254,12 @@ type ParamAttribute interface {
 // paramAttributeNode() ensures that only the following types can be
 // assigned to ParamAttribute.
 //
-func (Alignment) paramAttributeNode()       {}
+func (Align) paramAttributeNode()           {}
 func (AttrPair) paramAttributeNode()        {}
 func (AttrString) paramAttributeNode()      {}
 func (Dereferenceable) paramAttributeNode() {}
 func (ParamAttr) paramAttributeNode()       {}
+func (NilNode) paramAttributeNode()         {}
 
 type ReturnAttribute interface {
 	LlvmNode
@@ -1223,9 +1269,10 @@ type ReturnAttribute interface {
 // returnAttributeNode() ensures that only the following types can be
 // assigned to ReturnAttribute.
 //
-func (Alignment) returnAttributeNode()       {}
+func (Align) returnAttributeNode()           {}
 func (Dereferenceable) returnAttributeNode() {}
 func (ReturnAttr) returnAttributeNode()      {}
+func (NilNode) returnAttributeNode()         {}
 
 type SpecializedMDNode interface {
 	LlvmNode
@@ -1261,6 +1308,7 @@ func (DISubroutineType) specializedMDNodeNode()           {}
 func (DITemplateTypeParameter) specializedMDNodeNode()    {}
 func (DITemplateValueParameter) specializedMDNodeNode()   {}
 func (GenericDINode) specializedMDNodeNode()              {}
+func (NilNode) specializedMDNodeNode()                    {}
 
 type TargetDef interface {
 	LlvmNode
@@ -1272,6 +1320,7 @@ type TargetDef interface {
 //
 func (TargetDataLayout) targetDefNode() {}
 func (TargetTriple) targetDefNode()     {}
+func (NilNode) targetDefNode()          {}
 
 type Terminator interface {
 	LlvmNode
@@ -1293,6 +1342,7 @@ func (ResumeTerm) terminatorNode()      {}
 func (RetTerm) terminatorNode()         {}
 func (SwitchTerm) terminatorNode()      {}
 func (UnreachableTerm) terminatorNode() {}
+func (NilNode) terminatorNode()         {}
 
 type TopLevelEntity interface {
 	LlvmNode
@@ -1319,6 +1369,7 @@ func (TargetTriple) topLevelEntityNode()     {}
 func (TypeDef) topLevelEntityNode()          {}
 func (UseListOrder) topLevelEntityNode()     {}
 func (UseListOrderBB) topLevelEntityNode()   {}
+func (NilNode) topLevelEntityNode()          {}
 
 type Type interface {
 	LlvmNode
@@ -1342,6 +1393,7 @@ func (StructType) typeNode()       {}
 func (TokenType) typeNode()        {}
 func (VectorType) typeNode()       {}
 func (VoidType) typeNode()         {}
+func (NilNode) typeNode()          {}
 
 type Value interface {
 	LlvmNode
@@ -1406,6 +1458,7 @@ func (VectorConst) valueNode()          {}
 func (XorExpr) valueNode()              {}
 func (ZExtExpr) valueNode()             {}
 func (ZeroInitializerConst) valueNode() {}
+func (NilNode) valueNode()              {}
 
 type ValueInstruction interface {
 	LlvmNode
@@ -1465,6 +1518,7 @@ func (URemInst) valueInstructionNode()           {}
 func (VAArgInst) valueInstructionNode()          {}
 func (XorInst) valueInstructionNode()            {}
 func (ZExtInst) valueInstructionNode()           {}
+func (NilNode) valueInstructionNode()            {}
 
 type ValueTerminator interface {
 	LlvmNode
@@ -1476,6 +1530,7 @@ type ValueTerminator interface {
 //
 func (CatchSwitchTerm) valueTerminatorNode() {}
 func (InvokeTerm) valueTerminatorNode()      {}
+func (NilNode) valueTerminatorNode()         {}
 
 // Types.
 
@@ -1483,11 +1538,8 @@ type AShrExpr struct {
 	*Node
 }
 
-func (n AShrExpr) Exact() *Exact {
-	if child := n.Child(selector.Exact); child != nil {
-		return &Exact{child}
-	}
-	return nil
+func (n AShrExpr) Exact() /*opt*/ Exact {
+	return Exact{n.Child(selector.Exact)}
 }
 
 func (n AShrExpr) X() TypeConst {
@@ -1502,11 +1554,8 @@ type AShrInst struct {
 	*Node
 }
 
-func (n AShrInst) Exact() *Exact {
-	if child := n.Child(selector.Exact); child != nil {
-		return &Exact{child}
-	}
-	return nil
+func (n AShrInst) Exact() /*opt*/ Exact {
+	return Exact{n.Child(selector.Exact)}
 }
 
 func (n AShrInst) X() TypeValue {
@@ -1626,53 +1675,32 @@ func (n AliasDef) Name() GlobalIdent {
 	return GlobalIdent{n.Child(selector.GlobalIdent)}
 }
 
-func (n AliasDef) ExternLinkage() *ExternLinkage {
-	if child := n.Child(selector.ExternLinkage); child != nil {
-		return &ExternLinkage{child}
-	}
-	return nil
+func (n AliasDef) ExternLinkage() /*opt*/ ExternLinkage {
+	return ExternLinkage{n.Child(selector.ExternLinkage)}
 }
 
-func (n AliasDef) Linkage() *Linkage {
-	if child := n.Child(selector.Linkage); child != nil {
-		return &Linkage{child}
-	}
-	return nil
+func (n AliasDef) Linkage() /*opt*/ Linkage {
+	return Linkage{n.Child(selector.Linkage)}
 }
 
-func (n AliasDef) Preemption() *Preemption {
-	if child := n.Child(selector.Preemption); child != nil {
-		return &Preemption{child}
-	}
-	return nil
+func (n AliasDef) Preemption() /*opt*/ Preemption {
+	return Preemption{n.Child(selector.Preemption)}
 }
 
-func (n AliasDef) Visibility() *Visibility {
-	if child := n.Child(selector.Visibility); child != nil {
-		return &Visibility{child}
-	}
-	return nil
+func (n AliasDef) Visibility() /*opt*/ Visibility {
+	return Visibility{n.Child(selector.Visibility)}
 }
 
-func (n AliasDef) DLLStorageClass() *DLLStorageClass {
-	if child := n.Child(selector.DLLStorageClass); child != nil {
-		return &DLLStorageClass{child}
-	}
-	return nil
+func (n AliasDef) DLLStorageClass() /*opt*/ DLLStorageClass {
+	return DLLStorageClass{n.Child(selector.DLLStorageClass)}
 }
 
-func (n AliasDef) ThreadLocal() *ThreadLocal {
-	if child := n.Child(selector.ThreadLocal); child != nil {
-		return &ThreadLocal{child}
-	}
-	return nil
+func (n AliasDef) ThreadLocal() /*opt*/ ThreadLocal {
+	return ThreadLocal{n.Child(selector.ThreadLocal)}
 }
 
-func (n AliasDef) UnnamedAddr() *UnnamedAddr {
-	if child := n.Child(selector.UnnamedAddr); child != nil {
-		return &UnnamedAddr{child}
-	}
-	return nil
+func (n AliasDef) UnnamedAddr() /*opt*/ UnnamedAddr {
+	return UnnamedAddr{n.Child(selector.UnnamedAddr)}
 }
 
 func (n AliasDef) ContentType() Type {
@@ -1681,6 +1709,14 @@ func (n AliasDef) ContentType() Type {
 
 func (n AliasDef) Aliasee() TypeConst {
 	return TypeConst{n.Child(selector.TypeConst)}
+}
+
+type Align struct {
+	*Node
+}
+
+func (n Align) N() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type AlignField struct {
@@ -1703,6 +1739,10 @@ type AlignStack struct {
 	*Node
 }
 
+func (n AlignStack) N() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
+}
+
 type AlignStackPair struct {
 	*Node
 }
@@ -1711,12 +1751,8 @@ func (n AlignStackPair) N() UintLit {
 	return UintLit{n.Child(selector.UintLit)}
 }
 
-type Alignment struct {
+type AlignStackTok struct {
 	*Node
-}
-
-func (n Alignment) N() UintLit {
-	return UintLit{n.Child(selector.UintLit)}
 }
 
 type AllocSize struct {
@@ -1727,54 +1763,36 @@ func (n AllocSize) ElemSize() UintLit {
 	return UintLit{n.Child(selector.UintLit)}
 }
 
-func (n AllocSize) N() *UintLit {
-	if child := n.Child(selector.UintLit).Next(selector.UintLit); child != nil {
-		return &UintLit{child}
-	}
-	return nil
+func (n AllocSize) N() /*opt*/ UintLit {
+	return UintLit{n.Child(selector.UintLit).Next(selector.UintLit)}
 }
 
 type AllocaInst struct {
 	*Node
 }
 
-func (n AllocaInst) InAlloca() *InAlloca {
-	if child := n.Child(selector.InAlloca); child != nil {
-		return &InAlloca{child}
-	}
-	return nil
+func (n AllocaInst) InAlloca() /*opt*/ InAlloca {
+	return InAlloca{n.Child(selector.InAlloca)}
 }
 
-func (n AllocaInst) SwiftError() *SwiftError {
-	if child := n.Child(selector.SwiftError); child != nil {
-		return &SwiftError{child}
-	}
-	return nil
+func (n AllocaInst) SwiftError() /*opt*/ SwiftError {
+	return SwiftError{n.Child(selector.SwiftError)}
 }
 
 func (n AllocaInst) ElemType() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
-func (n AllocaInst) NElems() *TypeValue {
-	if child := n.Child(selector.TypeValue); child != nil {
-		return &TypeValue{child}
-	}
-	return nil
+func (n AllocaInst) NElems() /*opt*/ TypeValue {
+	return TypeValue{n.Child(selector.TypeValue)}
 }
 
-func (n AllocaInst) Alignment() *Alignment {
-	if child := n.Child(selector.Alignment); child != nil {
-		return &Alignment{child}
-	}
-	return nil
+func (n AllocaInst) Align() /*opt*/ Align {
+	return Align{n.Child(selector.Align)}
 }
 
-func (n AllocaInst) AddrSpace() *AddrSpace {
-	if child := n.Child(selector.AddrSpace); child != nil {
-		return &AddrSpace{child}
-	}
-	return nil
+func (n AllocaInst) AddrSpace() /*opt*/ AddrSpace {
+	return AddrSpace{n.Child(selector.AddrSpace)}
 }
 
 func (n AllocaInst) Metadata() []MetadataAttachment {
@@ -1902,11 +1920,8 @@ type AtomicRMWInst struct {
 	*Node
 }
 
-func (n AtomicRMWInst) Volatile() *Volatile {
-	if child := n.Child(selector.Volatile); child != nil {
-		return &Volatile{child}
-	}
-	return nil
+func (n AtomicRMWInst) Volatile() /*opt*/ Volatile {
+	return Volatile{n.Child(selector.Volatile)}
 }
 
 func (n AtomicRMWInst) Op() AtomicOp {
@@ -1921,11 +1936,8 @@ func (n AtomicRMWInst) X() TypeValue {
 	return TypeValue{n.Child(selector.TypeValue).Next(selector.TypeValue)}
 }
 
-func (n AtomicRMWInst) SyncScope() *SyncScope {
-	if child := n.Child(selector.SyncScope); child != nil {
-		return &SyncScope{child}
-	}
-	return nil
+func (n AtomicRMWInst) SyncScope() /*opt*/ SyncScope {
+	return SyncScope{n.Child(selector.SyncScope)}
 }
 
 func (n AtomicRMWInst) Ordering() AtomicOrdering {
@@ -2002,11 +2014,8 @@ type BasicBlock struct {
 	*Node
 }
 
-func (n BasicBlock) Name() *LabelIdent {
-	if child := n.Child(selector.LabelIdent); child != nil {
-		return &LabelIdent{child}
-	}
-	return nil
+func (n BasicBlock) Name() /*opt*/ LabelIdent {
+	return LabelIdent{n.Child(selector.LabelIdent)}
 }
 
 func (n BasicBlock) Insts() []Instruction {
@@ -2108,11 +2117,8 @@ type CallInst struct {
 	*Node
 }
 
-func (n CallInst) Tail() *Tail {
-	if child := n.Child(selector.Tail); child != nil {
-		return &Tail{child}
-	}
-	return nil
+func (n CallInst) Tail() /*opt*/ Tail {
+	return Tail{n.Child(selector.Tail)}
 }
 
 func (n CallInst) FastMathFlags() []FastMathFlag {
@@ -2125,10 +2131,7 @@ func (n CallInst) FastMathFlags() []FastMathFlag {
 }
 
 func (n CallInst) CallingConv() CallingConv {
-	if child := n.Child(selector.CallingConv); child != nil {
-		return ToLlvmNode(child).(CallingConv)
-	}
-	return nil
+	return ToLlvmNode(n.Child(selector.CallingConv)).(CallingConv)
 }
 
 func (n CallInst) ReturnAttrs() []ReturnAttribute {
@@ -2140,11 +2143,8 @@ func (n CallInst) ReturnAttrs() []ReturnAttribute {
 	return ret
 }
 
-func (n CallInst) AddrSpace() *AddrSpace {
-	if child := n.Child(selector.AddrSpace); child != nil {
-		return &AddrSpace{child}
-	}
-	return nil
+func (n CallInst) AddrSpace() /*opt*/ AddrSpace {
+	return AddrSpace{n.Child(selector.AddrSpace)}
 }
 
 func (n CallInst) Typ() Type {
@@ -2386,18 +2386,12 @@ type CmpXchgInst struct {
 	*Node
 }
 
-func (n CmpXchgInst) Weak() *Weak {
-	if child := n.Child(selector.Weak); child != nil {
-		return &Weak{child}
-	}
-	return nil
+func (n CmpXchgInst) Weak() /*opt*/ Weak {
+	return Weak{n.Child(selector.Weak)}
 }
 
-func (n CmpXchgInst) Volatile() *Volatile {
-	if child := n.Child(selector.Volatile); child != nil {
-		return &Volatile{child}
-	}
-	return nil
+func (n CmpXchgInst) Volatile() /*opt*/ Volatile {
+	return Volatile{n.Child(selector.Volatile)}
 }
 
 func (n CmpXchgInst) Ptr() TypeValue {
@@ -2412,11 +2406,8 @@ func (n CmpXchgInst) New() TypeValue {
 	return TypeValue{n.Child(selector.TypeValue).Next(selector.TypeValue).Next(selector.TypeValue)}
 }
 
-func (n CmpXchgInst) SyncScope() *SyncScope {
-	if child := n.Child(selector.SyncScope); child != nil {
-		return &SyncScope{child}
-	}
-	return nil
+func (n CmpXchgInst) SyncScope() /*opt*/ SyncScope {
+	return SyncScope{n.Child(selector.SyncScope)}
 }
 
 func (n CmpXchgInst) SuccessOrdering() AtomicOrdering {
@@ -2448,11 +2439,8 @@ type Comdat struct {
 	*Node
 }
 
-func (n Comdat) Name() *ComdatName {
-	if child := n.Child(selector.ComdatName); child != nil {
-		return &ComdatName{child}
-	}
-	return nil
+func (n Comdat) Name() /*opt*/ ComdatName {
+	return ComdatName{n.Child(selector.ComdatName)}
 }
 
 type ComdatDef struct {
@@ -2619,11 +2607,8 @@ type DIFlag struct {
 	*Node
 }
 
-func (n DIFlag) UintLit() *UintLit {
-	if child := n.Child(selector.UintLit); child != nil {
-		return &UintLit{child}
-	}
-	return nil
+func (n DIFlag) UintLit() /*opt*/ UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type DIFlags struct {
@@ -2941,44 +2926,32 @@ type DwarfAttEncoding struct {
 	*Node
 }
 
-func (n DwarfAttEncoding) UintLit() *UintLit {
-	if child := n.Child(selector.UintLit); child != nil {
-		return &UintLit{child}
-	}
-	return nil
+func (n DwarfAttEncoding) UintLit() /*opt*/ UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type DwarfCC struct {
 	*Node
 }
 
-func (n DwarfCC) UintLit() *UintLit {
-	if child := n.Child(selector.UintLit); child != nil {
-		return &UintLit{child}
-	}
-	return nil
+func (n DwarfCC) UintLit() /*opt*/ UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type DwarfLang struct {
 	*Node
 }
 
-func (n DwarfLang) UintLit() *UintLit {
-	if child := n.Child(selector.UintLit); child != nil {
-		return &UintLit{child}
-	}
-	return nil
+func (n DwarfLang) UintLit() /*opt*/ UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type DwarfMacinfo struct {
 	*Node
 }
 
-func (n DwarfMacinfo) UintLit() *UintLit {
-	if child := n.Child(selector.UintLit); child != nil {
-		return &UintLit{child}
-	}
-	return nil
+func (n DwarfMacinfo) UintLit() /*opt*/ UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type DwarfOp struct {
@@ -2989,22 +2962,16 @@ type DwarfTag struct {
 	*Node
 }
 
-func (n DwarfTag) UintLit() *UintLit {
-	if child := n.Child(selector.UintLit); child != nil {
-		return &UintLit{child}
-	}
-	return nil
+func (n DwarfTag) UintLit() /*opt*/ UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type DwarfVirtuality struct {
 	*Node
 }
 
-func (n DwarfVirtuality) UintLit() *UintLit {
-	if child := n.Child(selector.UintLit); child != nil {
-		return &UintLit{child}
-	}
-	return nil
+func (n DwarfVirtuality) UintLit() /*opt*/ UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type DwoIdField struct {
@@ -3031,11 +2998,8 @@ type EmissionKind struct {
 	*Node
 }
 
-func (n EmissionKind) UintLit() *UintLit {
-	if child := n.Child(selector.UintLit); child != nil {
-		return &UintLit{child}
-	}
-	return nil
+func (n EmissionKind) UintLit() /*opt*/ UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type EmissionKindField struct {
@@ -3598,11 +3562,8 @@ type FenceInst struct {
 	*Node
 }
 
-func (n FenceInst) SyncScope() *SyncScope {
-	if child := n.Child(selector.SyncScope); child != nil {
-		return &SyncScope{child}
-	}
-	return nil
+func (n FenceInst) SyncScope() /*opt*/ SyncScope {
+	return SyncScope{n.Child(selector.SyncScope)}
 }
 
 func (n FenceInst) Ordering() AtomicOrdering {
@@ -3742,46 +3703,28 @@ type FuncHeader struct {
 	*Node
 }
 
-func (n FuncHeader) ExternLinkage() *ExternLinkage {
-	if child := n.Child(selector.ExternLinkage); child != nil {
-		return &ExternLinkage{child}
-	}
-	return nil
+func (n FuncHeader) ExternLinkage() /*opt*/ ExternLinkage {
+	return ExternLinkage{n.Child(selector.ExternLinkage)}
 }
 
-func (n FuncHeader) Linkage() *Linkage {
-	if child := n.Child(selector.Linkage); child != nil {
-		return &Linkage{child}
-	}
-	return nil
+func (n FuncHeader) Linkage() /*opt*/ Linkage {
+	return Linkage{n.Child(selector.Linkage)}
 }
 
-func (n FuncHeader) Preemption() *Preemption {
-	if child := n.Child(selector.Preemption); child != nil {
-		return &Preemption{child}
-	}
-	return nil
+func (n FuncHeader) Preemption() /*opt*/ Preemption {
+	return Preemption{n.Child(selector.Preemption)}
 }
 
-func (n FuncHeader) Visibility() *Visibility {
-	if child := n.Child(selector.Visibility); child != nil {
-		return &Visibility{child}
-	}
-	return nil
+func (n FuncHeader) Visibility() /*opt*/ Visibility {
+	return Visibility{n.Child(selector.Visibility)}
 }
 
-func (n FuncHeader) DLLStorageClass() *DLLStorageClass {
-	if child := n.Child(selector.DLLStorageClass); child != nil {
-		return &DLLStorageClass{child}
-	}
-	return nil
+func (n FuncHeader) DLLStorageClass() /*opt*/ DLLStorageClass {
+	return DLLStorageClass{n.Child(selector.DLLStorageClass)}
 }
 
 func (n FuncHeader) CallingConv() CallingConv {
-	if child := n.Child(selector.CallingConv); child != nil {
-		return ToLlvmNode(child).(CallingConv)
-	}
-	return nil
+	return ToLlvmNode(n.Child(selector.CallingConv)).(CallingConv)
 }
 
 func (n FuncHeader) ReturnAttrs() []ReturnAttribute {
@@ -3805,18 +3748,12 @@ func (n FuncHeader) Params() Params {
 	return Params{n.Child(selector.Params)}
 }
 
-func (n FuncHeader) UnnamedAddr() *UnnamedAddr {
-	if child := n.Child(selector.UnnamedAddr); child != nil {
-		return &UnnamedAddr{child}
-	}
-	return nil
+func (n FuncHeader) UnnamedAddr() /*opt*/ UnnamedAddr {
+	return UnnamedAddr{n.Child(selector.UnnamedAddr)}
 }
 
-func (n FuncHeader) AddrSpace() *AddrSpace {
-	if child := n.Child(selector.AddrSpace); child != nil {
-		return &AddrSpace{child}
-	}
-	return nil
+func (n FuncHeader) AddrSpace() /*opt*/ AddrSpace {
+	return AddrSpace{n.Child(selector.AddrSpace)}
 }
 
 func (n FuncHeader) FuncAttrs() []FuncAttribute {
@@ -3828,46 +3765,28 @@ func (n FuncHeader) FuncAttrs() []FuncAttribute {
 	return ret
 }
 
-func (n FuncHeader) Section() *Section {
-	if child := n.Child(selector.Section); child != nil {
-		return &Section{child}
-	}
-	return nil
+func (n FuncHeader) Section() /*opt*/ Section {
+	return Section{n.Child(selector.Section)}
 }
 
-func (n FuncHeader) Comdat() *Comdat {
-	if child := n.Child(selector.Comdat); child != nil {
-		return &Comdat{child}
-	}
-	return nil
+func (n FuncHeader) Comdat() /*opt*/ Comdat {
+	return Comdat{n.Child(selector.Comdat)}
 }
 
-func (n FuncHeader) GCNode() *GCNode {
-	if child := n.Child(selector.GCNode); child != nil {
-		return &GCNode{child}
-	}
-	return nil
+func (n FuncHeader) GCNode() /*opt*/ GCNode {
+	return GCNode{n.Child(selector.GCNode)}
 }
 
-func (n FuncHeader) Prefix() *Prefix {
-	if child := n.Child(selector.Prefix); child != nil {
-		return &Prefix{child}
-	}
-	return nil
+func (n FuncHeader) Prefix() /*opt*/ Prefix {
+	return Prefix{n.Child(selector.Prefix)}
 }
 
-func (n FuncHeader) Prologue() *Prologue {
-	if child := n.Child(selector.Prologue); child != nil {
-		return &Prologue{child}
-	}
-	return nil
+func (n FuncHeader) Prologue() /*opt*/ Prologue {
+	return Prologue{n.Child(selector.Prologue)}
 }
 
-func (n FuncHeader) Personality() *Personality {
-	if child := n.Child(selector.Personality); child != nil {
-		return &Personality{child}
-	}
-	return nil
+func (n FuncHeader) Personality() /*opt*/ Personality {
+	return Personality{n.Child(selector.Personality)}
 }
 
 type FuncType struct {
@@ -3894,11 +3813,8 @@ type GEPIndex struct {
 	*Node
 }
 
-func (n GEPIndex) InRange() *InRange {
-	if child := n.Child(selector.InRange); child != nil {
-		return &InRange{child}
-	}
-	return nil
+func (n GEPIndex) InRange() /*opt*/ InRange {
+	return InRange{n.Child(selector.InRange)}
 }
 
 func (n GEPIndex) Index() TypeConst {
@@ -3922,11 +3838,8 @@ type GetElementPtrExpr struct {
 	*Node
 }
 
-func (n GetElementPtrExpr) InBounds() *InBounds {
-	if child := n.Child(selector.InBounds); child != nil {
-		return &InBounds{child}
-	}
-	return nil
+func (n GetElementPtrExpr) InBounds() /*opt*/ InBounds {
+	return InBounds{n.Child(selector.InBounds)}
 }
 
 func (n GetElementPtrExpr) ElemType() Type {
@@ -3950,11 +3863,8 @@ type GetElementPtrInst struct {
 	*Node
 }
 
-func (n GetElementPtrInst) InBounds() *InBounds {
-	if child := n.Child(selector.InBounds); child != nil {
-		return &InBounds{child}
-	}
-	return nil
+func (n GetElementPtrInst) InBounds() /*opt*/ InBounds {
+	return InBounds{n.Child(selector.InBounds)}
 }
 
 func (n GetElementPtrInst) ElemType() Type {
@@ -4003,53 +3913,32 @@ func (n GlobalDecl) ExternLinkage() ExternLinkage {
 	return ExternLinkage{n.Child(selector.ExternLinkage)}
 }
 
-func (n GlobalDecl) Preemption() *Preemption {
-	if child := n.Child(selector.Preemption); child != nil {
-		return &Preemption{child}
-	}
-	return nil
+func (n GlobalDecl) Preemption() /*opt*/ Preemption {
+	return Preemption{n.Child(selector.Preemption)}
 }
 
-func (n GlobalDecl) Visibility() *Visibility {
-	if child := n.Child(selector.Visibility); child != nil {
-		return &Visibility{child}
-	}
-	return nil
+func (n GlobalDecl) Visibility() /*opt*/ Visibility {
+	return Visibility{n.Child(selector.Visibility)}
 }
 
-func (n GlobalDecl) DLLStorageClass() *DLLStorageClass {
-	if child := n.Child(selector.DLLStorageClass); child != nil {
-		return &DLLStorageClass{child}
-	}
-	return nil
+func (n GlobalDecl) DLLStorageClass() /*opt*/ DLLStorageClass {
+	return DLLStorageClass{n.Child(selector.DLLStorageClass)}
 }
 
-func (n GlobalDecl) ThreadLocal() *ThreadLocal {
-	if child := n.Child(selector.ThreadLocal); child != nil {
-		return &ThreadLocal{child}
-	}
-	return nil
+func (n GlobalDecl) ThreadLocal() /*opt*/ ThreadLocal {
+	return ThreadLocal{n.Child(selector.ThreadLocal)}
 }
 
-func (n GlobalDecl) UnnamedAddr() *UnnamedAddr {
-	if child := n.Child(selector.UnnamedAddr); child != nil {
-		return &UnnamedAddr{child}
-	}
-	return nil
+func (n GlobalDecl) UnnamedAddr() /*opt*/ UnnamedAddr {
+	return UnnamedAddr{n.Child(selector.UnnamedAddr)}
 }
 
-func (n GlobalDecl) AddrSpace() *AddrSpace {
-	if child := n.Child(selector.AddrSpace); child != nil {
-		return &AddrSpace{child}
-	}
-	return nil
+func (n GlobalDecl) AddrSpace() /*opt*/ AddrSpace {
+	return AddrSpace{n.Child(selector.AddrSpace)}
 }
 
-func (n GlobalDecl) ExternallyInitialized() *ExternallyInitialized {
-	if child := n.Child(selector.ExternallyInitialized); child != nil {
-		return &ExternallyInitialized{child}
-	}
-	return nil
+func (n GlobalDecl) ExternallyInitialized() /*opt*/ ExternallyInitialized {
+	return ExternallyInitialized{n.Child(selector.ExternallyInitialized)}
 }
 
 func (n GlobalDecl) Immutable() Immutable {
@@ -4060,25 +3949,16 @@ func (n GlobalDecl) ContentType() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
-func (n GlobalDecl) Section() *Section {
-	if child := n.Child(selector.Section); child != nil {
-		return &Section{child}
-	}
-	return nil
+func (n GlobalDecl) Section() /*opt*/ Section {
+	return Section{n.Child(selector.Section)}
 }
 
-func (n GlobalDecl) Comdat() *Comdat {
-	if child := n.Child(selector.Comdat); child != nil {
-		return &Comdat{child}
-	}
-	return nil
+func (n GlobalDecl) Comdat() /*opt*/ Comdat {
+	return Comdat{n.Child(selector.Comdat)}
 }
 
-func (n GlobalDecl) Alignment() *Alignment {
-	if child := n.Child(selector.Alignment); child != nil {
-		return &Alignment{child}
-	}
-	return nil
+func (n GlobalDecl) Align() /*opt*/ Align {
+	return Align{n.Child(selector.Align)}
 }
 
 func (n GlobalDecl) Metadata() []MetadataAttachment {
@@ -4107,60 +3987,36 @@ func (n GlobalDef) Name() GlobalIdent {
 	return GlobalIdent{n.Child(selector.GlobalIdent)}
 }
 
-func (n GlobalDef) Linkage() *Linkage {
-	if child := n.Child(selector.Linkage); child != nil {
-		return &Linkage{child}
-	}
-	return nil
+func (n GlobalDef) Linkage() /*opt*/ Linkage {
+	return Linkage{n.Child(selector.Linkage)}
 }
 
-func (n GlobalDef) Preemption() *Preemption {
-	if child := n.Child(selector.Preemption); child != nil {
-		return &Preemption{child}
-	}
-	return nil
+func (n GlobalDef) Preemption() /*opt*/ Preemption {
+	return Preemption{n.Child(selector.Preemption)}
 }
 
-func (n GlobalDef) Visibility() *Visibility {
-	if child := n.Child(selector.Visibility); child != nil {
-		return &Visibility{child}
-	}
-	return nil
+func (n GlobalDef) Visibility() /*opt*/ Visibility {
+	return Visibility{n.Child(selector.Visibility)}
 }
 
-func (n GlobalDef) DLLStorageClass() *DLLStorageClass {
-	if child := n.Child(selector.DLLStorageClass); child != nil {
-		return &DLLStorageClass{child}
-	}
-	return nil
+func (n GlobalDef) DLLStorageClass() /*opt*/ DLLStorageClass {
+	return DLLStorageClass{n.Child(selector.DLLStorageClass)}
 }
 
-func (n GlobalDef) ThreadLocal() *ThreadLocal {
-	if child := n.Child(selector.ThreadLocal); child != nil {
-		return &ThreadLocal{child}
-	}
-	return nil
+func (n GlobalDef) ThreadLocal() /*opt*/ ThreadLocal {
+	return ThreadLocal{n.Child(selector.ThreadLocal)}
 }
 
-func (n GlobalDef) UnnamedAddr() *UnnamedAddr {
-	if child := n.Child(selector.UnnamedAddr); child != nil {
-		return &UnnamedAddr{child}
-	}
-	return nil
+func (n GlobalDef) UnnamedAddr() /*opt*/ UnnamedAddr {
+	return UnnamedAddr{n.Child(selector.UnnamedAddr)}
 }
 
-func (n GlobalDef) AddrSpace() *AddrSpace {
-	if child := n.Child(selector.AddrSpace); child != nil {
-		return &AddrSpace{child}
-	}
-	return nil
+func (n GlobalDef) AddrSpace() /*opt*/ AddrSpace {
+	return AddrSpace{n.Child(selector.AddrSpace)}
 }
 
-func (n GlobalDef) ExternallyInitialized() *ExternallyInitialized {
-	if child := n.Child(selector.ExternallyInitialized); child != nil {
-		return &ExternallyInitialized{child}
-	}
-	return nil
+func (n GlobalDef) ExternallyInitialized() /*opt*/ ExternallyInitialized {
+	return ExternallyInitialized{n.Child(selector.ExternallyInitialized)}
 }
 
 func (n GlobalDef) Immutable() Immutable {
@@ -4175,25 +4031,16 @@ func (n GlobalDef) Init() Constant {
 	return ToLlvmNode(n.Child(selector.GlobalIdent).Next(selector.Constant)).(Constant)
 }
 
-func (n GlobalDef) Section() *Section {
-	if child := n.Child(selector.Section); child != nil {
-		return &Section{child}
-	}
-	return nil
+func (n GlobalDef) Section() /*opt*/ Section {
+	return Section{n.Child(selector.Section)}
 }
 
-func (n GlobalDef) Comdat() *Comdat {
-	if child := n.Child(selector.Comdat); child != nil {
-		return &Comdat{child}
-	}
-	return nil
+func (n GlobalDef) Comdat() /*opt*/ Comdat {
+	return Comdat{n.Child(selector.Comdat)}
 }
 
-func (n GlobalDef) Alignment() *Alignment {
-	if child := n.Child(selector.Alignment); child != nil {
-		return &Alignment{child}
-	}
-	return nil
+func (n GlobalDef) Align() /*opt*/ Align {
+	return Align{n.Child(selector.Align)}
 }
 
 func (n GlobalDef) Metadata() []MetadataAttachment {
@@ -4283,53 +4130,32 @@ func (n IFuncDef) Name() GlobalIdent {
 	return GlobalIdent{n.Child(selector.GlobalIdent)}
 }
 
-func (n IFuncDef) ExternLinkage() *ExternLinkage {
-	if child := n.Child(selector.ExternLinkage); child != nil {
-		return &ExternLinkage{child}
-	}
-	return nil
+func (n IFuncDef) ExternLinkage() /*opt*/ ExternLinkage {
+	return ExternLinkage{n.Child(selector.ExternLinkage)}
 }
 
-func (n IFuncDef) Linkage() *Linkage {
-	if child := n.Child(selector.Linkage); child != nil {
-		return &Linkage{child}
-	}
-	return nil
+func (n IFuncDef) Linkage() /*opt*/ Linkage {
+	return Linkage{n.Child(selector.Linkage)}
 }
 
-func (n IFuncDef) Preemption() *Preemption {
-	if child := n.Child(selector.Preemption); child != nil {
-		return &Preemption{child}
-	}
-	return nil
+func (n IFuncDef) Preemption() /*opt*/ Preemption {
+	return Preemption{n.Child(selector.Preemption)}
 }
 
-func (n IFuncDef) Visibility() *Visibility {
-	if child := n.Child(selector.Visibility); child != nil {
-		return &Visibility{child}
-	}
-	return nil
+func (n IFuncDef) Visibility() /*opt*/ Visibility {
+	return Visibility{n.Child(selector.Visibility)}
 }
 
-func (n IFuncDef) DLLStorageClass() *DLLStorageClass {
-	if child := n.Child(selector.DLLStorageClass); child != nil {
-		return &DLLStorageClass{child}
-	}
-	return nil
+func (n IFuncDef) DLLStorageClass() /*opt*/ DLLStorageClass {
+	return DLLStorageClass{n.Child(selector.DLLStorageClass)}
 }
 
-func (n IFuncDef) ThreadLocal() *ThreadLocal {
-	if child := n.Child(selector.ThreadLocal); child != nil {
-		return &ThreadLocal{child}
-	}
-	return nil
+func (n IFuncDef) ThreadLocal() /*opt*/ ThreadLocal {
+	return ThreadLocal{n.Child(selector.ThreadLocal)}
 }
 
-func (n IFuncDef) UnnamedAddr() *UnnamedAddr {
-	if child := n.Child(selector.UnnamedAddr); child != nil {
-		return &UnnamedAddr{child}
-	}
-	return nil
+func (n IFuncDef) UnnamedAddr() /*opt*/ UnnamedAddr {
+	return UnnamedAddr{n.Child(selector.UnnamedAddr)}
 }
 
 func (n IFuncDef) ContentType() Type {
@@ -4426,25 +4252,16 @@ type InlineAsm struct {
 	*Node
 }
 
-func (n InlineAsm) SideEffect() *SideEffect {
-	if child := n.Child(selector.SideEffect); child != nil {
-		return &SideEffect{child}
-	}
-	return nil
+func (n InlineAsm) SideEffect() /*opt*/ SideEffect {
+	return SideEffect{n.Child(selector.SideEffect)}
 }
 
-func (n InlineAsm) AlignStack() *AlignStack {
-	if child := n.Child(selector.AlignStack); child != nil {
-		return &AlignStack{child}
-	}
-	return nil
+func (n InlineAsm) AlignStackTok() /*opt*/ AlignStackTok {
+	return AlignStackTok{n.Child(selector.AlignStackTok)}
 }
 
-func (n InlineAsm) IntelDialect() *IntelDialect {
-	if child := n.Child(selector.IntelDialect); child != nil {
-		return &IntelDialect{child}
-	}
-	return nil
+func (n InlineAsm) IntelDialect() /*opt*/ IntelDialect {
+	return IntelDialect{n.Child(selector.IntelDialect)}
 }
 
 func (n InlineAsm) Asm() StringLit {
@@ -4613,10 +4430,7 @@ type InvokeTerm struct {
 }
 
 func (n InvokeTerm) CallingConv() CallingConv {
-	if child := n.Child(selector.CallingConv); child != nil {
-		return ToLlvmNode(child).(CallingConv)
-	}
-	return nil
+	return ToLlvmNode(n.Child(selector.CallingConv)).(CallingConv)
 }
 
 func (n InvokeTerm) ReturnAttrs() []ReturnAttribute {
@@ -4628,11 +4442,8 @@ func (n InvokeTerm) ReturnAttrs() []ReturnAttribute {
 	return ret
 }
 
-func (n InvokeTerm) AddrSpace() *AddrSpace {
-	if child := n.Child(selector.AddrSpace); child != nil {
-		return &AddrSpace{child}
-	}
-	return nil
+func (n InvokeTerm) AddrSpace() /*opt*/ AddrSpace {
+	return AddrSpace{n.Child(selector.AddrSpace)}
 }
 
 func (n InvokeTerm) Typ() Type {
@@ -4734,11 +4545,8 @@ type LShrExpr struct {
 	*Node
 }
 
-func (n LShrExpr) Exact() *Exact {
-	if child := n.Child(selector.Exact); child != nil {
-		return &Exact{child}
-	}
-	return nil
+func (n LShrExpr) Exact() /*opt*/ Exact {
+	return Exact{n.Child(selector.Exact)}
 }
 
 func (n LShrExpr) X() TypeConst {
@@ -4753,11 +4561,8 @@ type LShrInst struct {
 	*Node
 }
 
-func (n LShrInst) Exact() *Exact {
-	if child := n.Child(selector.Exact); child != nil {
-		return &Exact{child}
-	}
-	return nil
+func (n LShrInst) Exact() /*opt*/ Exact {
+	return Exact{n.Child(selector.Exact)}
 }
 
 func (n LShrInst) X() TypeValue {
@@ -4805,11 +4610,8 @@ func (n LandingPadInst) ResultType() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
-func (n LandingPadInst) Cleanup() *Cleanup {
-	if child := n.Child(selector.Cleanup); child != nil {
-		return &Cleanup{child}
-	}
-	return nil
+func (n LandingPadInst) Cleanup() /*opt*/ Cleanup {
+	return Cleanup{n.Child(selector.Cleanup)}
 }
 
 func (n LandingPadInst) Clauses() []Clause {
@@ -4862,18 +4664,12 @@ type LoadInst struct {
 	*Node
 }
 
-func (n LoadInst) Atomic() *Atomic {
-	if child := n.Child(selector.Atomic); child != nil {
-		return &Atomic{child}
-	}
-	return nil
+func (n LoadInst) Atomic() /*opt*/ Atomic {
+	return Atomic{n.Child(selector.Atomic)}
 }
 
-func (n LoadInst) Volatile() *Volatile {
-	if child := n.Child(selector.Volatile); child != nil {
-		return &Volatile{child}
-	}
-	return nil
+func (n LoadInst) Volatile() /*opt*/ Volatile {
+	return Volatile{n.Child(selector.Volatile)}
 }
 
 func (n LoadInst) ElemType() Type {
@@ -4884,25 +4680,16 @@ func (n LoadInst) Src() TypeValue {
 	return TypeValue{n.Child(selector.TypeValue)}
 }
 
-func (n LoadInst) SyncScope() *SyncScope {
-	if child := n.Child(selector.SyncScope); child != nil {
-		return &SyncScope{child}
-	}
-	return nil
+func (n LoadInst) SyncScope() /*opt*/ SyncScope {
+	return SyncScope{n.Child(selector.SyncScope)}
 }
 
-func (n LoadInst) Ordering() *AtomicOrdering {
-	if child := n.Child(selector.AtomicOrdering); child != nil {
-		return &AtomicOrdering{child}
-	}
-	return nil
+func (n LoadInst) Ordering() /*opt*/ AtomicOrdering {
+	return AtomicOrdering{n.Child(selector.AtomicOrdering)}
 }
 
-func (n LoadInst) Alignment() *Alignment {
-	if child := n.Child(selector.Alignment); child != nil {
-		return &Alignment{child}
-	}
-	return nil
+func (n LoadInst) Align() /*opt*/ Align {
+	return Align{n.Child(selector.Align)}
 }
 
 func (n LoadInst) Metadata() []MetadataAttachment {
@@ -5011,11 +4798,8 @@ func (n MetadataDef) ID() MetadataID {
 	return MetadataID{n.Child(selector.MetadataID)}
 }
 
-func (n MetadataDef) Distinct() *Distinct {
-	if child := n.Child(selector.Distinct); child != nil {
-		return &Distinct{child}
-	}
-	return nil
+func (n MetadataDef) Distinct() /*opt*/ Distinct {
+	return Distinct{n.Child(selector.Distinct)}
 }
 
 func (n MetadataDef) MDNode() LlvmNode {
@@ -5118,11 +4902,8 @@ type NameTableKind struct {
 	*Node
 }
 
-func (n NameTableKind) UintLit() *UintLit {
-	if child := n.Child(selector.UintLit); child != nil {
-		return &UintLit{child}
-	}
-	return nil
+func (n NameTableKind) UintLit() /*opt*/ UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type NameTableKindField struct {
@@ -5286,11 +5067,8 @@ func (n Param) Attrs() []ParamAttribute {
 	return ret
 }
 
-func (n Param) Name() *LocalIdent {
-	if child := n.Child(selector.LocalIdent); child != nil {
-		return &LocalIdent{child}
-	}
-	return nil
+func (n Param) Name() /*opt*/ LocalIdent {
+	return LocalIdent{n.Child(selector.LocalIdent)}
 }
 
 type ParamAttr struct {
@@ -5310,11 +5088,8 @@ func (n Params) Params() []Param {
 	return ret
 }
 
-func (n Params) Variadic() *Ellipsis {
-	if child := n.Child(selector.Ellipsis); child != nil {
-		return &Ellipsis{child}
-	}
-	return nil
+func (n Params) Variadic() /*opt*/ Ellipsis {
+	return Ellipsis{n.Child(selector.Ellipsis)}
 }
 
 type Personality struct {
@@ -5359,11 +5134,8 @@ func (n PointerType) Elem() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
-func (n PointerType) AddrSpace() *AddrSpace {
-	if child := n.Child(selector.AddrSpace); child != nil {
-		return &AddrSpace{child}
-	}
-	return nil
+func (n PointerType) AddrSpace() /*opt*/ AddrSpace {
+	return AddrSpace{n.Child(selector.AddrSpace)}
 }
 
 type Preemption struct {
@@ -5453,10 +5225,7 @@ func (n RetTerm) XTyp() LlvmNode {
 }
 
 func (n RetTerm) X() Value {
-	if child := n.Child(selector.Value); child != nil {
-		return ToLlvmNode(child).(Value)
-	}
-	return nil
+	return ToLlvmNode(n.Child(selector.Value)).(Value)
 }
 
 func (n RetTerm) Metadata() []MetadataAttachment {
@@ -5508,11 +5277,8 @@ type SDivExpr struct {
 	*Node
 }
 
-func (n SDivExpr) Exact() *Exact {
-	if child := n.Child(selector.Exact); child != nil {
-		return &Exact{child}
-	}
-	return nil
+func (n SDivExpr) Exact() /*opt*/ Exact {
+	return Exact{n.Child(selector.Exact)}
 }
 
 func (n SDivExpr) X() TypeConst {
@@ -5527,11 +5293,8 @@ type SDivInst struct {
 	*Node
 }
 
-func (n SDivInst) Exact() *Exact {
-	if child := n.Child(selector.Exact); child != nil {
-		return &Exact{child}
-	}
-	return nil
+func (n SDivInst) Exact() /*opt*/ Exact {
+	return Exact{n.Child(selector.Exact)}
 }
 
 func (n SDivInst) X() TypeValue {
@@ -5863,30 +5626,16 @@ func (n SplitDebugInliningField) SplitDebugInlining() BoolLit {
 	return BoolLit{n.Child(selector.BoolLit)}
 }
 
-type StackAlignment struct {
-	*Node
-}
-
-func (n StackAlignment) N() UintLit {
-	return UintLit{n.Child(selector.UintLit)}
-}
-
 type StoreInst struct {
 	*Node
 }
 
-func (n StoreInst) Atomic() *Atomic {
-	if child := n.Child(selector.Atomic); child != nil {
-		return &Atomic{child}
-	}
-	return nil
+func (n StoreInst) Atomic() /*opt*/ Atomic {
+	return Atomic{n.Child(selector.Atomic)}
 }
 
-func (n StoreInst) Volatile() *Volatile {
-	if child := n.Child(selector.Volatile); child != nil {
-		return &Volatile{child}
-	}
-	return nil
+func (n StoreInst) Volatile() /*opt*/ Volatile {
+	return Volatile{n.Child(selector.Volatile)}
 }
 
 func (n StoreInst) Src() TypeValue {
@@ -5897,25 +5646,16 @@ func (n StoreInst) Dst() TypeValue {
 	return TypeValue{n.Child(selector.TypeValue).Next(selector.TypeValue)}
 }
 
-func (n StoreInst) SyncScope() *SyncScope {
-	if child := n.Child(selector.SyncScope); child != nil {
-		return &SyncScope{child}
-	}
-	return nil
+func (n StoreInst) SyncScope() /*opt*/ SyncScope {
+	return SyncScope{n.Child(selector.SyncScope)}
 }
 
-func (n StoreInst) Ordering() *AtomicOrdering {
-	if child := n.Child(selector.AtomicOrdering); child != nil {
-		return &AtomicOrdering{child}
-	}
-	return nil
+func (n StoreInst) Ordering() /*opt*/ AtomicOrdering {
+	return AtomicOrdering{n.Child(selector.AtomicOrdering)}
 }
 
-func (n StoreInst) Alignment() *Alignment {
-	if child := n.Child(selector.Alignment); child != nil {
-		return &Alignment{child}
-	}
-	return nil
+func (n StoreInst) Align() /*opt*/ Align {
+	return Align{n.Child(selector.Align)}
 }
 
 func (n StoreInst) Metadata() []MetadataAttachment {
@@ -6102,11 +5842,8 @@ type ThreadLocal struct {
 	*Node
 }
 
-func (n ThreadLocal) Model() *TLSModel {
-	if child := n.Child(selector.TLSModel); child != nil {
-		return &TLSModel{child}
-	}
-	return nil
+func (n ThreadLocal) Model() /*opt*/ TLSModel {
+	return TLSModel{n.Child(selector.TLSModel)}
 }
 
 type ThrownTypesField struct {
@@ -6218,11 +5955,8 @@ type UDivExpr struct {
 	*Node
 }
 
-func (n UDivExpr) Exact() *Exact {
-	if child := n.Child(selector.Exact); child != nil {
-		return &Exact{child}
-	}
-	return nil
+func (n UDivExpr) Exact() /*opt*/ Exact {
+	return Exact{n.Child(selector.Exact)}
 }
 
 func (n UDivExpr) X() TypeConst {
@@ -6237,11 +5971,8 @@ type UDivInst struct {
 	*Node
 }
 
-func (n UDivInst) Exact() *Exact {
-	if child := n.Child(selector.Exact); child != nil {
-		return &Exact{child}
-	}
-	return nil
+func (n UDivInst) Exact() /*opt*/ Exact {
+	return Exact{n.Child(selector.Exact)}
 }
 
 func (n UDivInst) X() TypeValue {
@@ -6364,18 +6095,12 @@ type UnwindTarget struct {
 	*Node
 }
 
-func (n UnwindTarget) Label() *Label {
-	if child := n.Child(selector.Label); child != nil {
-		return &Label{child}
-	}
-	return nil
+func (n UnwindTarget) Label() /*opt*/ Label {
+	return Label{n.Child(selector.Label)}
 }
 
-func (n UnwindTarget) UnwindToCaller() *UnwindToCaller {
-	if child := n.Child(selector.UnwindToCaller); child != nil {
-		return &UnwindToCaller{child}
-	}
-	return nil
+func (n UnwindTarget) UnwindToCaller() /*opt*/ UnwindToCaller {
+	return UnwindToCaller{n.Child(selector.UnwindToCaller)}
 }
 
 type UnwindToCaller struct {
@@ -6390,7 +6115,7 @@ func (n UseListOrder) TypeValue() TypeValue {
 	return TypeValue{n.Child(selector.TypeValue)}
 }
 
-func (n UseListOrder) Indicies() []UintLit {
+func (n UseListOrder) Indices() []UintLit {
 	nodes := n.Children(selector.UintLit)
 	var ret = make([]UintLit, 0, len(nodes))
 	for _, node := range nodes {
@@ -6411,7 +6136,7 @@ func (n UseListOrderBB) Block() LocalIdent {
 	return LocalIdent{n.Child(selector.LocalIdent)}
 }
 
-func (n UseListOrderBB) Indicies() []UintLit {
+func (n UseListOrderBB) Indices() []UintLit {
 	nodes := n.Children(selector.UintLit)
 	var ret = make([]UintLit, 0, len(nodes))
 	for _, node := range nodes {

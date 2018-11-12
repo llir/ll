@@ -25,6 +25,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &AddrSpaceCastInst{n}
 	case ll.AliasDef:
 		return &AliasDef{n}
+	case ll.Align:
+		return &Align{n}
 	case ll.AlignField:
 		return &AlignField{n}
 	case ll.AlignPair:
@@ -33,8 +35,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &AlignStack{n}
 	case ll.AlignStackPair:
 		return &AlignStackPair{n}
-	case ll.Alignment:
-		return &Alignment{n}
+	case ll.AlignStackTok:
+		return &AlignStackTok{n}
 	case ll.AllocSize:
 		return &AllocSize{n}
 	case ll.AllocaInst:
@@ -603,8 +605,6 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &SplitDebugFilenameField{n}
 	case ll.SplitDebugInliningField:
 		return &SplitDebugInliningField{n}
-	case ll.StackAlignment:
-		return &StackAlignment{n}
 	case ll.StoreInst:
 		return &StoreInst{n}
 	case ll.StringLit:
@@ -727,6 +727,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &ZExtInst{n}
 	case ll.ZeroInitializerConst:
 		return &ZeroInitializerConst{n}
+	case ll.NoType:
+		return nilInstance
 	}
 	panic(fmt.Errorf("ast: unknown node type %v", n.Type()))
 	return nil

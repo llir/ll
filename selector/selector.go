@@ -18,11 +18,12 @@ var (
 	AddrSpaceCastExpr               = func(t ll.NodeType) bool { return t == ll.AddrSpaceCastExpr }
 	AddrSpaceCastInst               = func(t ll.NodeType) bool { return t == ll.AddrSpaceCastInst }
 	AliasDef                        = func(t ll.NodeType) bool { return t == ll.AliasDef }
+	Align                           = func(t ll.NodeType) bool { return t == ll.Align }
 	AlignField                      = func(t ll.NodeType) bool { return t == ll.AlignField }
 	AlignPair                       = func(t ll.NodeType) bool { return t == ll.AlignPair }
 	AlignStack                      = func(t ll.NodeType) bool { return t == ll.AlignStack }
 	AlignStackPair                  = func(t ll.NodeType) bool { return t == ll.AlignStackPair }
-	Alignment                       = func(t ll.NodeType) bool { return t == ll.Alignment }
+	AlignStackTok                   = func(t ll.NodeType) bool { return t == ll.AlignStackTok }
 	AllocSize                       = func(t ll.NodeType) bool { return t == ll.AllocSize }
 	AllocaInst                      = func(t ll.NodeType) bool { return t == ll.AllocaInst }
 	AndExpr                         = func(t ll.NodeType) bool { return t == ll.AndExpr }
@@ -307,7 +308,6 @@ var (
 	SourceFilename                  = func(t ll.NodeType) bool { return t == ll.SourceFilename }
 	SplitDebugFilenameField         = func(t ll.NodeType) bool { return t == ll.SplitDebugFilenameField }
 	SplitDebugInliningField         = func(t ll.NodeType) bool { return t == ll.SplitDebugInliningField }
-	StackAlignment                  = func(t ll.NodeType) bool { return t == ll.StackAlignment }
 	StoreInst                       = func(t ll.NodeType) bool { return t == ll.StoreInst }
 	StringLit                       = func(t ll.NodeType) bool { return t == ll.StringLit }
 	StructConst                     = func(t ll.NodeType) bool { return t == ll.StructConst }
