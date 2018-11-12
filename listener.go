@@ -51,7 +51,7 @@ const (
 	NamedMetadataDef // Name=MetadataName MDNodes=(MetadataNode)*
 	MetadataDef      // ID=MetadataID Distinct? MDNode=(MDTuple | SpecializedMDNode)
 	Distinct
-	UseListOrder   // TypeValue Indices=(UintLit)+
+	UseListOrder   // Val=TypeValue Indices=(UintLit)+
 	UseListOrderBB // Func=GlobalIdent Block=LocalIdent Indices=(UintLit)+
 	VoidType
 	FuncType // RetType=Type Params

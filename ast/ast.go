@@ -6275,7 +6275,7 @@ type UseListOrder struct {
 	*Node
 }
 
-func (n UseListOrder) TypeValue() TypeValue {
+func (n UseListOrder) Val() TypeValue {
 	return TypeValue{n.Child(selector.TypeValue)}
 }
 
