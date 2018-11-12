@@ -205,6 +205,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &DeclarationField{n}
 	case ll.Dereferenceable:
 		return &Dereferenceable{n}
+	case ll.DereferenceableOrNull:
+		return &DereferenceableOrNull{n}
 	case ll.DirectoryField:
 		return &DirectoryField{n}
 	case ll.DiscriminatorField:

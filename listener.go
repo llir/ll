@@ -347,9 +347,10 @@ const (
 	AttrPair   // Key=StringLit Val=StringLit
 	AttrString // Val=StringLit
 	CallingConvEnum
-	CallingConvInt  // UintLit
-	Comdat          // Name=ComdatName?
-	Dereferenceable // N=UintLit
+	CallingConvInt        // UintLit
+	Comdat                // Name=ComdatName?
+	Dereferenceable       // N=UintLit
+	DereferenceableOrNull // N=UintLit
 	DLLStorageClass
 	Ellipsis
 	Exact
@@ -723,6 +724,7 @@ var nodeTypeStr = [...]string{
 	"CallingConvInt",
 	"Comdat",
 	"Dereferenceable",
+	"DereferenceableOrNull",
 	"DLLStorageClass",
 	"Ellipsis",
 	"Exact",
@@ -1399,12 +1401,14 @@ var ParamAttribute = []NodeType{
 	AttrPair,
 	AttrString,
 	Dereferenceable,
+	DereferenceableOrNull,
 	ParamAttr,
 }
 
 var ReturnAttribute = []NodeType{
 	Align,
 	Dereferenceable,
+	DereferenceableOrNull,
 	ReturnAttr,
 }
 
@@ -2721,7 +2725,7 @@ var ruleNodeType = [...]NodeType{
 	Comdat,                     // Comdat : 'comdat'
 	Comdat,                     // Comdat : 'comdat' '(' ComdatName ')'
 	Dereferenceable,            // Dereferenceable : 'dereferenceable' '(' UintLit ')'
-	Dereferenceable,            // Dereferenceable : 'dereferenceable_or_null' '(' UintLit ')'
+	DereferenceableOrNull,      // Dereferenceable : 'dereferenceable_or_null' '(' UintLit ')'
 	DLLStorageClass,            // DLLStorageClass : 'dllexport'
 	DLLStorageClass,            // DLLStorageClass : 'dllimport'
 	Ellipsis,                   // Ellipsis : '...'

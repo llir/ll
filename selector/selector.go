@@ -108,6 +108,7 @@ var (
 	DebugInfoForProfilingField      = func(t ll.NodeType) bool { return t == ll.DebugInfoForProfilingField }
 	DeclarationField                = func(t ll.NodeType) bool { return t == ll.DeclarationField }
 	Dereferenceable                 = func(t ll.NodeType) bool { return t == ll.Dereferenceable }
+	DereferenceableOrNull           = func(t ll.NodeType) bool { return t == ll.DereferenceableOrNull }
 	DirectoryField                  = func(t ll.NodeType) bool { return t == ll.DirectoryField }
 	DiscriminatorField              = func(t ll.NodeType) bool { return t == ll.DiscriminatorField }
 	DiscriminatorIntField           = func(t ll.NodeType) bool { return t == ll.DiscriminatorIntField }

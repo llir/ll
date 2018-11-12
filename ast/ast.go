@@ -116,6 +116,7 @@ func (n DLLStorageClass) LlvmNode() *Node            { return n.Node }
 func (n DebugInfoForProfilingField) LlvmNode() *Node { return n.Node }
 func (n DeclarationField) LlvmNode() *Node           { return n.Node }
 func (n Dereferenceable) LlvmNode() *Node            { return n.Node }
+func (n DereferenceableOrNull) LlvmNode() *Node      { return n.Node }
 func (n DirectoryField) LlvmNode() *Node             { return n.Node }
 func (n DiscriminatorField) LlvmNode() *Node         { return n.Node }
 func (n DiscriminatorIntField) LlvmNode() *Node      { return n.Node }
@@ -1371,12 +1372,13 @@ type ParamAttribute interface {
 // paramAttributeNode() ensures that only the following types can be
 // assigned to ParamAttribute.
 //
-func (Align) paramAttributeNode()           {}
-func (AttrPair) paramAttributeNode()        {}
-func (AttrString) paramAttributeNode()      {}
-func (Dereferenceable) paramAttributeNode() {}
-func (ParamAttr) paramAttributeNode()       {}
-func (NilNode) paramAttributeNode()         {}
+func (Align) paramAttributeNode()                 {}
+func (AttrPair) paramAttributeNode()              {}
+func (AttrString) paramAttributeNode()            {}
+func (Dereferenceable) paramAttributeNode()       {}
+func (DereferenceableOrNull) paramAttributeNode() {}
+func (ParamAttr) paramAttributeNode()             {}
+func (NilNode) paramAttributeNode()               {}
 
 type ReturnAttribute interface {
 	LlvmNode
@@ -1386,10 +1388,11 @@ type ReturnAttribute interface {
 // returnAttributeNode() ensures that only the following types can be
 // assigned to ReturnAttribute.
 //
-func (Align) returnAttributeNode()           {}
-func (Dereferenceable) returnAttributeNode() {}
-func (ReturnAttr) returnAttributeNode()      {}
-func (NilNode) returnAttributeNode()         {}
+func (Align) returnAttributeNode()                 {}
+func (Dereferenceable) returnAttributeNode()       {}
+func (DereferenceableOrNull) returnAttributeNode() {}
+func (ReturnAttr) returnAttributeNode()            {}
+func (NilNode) returnAttributeNode()               {}
 
 type SpecializedMDNode interface {
 	LlvmNode
@@ -3004,6 +3007,14 @@ type Dereferenceable struct {
 }
 
 func (n Dereferenceable) N() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
+}
+
+type DereferenceableOrNull struct {
+	*Node
+}
+
+func (n DereferenceableOrNull) N() UintLit {
 	return UintLit{n.Child(selector.UintLit)}
 }
 
