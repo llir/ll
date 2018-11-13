@@ -25,7 +25,6 @@ func (n AddInst) LlvmNode() *Node                    { return n.Node }
 func (n AddrSpace) LlvmNode() *Node                  { return n.Node }
 func (n AddrSpaceCastExpr) LlvmNode() *Node          { return n.Node }
 func (n AddrSpaceCastInst) LlvmNode() *Node          { return n.Node }
-func (n AliasDef) LlvmNode() *Node                   { return n.Node }
 func (n Align) LlvmNode() *Node                      { return n.Node }
 func (n AlignField) LlvmNode() *Node                 { return n.Node }
 func (n AlignPair) LlvmNode() *Node                  { return n.Node }
@@ -205,7 +204,6 @@ func (n GlobalsField) LlvmNode() *Node               { return n.Node }
 func (n HeaderField) LlvmNode() *Node                { return n.Node }
 func (n ICmpExpr) LlvmNode() *Node                   { return n.Node }
 func (n ICmpInst) LlvmNode() *Node                   { return n.Node }
-func (n IFuncDef) LlvmNode() *Node                   { return n.Node }
 func (n IPred) LlvmNode() *Node                      { return n.Node }
 func (n IdentifierField) LlvmNode() *Node            { return n.Node }
 func (n Immutable) LlvmNode() *Node                  { return n.Node }
@@ -216,6 +214,8 @@ func (n InRange) LlvmNode() *Node                    { return n.Node }
 func (n Inc) LlvmNode() *Node                        { return n.Node }
 func (n IncludePathField) LlvmNode() *Node           { return n.Node }
 func (n IndirectBrTerm) LlvmNode() *Node             { return n.Node }
+func (n IndirectSymbolDef) LlvmNode() *Node          { return n.Node }
+func (n IndirectSymbolKind) LlvmNode() *Node         { return n.Node }
 func (n InlineAsm) LlvmNode() *Node                  { return n.Node }
 func (n InlinedAtField) LlvmNode() *Node             { return n.Node }
 func (n InsertElementExpr) LlvmNode() *Node          { return n.Node }
@@ -1104,17 +1104,20 @@ func (OperandsField) genericDINodeFieldNode() {}
 func (TagField) genericDINodeFieldNode()      {}
 func (NilNode) genericDINodeFieldNode()       {}
 
-type IndirectSymbolDef interface {
+type IndirectSymbol interface {
 	LlvmNode
-	indirectSymbolDefNode()
+	indirectSymbolNode()
 }
 
-// indirectSymbolDefNode() ensures that only the following types can be
-// assigned to IndirectSymbolDef.
+// indirectSymbolNode() ensures that only the following types can be
+// assigned to IndirectSymbol.
 //
-func (AliasDef) indirectSymbolDefNode() {}
-func (IFuncDef) indirectSymbolDefNode() {}
-func (NilNode) indirectSymbolDefNode()  {}
+func (AddrSpaceCastExpr) indirectSymbolNode() {}
+func (BitCastExpr) indirectSymbolNode()       {}
+func (GetElementPtrExpr) indirectSymbolNode() {}
+func (IntToPtrExpr) indirectSymbolNode()      {}
+func (TypeConst) indirectSymbolNode()         {}
+func (NilNode) indirectSymbolNode()           {}
 
 type Instruction interface {
 	LlvmNode
@@ -1472,24 +1475,23 @@ type TopLevelEntity interface {
 // topLevelEntityNode() ensures that only the following types can be
 // assigned to TopLevelEntity.
 //
-func (AliasDef) topLevelEntityNode()         {}
-func (AttrGroupDef) topLevelEntityNode()     {}
-func (ComdatDef) topLevelEntityNode()        {}
-func (FuncDecl) topLevelEntityNode()         {}
-func (FuncDef) topLevelEntityNode()          {}
-func (GlobalDecl) topLevelEntityNode()       {}
-func (GlobalDef) topLevelEntityNode()        {}
-func (IFuncDef) topLevelEntityNode()         {}
-func (MetadataDef) topLevelEntityNode()      {}
-func (ModuleAsm) topLevelEntityNode()        {}
-func (NamedMetadataDef) topLevelEntityNode() {}
-func (SourceFilename) topLevelEntityNode()   {}
-func (TargetDataLayout) topLevelEntityNode() {}
-func (TargetTriple) topLevelEntityNode()     {}
-func (TypeDef) topLevelEntityNode()          {}
-func (UseListOrder) topLevelEntityNode()     {}
-func (UseListOrderBB) topLevelEntityNode()   {}
-func (NilNode) topLevelEntityNode()          {}
+func (AttrGroupDef) topLevelEntityNode()      {}
+func (ComdatDef) topLevelEntityNode()         {}
+func (FuncDecl) topLevelEntityNode()          {}
+func (FuncDef) topLevelEntityNode()           {}
+func (GlobalDecl) topLevelEntityNode()        {}
+func (GlobalDef) topLevelEntityNode()         {}
+func (IndirectSymbolDef) topLevelEntityNode() {}
+func (MetadataDef) topLevelEntityNode()       {}
+func (ModuleAsm) topLevelEntityNode()         {}
+func (NamedMetadataDef) topLevelEntityNode()  {}
+func (SourceFilename) topLevelEntityNode()    {}
+func (TargetDataLayout) topLevelEntityNode()  {}
+func (TargetTriple) topLevelEntityNode()      {}
+func (TypeDef) topLevelEntityNode()           {}
+func (UseListOrder) topLevelEntityNode()      {}
+func (UseListOrderBB) topLevelEntityNode()    {}
+func (NilNode) topLevelEntityNode()           {}
 
 type Type interface {
 	LlvmNode
@@ -1785,50 +1787,6 @@ func (n AddrSpaceCastInst) Metadata() []MetadataAttachment {
 		ret = append(ret, MetadataAttachment{node})
 	}
 	return ret
-}
-
-type AliasDef struct {
-	*Node
-}
-
-func (n AliasDef) Name() GlobalIdent {
-	return GlobalIdent{n.Child(selector.GlobalIdent)}
-}
-
-func (n AliasDef) ExternLinkage() /*opt*/ ExternLinkage {
-	return ExternLinkage{n.Child(selector.ExternLinkage)}
-}
-
-func (n AliasDef) Linkage() /*opt*/ Linkage {
-	return Linkage{n.Child(selector.Linkage)}
-}
-
-func (n AliasDef) Preemption() /*opt*/ Preemption {
-	return Preemption{n.Child(selector.Preemption)}
-}
-
-func (n AliasDef) Visibility() /*opt*/ Visibility {
-	return Visibility{n.Child(selector.Visibility)}
-}
-
-func (n AliasDef) DLLStorageClass() /*opt*/ DLLStorageClass {
-	return DLLStorageClass{n.Child(selector.DLLStorageClass)}
-}
-
-func (n AliasDef) ThreadLocal() /*opt*/ ThreadLocal {
-	return ThreadLocal{n.Child(selector.ThreadLocal)}
-}
-
-func (n AliasDef) UnnamedAddr() /*opt*/ UnnamedAddr {
-	return UnnamedAddr{n.Child(selector.UnnamedAddr)}
-}
-
-func (n AliasDef) ContentType() Type {
-	return ToLlvmNode(n.Child(selector.Type)).(Type)
-}
-
-func (n AliasDef) Aliasee() TypeConst {
-	return TypeConst{n.Child(selector.TypeConst)}
 }
 
 type Align struct {
@@ -4282,50 +4240,6 @@ func (n ICmpInst) Metadata() []MetadataAttachment {
 	return ret
 }
 
-type IFuncDef struct {
-	*Node
-}
-
-func (n IFuncDef) Name() GlobalIdent {
-	return GlobalIdent{n.Child(selector.GlobalIdent)}
-}
-
-func (n IFuncDef) ExternLinkage() /*opt*/ ExternLinkage {
-	return ExternLinkage{n.Child(selector.ExternLinkage)}
-}
-
-func (n IFuncDef) Linkage() /*opt*/ Linkage {
-	return Linkage{n.Child(selector.Linkage)}
-}
-
-func (n IFuncDef) Preemption() /*opt*/ Preemption {
-	return Preemption{n.Child(selector.Preemption)}
-}
-
-func (n IFuncDef) Visibility() /*opt*/ Visibility {
-	return Visibility{n.Child(selector.Visibility)}
-}
-
-func (n IFuncDef) DLLStorageClass() /*opt*/ DLLStorageClass {
-	return DLLStorageClass{n.Child(selector.DLLStorageClass)}
-}
-
-func (n IFuncDef) ThreadLocal() /*opt*/ ThreadLocal {
-	return ThreadLocal{n.Child(selector.ThreadLocal)}
-}
-
-func (n IFuncDef) UnnamedAddr() /*opt*/ UnnamedAddr {
-	return UnnamedAddr{n.Child(selector.UnnamedAddr)}
-}
-
-func (n IFuncDef) ContentType() Type {
-	return ToLlvmNode(n.Child(selector.Type)).(Type)
-}
-
-func (n IFuncDef) Resolver() TypeConst {
-	return TypeConst{n.Child(selector.TypeConst)}
-}
-
 type IPred struct {
 	*Node
 }
@@ -4406,6 +4320,58 @@ func (n IndirectBrTerm) Metadata() []MetadataAttachment {
 		ret = append(ret, MetadataAttachment{node})
 	}
 	return ret
+}
+
+type IndirectSymbolDef struct {
+	*Node
+}
+
+func (n IndirectSymbolDef) Name() GlobalIdent {
+	return GlobalIdent{n.Child(selector.GlobalIdent)}
+}
+
+func (n IndirectSymbolDef) ExternLinkage() /*opt*/ ExternLinkage {
+	return ExternLinkage{n.Child(selector.ExternLinkage)}
+}
+
+func (n IndirectSymbolDef) Linkage() /*opt*/ Linkage {
+	return Linkage{n.Child(selector.Linkage)}
+}
+
+func (n IndirectSymbolDef) Preemption() /*opt*/ Preemption {
+	return Preemption{n.Child(selector.Preemption)}
+}
+
+func (n IndirectSymbolDef) Visibility() /*opt*/ Visibility {
+	return Visibility{n.Child(selector.Visibility)}
+}
+
+func (n IndirectSymbolDef) DLLStorageClass() /*opt*/ DLLStorageClass {
+	return DLLStorageClass{n.Child(selector.DLLStorageClass)}
+}
+
+func (n IndirectSymbolDef) ThreadLocal() /*opt*/ ThreadLocal {
+	return ThreadLocal{n.Child(selector.ThreadLocal)}
+}
+
+func (n IndirectSymbolDef) UnnamedAddr() /*opt*/ UnnamedAddr {
+	return UnnamedAddr{n.Child(selector.UnnamedAddr)}
+}
+
+func (n IndirectSymbolDef) IndirectSymbolKind() IndirectSymbolKind {
+	return IndirectSymbolKind{n.Child(selector.IndirectSymbolKind)}
+}
+
+func (n IndirectSymbolDef) ContentType() Type {
+	return ToLlvmNode(n.Child(selector.Type)).(Type)
+}
+
+func (n IndirectSymbolDef) IndirectSymbol() IndirectSymbol {
+	return ToLlvmNode(n.Child(selector.IndirectSymbol)).(IndirectSymbol)
+}
+
+type IndirectSymbolKind struct {
+	*Node
 }
 
 type InlineAsm struct {

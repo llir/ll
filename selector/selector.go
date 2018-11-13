@@ -17,7 +17,6 @@ var (
 	AddrSpace                       = func(t ll.NodeType) bool { return t == ll.AddrSpace }
 	AddrSpaceCastExpr               = func(t ll.NodeType) bool { return t == ll.AddrSpaceCastExpr }
 	AddrSpaceCastInst               = func(t ll.NodeType) bool { return t == ll.AddrSpaceCastInst }
-	AliasDef                        = func(t ll.NodeType) bool { return t == ll.AliasDef }
 	Align                           = func(t ll.NodeType) bool { return t == ll.Align }
 	AlignField                      = func(t ll.NodeType) bool { return t == ll.AlignField }
 	AlignPair                       = func(t ll.NodeType) bool { return t == ll.AlignPair }
@@ -197,7 +196,6 @@ var (
 	HeaderField                     = func(t ll.NodeType) bool { return t == ll.HeaderField }
 	ICmpExpr                        = func(t ll.NodeType) bool { return t == ll.ICmpExpr }
 	ICmpInst                        = func(t ll.NodeType) bool { return t == ll.ICmpInst }
-	IFuncDef                        = func(t ll.NodeType) bool { return t == ll.IFuncDef }
 	IPred                           = func(t ll.NodeType) bool { return t == ll.IPred }
 	IdentifierField                 = func(t ll.NodeType) bool { return t == ll.IdentifierField }
 	Immutable                       = func(t ll.NodeType) bool { return t == ll.Immutable }
@@ -208,6 +206,8 @@ var (
 	Inc                             = func(t ll.NodeType) bool { return t == ll.Inc }
 	IncludePathField                = func(t ll.NodeType) bool { return t == ll.IncludePathField }
 	IndirectBrTerm                  = func(t ll.NodeType) bool { return t == ll.IndirectBrTerm }
+	IndirectSymbolDef               = func(t ll.NodeType) bool { return t == ll.IndirectSymbolDef }
+	IndirectSymbolKind              = func(t ll.NodeType) bool { return t == ll.IndirectSymbolKind }
 	InlineAsm                       = func(t ll.NodeType) bool { return t == ll.InlineAsm }
 	InlinedAtField                  = func(t ll.NodeType) bool { return t == ll.InlinedAtField }
 	InsertElementExpr               = func(t ll.NodeType) bool { return t == ll.InsertElementExpr }
@@ -420,7 +420,7 @@ var (
 	FirstClassType                  = OneOf(ll.FirstClassType...)
 	FuncAttribute                   = OneOf(ll.FuncAttribute...)
 	GenericDINodeField              = OneOf(ll.GenericDINodeField...)
-	IndirectSymbolDef               = OneOf(ll.IndirectSymbolDef...)
+	IndirectSymbol                  = OneOf(ll.IndirectSymbol...)
 	Instruction                     = OneOf(ll.Instruction...)
 	MDField                         = OneOf(ll.MDField...)
 	MDFieldOrInt                    = OneOf(ll.MDFieldOrInt...)

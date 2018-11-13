@@ -37,8 +37,8 @@ const (
 	GlobalDef  // Name=GlobalIdent Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? AddrSpace? ExternallyInitialized? Immutable ContentType=Type Init=Constant Section? Comdat? Align? Metadata=(MetadataAttachment)* FuncAttrs=(FuncAttribute)*
 	ExternallyInitialized
 	Immutable
-	AliasDef         // Name=GlobalIdent ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? ContentType=Type Aliasee=TypeConst
-	IFuncDef         // Name=GlobalIdent ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? ContentType=Type Resolver=TypeConst
+	IndirectSymbolDef // Name=GlobalIdent ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? IndirectSymbolKind ContentType=Type IndirectSymbol
+	IndirectSymbolKind
 	FuncDecl         // Metadata=(MetadataAttachment)* Header=FuncHeader
 	FuncDef          // Header=FuncHeader Metadata=(MetadataAttachment)* Body=FuncBody
 	FuncHeader       // ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? CallingConv? ReturnAttrs=(ReturnAttribute)* RetType=Type Name=GlobalIdent Params UnnamedAddr? AddrSpace? FuncAttrs=(FuncAttribute)* Section? Comdat? GCNode? Prefix? Prologue? Personality?
@@ -411,8 +411,8 @@ var nodeTypeStr = [...]string{
 	"GlobalDef",
 	"ExternallyInitialized",
 	"Immutable",
-	"AliasDef",
-	"IFuncDef",
+	"IndirectSymbolDef",
+	"IndirectSymbolKind",
 	"FuncDecl",
 	"FuncDef",
 	"FuncHeader",
@@ -1192,9 +1192,12 @@ var GenericDINodeField = []NodeType{
 	TagField,
 }
 
-var IndirectSymbolDef = []NodeType{
-	AliasDef,
-	IFuncDef,
+var IndirectSymbol = []NodeType{
+	AddrSpaceCastExpr,
+	BitCastExpr,
+	GetElementPtrExpr,
+	IntToPtrExpr,
+	TypeConst,
 }
 
 var Instruction = []NodeType{
@@ -1462,14 +1465,13 @@ var Terminator = []NodeType{
 }
 
 var TopLevelEntity = []NodeType{
-	AliasDef,
 	AttrGroupDef,
 	ComdatDef,
 	FuncDecl,
 	FuncDef,
 	GlobalDecl,
 	GlobalDef,
-	IFuncDef,
+	IndirectSymbolDef,
 	MetadataDef,
 	ModuleAsm,
 	NamedMetadataDef,
@@ -1732,12 +1734,15 @@ var ruleNodeType = [...]NodeType{
 	ExternallyInitialized,      // ExternallyInitialized : 'externally_initialized'
 	Immutable,                  // Immutable : 'constant'
 	Immutable,                  // Immutable : 'global'
-	0,                          // IndirectSymbolDef : AliasDef
-	0,                          // IndirectSymbolDef : IFuncDef
-	AliasDef,                   // AliasDef : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'alias' Type ',' TypeConst
-	AliasDef,                   // AliasDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'alias' Type ',' TypeConst
-	IFuncDef,                   // IFuncDef : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'ifunc' Type ',' TypeConst
-	IFuncDef,                   // IFuncDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt 'ifunc' Type ',' TypeConst
+	IndirectSymbolDef,          // IndirectSymbolDef : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt IndirectSymbolKind Type ',' IndirectSymbol
+	IndirectSymbolDef,          // IndirectSymbolDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt IndirectSymbolKind Type ',' IndirectSymbol
+	IndirectSymbolKind,         // IndirectSymbolKind : 'alias'
+	IndirectSymbolKind,         // IndirectSymbolKind : 'ifunc'
+	0,                          // IndirectSymbol : TypeConst
+	0,                          // IndirectSymbol : BitCastExpr
+	0,                          // IndirectSymbol : GetElementPtrExpr
+	0,                          // IndirectSymbol : AddrSpaceCastExpr
+	0,                          // IndirectSymbol : IntToPtrExpr
 	FuncDecl,                   // FuncDecl : 'declare' MetadataAttachment_optlist FuncHeader
 	0,                          // MetadataAttachment_optlist : MetadataAttachment_optlist MetadataAttachment
 	0,                          // MetadataAttachment_optlist :

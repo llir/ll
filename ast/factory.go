@@ -23,8 +23,6 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &AddrSpaceCastExpr{n}
 	case ll.AddrSpaceCastInst:
 		return &AddrSpaceCastInst{n}
-	case ll.AliasDef:
-		return &AliasDef{n}
 	case ll.Align:
 		return &Align{n}
 	case ll.AlignField:
@@ -383,8 +381,6 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &ICmpExpr{n}
 	case ll.ICmpInst:
 		return &ICmpInst{n}
-	case ll.IFuncDef:
-		return &IFuncDef{n}
 	case ll.IPred:
 		return &IPred{n}
 	case ll.IdentifierField:
@@ -405,6 +401,10 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &IncludePathField{n}
 	case ll.IndirectBrTerm:
 		return &IndirectBrTerm{n}
+	case ll.IndirectSymbolDef:
+		return &IndirectSymbolDef{n}
+	case ll.IndirectSymbolKind:
+		return &IndirectSymbolKind{n}
 	case ll.InlineAsm:
 		return &InlineAsm{n}
 	case ll.InlinedAtField:
