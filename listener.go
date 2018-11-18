@@ -196,7 +196,7 @@ const (
 	CondBrTerm                 // CondTyp=IntType Cond=Value TargetTrue=Label TargetFalse=Label Metadata=(MetadataAttachment)*
 	SwitchTerm                 // X=TypeValue Default=Label Cases=(Case)* Metadata=(MetadataAttachment)*
 	Case                       // X=TypeConst Target=Label
-	IndirectBrTerm             // Addr=TypeValue ValidTargets=(Label)+ Metadata=(MetadataAttachment)*
+	IndirectBrTerm             // Addr=TypeValue ValidTargets=(Label)* Metadata=(MetadataAttachment)*
 	InvokeTerm                 // CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Invokee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* Normal=Label Exception=Label Metadata=(MetadataAttachment)*
 	ResumeTerm                 // X=TypeValue Metadata=(MetadataAttachment)*
 	CatchSwitchTerm            // Scope=ExceptionScope Handlers=(Label)+ UnwindTarget Metadata=(MetadataAttachment)*
@@ -2200,10 +2200,12 @@ var ruleNodeType = [...]NodeType{
 	SwitchTerm,                 // SwitchTerm : 'switch' TypeValue ',' Label '[' Case_optlist ']' list_of_','_and_1_elements
 	SwitchTerm,                 // SwitchTerm : 'switch' TypeValue ',' Label '[' Case_optlist ']'
 	Case,                       // Case : TypeConst ',' Label
-	IndirectBrTerm,             // IndirectBrTerm : 'indirectbr' TypeValue ',' '[' Label_list_withsep ']' list_of_','_and_1_elements
-	IndirectBrTerm,             // IndirectBrTerm : 'indirectbr' TypeValue ',' '[' Label_list_withsep ']'
+	IndirectBrTerm,             // IndirectBrTerm : 'indirectbr' TypeValue ',' '[' Label_list_withsep_opt ']' list_of_','_and_1_elements
+	IndirectBrTerm,             // IndirectBrTerm : 'indirectbr' TypeValue ',' '[' Label_list_withsep_opt ']'
 	0,                          // Label_list_withsep : Label_list_withsep ',' Label
 	0,                          // Label_list_withsep : Label
+	0,                          // Label_list_withsep_opt : Label_list_withsep
+	0,                          // Label_list_withsep_opt :
 	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']' 'to' Label 'unwind' Label list_of_','_and_1_elements
 	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']' 'to' Label 'unwind' Label
 	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist 'to' Label 'unwind' Label list_of_','_and_1_elements
