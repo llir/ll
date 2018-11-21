@@ -233,9 +233,9 @@ const (
 	DITemplateTypeParameter    // Fields=(DITemplateTypeParameterField)*
 	DITemplateValueParameter   // Fields=(DITemplateValueParameterField)*
 	GenericDINode              // Fields=(GenericDINodeField)*
-	AlignField                 // Align=IntLit
-	ArgField                   // Arg=IntLit
-	AttributesField            // Attributes=IntLit
+	AlignField                 // Align=UintLit
+	ArgField                   // Arg=UintLit
+	AttributesField            // Attributes=UintLit
 	BaseTypeField              // BaseType=MDField
 	CCField                    // CC=DwarfCC
 	ChecksumField              // Checksum=StringLit
@@ -248,9 +248,9 @@ const (
 	DeclarationField           // Declaration=MDField
 	DirectoryField             // Directory=StringLit
 	DiscriminatorField         // Discriminator=MDField
-	DiscriminatorIntField      // Discriminator=IntLit
-	DwarfAddressSpaceField     // DwarfAddressSpace=IntLit
-	DwoIdField                 // DwoId=IntLit
+	DiscriminatorIntField      // Discriminator=UintLit
+	DwarfAddressSpaceField     // DwarfAddressSpace=UintLit
+	DwoIdField                 // DwoId=UintLit
 	ElementsField              // Elements=MDField
 	EmissionKindField          // EmissionKind
 	EncodingField              // Encoding=DwarfAttEncoding
@@ -284,17 +284,17 @@ const (
 	NameField                  // Name=StringLit
 	NameTableKindField         // NameTableKind
 	NodesField                 // Nodes=MDField
-	OffsetField                // OffsetField=IntLit
+	OffsetField                // OffsetField=UintLit
 	OperandsField              // Operands=MDFields
 	ProducerField              // Producer=StringLit
 	RetainedNodesField         // RetainedNodes=MDField
 	RetainedTypesField         // RetainedTypes=MDField
 	RuntimeLangField           // RuntimeLang=DwarfLang
-	RuntimeVersionField        // RuntimeVersion=IntLit
+	RuntimeVersionField        // RuntimeVersion=UintLit
 	ScopeField                 // Scope=MDField
 	ScopeLineField             // ScopeLine=IntLit
 	SetterField                // Setter=StringLit
-	SizeField                  // Size=IntLit
+	SizeField                  // Size=UintLit
 	SourceField                // Source=StringLit
 	SplitDebugFilenameField    // SplitDebugFilename=StringLit
 	SplitDebugInliningField    // SplitDebugInlining=BoolLit
@@ -310,7 +310,7 @@ const (
 	ValueIntField              // Value=IntLit
 	ValueStringField           // Value=StringLit
 	VarField                   // Var=MDField
-	VirtualIndexField          // VirtualIndex=IntLit
+	VirtualIndexField          // VirtualIndex=UintLit
 	VirtualityField            // Virtuality=DwarfVirtuality
 	VtableHolderField          // VtableHolder=MDField
 	ChecksumKind
@@ -2555,9 +2555,9 @@ var ruleNodeType = [...]NodeType{
 	0,                          // GenericDINodeField : TagField
 	0,                          // GenericDINodeField : HeaderField
 	0,                          // GenericDINodeField : OperandsField
-	AlignField,                 // AlignField : 'align:' IntLit
-	ArgField,                   // ArgField : 'arg:' IntLit
-	AttributesField,            // AttributesField : 'attributes:' IntLit
+	AlignField,                 // AlignField : 'align:' UintLit
+	ArgField,                   // ArgField : 'arg:' UintLit
+	AttributesField,            // AttributesField : 'attributes:' UintLit
 	BaseTypeField,              // BaseTypeField : 'baseType:' MDField
 	CCField,                    // CCField : 'cc:' DwarfCC
 	ChecksumField,              // ChecksumField : 'checksum:' StringLit
@@ -2570,9 +2570,9 @@ var ruleNodeType = [...]NodeType{
 	DeclarationField,           // DeclarationField : 'declaration:' MDField
 	DirectoryField,             // DirectoryField : 'directory:' StringLit
 	DiscriminatorField,         // DiscriminatorField : 'discriminator:' MDField
-	DiscriminatorIntField,      // DiscriminatorIntField : 'discriminator:' IntLit
-	DwarfAddressSpaceField,     // DwarfAddressSpaceField : 'dwarfAddressSpace:' IntLit
-	DwoIdField,                 // DwoIdField : 'dwoId:' IntLit
+	DiscriminatorIntField,      // DiscriminatorIntField : 'discriminator:' UintLit
+	DwarfAddressSpaceField,     // DwarfAddressSpaceField : 'dwarfAddressSpace:' UintLit
+	DwoIdField,                 // DwoIdField : 'dwoId:' UintLit
 	ElementsField,              // ElementsField : 'elements:' MDField
 	EmissionKindField,          // EmissionKindField : 'emissionKind:' EmissionKind
 	EncodingField,              // EncodingField : 'encoding:' DwarfAttEncoding
@@ -2606,17 +2606,17 @@ var ruleNodeType = [...]NodeType{
 	NameField,                  // NameField : 'name:' StringLit
 	NameTableKindField,         // NameTableKindField : 'nameTableKind:' NameTableKind
 	NodesField,                 // NodesField : 'nodes:' MDField
-	OffsetField,                // OffsetField : 'offset:' IntLit
+	OffsetField,                // OffsetField : 'offset:' UintLit
 	OperandsField,              // OperandsField : 'operands:' MDFields
 	ProducerField,              // ProducerField : 'producer:' StringLit
 	RetainedNodesField,         // RetainedNodesField : 'retainedNodes:' MDField
 	RetainedTypesField,         // RetainedTypesField : 'retainedTypes:' MDField
 	RuntimeLangField,           // RuntimeLangField : 'runtimeLang:' DwarfLang
-	RuntimeVersionField,        // RuntimeVersionField : 'runtimeVersion:' IntLit
+	RuntimeVersionField,        // RuntimeVersionField : 'runtimeVersion:' UintLit
 	ScopeField,                 // ScopeField : 'scope:' MDField
 	ScopeLineField,             // ScopeLineField : 'scopeLine:' IntLit
 	SetterField,                // SetterField : 'setter:' StringLit
-	SizeField,                  // SizeField : 'size:' IntLit
+	SizeField,                  // SizeField : 'size:' UintLit
 	SourceField,                // SourceField : 'source:' StringLit
 	SplitDebugFilenameField,    // SplitDebugFilenameField : 'splitDebugFilename:' StringLit
 	SplitDebugInliningField,    // SplitDebugInliningField : 'splitDebugInlining:' BoolLit
@@ -2632,7 +2632,7 @@ var ruleNodeType = [...]NodeType{
 	ValueIntField,              // ValueIntField : 'value:' IntLit
 	ValueStringField,           // ValueStringField : 'value:' StringLit
 	VarField,                   // VarField : 'var:' MDField
-	VirtualIndexField,          // VirtualIndexField : 'virtualIndex:' IntLit
+	VirtualIndexField,          // VirtualIndexField : 'virtualIndex:' UintLit
 	VirtualityField,            // VirtualityField : 'virtuality:' DwarfVirtuality
 	VtableHolderField,          // VtableHolderField : 'vtableHolder:' MDField
 	0,                          // MDFieldOrInt : MDField

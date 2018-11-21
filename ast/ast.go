@@ -1801,8 +1801,8 @@ type AlignField struct {
 	*Node
 }
 
-func (n AlignField) Align() IntLit {
-	return IntLit{n.Child(selector.IntLit)}
+func (n AlignField) Align() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type AlignPair struct {
@@ -1940,8 +1940,8 @@ type ArgField struct {
 	*Node
 }
 
-func (n ArgField) Arg() IntLit {
-	return IntLit{n.Child(selector.IntLit)}
+func (n ArgField) Arg() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type Args struct {
@@ -2076,8 +2076,8 @@ type AttributesField struct {
 	*Node
 }
 
-func (n AttributesField) Attributes() IntLit {
-	return IntLit{n.Child(selector.IntLit)}
+func (n AttributesField) Attributes() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type BaseTypeField struct {
@@ -2996,8 +2996,8 @@ type DiscriminatorIntField struct {
 	*Node
 }
 
-func (n DiscriminatorIntField) Discriminator() IntLit {
-	return IntLit{n.Child(selector.IntLit)}
+func (n DiscriminatorIntField) Discriminator() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type Distinct struct {
@@ -3008,8 +3008,8 @@ type DwarfAddressSpaceField struct {
 	*Node
 }
 
-func (n DwarfAddressSpaceField) DwarfAddressSpace() IntLit {
-	return IntLit{n.Child(selector.IntLit)}
+func (n DwarfAddressSpaceField) DwarfAddressSpace() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type DwarfAttEncodingEnum struct {
@@ -3092,8 +3092,8 @@ type DwoIdField struct {
 	*Node
 }
 
-func (n DwoIdField) DwoId() IntLit {
-	return IntLit{n.Child(selector.IntLit)}
+func (n DwoIdField) DwoId() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type ElementsField struct {
@@ -5097,8 +5097,8 @@ type OffsetField struct {
 	*Node
 }
 
-func (n OffsetField) OffsetField() IntLit {
-	return IntLit{n.Child(selector.IntLit)}
+func (n OffsetField) OffsetField() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type OpaqueType struct {
@@ -5399,8 +5399,8 @@ type RuntimeVersionField struct {
 	*Node
 }
 
-func (n RuntimeVersionField) RuntimeVersion() IntLit {
-	return IntLit{n.Child(selector.IntLit)}
+func (n RuntimeVersionField) RuntimeVersion() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type SDivExpr struct {
@@ -5720,8 +5720,8 @@ type SizeField struct {
 	*Node
 }
 
-func (n SizeField) Size() IntLit {
-	return IntLit{n.Child(selector.IntLit)}
+func (n SizeField) Size() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type SourceField struct {
@@ -6357,8 +6357,8 @@ type VirtualIndexField struct {
 	*Node
 }
 
-func (n VirtualIndexField) VirtualIndex() IntLit {
-	return IntLit{n.Child(selector.IntLit)}
+func (n VirtualIndexField) VirtualIndex() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
 }
 
 type VirtualityField struct {
