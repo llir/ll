@@ -30,7 +30,7 @@ const (
 	TargetDataLayout // DataLayout=StringLit
 	TargetTriple     // TargetTriple=StringLit
 	ModuleAsm        // Asm=StringLit
-	TypeDef          // Alias=LocalIdent Typ=(OpaqueType | Type)
+	TypeDef          // Name=LocalIdent Typ=(OpaqueType | Type)
 	ComdatDef        // Name=ComdatName Kind=SelectionKind
 	SelectionKind
 	GlobalDecl // Name=GlobalIdent ExternLinkage Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? AddrSpace? ExternallyInitialized? Immutable ContentType=Type Section? Comdat? Align? Metadata=(MetadataAttachment)* FuncAttrs=(FuncAttribute)*

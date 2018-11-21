@@ -6037,7 +6037,7 @@ type TypeDef struct {
 	*Node
 }
 
-func (n TypeDef) Alias() LocalIdent {
+func (n TypeDef) Name() LocalIdent {
 	return LocalIdent{n.Child(selector.LocalIdent)}
 }
 
