@@ -4,749 +4,750 @@ package ast
 
 import (
 	"fmt"
+
 	"github.com/llir/ll"
 )
 
 func ToLlvmNode(n *Node) LlvmNode {
 	switch n.Type() {
 	case ll.AShrExpr:
-		return &AShrExpr{n}
+		return AShrExpr{n}
 	case ll.AShrInst:
-		return &AShrInst{n}
+		return AShrInst{n}
 	case ll.AddExpr:
-		return &AddExpr{n}
+		return AddExpr{n}
 	case ll.AddInst:
-		return &AddInst{n}
+		return AddInst{n}
 	case ll.AddrSpace:
-		return &AddrSpace{n}
+		return AddrSpace{n}
 	case ll.AddrSpaceCastExpr:
-		return &AddrSpaceCastExpr{n}
+		return AddrSpaceCastExpr{n}
 	case ll.AddrSpaceCastInst:
-		return &AddrSpaceCastInst{n}
+		return AddrSpaceCastInst{n}
 	case ll.Align:
-		return &Align{n}
+		return Align{n}
 	case ll.AlignField:
-		return &AlignField{n}
+		return AlignField{n}
 	case ll.AlignPair:
-		return &AlignPair{n}
+		return AlignPair{n}
 	case ll.AlignStack:
-		return &AlignStack{n}
+		return AlignStack{n}
 	case ll.AlignStackPair:
-		return &AlignStackPair{n}
+		return AlignStackPair{n}
 	case ll.AlignStackTok:
-		return &AlignStackTok{n}
+		return AlignStackTok{n}
 	case ll.AllocSize:
-		return &AllocSize{n}
+		return AllocSize{n}
 	case ll.AllocaInst:
-		return &AllocaInst{n}
+		return AllocaInst{n}
 	case ll.AndExpr:
-		return &AndExpr{n}
+		return AndExpr{n}
 	case ll.AndInst:
-		return &AndInst{n}
+		return AndInst{n}
 	case ll.Arg:
-		return &Arg{n}
+		return Arg{n}
 	case ll.ArgField:
-		return &ArgField{n}
+		return ArgField{n}
 	case ll.Args:
-		return &Args{n}
+		return Args{n}
 	case ll.ArrayConst:
-		return &ArrayConst{n}
+		return ArrayConst{n}
 	case ll.ArrayType:
-		return &ArrayType{n}
+		return ArrayType{n}
 	case ll.Atomic:
-		return &Atomic{n}
+		return Atomic{n}
 	case ll.AtomicOp:
-		return &AtomicOp{n}
+		return AtomicOp{n}
 	case ll.AtomicOrdering:
-		return &AtomicOrdering{n}
+		return AtomicOrdering{n}
 	case ll.AtomicRMWInst:
-		return &AtomicRMWInst{n}
+		return AtomicRMWInst{n}
 	case ll.AttrGroupDef:
-		return &AttrGroupDef{n}
+		return AttrGroupDef{n}
 	case ll.AttrGroupID:
-		return &AttrGroupID{n}
+		return AttrGroupID{n}
 	case ll.AttrPair:
-		return &AttrPair{n}
+		return AttrPair{n}
 	case ll.AttrString:
-		return &AttrString{n}
+		return AttrString{n}
 	case ll.AttributesField:
-		return &AttributesField{n}
+		return AttributesField{n}
 	case ll.BaseTypeField:
-		return &BaseTypeField{n}
+		return BaseTypeField{n}
 	case ll.BasicBlock:
-		return &BasicBlock{n}
+		return BasicBlock{n}
 	case ll.BitCastExpr:
-		return &BitCastExpr{n}
+		return BitCastExpr{n}
 	case ll.BitCastInst:
-		return &BitCastInst{n}
+		return BitCastInst{n}
 	case ll.BlockAddressConst:
-		return &BlockAddressConst{n}
+		return BlockAddressConst{n}
 	case ll.BoolConst:
-		return &BoolConst{n}
+		return BoolConst{n}
 	case ll.BoolLit:
-		return &BoolLit{n}
+		return BoolLit{n}
 	case ll.BrTerm:
-		return &BrTerm{n}
+		return BrTerm{n}
 	case ll.CCField:
-		return &CCField{n}
+		return CCField{n}
 	case ll.CallInst:
-		return &CallInst{n}
+		return CallInst{n}
 	case ll.CallingConvEnum:
-		return &CallingConvEnum{n}
+		return CallingConvEnum{n}
 	case ll.CallingConvInt:
-		return &CallingConvInt{n}
+		return CallingConvInt{n}
 	case ll.Case:
-		return &Case{n}
+		return Case{n}
 	case ll.CatchPadInst:
-		return &CatchPadInst{n}
+		return CatchPadInst{n}
 	case ll.CatchRetTerm:
-		return &CatchRetTerm{n}
+		return CatchRetTerm{n}
 	case ll.CatchSwitchTerm:
-		return &CatchSwitchTerm{n}
+		return CatchSwitchTerm{n}
 	case ll.CharArrayConst:
-		return &CharArrayConst{n}
+		return CharArrayConst{n}
 	case ll.ChecksumField:
-		return &ChecksumField{n}
+		return ChecksumField{n}
 	case ll.ChecksumKind:
-		return &ChecksumKind{n}
+		return ChecksumKind{n}
 	case ll.ChecksumkindField:
-		return &ChecksumkindField{n}
+		return ChecksumkindField{n}
 	case ll.Clause:
-		return &Clause{n}
+		return Clause{n}
 	case ll.ClauseType:
-		return &ClauseType{n}
+		return ClauseType{n}
 	case ll.Cleanup:
-		return &Cleanup{n}
+		return Cleanup{n}
 	case ll.CleanupPadInst:
-		return &CleanupPadInst{n}
+		return CleanupPadInst{n}
 	case ll.CleanupRetTerm:
-		return &CleanupRetTerm{n}
+		return CleanupRetTerm{n}
 	case ll.CmpXchgInst:
-		return &CmpXchgInst{n}
+		return CmpXchgInst{n}
 	case ll.ColumnField:
-		return &ColumnField{n}
+		return ColumnField{n}
 	case ll.Comdat:
-		return &Comdat{n}
+		return Comdat{n}
 	case ll.ComdatDef:
-		return &ComdatDef{n}
+		return ComdatDef{n}
 	case ll.ComdatName:
-		return &ComdatName{n}
+		return ComdatName{n}
 	case ll.CondBrTerm:
-		return &CondBrTerm{n}
+		return CondBrTerm{n}
 	case ll.ConfigMacrosField:
-		return &ConfigMacrosField{n}
+		return ConfigMacrosField{n}
 	case ll.ContainingTypeField:
-		return &ContainingTypeField{n}
+		return ContainingTypeField{n}
 	case ll.CountField:
-		return &CountField{n}
+		return CountField{n}
 	case ll.DIBasicType:
-		return &DIBasicType{n}
+		return DIBasicType{n}
 	case ll.DICompileUnit:
-		return &DICompileUnit{n}
+		return DICompileUnit{n}
 	case ll.DICompositeType:
-		return &DICompositeType{n}
+		return DICompositeType{n}
 	case ll.DIDerivedType:
-		return &DIDerivedType{n}
+		return DIDerivedType{n}
 	case ll.DIEnumerator:
-		return &DIEnumerator{n}
+		return DIEnumerator{n}
 	case ll.DIExpression:
-		return &DIExpression{n}
+		return DIExpression{n}
 	case ll.DIFile:
-		return &DIFile{n}
+		return DIFile{n}
 	case ll.DIFlagEnum:
-		return &DIFlagEnum{n}
+		return DIFlagEnum{n}
 	case ll.DIFlagInt:
-		return &DIFlagInt{n}
+		return DIFlagInt{n}
 	case ll.DIFlags:
-		return &DIFlags{n}
+		return DIFlags{n}
 	case ll.DIGlobalVariable:
-		return &DIGlobalVariable{n}
+		return DIGlobalVariable{n}
 	case ll.DIGlobalVariableExpression:
-		return &DIGlobalVariableExpression{n}
+		return DIGlobalVariableExpression{n}
 	case ll.DIImportedEntity:
-		return &DIImportedEntity{n}
+		return DIImportedEntity{n}
 	case ll.DILabel:
-		return &DILabel{n}
+		return DILabel{n}
 	case ll.DILexicalBlock:
-		return &DILexicalBlock{n}
+		return DILexicalBlock{n}
 	case ll.DILexicalBlockFile:
-		return &DILexicalBlockFile{n}
+		return DILexicalBlockFile{n}
 	case ll.DILocalVariable:
-		return &DILocalVariable{n}
+		return DILocalVariable{n}
 	case ll.DILocation:
-		return &DILocation{n}
+		return DILocation{n}
 	case ll.DIMacro:
-		return &DIMacro{n}
+		return DIMacro{n}
 	case ll.DIMacroFile:
-		return &DIMacroFile{n}
+		return DIMacroFile{n}
 	case ll.DIModule:
-		return &DIModule{n}
+		return DIModule{n}
 	case ll.DINamespace:
-		return &DINamespace{n}
+		return DINamespace{n}
 	case ll.DIObjCProperty:
-		return &DIObjCProperty{n}
+		return DIObjCProperty{n}
 	case ll.DISubprogram:
-		return &DISubprogram{n}
+		return DISubprogram{n}
 	case ll.DISubrange:
-		return &DISubrange{n}
+		return DISubrange{n}
 	case ll.DISubroutineType:
-		return &DISubroutineType{n}
+		return DISubroutineType{n}
 	case ll.DITemplateTypeParameter:
-		return &DITemplateTypeParameter{n}
+		return DITemplateTypeParameter{n}
 	case ll.DITemplateValueParameter:
-		return &DITemplateValueParameter{n}
+		return DITemplateValueParameter{n}
 	case ll.DLLStorageClass:
-		return &DLLStorageClass{n}
+		return DLLStorageClass{n}
 	case ll.DebugInfoForProfilingField:
-		return &DebugInfoForProfilingField{n}
+		return DebugInfoForProfilingField{n}
 	case ll.DeclarationField:
-		return &DeclarationField{n}
+		return DeclarationField{n}
 	case ll.Dereferenceable:
-		return &Dereferenceable{n}
+		return Dereferenceable{n}
 	case ll.DereferenceableOrNull:
-		return &DereferenceableOrNull{n}
+		return DereferenceableOrNull{n}
 	case ll.DirectoryField:
-		return &DirectoryField{n}
+		return DirectoryField{n}
 	case ll.DiscriminatorField:
-		return &DiscriminatorField{n}
+		return DiscriminatorField{n}
 	case ll.DiscriminatorIntField:
-		return &DiscriminatorIntField{n}
+		return DiscriminatorIntField{n}
 	case ll.Distinct:
-		return &Distinct{n}
+		return Distinct{n}
 	case ll.DwarfAddressSpaceField:
-		return &DwarfAddressSpaceField{n}
+		return DwarfAddressSpaceField{n}
 	case ll.DwarfAttEncodingEnum:
-		return &DwarfAttEncodingEnum{n}
+		return DwarfAttEncodingEnum{n}
 	case ll.DwarfAttEncodingInt:
-		return &DwarfAttEncodingInt{n}
+		return DwarfAttEncodingInt{n}
 	case ll.DwarfCCEnum:
-		return &DwarfCCEnum{n}
+		return DwarfCCEnum{n}
 	case ll.DwarfCCInt:
-		return &DwarfCCInt{n}
+		return DwarfCCInt{n}
 	case ll.DwarfLangEnum:
-		return &DwarfLangEnum{n}
+		return DwarfLangEnum{n}
 	case ll.DwarfLangInt:
-		return &DwarfLangInt{n}
+		return DwarfLangInt{n}
 	case ll.DwarfMacinfoEnum:
-		return &DwarfMacinfoEnum{n}
+		return DwarfMacinfoEnum{n}
 	case ll.DwarfMacinfoInt:
-		return &DwarfMacinfoInt{n}
+		return DwarfMacinfoInt{n}
 	case ll.DwarfOp:
-		return &DwarfOp{n}
+		return DwarfOp{n}
 	case ll.DwarfTagEnum:
-		return &DwarfTagEnum{n}
+		return DwarfTagEnum{n}
 	case ll.DwarfTagInt:
-		return &DwarfTagInt{n}
+		return DwarfTagInt{n}
 	case ll.DwarfVirtualityEnum:
-		return &DwarfVirtualityEnum{n}
+		return DwarfVirtualityEnum{n}
 	case ll.DwarfVirtualityInt:
-		return &DwarfVirtualityInt{n}
+		return DwarfVirtualityInt{n}
 	case ll.DwoIdField:
-		return &DwoIdField{n}
+		return DwoIdField{n}
 	case ll.ElementsField:
-		return &ElementsField{n}
+		return ElementsField{n}
 	case ll.Ellipsis:
-		return &Ellipsis{n}
+		return Ellipsis{n}
 	case ll.EmissionKindEnum:
-		return &EmissionKindEnum{n}
+		return EmissionKindEnum{n}
 	case ll.EmissionKindField:
-		return &EmissionKindField{n}
+		return EmissionKindField{n}
 	case ll.EmissionKindInt:
-		return &EmissionKindInt{n}
+		return EmissionKindInt{n}
 	case ll.EncodingField:
-		return &EncodingField{n}
+		return EncodingField{n}
 	case ll.EntityField:
-		return &EntityField{n}
+		return EntityField{n}
 	case ll.EnumsField:
-		return &EnumsField{n}
+		return EnumsField{n}
 	case ll.Exact:
-		return &Exact{n}
+		return Exact{n}
 	case ll.ExceptionArg:
-		return &ExceptionArg{n}
+		return ExceptionArg{n}
 	case ll.ExportSymbolsField:
-		return &ExportSymbolsField{n}
+		return ExportSymbolsField{n}
 	case ll.ExprField:
-		return &ExprField{n}
+		return ExprField{n}
 	case ll.ExternLinkage:
-		return &ExternLinkage{n}
+		return ExternLinkage{n}
 	case ll.ExternallyInitialized:
-		return &ExternallyInitialized{n}
+		return ExternallyInitialized{n}
 	case ll.ExtraDataField:
-		return &ExtraDataField{n}
+		return ExtraDataField{n}
 	case ll.ExtractElementExpr:
-		return &ExtractElementExpr{n}
+		return ExtractElementExpr{n}
 	case ll.ExtractElementInst:
-		return &ExtractElementInst{n}
+		return ExtractElementInst{n}
 	case ll.ExtractValueExpr:
-		return &ExtractValueExpr{n}
+		return ExtractValueExpr{n}
 	case ll.ExtractValueInst:
-		return &ExtractValueInst{n}
+		return ExtractValueInst{n}
 	case ll.FAddExpr:
-		return &FAddExpr{n}
+		return FAddExpr{n}
 	case ll.FAddInst:
-		return &FAddInst{n}
+		return FAddInst{n}
 	case ll.FCmpExpr:
-		return &FCmpExpr{n}
+		return FCmpExpr{n}
 	case ll.FCmpInst:
-		return &FCmpInst{n}
+		return FCmpInst{n}
 	case ll.FDivExpr:
-		return &FDivExpr{n}
+		return FDivExpr{n}
 	case ll.FDivInst:
-		return &FDivInst{n}
+		return FDivInst{n}
 	case ll.FMulExpr:
-		return &FMulExpr{n}
+		return FMulExpr{n}
 	case ll.FMulInst:
-		return &FMulInst{n}
+		return FMulInst{n}
 	case ll.FPExtExpr:
-		return &FPExtExpr{n}
+		return FPExtExpr{n}
 	case ll.FPExtInst:
-		return &FPExtInst{n}
+		return FPExtInst{n}
 	case ll.FPToSIExpr:
-		return &FPToSIExpr{n}
+		return FPToSIExpr{n}
 	case ll.FPToSIInst:
-		return &FPToSIInst{n}
+		return FPToSIInst{n}
 	case ll.FPToUIExpr:
-		return &FPToUIExpr{n}
+		return FPToUIExpr{n}
 	case ll.FPToUIInst:
-		return &FPToUIInst{n}
+		return FPToUIInst{n}
 	case ll.FPTruncExpr:
-		return &FPTruncExpr{n}
+		return FPTruncExpr{n}
 	case ll.FPTruncInst:
-		return &FPTruncInst{n}
+		return FPTruncInst{n}
 	case ll.FPred:
-		return &FPred{n}
+		return FPred{n}
 	case ll.FRemExpr:
-		return &FRemExpr{n}
+		return FRemExpr{n}
 	case ll.FRemInst:
-		return &FRemInst{n}
+		return FRemInst{n}
 	case ll.FSubExpr:
-		return &FSubExpr{n}
+		return FSubExpr{n}
 	case ll.FSubInst:
-		return &FSubInst{n}
+		return FSubInst{n}
 	case ll.FastMathFlag:
-		return &FastMathFlag{n}
+		return FastMathFlag{n}
 	case ll.FenceInst:
-		return &FenceInst{n}
+		return FenceInst{n}
 	case ll.FileField:
-		return &FileField{n}
+		return FileField{n}
 	case ll.FilenameField:
-		return &FilenameField{n}
+		return FilenameField{n}
 	case ll.FlagsField:
-		return &FlagsField{n}
+		return FlagsField{n}
 	case ll.FlagsStringField:
-		return &FlagsStringField{n}
+		return FlagsStringField{n}
 	case ll.FloatConst:
-		return &FloatConst{n}
+		return FloatConst{n}
 	case ll.FloatKind:
-		return &FloatKind{n}
+		return FloatKind{n}
 	case ll.FloatLit:
-		return &FloatLit{n}
+		return FloatLit{n}
 	case ll.FloatType:
-		return &FloatType{n}
+		return FloatType{n}
 	case ll.FuncAttr:
-		return &FuncAttr{n}
+		return FuncAttr{n}
 	case ll.FuncBody:
-		return &FuncBody{n}
+		return FuncBody{n}
 	case ll.FuncDecl:
-		return &FuncDecl{n}
+		return FuncDecl{n}
 	case ll.FuncDef:
-		return &FuncDef{n}
+		return FuncDef{n}
 	case ll.FuncHeader:
-		return &FuncHeader{n}
+		return FuncHeader{n}
 	case ll.FuncType:
-		return &FuncType{n}
+		return FuncType{n}
 	case ll.GCNode:
-		return &GCNode{n}
+		return GCNode{n}
 	case ll.GEPIndex:
-		return &GEPIndex{n}
+		return GEPIndex{n}
 	case ll.GenericDINode:
-		return &GenericDINode{n}
+		return GenericDINode{n}
 	case ll.GetElementPtrExpr:
-		return &GetElementPtrExpr{n}
+		return GetElementPtrExpr{n}
 	case ll.GetElementPtrInst:
-		return &GetElementPtrInst{n}
+		return GetElementPtrInst{n}
 	case ll.GetterField:
-		return &GetterField{n}
+		return GetterField{n}
 	case ll.GlobalDecl:
-		return &GlobalDecl{n}
+		return GlobalDecl{n}
 	case ll.GlobalDef:
-		return &GlobalDef{n}
+		return GlobalDef{n}
 	case ll.GlobalIdent:
-		return &GlobalIdent{n}
+		return GlobalIdent{n}
 	case ll.GlobalsField:
-		return &GlobalsField{n}
+		return GlobalsField{n}
 	case ll.HeaderField:
-		return &HeaderField{n}
+		return HeaderField{n}
 	case ll.ICmpExpr:
-		return &ICmpExpr{n}
+		return ICmpExpr{n}
 	case ll.ICmpInst:
-		return &ICmpInst{n}
+		return ICmpInst{n}
 	case ll.IPred:
-		return &IPred{n}
+		return IPred{n}
 	case ll.IdentifierField:
-		return &IdentifierField{n}
+		return IdentifierField{n}
 	case ll.Immutable:
-		return &Immutable{n}
+		return Immutable{n}
 	case ll.ImportsField:
-		return &ImportsField{n}
+		return ImportsField{n}
 	case ll.InAlloca:
-		return &InAlloca{n}
+		return InAlloca{n}
 	case ll.InBounds:
-		return &InBounds{n}
+		return InBounds{n}
 	case ll.InRange:
-		return &InRange{n}
+		return InRange{n}
 	case ll.Inc:
-		return &Inc{n}
+		return Inc{n}
 	case ll.IncludePathField:
-		return &IncludePathField{n}
+		return IncludePathField{n}
 	case ll.IndirectBrTerm:
-		return &IndirectBrTerm{n}
+		return IndirectBrTerm{n}
 	case ll.IndirectSymbolDef:
-		return &IndirectSymbolDef{n}
+		return IndirectSymbolDef{n}
 	case ll.IndirectSymbolKind:
-		return &IndirectSymbolKind{n}
+		return IndirectSymbolKind{n}
 	case ll.InlineAsm:
-		return &InlineAsm{n}
+		return InlineAsm{n}
 	case ll.InlinedAtField:
-		return &InlinedAtField{n}
+		return InlinedAtField{n}
 	case ll.InsertElementExpr:
-		return &InsertElementExpr{n}
+		return InsertElementExpr{n}
 	case ll.InsertElementInst:
-		return &InsertElementInst{n}
+		return InsertElementInst{n}
 	case ll.InsertValueExpr:
-		return &InsertValueExpr{n}
+		return InsertValueExpr{n}
 	case ll.InsertValueInst:
-		return &InsertValueInst{n}
+		return InsertValueInst{n}
 	case ll.IntConst:
-		return &IntConst{n}
+		return IntConst{n}
 	case ll.IntLit:
-		return &IntLit{n}
+		return IntLit{n}
 	case ll.IntToPtrExpr:
-		return &IntToPtrExpr{n}
+		return IntToPtrExpr{n}
 	case ll.IntToPtrInst:
-		return &IntToPtrInst{n}
+		return IntToPtrInst{n}
 	case ll.IntType:
-		return &IntType{n}
+		return IntType{n}
 	case ll.IntelDialect:
-		return &IntelDialect{n}
+		return IntelDialect{n}
 	case ll.InvokeTerm:
-		return &InvokeTerm{n}
+		return InvokeTerm{n}
 	case ll.IsDefinitionField:
-		return &IsDefinitionField{n}
+		return IsDefinitionField{n}
 	case ll.IsImplicitCodeField:
-		return &IsImplicitCodeField{n}
+		return IsImplicitCodeField{n}
 	case ll.IsLocalField:
-		return &IsLocalField{n}
+		return IsLocalField{n}
 	case ll.IsOptimizedField:
-		return &IsOptimizedField{n}
+		return IsOptimizedField{n}
 	case ll.IsUnsignedField:
-		return &IsUnsignedField{n}
+		return IsUnsignedField{n}
 	case ll.IsysrootField:
-		return &IsysrootField{n}
+		return IsysrootField{n}
 	case ll.LShrExpr:
-		return &LShrExpr{n}
+		return LShrExpr{n}
 	case ll.LShrInst:
-		return &LShrInst{n}
+		return LShrInst{n}
 	case ll.Label:
-		return &Label{n}
+		return Label{n}
 	case ll.LabelIdent:
-		return &LabelIdent{n}
+		return LabelIdent{n}
 	case ll.LabelType:
-		return &LabelType{n}
+		return LabelType{n}
 	case ll.LandingPadInst:
-		return &LandingPadInst{n}
+		return LandingPadInst{n}
 	case ll.LanguageField:
-		return &LanguageField{n}
+		return LanguageField{n}
 	case ll.LineField:
-		return &LineField{n}
+		return LineField{n}
 	case ll.Linkage:
-		return &Linkage{n}
+		return Linkage{n}
 	case ll.LinkageNameField:
-		return &LinkageNameField{n}
+		return LinkageNameField{n}
 	case ll.LoadInst:
-		return &LoadInst{n}
+		return LoadInst{n}
 	case ll.LocalDefInst:
-		return &LocalDefInst{n}
+		return LocalDefInst{n}
 	case ll.LocalDefTerm:
-		return &LocalDefTerm{n}
+		return LocalDefTerm{n}
 	case ll.LocalIdent:
-		return &LocalIdent{n}
+		return LocalIdent{n}
 	case ll.LowerBoundField:
-		return &LowerBoundField{n}
+		return LowerBoundField{n}
 	case ll.MDFields:
-		return &MDFields{n}
+		return MDFields{n}
 	case ll.MDString:
-		return &MDString{n}
+		return MDString{n}
 	case ll.MDTuple:
-		return &MDTuple{n}
+		return MDTuple{n}
 	case ll.MMXType:
-		return &MMXType{n}
+		return MMXType{n}
 	case ll.MacrosField:
-		return &MacrosField{n}
+		return MacrosField{n}
 	case ll.MetadataAttachment:
-		return &MetadataAttachment{n}
+		return MetadataAttachment{n}
 	case ll.MetadataDef:
-		return &MetadataDef{n}
+		return MetadataDef{n}
 	case ll.MetadataID:
-		return &MetadataID{n}
+		return MetadataID{n}
 	case ll.MetadataName:
-		return &MetadataName{n}
+		return MetadataName{n}
 	case ll.MetadataType:
-		return &MetadataType{n}
+		return MetadataType{n}
 	case ll.Module:
-		return &Module{n}
+		return Module{n}
 	case ll.ModuleAsm:
-		return &ModuleAsm{n}
+		return ModuleAsm{n}
 	case ll.MulExpr:
-		return &MulExpr{n}
+		return MulExpr{n}
 	case ll.MulInst:
-		return &MulInst{n}
+		return MulInst{n}
 	case ll.NameField:
-		return &NameField{n}
+		return NameField{n}
 	case ll.NameTableKindEnum:
-		return &NameTableKindEnum{n}
+		return NameTableKindEnum{n}
 	case ll.NameTableKindField:
-		return &NameTableKindField{n}
+		return NameTableKindField{n}
 	case ll.NameTableKindInt:
-		return &NameTableKindInt{n}
+		return NameTableKindInt{n}
 	case ll.NamedMetadataDef:
-		return &NamedMetadataDef{n}
+		return NamedMetadataDef{n}
 	case ll.NamedType:
-		return &NamedType{n}
+		return NamedType{n}
 	case ll.NodesField:
-		return &NodesField{n}
+		return NodesField{n}
 	case ll.NoneConst:
-		return &NoneConst{n}
+		return NoneConst{n}
 	case ll.NullConst:
-		return &NullConst{n}
+		return NullConst{n}
 	case ll.NullLit:
-		return &NullLit{n}
+		return NullLit{n}
 	case ll.OffsetField:
-		return &OffsetField{n}
+		return OffsetField{n}
 	case ll.OpaqueType:
-		return &OpaqueType{n}
+		return OpaqueType{n}
 	case ll.OperandBundle:
-		return &OperandBundle{n}
+		return OperandBundle{n}
 	case ll.OperandsField:
-		return &OperandsField{n}
+		return OperandsField{n}
 	case ll.OrExpr:
-		return &OrExpr{n}
+		return OrExpr{n}
 	case ll.OrInst:
-		return &OrInst{n}
+		return OrInst{n}
 	case ll.OverflowFlag:
-		return &OverflowFlag{n}
+		return OverflowFlag{n}
 	case ll.PackedStructType:
-		return &PackedStructType{n}
+		return PackedStructType{n}
 	case ll.Param:
-		return &Param{n}
+		return Param{n}
 	case ll.ParamAttr:
-		return &ParamAttr{n}
+		return ParamAttr{n}
 	case ll.Params:
-		return &Params{n}
+		return Params{n}
 	case ll.Personality:
-		return &Personality{n}
+		return Personality{n}
 	case ll.PhiInst:
-		return &PhiInst{n}
+		return PhiInst{n}
 	case ll.PointerType:
-		return &PointerType{n}
+		return PointerType{n}
 	case ll.Preemption:
-		return &Preemption{n}
+		return Preemption{n}
 	case ll.Prefix:
-		return &Prefix{n}
+		return Prefix{n}
 	case ll.ProducerField:
-		return &ProducerField{n}
+		return ProducerField{n}
 	case ll.Prologue:
-		return &Prologue{n}
+		return Prologue{n}
 	case ll.PtrToIntExpr:
-		return &PtrToIntExpr{n}
+		return PtrToIntExpr{n}
 	case ll.PtrToIntInst:
-		return &PtrToIntInst{n}
+		return PtrToIntInst{n}
 	case ll.ResumeTerm:
-		return &ResumeTerm{n}
+		return ResumeTerm{n}
 	case ll.RetTerm:
-		return &RetTerm{n}
+		return RetTerm{n}
 	case ll.RetainedNodesField:
-		return &RetainedNodesField{n}
+		return RetainedNodesField{n}
 	case ll.RetainedTypesField:
-		return &RetainedTypesField{n}
+		return RetainedTypesField{n}
 	case ll.ReturnAttr:
-		return &ReturnAttr{n}
+		return ReturnAttr{n}
 	case ll.RuntimeLangField:
-		return &RuntimeLangField{n}
+		return RuntimeLangField{n}
 	case ll.RuntimeVersionField:
-		return &RuntimeVersionField{n}
+		return RuntimeVersionField{n}
 	case ll.SDivExpr:
-		return &SDivExpr{n}
+		return SDivExpr{n}
 	case ll.SDivInst:
-		return &SDivInst{n}
+		return SDivInst{n}
 	case ll.SExtExpr:
-		return &SExtExpr{n}
+		return SExtExpr{n}
 	case ll.SExtInst:
-		return &SExtInst{n}
+		return SExtInst{n}
 	case ll.SIToFPExpr:
-		return &SIToFPExpr{n}
+		return SIToFPExpr{n}
 	case ll.SIToFPInst:
-		return &SIToFPInst{n}
+		return SIToFPInst{n}
 	case ll.SRemExpr:
-		return &SRemExpr{n}
+		return SRemExpr{n}
 	case ll.SRemInst:
-		return &SRemInst{n}
+		return SRemInst{n}
 	case ll.ScopeField:
-		return &ScopeField{n}
+		return ScopeField{n}
 	case ll.ScopeLineField:
-		return &ScopeLineField{n}
+		return ScopeLineField{n}
 	case ll.Section:
-		return &Section{n}
+		return Section{n}
 	case ll.SelectExpr:
-		return &SelectExpr{n}
+		return SelectExpr{n}
 	case ll.SelectInst:
-		return &SelectInst{n}
+		return SelectInst{n}
 	case ll.SelectionKind:
-		return &SelectionKind{n}
+		return SelectionKind{n}
 	case ll.SetterField:
-		return &SetterField{n}
+		return SetterField{n}
 	case ll.ShlExpr:
-		return &ShlExpr{n}
+		return ShlExpr{n}
 	case ll.ShlInst:
-		return &ShlInst{n}
+		return ShlInst{n}
 	case ll.ShuffleVectorExpr:
-		return &ShuffleVectorExpr{n}
+		return ShuffleVectorExpr{n}
 	case ll.ShuffleVectorInst:
-		return &ShuffleVectorInst{n}
+		return ShuffleVectorInst{n}
 	case ll.SideEffect:
-		return &SideEffect{n}
+		return SideEffect{n}
 	case ll.SizeField:
-		return &SizeField{n}
+		return SizeField{n}
 	case ll.SourceField:
-		return &SourceField{n}
+		return SourceField{n}
 	case ll.SourceFilename:
-		return &SourceFilename{n}
+		return SourceFilename{n}
 	case ll.SplitDebugFilenameField:
-		return &SplitDebugFilenameField{n}
+		return SplitDebugFilenameField{n}
 	case ll.SplitDebugInliningField:
-		return &SplitDebugInliningField{n}
+		return SplitDebugInliningField{n}
 	case ll.StoreInst:
-		return &StoreInst{n}
+		return StoreInst{n}
 	case ll.StringLit:
-		return &StringLit{n}
+		return StringLit{n}
 	case ll.StructConst:
-		return &StructConst{n}
+		return StructConst{n}
 	case ll.StructType:
-		return &StructType{n}
+		return StructType{n}
 	case ll.SubExpr:
-		return &SubExpr{n}
+		return SubExpr{n}
 	case ll.SubInst:
-		return &SubInst{n}
+		return SubInst{n}
 	case ll.SwiftError:
-		return &SwiftError{n}
+		return SwiftError{n}
 	case ll.SwitchTerm:
-		return &SwitchTerm{n}
+		return SwitchTerm{n}
 	case ll.SyncScope:
-		return &SyncScope{n}
+		return SyncScope{n}
 	case ll.TLSModel:
-		return &TLSModel{n}
+		return TLSModel{n}
 	case ll.TagField:
-		return &TagField{n}
+		return TagField{n}
 	case ll.Tail:
-		return &Tail{n}
+		return Tail{n}
 	case ll.TargetDataLayout:
-		return &TargetDataLayout{n}
+		return TargetDataLayout{n}
 	case ll.TargetTriple:
-		return &TargetTriple{n}
+		return TargetTriple{n}
 	case ll.TemplateParamsField:
-		return &TemplateParamsField{n}
+		return TemplateParamsField{n}
 	case ll.ThisAdjustmentField:
-		return &ThisAdjustmentField{n}
+		return ThisAdjustmentField{n}
 	case ll.ThreadLocal:
-		return &ThreadLocal{n}
+		return ThreadLocal{n}
 	case ll.ThrownTypesField:
-		return &ThrownTypesField{n}
+		return ThrownTypesField{n}
 	case ll.TokenType:
-		return &TokenType{n}
+		return TokenType{n}
 	case ll.TruncExpr:
-		return &TruncExpr{n}
+		return TruncExpr{n}
 	case ll.TruncInst:
-		return &TruncInst{n}
+		return TruncInst{n}
 	case ll.TypeConst:
-		return &TypeConst{n}
+		return TypeConst{n}
 	case ll.TypeDef:
-		return &TypeDef{n}
+		return TypeDef{n}
 	case ll.TypeField:
-		return &TypeField{n}
+		return TypeField{n}
 	case ll.TypeMacinfoField:
-		return &TypeMacinfoField{n}
+		return TypeMacinfoField{n}
 	case ll.TypeValue:
-		return &TypeValue{n}
+		return TypeValue{n}
 	case ll.TypesField:
-		return &TypesField{n}
+		return TypesField{n}
 	case ll.UDivExpr:
-		return &UDivExpr{n}
+		return UDivExpr{n}
 	case ll.UDivInst:
-		return &UDivInst{n}
+		return UDivInst{n}
 	case ll.UIToFPExpr:
-		return &UIToFPExpr{n}
+		return UIToFPExpr{n}
 	case ll.UIToFPInst:
-		return &UIToFPInst{n}
+		return UIToFPInst{n}
 	case ll.URemExpr:
-		return &URemExpr{n}
+		return URemExpr{n}
 	case ll.URemInst:
-		return &URemInst{n}
+		return URemInst{n}
 	case ll.UintLit:
-		return &UintLit{n}
+		return UintLit{n}
 	case ll.UndefConst:
-		return &UndefConst{n}
+		return UndefConst{n}
 	case ll.UnitField:
-		return &UnitField{n}
+		return UnitField{n}
 	case ll.UnnamedAddr:
-		return &UnnamedAddr{n}
+		return UnnamedAddr{n}
 	case ll.UnreachableTerm:
-		return &UnreachableTerm{n}
+		return UnreachableTerm{n}
 	case ll.UnwindTarget:
-		return &UnwindTarget{n}
+		return UnwindTarget{n}
 	case ll.UnwindToCaller:
-		return &UnwindToCaller{n}
+		return UnwindToCaller{n}
 	case ll.UseListOrder:
-		return &UseListOrder{n}
+		return UseListOrder{n}
 	case ll.UseListOrderBB:
-		return &UseListOrderBB{n}
+		return UseListOrderBB{n}
 	case ll.VAArgInst:
-		return &VAArgInst{n}
+		return VAArgInst{n}
 	case ll.ValueField:
-		return &ValueField{n}
+		return ValueField{n}
 	case ll.ValueIntField:
-		return &ValueIntField{n}
+		return ValueIntField{n}
 	case ll.ValueStringField:
-		return &ValueStringField{n}
+		return ValueStringField{n}
 	case ll.VarField:
-		return &VarField{n}
+		return VarField{n}
 	case ll.VectorConst:
-		return &VectorConst{n}
+		return VectorConst{n}
 	case ll.VectorType:
-		return &VectorType{n}
+		return VectorType{n}
 	case ll.VirtualIndexField:
-		return &VirtualIndexField{n}
+		return VirtualIndexField{n}
 	case ll.VirtualityField:
-		return &VirtualityField{n}
+		return VirtualityField{n}
 	case ll.Visibility:
-		return &Visibility{n}
+		return Visibility{n}
 	case ll.VoidType:
-		return &VoidType{n}
+		return VoidType{n}
 	case ll.Volatile:
-		return &Volatile{n}
+		return Volatile{n}
 	case ll.VtableHolderField:
-		return &VtableHolderField{n}
+		return VtableHolderField{n}
 	case ll.Weak:
-		return &Weak{n}
+		return Weak{n}
 	case ll.XorExpr:
-		return &XorExpr{n}
+		return XorExpr{n}
 	case ll.XorInst:
-		return &XorInst{n}
+		return XorInst{n}
 	case ll.ZExtExpr:
-		return &ZExtExpr{n}
+		return ZExtExpr{n}
 	case ll.ZExtInst:
-		return &ZExtInst{n}
+		return ZExtInst{n}
 	case ll.ZeroInitializerConst:
-		return &ZeroInitializerConst{n}
+		return ZeroInitializerConst{n}
 	case ll.NoType:
 		return nilInstance
 	}
