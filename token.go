@@ -39,32 +39,6 @@ const (
 	FLOAT_LIT_TOK
 	STRING_LIT_TOK
 	INT_TYPE_TOK
-	EXCLDIBASICTYPE                // !DIBasicType
-	EXCLDICOMPILEUNIT              // !DICompileUnit
-	EXCLDICOMPOSITETYPE            // !DICompositeType
-	EXCLDIDERIVEDTYPE              // !DIDerivedType
-	EXCLDIENUMERATOR               // !DIEnumerator
-	EXCLDIEXPRESSION               // !DIExpression
-	EXCLDIFILE                     // !DIFile
-	EXCLDIGLOBALVARIABLE           // !DIGlobalVariable
-	EXCLDIGLOBALVARIABLEEXPRESSION // !DIGlobalVariableExpression
-	EXCLDIIMPORTEDENTITY           // !DIImportedEntity
-	EXCLDILABEL                    // !DILabel
-	EXCLDILEXICALBLOCK             // !DILexicalBlock
-	EXCLDILEXICALBLOCKFILE         // !DILexicalBlockFile
-	EXCLDILOCALVARIABLE            // !DILocalVariable
-	EXCLDILOCATION                 // !DILocation
-	EXCLDIMACRO                    // !DIMacro
-	EXCLDIMACROFILE                // !DIMacroFile
-	EXCLDIMODULE                   // !DIModule
-	EXCLDINAMESPACE                // !DINamespace
-	EXCLDIOBJCPROPERTY             // !DIObjCProperty
-	EXCLDISUBPROGRAM               // !DISubprogram
-	EXCLDISUBRANGE                 // !DISubrange
-	EXCLDISUBROUTINETYPE           // !DISubroutineType
-	EXCLDITEMPLATETYPEPARAMETER    // !DITemplateTypeParameter
-	EXCLDITEMPLATEVALUEPARAMETER   // !DITemplateValueParameter
-	EXCLGENERICDINODE              // !GenericDINode
 	AARCH64_VECTOR_PCS             // aarch64_vector_pcs
 	ACQ_REL                        // acq_rel
 	ACQUIRE                        // acquire
@@ -364,6 +338,32 @@ const (
 	ZEROEXT                        // zeroext
 	ZEROINITIALIZER                // zeroinitializer
 	ZEXT                           // zext
+	EXCLDIBASICTYPE                // !DIBasicType
+	EXCLDICOMPILEUNIT              // !DICompileUnit
+	EXCLDICOMPOSITETYPE            // !DICompositeType
+	EXCLDIDERIVEDTYPE              // !DIDerivedType
+	EXCLDIENUMERATOR               // !DIEnumerator
+	EXCLDIEXPRESSION               // !DIExpression
+	EXCLDIFILE                     // !DIFile
+	EXCLDIGLOBALVARIABLE           // !DIGlobalVariable
+	EXCLDIGLOBALVARIABLEEXPRESSION // !DIGlobalVariableExpression
+	EXCLDIIMPORTEDENTITY           // !DIImportedEntity
+	EXCLDILABEL                    // !DILabel
+	EXCLDILEXICALBLOCK             // !DILexicalBlock
+	EXCLDILEXICALBLOCKFILE         // !DILexicalBlockFile
+	EXCLDILOCALVARIABLE            // !DILocalVariable
+	EXCLDILOCATION                 // !DILocation
+	EXCLDIMACRO                    // !DIMacro
+	EXCLDIMACROFILE                // !DIMacroFile
+	EXCLDIMODULE                   // !DIModule
+	EXCLDINAMESPACE                // !DINamespace
+	EXCLDIOBJCPROPERTY             // !DIObjCProperty
+	EXCLDISUBPROGRAM               // !DISubprogram
+	EXCLDISUBRANGE                 // !DISubrange
+	EXCLDISUBROUTINETYPE           // !DISubroutineType
+	EXCLDITEMPLATETYPEPARAMETER    // !DITemplateTypeParameter
+	EXCLDITEMPLATEVALUEPARAMETER   // !DITemplateValueParameter
+	EXCLGENERICDINODE              // !GenericDINode
 	ALIGNCOLON                     // align:
 	ARGCOLON                       // arg:
 	ATTRIBUTESCOLON                // attributes:
@@ -485,32 +485,6 @@ var tokenStr = [...]string{
 	"FLOAT_LIT_TOK",
 	"STRING_LIT_TOK",
 	"INT_TYPE_TOK",
-	"!DIBasicType",
-	"!DICompileUnit",
-	"!DICompositeType",
-	"!DIDerivedType",
-	"!DIEnumerator",
-	"!DIExpression",
-	"!DIFile",
-	"!DIGlobalVariable",
-	"!DIGlobalVariableExpression",
-	"!DIImportedEntity",
-	"!DILabel",
-	"!DILexicalBlock",
-	"!DILexicalBlockFile",
-	"!DILocalVariable",
-	"!DILocation",
-	"!DIMacro",
-	"!DIMacroFile",
-	"!DIModule",
-	"!DINamespace",
-	"!DIObjCProperty",
-	"!DISubprogram",
-	"!DISubrange",
-	"!DISubroutineType",
-	"!DITemplateTypeParameter",
-	"!DITemplateValueParameter",
-	"!GenericDINode",
 	"aarch64_vector_pcs",
 	"acq_rel",
 	"acquire",
@@ -810,6 +784,32 @@ var tokenStr = [...]string{
 	"zeroext",
 	"zeroinitializer",
 	"zext",
+	"!DIBasicType",
+	"!DICompileUnit",
+	"!DICompositeType",
+	"!DIDerivedType",
+	"!DIEnumerator",
+	"!DIExpression",
+	"!DIFile",
+	"!DIGlobalVariable",
+	"!DIGlobalVariableExpression",
+	"!DIImportedEntity",
+	"!DILabel",
+	"!DILexicalBlock",
+	"!DILexicalBlockFile",
+	"!DILocalVariable",
+	"!DILocation",
+	"!DIMacro",
+	"!DIMacroFile",
+	"!DIModule",
+	"!DINamespace",
+	"!DIObjCProperty",
+	"!DISubprogram",
+	"!DISubrange",
+	"!DISubroutineType",
+	"!DITemplateTypeParameter",
+	"!DITemplateValueParameter",
+	"!GenericDINode",
 	"align:",
 	"arg:",
 	"attributes:",
