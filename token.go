@@ -73,7 +73,6 @@ const (
 	ADDRSPACECAST                  // addrspacecast
 	AFN                            // afn
 	ALIAS                          // alias
-	ALIGNCOLON                     // align:
 	ALIGN                          // align
 	ALIGNSTACK                     // alignstack
 	ALLOCA                         // alloca
@@ -92,7 +91,6 @@ const (
 	ANYREGCC                       // anyregcc
 	APPENDING                      // appending
 	ARCP                           // arcp
-	ARGCOLON                       // arg:
 	ARGMEMONLY                     // argmemonly
 	ARM_AAPCS_VFPCC                // arm_aapcs_vfpcc
 	ARM_AAPCSCC                    // arm_aapcscc
@@ -101,12 +99,10 @@ const (
 	ASM                            // asm
 	ATOMIC                         // atomic
 	ATOMICRMW                      // atomicrmw
-	ATTRIBUTESCOLON                // attributes:
 	ATTRIBUTES                     // attributes
 	AVAILABLE_EXTERNALLY           // available_externally
 	AVR_INTRCC                     // avr_intrcc
 	AVR_SIGNALCC                   // avr_signalcc
-	BASETYPECOLON                  // baseType:
 	BITCAST                        // bitcast
 	BLOCKADDRESS                   // blockaddress
 	BR                             // br
@@ -119,61 +115,40 @@ const (
 	CATCHPAD                       // catchpad
 	CATCHRET                       // catchret
 	CATCHSWITCH                    // catchswitch
-	CCCOLON                        // cc:
 	CC                             // cc
 	CCC                            // ccc
-	CHECKSUMCOLON                  // checksum:
-	CHECKSUMKINDCOLON              // checksumkind:
 	CLEANUP                        // cleanup
 	CLEANUPPAD                     // cleanuppad
 	CLEANUPRET                     // cleanupret
 	CMPXCHG                        // cmpxchg
 	COLD                           // cold
 	COLDCC                         // coldcc
-	COLUMNCOLON                    // column:
 	COMDAT                         // comdat
 	COMMON                         // common
-	CONFIGMACROSCOLON              // configMacros:
 	CONSTANT                       // constant
-	CONTAININGTYPECOLON            // containingType:
 	CONTRACT                       // contract
 	CONVERGENT                     // convergent
-	COUNTCOLON                     // count:
 	CXX_FAST_TLSCC                 // cxx_fast_tlscc
 	DATALAYOUT                     // datalayout
-	DEBUGINFOFORPROFILINGCOLON     // debugInfoForProfiling:
-	DECLARATIONCOLON               // declaration:
 	DECLARE                        // declare
 	DEFAULT                        // default
 	DEFINE                         // define
 	DEREFERENCEABLE_OR_NULL        // dereferenceable_or_null
 	DEREFERENCEABLE                // dereferenceable
-	DIRECTORYCOLON                 // directory:
-	DISCRIMINATORCOLON             // discriminator:
 	DISTINCT                       // distinct
 	DLLEXPORT                      // dllexport
 	DLLIMPORT                      // dllimport
 	DOUBLE                         // double
 	DSO_LOCAL                      // dso_local
 	DSO_PREEMPTABLE                // dso_preemptable
-	DWARFADDRESSSPACECOLON         // dwarfAddressSpace:
-	DWOIDCOLON                     // dwoId:
-	ELEMENTSCOLON                  // elements:
-	EMISSIONKINDCOLON              // emissionKind:
-	ENCODINGCOLON                  // encoding:
-	ENTITYCOLON                    // entity:
-	ENUMSCOLON                     // enums:
 	EQ                             // eq
 	EXACT                          // exact
 	EXACTMATCH                     // exactmatch
-	EXPORTSYMBOLSCOLON             // exportSymbols:
-	EXPRCOLON                      // expr:
 	EXTERN_WEAK                    // extern_weak
 	EXTERNAL                       // external
 	EXTERNALLY_INITIALIZED         // externally_initialized
 	EXTRACTELEMENT                 // extractelement
 	EXTRACTVALUE                   // extractvalue
-	EXTRADATACOLON                 // extraData:
 	FADD                           // fadd
 	FALSE                          // false
 	FAST                           // fast
@@ -181,10 +156,7 @@ const (
 	FCMP                           // fcmp
 	FDIV                           // fdiv
 	FENCE                          // fence
-	FILECOLON                      // file:
-	FILENAMECOLON                  // filename:
 	FILTER                         // filter
-	FLAGSCOLON                     // flags:
 	FLOAT                          // float
 	FMUL                           // fmul
 	FP128                          // fp128
@@ -197,27 +169,20 @@ const (
 	FSUB                           // fsub
 	GC                             // gc
 	GETELEMENTPTR                  // getelementptr
-	GETTERCOLON                    // getter:
 	GHCCC                          // ghccc
 	GLOBAL                         // global
-	GLOBALSCOLON                   // globals:
 	HALF                           // half
-	HEADERCOLON                    // header:
 	HHVM_CCC                       // hhvm_ccc
 	HHVMCC                         // hhvmcc
 	HIDDEN                         // hidden
 	ICMP                           // icmp
-	IDENTIFIERCOLON                // identifier:
 	IFUNC                          // ifunc
-	IMPORTSCOLON                   // imports:
 	INACCESSIBLEMEM_OR_ARGMEMONLY  // inaccessiblemem_or_argmemonly
 	INACCESSIBLEMEMONLY            // inaccessiblememonly
 	INALLOCA                       // inalloca
 	INBOUNDS                       // inbounds
-	INCLUDEPATHCOLON               // includePath:
 	INDIRECTBR                     // indirectbr
 	INITIALEXEC                    // initialexec
-	INLINEDATCOLON                 // inlinedAt:
 	INLINEHINT                     // inlinehint
 	INRANGE                        // inrange
 	INREG                          // inreg
@@ -228,28 +193,17 @@ const (
 	INTERNAL                       // internal
 	INTTOPTR                       // inttoptr
 	INVOKE                         // invoke
-	ISDEFINITIONCOLON              // isDefinition:
-	ISIMPLICITCODECOLON            // isImplicitCode:
-	ISLOCALCOLON                   // isLocal:
-	ISOPTIMIZEDCOLON               // isOptimized:
-	ISUNSIGNEDCOLON                // isUnsigned:
-	ISYSROOTCOLON                  // isysroot:
 	JUMPTABLE                      // jumptable
 	LABEL                          // label
 	LANDINGPAD                     // landingpad
-	LANGUAGECOLON                  // language:
 	LARGEST                        // largest
-	LINECOLON                      // line:
-	LINKAGENAMECOLON               // linkageName:
 	LINKONCE_ODR                   // linkonce_odr
 	LINKONCE                       // linkonce
 	LOAD                           // load
 	LOCAL_UNNAMED_ADDR             // local_unnamed_addr
 	LOCALDYNAMIC                   // localdynamic
 	LOCALEXEC                      // localexec
-	LOWERBOUNDCOLON                // lowerBound:
 	LSHR                           // lshr
-	MACROSCOLON                    // macros:
 	MAX                            // max
 	METADATA                       // metadata
 	MIN                            // min
@@ -260,8 +214,6 @@ const (
 	MUL                            // mul
 	MUSTTAIL                       // musttail
 	NAKED                          // naked
-	NAMECOLON                      // name:
-	NAMETABLEKINDCOLON             // nameTableKind:
 	NAND                           // nand
 	NE                             // ne
 	NEST                           // nest
@@ -271,7 +223,6 @@ const (
 	NOBUILTIN                      // nobuiltin
 	NOCAPTURE                      // nocapture
 	NOCF_CHECK                     // nocf_check
-	NODESCOLON                     // nodes:
 	NODUPLICATE                    // noduplicate
 	NODUPLICATES                   // noduplicates
 	NOIMPLICITFLOAT                // noimplicitfloat
@@ -289,14 +240,12 @@ const (
 	NULL                           // null
 	NUW                            // nuw
 	OEQ                            // oeq
-	OFFSETCOLON                    // offset:
 	OGE                            // oge
 	OGT                            // ogt
 	OLE                            // ole
 	OLT                            // olt
 	ONE                            // one
 	OPAQUE                         // opaque
-	OPERANDSCOLON                  // operands:
 	OPTFORFUZZING                  // optforfuzzing
 	OPTNONE                        // optnone
 	OPTSIZE                        // optsize
@@ -309,7 +258,6 @@ const (
 	PRESERVE_ALLCC                 // preserve_allcc
 	PRESERVE_MOSTCC                // preserve_mostcc
 	PRIVATE                        // private
-	PRODUCERCOLON                  // producer:
 	PROLOGUE                       // prologue
 	PROTECTED                      // protected
 	PTRTOINT                       // ptrtoint
@@ -321,25 +269,18 @@ const (
 	RELEASE                        // release
 	RESUME                         // resume
 	RET                            // ret
-	RETAINEDNODESCOLON             // retainedNodes:
-	RETAINEDTYPESCOLON             // retainedTypes:
 	RETURNED                       // returned
 	RETURNS_TWICE                  // returns_twice
-	RUNTIMELANGCOLON               // runtimeLang:
-	RUNTIMEVERSIONCOLON            // runtimeVersion:
 	SAFESTACK                      // safestack
 	SAMESIZE                       // samesize
 	SANITIZE_ADDRESS               // sanitize_address
 	SANITIZE_HWADDRESS             // sanitize_hwaddress
 	SANITIZE_MEMORY                // sanitize_memory
 	SANITIZE_THREAD                // sanitize_thread
-	SCOPECOLON                     // scope:
-	SCOPELINECOLON                 // scopeLine:
 	SDIV                           // sdiv
 	SECTION                        // section
 	SELECT                         // select
 	SEQ_CST                        // seq_cst
-	SETTERCOLON                    // setter:
 	SEXT                           // sext
 	SGE                            // sge
 	SGT                            // sgt
@@ -350,17 +291,13 @@ const (
 	SIGNEXT                        // signext
 	SINGLETHREAD                   // singlethread
 	SITOFP                         // sitofp
-	SIZECOLON                      // size:
 	SLE                            // sle
 	SLT                            // slt
 	SOURCE_FILENAME                // source_filename
-	SOURCECOLON                    // source:
 	SPECULATABLE                   // speculatable
 	SPECULATIVE_LOAD_HARDENING     // speculative_load_hardening
 	SPIR_FUNC                      // spir_func
 	SPIR_KERNEL                    // spir_kernel
-	SPLITDEBUGFILENAMECOLON        // splitDebugFilename:
-	SPLITDEBUGINLININGCOLON        // splitDebugInlining:
 	SREM                           // srem
 	SRET                           // sret
 	SSP                            // ssp
@@ -374,21 +311,15 @@ const (
 	SWIFTSELF                      // swiftself
 	SWITCH                         // switch
 	SYNCSCOPE                      // syncscope
-	TAGCOLON                       // tag:
 	TAIL                           // tail
 	TARGET                         // target
-	TEMPLATEPARAMSCOLON            // templateParams:
-	THISADJUSTMENTCOLON            // thisAdjustment:
 	THREAD_LOCAL                   // thread_local
-	THROWNTYPESCOLON               // thrownTypes:
 	TO                             // to
 	TOKEN                          // token
 	TRIPLE                         // triple
 	TRUE                           // true
 	TRUNC                          // trunc
-	TYPECOLON                      // type:
 	TYPE                           // type
-	TYPESCOLON                     // types:
 	UDIV                           // udiv
 	UEQ                            // ueq
 	UGE                            // uge
@@ -400,7 +331,6 @@ const (
 	UMIN                           // umin
 	UNDEF                          // undef
 	UNE                            // une
-	UNITCOLON                      // unit:
 	UNNAMED_ADDR                   // unnamed_addr
 	UNO                            // uno
 	UNORDERED                      // unordered
@@ -411,13 +341,8 @@ const (
 	USELISTORDER                   // uselistorder
 	UWTABLE                        // uwtable
 	VA_ARG                         // va_arg
-	VALUECOLON                     // value:
-	VARCOLON                       // var:
-	VIRTUALINDEXCOLON              // virtualIndex:
-	VIRTUALITYCOLON                // virtuality:
 	VOID                           // void
 	VOLATILE                       // volatile
-	VTABLEHOLDERCOLON              // vtableHolder:
 	WEAK_ODR                       // weak_odr
 	WEAK                           // weak
 	WEBKIT_JSCC                    // webkit_jscc
@@ -439,6 +364,81 @@ const (
 	ZEROEXT                        // zeroext
 	ZEROINITIALIZER                // zeroinitializer
 	ZEXT                           // zext
+	ALIGNCOLON                     // align:
+	ARGCOLON                       // arg:
+	ATTRIBUTESCOLON                // attributes:
+	BASETYPECOLON                  // baseType:
+	CCCOLON                        // cc:
+	CHECKSUMCOLON                  // checksum:
+	CHECKSUMKINDCOLON              // checksumkind:
+	COLUMNCOLON                    // column:
+	CONFIGMACROSCOLON              // configMacros:
+	CONTAININGTYPECOLON            // containingType:
+	COUNTCOLON                     // count:
+	DEBUGINFOFORPROFILINGCOLON     // debugInfoForProfiling:
+	DECLARATIONCOLON               // declaration:
+	DIRECTORYCOLON                 // directory:
+	DISCRIMINATORCOLON             // discriminator:
+	DWARFADDRESSSPACECOLON         // dwarfAddressSpace:
+	DWOIDCOLON                     // dwoId:
+	ELEMENTSCOLON                  // elements:
+	EMISSIONKINDCOLON              // emissionKind:
+	ENCODINGCOLON                  // encoding:
+	ENTITYCOLON                    // entity:
+	ENUMSCOLON                     // enums:
+	EXPORTSYMBOLSCOLON             // exportSymbols:
+	EXPRCOLON                      // expr:
+	EXTRADATACOLON                 // extraData:
+	FILECOLON                      // file:
+	FILENAMECOLON                  // filename:
+	FLAGSCOLON                     // flags:
+	GETTERCOLON                    // getter:
+	GLOBALSCOLON                   // globals:
+	HEADERCOLON                    // header:
+	IDENTIFIERCOLON                // identifier:
+	IMPORTSCOLON                   // imports:
+	INCLUDEPATHCOLON               // includePath:
+	INLINEDATCOLON                 // inlinedAt:
+	ISDEFINITIONCOLON              // isDefinition:
+	ISIMPLICITCODECOLON            // isImplicitCode:
+	ISLOCALCOLON                   // isLocal:
+	ISOPTIMIZEDCOLON               // isOptimized:
+	ISUNSIGNEDCOLON                // isUnsigned:
+	ISYSROOTCOLON                  // isysroot:
+	LANGUAGECOLON                  // language:
+	LINECOLON                      // line:
+	LINKAGENAMECOLON               // linkageName:
+	LOWERBOUNDCOLON                // lowerBound:
+	MACROSCOLON                    // macros:
+	NAMECOLON                      // name:
+	NAMETABLEKINDCOLON             // nameTableKind:
+	NODESCOLON                     // nodes:
+	OFFSETCOLON                    // offset:
+	OPERANDSCOLON                  // operands:
+	PRODUCERCOLON                  // producer:
+	RETAINEDNODESCOLON             // retainedNodes:
+	RETAINEDTYPESCOLON             // retainedTypes:
+	RUNTIMELANGCOLON               // runtimeLang:
+	RUNTIMEVERSIONCOLON            // runtimeVersion:
+	SCOPECOLON                     // scope:
+	SCOPELINECOLON                 // scopeLine:
+	SETTERCOLON                    // setter:
+	SIZECOLON                      // size:
+	SOURCECOLON                    // source:
+	SPLITDEBUGFILENAMECOLON        // splitDebugFilename:
+	SPLITDEBUGINLININGCOLON        // splitDebugInlining:
+	TAGCOLON                       // tag:
+	TEMPLATEPARAMSCOLON            // templateParams:
+	THISADJUSTMENTCOLON            // thisAdjustment:
+	THROWNTYPESCOLON               // thrownTypes:
+	TYPECOLON                      // type:
+	TYPESCOLON                     // types:
+	UNITCOLON                      // unit:
+	VALUECOLON                     // value:
+	VARCOLON                       // var:
+	VIRTUALINDEXCOLON              // virtualIndex:
+	VIRTUALITYCOLON                // virtuality:
+	VTABLEHOLDERCOLON              // vtableHolder:
 	COMMA
 	EXCL
 	DOTDOTDOT // ...
@@ -519,7 +519,6 @@ var tokenStr = [...]string{
 	"addrspacecast",
 	"afn",
 	"alias",
-	"align:",
 	"align",
 	"alignstack",
 	"alloca",
@@ -538,7 +537,6 @@ var tokenStr = [...]string{
 	"anyregcc",
 	"appending",
 	"arcp",
-	"arg:",
 	"argmemonly",
 	"arm_aapcs_vfpcc",
 	"arm_aapcscc",
@@ -547,12 +545,10 @@ var tokenStr = [...]string{
 	"asm",
 	"atomic",
 	"atomicrmw",
-	"attributes:",
 	"attributes",
 	"available_externally",
 	"avr_intrcc",
 	"avr_signalcc",
-	"baseType:",
 	"bitcast",
 	"blockaddress",
 	"br",
@@ -565,61 +561,40 @@ var tokenStr = [...]string{
 	"catchpad",
 	"catchret",
 	"catchswitch",
-	"cc:",
 	"cc",
 	"ccc",
-	"checksum:",
-	"checksumkind:",
 	"cleanup",
 	"cleanuppad",
 	"cleanupret",
 	"cmpxchg",
 	"cold",
 	"coldcc",
-	"column:",
 	"comdat",
 	"common",
-	"configMacros:",
 	"constant",
-	"containingType:",
 	"contract",
 	"convergent",
-	"count:",
 	"cxx_fast_tlscc",
 	"datalayout",
-	"debugInfoForProfiling:",
-	"declaration:",
 	"declare",
 	"default",
 	"define",
 	"dereferenceable_or_null",
 	"dereferenceable",
-	"directory:",
-	"discriminator:",
 	"distinct",
 	"dllexport",
 	"dllimport",
 	"double",
 	"dso_local",
 	"dso_preemptable",
-	"dwarfAddressSpace:",
-	"dwoId:",
-	"elements:",
-	"emissionKind:",
-	"encoding:",
-	"entity:",
-	"enums:",
 	"eq",
 	"exact",
 	"exactmatch",
-	"exportSymbols:",
-	"expr:",
 	"extern_weak",
 	"external",
 	"externally_initialized",
 	"extractelement",
 	"extractvalue",
-	"extraData:",
 	"fadd",
 	"false",
 	"fast",
@@ -627,10 +602,7 @@ var tokenStr = [...]string{
 	"fcmp",
 	"fdiv",
 	"fence",
-	"file:",
-	"filename:",
 	"filter",
-	"flags:",
 	"float",
 	"fmul",
 	"fp128",
@@ -643,27 +615,20 @@ var tokenStr = [...]string{
 	"fsub",
 	"gc",
 	"getelementptr",
-	"getter:",
 	"ghccc",
 	"global",
-	"globals:",
 	"half",
-	"header:",
 	"hhvm_ccc",
 	"hhvmcc",
 	"hidden",
 	"icmp",
-	"identifier:",
 	"ifunc",
-	"imports:",
 	"inaccessiblemem_or_argmemonly",
 	"inaccessiblememonly",
 	"inalloca",
 	"inbounds",
-	"includePath:",
 	"indirectbr",
 	"initialexec",
-	"inlinedAt:",
 	"inlinehint",
 	"inrange",
 	"inreg",
@@ -674,28 +639,17 @@ var tokenStr = [...]string{
 	"internal",
 	"inttoptr",
 	"invoke",
-	"isDefinition:",
-	"isImplicitCode:",
-	"isLocal:",
-	"isOptimized:",
-	"isUnsigned:",
-	"isysroot:",
 	"jumptable",
 	"label",
 	"landingpad",
-	"language:",
 	"largest",
-	"line:",
-	"linkageName:",
 	"linkonce_odr",
 	"linkonce",
 	"load",
 	"local_unnamed_addr",
 	"localdynamic",
 	"localexec",
-	"lowerBound:",
 	"lshr",
-	"macros:",
 	"max",
 	"metadata",
 	"min",
@@ -706,8 +660,6 @@ var tokenStr = [...]string{
 	"mul",
 	"musttail",
 	"naked",
-	"name:",
-	"nameTableKind:",
 	"nand",
 	"ne",
 	"nest",
@@ -717,7 +669,6 @@ var tokenStr = [...]string{
 	"nobuiltin",
 	"nocapture",
 	"nocf_check",
-	"nodes:",
 	"noduplicate",
 	"noduplicates",
 	"noimplicitfloat",
@@ -735,14 +686,12 @@ var tokenStr = [...]string{
 	"null",
 	"nuw",
 	"oeq",
-	"offset:",
 	"oge",
 	"ogt",
 	"ole",
 	"olt",
 	"one",
 	"opaque",
-	"operands:",
 	"optforfuzzing",
 	"optnone",
 	"optsize",
@@ -755,7 +704,6 @@ var tokenStr = [...]string{
 	"preserve_allcc",
 	"preserve_mostcc",
 	"private",
-	"producer:",
 	"prologue",
 	"protected",
 	"ptrtoint",
@@ -767,25 +715,18 @@ var tokenStr = [...]string{
 	"release",
 	"resume",
 	"ret",
-	"retainedNodes:",
-	"retainedTypes:",
 	"returned",
 	"returns_twice",
-	"runtimeLang:",
-	"runtimeVersion:",
 	"safestack",
 	"samesize",
 	"sanitize_address",
 	"sanitize_hwaddress",
 	"sanitize_memory",
 	"sanitize_thread",
-	"scope:",
-	"scopeLine:",
 	"sdiv",
 	"section",
 	"select",
 	"seq_cst",
-	"setter:",
 	"sext",
 	"sge",
 	"sgt",
@@ -796,17 +737,13 @@ var tokenStr = [...]string{
 	"signext",
 	"singlethread",
 	"sitofp",
-	"size:",
 	"sle",
 	"slt",
 	"source_filename",
-	"source:",
 	"speculatable",
 	"speculative_load_hardening",
 	"spir_func",
 	"spir_kernel",
-	"splitDebugFilename:",
-	"splitDebugInlining:",
 	"srem",
 	"sret",
 	"ssp",
@@ -820,21 +757,15 @@ var tokenStr = [...]string{
 	"swiftself",
 	"switch",
 	"syncscope",
-	"tag:",
 	"tail",
 	"target",
-	"templateParams:",
-	"thisAdjustment:",
 	"thread_local",
-	"thrownTypes:",
 	"to",
 	"token",
 	"triple",
 	"true",
 	"trunc",
-	"type:",
 	"type",
-	"types:",
 	"udiv",
 	"ueq",
 	"uge",
@@ -846,7 +777,6 @@ var tokenStr = [...]string{
 	"umin",
 	"undef",
 	"une",
-	"unit:",
 	"unnamed_addr",
 	"uno",
 	"unordered",
@@ -857,13 +787,8 @@ var tokenStr = [...]string{
 	"uselistorder",
 	"uwtable",
 	"va_arg",
-	"value:",
-	"var:",
-	"virtualIndex:",
-	"virtuality:",
 	"void",
 	"volatile",
-	"vtableHolder:",
 	"weak_odr",
 	"weak",
 	"webkit_jscc",
@@ -885,6 +810,81 @@ var tokenStr = [...]string{
 	"zeroext",
 	"zeroinitializer",
 	"zext",
+	"align:",
+	"arg:",
+	"attributes:",
+	"baseType:",
+	"cc:",
+	"checksum:",
+	"checksumkind:",
+	"column:",
+	"configMacros:",
+	"containingType:",
+	"count:",
+	"debugInfoForProfiling:",
+	"declaration:",
+	"directory:",
+	"discriminator:",
+	"dwarfAddressSpace:",
+	"dwoId:",
+	"elements:",
+	"emissionKind:",
+	"encoding:",
+	"entity:",
+	"enums:",
+	"exportSymbols:",
+	"expr:",
+	"extraData:",
+	"file:",
+	"filename:",
+	"flags:",
+	"getter:",
+	"globals:",
+	"header:",
+	"identifier:",
+	"imports:",
+	"includePath:",
+	"inlinedAt:",
+	"isDefinition:",
+	"isImplicitCode:",
+	"isLocal:",
+	"isOptimized:",
+	"isUnsigned:",
+	"isysroot:",
+	"language:",
+	"line:",
+	"linkageName:",
+	"lowerBound:",
+	"macros:",
+	"name:",
+	"nameTableKind:",
+	"nodes:",
+	"offset:",
+	"operands:",
+	"producer:",
+	"retainedNodes:",
+	"retainedTypes:",
+	"runtimeLang:",
+	"runtimeVersion:",
+	"scope:",
+	"scopeLine:",
+	"setter:",
+	"size:",
+	"source:",
+	"splitDebugFilename:",
+	"splitDebugInlining:",
+	"tag:",
+	"templateParams:",
+	"thisAdjustment:",
+	"thrownTypes:",
+	"type:",
+	"types:",
+	"unit:",
+	"value:",
+	"var:",
+	"virtualIndex:",
+	"virtuality:",
+	"vtableHolder:",
 	"COMMA",
 	"EXCL",
 	"...",
