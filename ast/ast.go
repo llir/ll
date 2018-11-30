@@ -1672,8 +1672,9 @@ type AShrExpr struct {
 	*Node
 }
 
-func (n AShrExpr) Exact() /*opt*/ Exact {
-	return Exact{n.Child(selector.Exact)}
+func (n AShrExpr) Exact() (Exact, bool) {
+	field := Exact{n.Child(selector.Exact)}
+	return field, field.IsValid()
 }
 
 func (n AShrExpr) X() TypeConst {
@@ -1688,8 +1689,9 @@ type AShrInst struct {
 	*Node
 }
 
-func (n AShrInst) Exact() /*opt*/ Exact {
-	return Exact{n.Child(selector.Exact)}
+func (n AShrInst) Exact() (Exact, bool) {
+	field := Exact{n.Child(selector.Exact)}
+	return field, field.IsValid()
 }
 
 func (n AShrInst) X() TypeValue {
@@ -1853,36 +1855,42 @@ func (n AllocSize) ElemSize() UintLit {
 	return UintLit{n.Child(selector.UintLit)}
 }
 
-func (n AllocSize) N() /*opt*/ UintLit {
-	return UintLit{n.Child(selector.UintLit).Next(selector.UintLit)}
+func (n AllocSize) N() (UintLit, bool) {
+	field := UintLit{n.Child(selector.UintLit).Next(selector.UintLit)}
+	return field, field.IsValid()
 }
 
 type AllocaInst struct {
 	*Node
 }
 
-func (n AllocaInst) InAlloca() /*opt*/ InAlloca {
-	return InAlloca{n.Child(selector.InAlloca)}
+func (n AllocaInst) InAlloca() (InAlloca, bool) {
+	field := InAlloca{n.Child(selector.InAlloca)}
+	return field, field.IsValid()
 }
 
-func (n AllocaInst) SwiftError() /*opt*/ SwiftError {
-	return SwiftError{n.Child(selector.SwiftError)}
+func (n AllocaInst) SwiftError() (SwiftError, bool) {
+	field := SwiftError{n.Child(selector.SwiftError)}
+	return field, field.IsValid()
 }
 
 func (n AllocaInst) ElemType() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
-func (n AllocaInst) NElems() /*opt*/ TypeValue {
-	return TypeValue{n.Child(selector.TypeValue)}
+func (n AllocaInst) NElems() (TypeValue, bool) {
+	field := TypeValue{n.Child(selector.TypeValue)}
+	return field, field.IsValid()
 }
 
-func (n AllocaInst) Align() /*opt*/ Align {
-	return Align{n.Child(selector.Align)}
+func (n AllocaInst) Align() (Align, bool) {
+	field := Align{n.Child(selector.Align)}
+	return field, field.IsValid()
 }
 
-func (n AllocaInst) AddrSpace() /*opt*/ AddrSpace {
-	return AddrSpace{n.Child(selector.AddrSpace)}
+func (n AllocaInst) AddrSpace() (AddrSpace, bool) {
+	field := AddrSpace{n.Child(selector.AddrSpace)}
+	return field, field.IsValid()
 }
 
 func (n AllocaInst) Metadata() []MetadataAttachment {
@@ -2010,8 +2018,9 @@ type AtomicRMWInst struct {
 	*Node
 }
 
-func (n AtomicRMWInst) Volatile() /*opt*/ Volatile {
-	return Volatile{n.Child(selector.Volatile)}
+func (n AtomicRMWInst) Volatile() (Volatile, bool) {
+	field := Volatile{n.Child(selector.Volatile)}
+	return field, field.IsValid()
 }
 
 func (n AtomicRMWInst) Op() AtomicOp {
@@ -2026,8 +2035,9 @@ func (n AtomicRMWInst) X() TypeValue {
 	return TypeValue{n.Child(selector.TypeValue).Next(selector.TypeValue)}
 }
 
-func (n AtomicRMWInst) SyncScope() /*opt*/ SyncScope {
-	return SyncScope{n.Child(selector.SyncScope)}
+func (n AtomicRMWInst) SyncScope() (SyncScope, bool) {
+	field := SyncScope{n.Child(selector.SyncScope)}
+	return field, field.IsValid()
 }
 
 func (n AtomicRMWInst) Ordering() AtomicOrdering {
@@ -2104,8 +2114,9 @@ type BasicBlock struct {
 	*Node
 }
 
-func (n BasicBlock) Name() /*opt*/ LabelIdent {
-	return LabelIdent{n.Child(selector.LabelIdent)}
+func (n BasicBlock) Name() (LabelIdent, bool) {
+	field := LabelIdent{n.Child(selector.LabelIdent)}
+	return field, field.IsValid()
 }
 
 func (n BasicBlock) Insts() []Instruction {
@@ -2207,8 +2218,9 @@ type CallInst struct {
 	*Node
 }
 
-func (n CallInst) Tail() /*opt*/ Tail {
-	return Tail{n.Child(selector.Tail)}
+func (n CallInst) Tail() (Tail, bool) {
+	field := Tail{n.Child(selector.Tail)}
+	return field, field.IsValid()
 }
 
 func (n CallInst) FastMathFlags() []FastMathFlag {
@@ -2233,8 +2245,9 @@ func (n CallInst) ReturnAttrs() []ReturnAttribute {
 	return ret
 }
 
-func (n CallInst) AddrSpace() /*opt*/ AddrSpace {
-	return AddrSpace{n.Child(selector.AddrSpace)}
+func (n CallInst) AddrSpace() (AddrSpace, bool) {
+	field := AddrSpace{n.Child(selector.AddrSpace)}
+	return field, field.IsValid()
 }
 
 func (n CallInst) Typ() Type {
@@ -2471,12 +2484,14 @@ type CmpXchgInst struct {
 	*Node
 }
 
-func (n CmpXchgInst) Weak() /*opt*/ Weak {
-	return Weak{n.Child(selector.Weak)}
+func (n CmpXchgInst) Weak() (Weak, bool) {
+	field := Weak{n.Child(selector.Weak)}
+	return field, field.IsValid()
 }
 
-func (n CmpXchgInst) Volatile() /*opt*/ Volatile {
-	return Volatile{n.Child(selector.Volatile)}
+func (n CmpXchgInst) Volatile() (Volatile, bool) {
+	field := Volatile{n.Child(selector.Volatile)}
+	return field, field.IsValid()
 }
 
 func (n CmpXchgInst) Ptr() TypeValue {
@@ -2491,8 +2506,9 @@ func (n CmpXchgInst) New() TypeValue {
 	return TypeValue{n.Child(selector.TypeValue).Next(selector.TypeValue).Next(selector.TypeValue)}
 }
 
-func (n CmpXchgInst) SyncScope() /*opt*/ SyncScope {
-	return SyncScope{n.Child(selector.SyncScope)}
+func (n CmpXchgInst) SyncScope() (SyncScope, bool) {
+	field := SyncScope{n.Child(selector.SyncScope)}
+	return field, field.IsValid()
 }
 
 func (n CmpXchgInst) SuccessOrdering() AtomicOrdering {
@@ -2524,8 +2540,9 @@ type Comdat struct {
 	*Node
 }
 
-func (n Comdat) Name() /*opt*/ ComdatName {
-	return ComdatName{n.Child(selector.ComdatName)}
+func (n Comdat) Name() (ComdatName, bool) {
+	field := ComdatName{n.Child(selector.ComdatName)}
+	return field, field.IsValid()
 }
 
 type ComdatDef struct {
@@ -3687,8 +3704,9 @@ type FenceInst struct {
 	*Node
 }
 
-func (n FenceInst) SyncScope() /*opt*/ SyncScope {
-	return SyncScope{n.Child(selector.SyncScope)}
+func (n FenceInst) SyncScope() (SyncScope, bool) {
+	field := SyncScope{n.Child(selector.SyncScope)}
+	return field, field.IsValid()
 }
 
 func (n FenceInst) Ordering() AtomicOrdering {
@@ -3828,24 +3846,29 @@ type FuncHeader struct {
 	*Node
 }
 
-func (n FuncHeader) ExternLinkage() /*opt*/ ExternLinkage {
-	return ExternLinkage{n.Child(selector.ExternLinkage)}
+func (n FuncHeader) ExternLinkage() (ExternLinkage, bool) {
+	field := ExternLinkage{n.Child(selector.ExternLinkage)}
+	return field, field.IsValid()
 }
 
-func (n FuncHeader) Linkage() /*opt*/ Linkage {
-	return Linkage{n.Child(selector.Linkage)}
+func (n FuncHeader) Linkage() (Linkage, bool) {
+	field := Linkage{n.Child(selector.Linkage)}
+	return field, field.IsValid()
 }
 
-func (n FuncHeader) Preemption() /*opt*/ Preemption {
-	return Preemption{n.Child(selector.Preemption)}
+func (n FuncHeader) Preemption() (Preemption, bool) {
+	field := Preemption{n.Child(selector.Preemption)}
+	return field, field.IsValid()
 }
 
-func (n FuncHeader) Visibility() /*opt*/ Visibility {
-	return Visibility{n.Child(selector.Visibility)}
+func (n FuncHeader) Visibility() (Visibility, bool) {
+	field := Visibility{n.Child(selector.Visibility)}
+	return field, field.IsValid()
 }
 
-func (n FuncHeader) DLLStorageClass() /*opt*/ DLLStorageClass {
-	return DLLStorageClass{n.Child(selector.DLLStorageClass)}
+func (n FuncHeader) DLLStorageClass() (DLLStorageClass, bool) {
+	field := DLLStorageClass{n.Child(selector.DLLStorageClass)}
+	return field, field.IsValid()
 }
 
 func (n FuncHeader) CallingConv() CallingConv {
@@ -3873,12 +3896,14 @@ func (n FuncHeader) Params() Params {
 	return Params{n.Child(selector.Params)}
 }
 
-func (n FuncHeader) UnnamedAddr() /*opt*/ UnnamedAddr {
-	return UnnamedAddr{n.Child(selector.UnnamedAddr)}
+func (n FuncHeader) UnnamedAddr() (UnnamedAddr, bool) {
+	field := UnnamedAddr{n.Child(selector.UnnamedAddr)}
+	return field, field.IsValid()
 }
 
-func (n FuncHeader) AddrSpace() /*opt*/ AddrSpace {
-	return AddrSpace{n.Child(selector.AddrSpace)}
+func (n FuncHeader) AddrSpace() (AddrSpace, bool) {
+	field := AddrSpace{n.Child(selector.AddrSpace)}
+	return field, field.IsValid()
 }
 
 func (n FuncHeader) FuncAttrs() []FuncAttribute {
@@ -3890,28 +3915,34 @@ func (n FuncHeader) FuncAttrs() []FuncAttribute {
 	return ret
 }
 
-func (n FuncHeader) Section() /*opt*/ Section {
-	return Section{n.Child(selector.Section)}
+func (n FuncHeader) Section() (Section, bool) {
+	field := Section{n.Child(selector.Section)}
+	return field, field.IsValid()
 }
 
-func (n FuncHeader) Comdat() /*opt*/ Comdat {
-	return Comdat{n.Child(selector.Comdat)}
+func (n FuncHeader) Comdat() (Comdat, bool) {
+	field := Comdat{n.Child(selector.Comdat)}
+	return field, field.IsValid()
 }
 
-func (n FuncHeader) GCNode() /*opt*/ GCNode {
-	return GCNode{n.Child(selector.GCNode)}
+func (n FuncHeader) GCNode() (GCNode, bool) {
+	field := GCNode{n.Child(selector.GCNode)}
+	return field, field.IsValid()
 }
 
-func (n FuncHeader) Prefix() /*opt*/ Prefix {
-	return Prefix{n.Child(selector.Prefix)}
+func (n FuncHeader) Prefix() (Prefix, bool) {
+	field := Prefix{n.Child(selector.Prefix)}
+	return field, field.IsValid()
 }
 
-func (n FuncHeader) Prologue() /*opt*/ Prologue {
-	return Prologue{n.Child(selector.Prologue)}
+func (n FuncHeader) Prologue() (Prologue, bool) {
+	field := Prologue{n.Child(selector.Prologue)}
+	return field, field.IsValid()
 }
 
-func (n FuncHeader) Personality() /*opt*/ Personality {
-	return Personality{n.Child(selector.Personality)}
+func (n FuncHeader) Personality() (Personality, bool) {
+	field := Personality{n.Child(selector.Personality)}
+	return field, field.IsValid()
 }
 
 type FuncType struct {
@@ -3938,8 +3969,9 @@ type GEPIndex struct {
 	*Node
 }
 
-func (n GEPIndex) InRange() /*opt*/ InRange {
-	return InRange{n.Child(selector.InRange)}
+func (n GEPIndex) InRange() (InRange, bool) {
+	field := InRange{n.Child(selector.InRange)}
+	return field, field.IsValid()
 }
 
 func (n GEPIndex) Index() TypeConst {
@@ -3963,8 +3995,9 @@ type GetElementPtrExpr struct {
 	*Node
 }
 
-func (n GetElementPtrExpr) InBounds() /*opt*/ InBounds {
-	return InBounds{n.Child(selector.InBounds)}
+func (n GetElementPtrExpr) InBounds() (InBounds, bool) {
+	field := InBounds{n.Child(selector.InBounds)}
+	return field, field.IsValid()
 }
 
 func (n GetElementPtrExpr) ElemType() Type {
@@ -3988,8 +4021,9 @@ type GetElementPtrInst struct {
 	*Node
 }
 
-func (n GetElementPtrInst) InBounds() /*opt*/ InBounds {
-	return InBounds{n.Child(selector.InBounds)}
+func (n GetElementPtrInst) InBounds() (InBounds, bool) {
+	field := InBounds{n.Child(selector.InBounds)}
+	return field, field.IsValid()
 }
 
 func (n GetElementPtrInst) ElemType() Type {
@@ -4038,32 +4072,39 @@ func (n GlobalDecl) ExternLinkage() ExternLinkage {
 	return ExternLinkage{n.Child(selector.ExternLinkage)}
 }
 
-func (n GlobalDecl) Preemption() /*opt*/ Preemption {
-	return Preemption{n.Child(selector.Preemption)}
+func (n GlobalDecl) Preemption() (Preemption, bool) {
+	field := Preemption{n.Child(selector.Preemption)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDecl) Visibility() /*opt*/ Visibility {
-	return Visibility{n.Child(selector.Visibility)}
+func (n GlobalDecl) Visibility() (Visibility, bool) {
+	field := Visibility{n.Child(selector.Visibility)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDecl) DLLStorageClass() /*opt*/ DLLStorageClass {
-	return DLLStorageClass{n.Child(selector.DLLStorageClass)}
+func (n GlobalDecl) DLLStorageClass() (DLLStorageClass, bool) {
+	field := DLLStorageClass{n.Child(selector.DLLStorageClass)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDecl) ThreadLocal() /*opt*/ ThreadLocal {
-	return ThreadLocal{n.Child(selector.ThreadLocal)}
+func (n GlobalDecl) ThreadLocal() (ThreadLocal, bool) {
+	field := ThreadLocal{n.Child(selector.ThreadLocal)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDecl) UnnamedAddr() /*opt*/ UnnamedAddr {
-	return UnnamedAddr{n.Child(selector.UnnamedAddr)}
+func (n GlobalDecl) UnnamedAddr() (UnnamedAddr, bool) {
+	field := UnnamedAddr{n.Child(selector.UnnamedAddr)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDecl) AddrSpace() /*opt*/ AddrSpace {
-	return AddrSpace{n.Child(selector.AddrSpace)}
+func (n GlobalDecl) AddrSpace() (AddrSpace, bool) {
+	field := AddrSpace{n.Child(selector.AddrSpace)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDecl) ExternallyInitialized() /*opt*/ ExternallyInitialized {
-	return ExternallyInitialized{n.Child(selector.ExternallyInitialized)}
+func (n GlobalDecl) ExternallyInitialized() (ExternallyInitialized, bool) {
+	field := ExternallyInitialized{n.Child(selector.ExternallyInitialized)}
+	return field, field.IsValid()
 }
 
 func (n GlobalDecl) Immutable() Immutable {
@@ -4074,16 +4115,19 @@ func (n GlobalDecl) ContentType() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
-func (n GlobalDecl) Section() /*opt*/ Section {
-	return Section{n.Child(selector.Section)}
+func (n GlobalDecl) Section() (Section, bool) {
+	field := Section{n.Child(selector.Section)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDecl) Comdat() /*opt*/ Comdat {
-	return Comdat{n.Child(selector.Comdat)}
+func (n GlobalDecl) Comdat() (Comdat, bool) {
+	field := Comdat{n.Child(selector.Comdat)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDecl) Align() /*opt*/ Align {
-	return Align{n.Child(selector.Align)}
+func (n GlobalDecl) Align() (Align, bool) {
+	field := Align{n.Child(selector.Align)}
+	return field, field.IsValid()
 }
 
 func (n GlobalDecl) Metadata() []MetadataAttachment {
@@ -4112,36 +4156,44 @@ func (n GlobalDef) Name() GlobalIdent {
 	return GlobalIdent{n.Child(selector.GlobalIdent)}
 }
 
-func (n GlobalDef) Linkage() /*opt*/ Linkage {
-	return Linkage{n.Child(selector.Linkage)}
+func (n GlobalDef) Linkage() (Linkage, bool) {
+	field := Linkage{n.Child(selector.Linkage)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDef) Preemption() /*opt*/ Preemption {
-	return Preemption{n.Child(selector.Preemption)}
+func (n GlobalDef) Preemption() (Preemption, bool) {
+	field := Preemption{n.Child(selector.Preemption)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDef) Visibility() /*opt*/ Visibility {
-	return Visibility{n.Child(selector.Visibility)}
+func (n GlobalDef) Visibility() (Visibility, bool) {
+	field := Visibility{n.Child(selector.Visibility)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDef) DLLStorageClass() /*opt*/ DLLStorageClass {
-	return DLLStorageClass{n.Child(selector.DLLStorageClass)}
+func (n GlobalDef) DLLStorageClass() (DLLStorageClass, bool) {
+	field := DLLStorageClass{n.Child(selector.DLLStorageClass)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDef) ThreadLocal() /*opt*/ ThreadLocal {
-	return ThreadLocal{n.Child(selector.ThreadLocal)}
+func (n GlobalDef) ThreadLocal() (ThreadLocal, bool) {
+	field := ThreadLocal{n.Child(selector.ThreadLocal)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDef) UnnamedAddr() /*opt*/ UnnamedAddr {
-	return UnnamedAddr{n.Child(selector.UnnamedAddr)}
+func (n GlobalDef) UnnamedAddr() (UnnamedAddr, bool) {
+	field := UnnamedAddr{n.Child(selector.UnnamedAddr)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDef) AddrSpace() /*opt*/ AddrSpace {
-	return AddrSpace{n.Child(selector.AddrSpace)}
+func (n GlobalDef) AddrSpace() (AddrSpace, bool) {
+	field := AddrSpace{n.Child(selector.AddrSpace)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDef) ExternallyInitialized() /*opt*/ ExternallyInitialized {
-	return ExternallyInitialized{n.Child(selector.ExternallyInitialized)}
+func (n GlobalDef) ExternallyInitialized() (ExternallyInitialized, bool) {
+	field := ExternallyInitialized{n.Child(selector.ExternallyInitialized)}
+	return field, field.IsValid()
 }
 
 func (n GlobalDef) Immutable() Immutable {
@@ -4156,16 +4208,19 @@ func (n GlobalDef) Init() Constant {
 	return ToLlvmNode(n.Child(selector.GlobalIdent).Next(selector.Constant)).(Constant)
 }
 
-func (n GlobalDef) Section() /*opt*/ Section {
-	return Section{n.Child(selector.Section)}
+func (n GlobalDef) Section() (Section, bool) {
+	field := Section{n.Child(selector.Section)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDef) Comdat() /*opt*/ Comdat {
-	return Comdat{n.Child(selector.Comdat)}
+func (n GlobalDef) Comdat() (Comdat, bool) {
+	field := Comdat{n.Child(selector.Comdat)}
+	return field, field.IsValid()
 }
 
-func (n GlobalDef) Align() /*opt*/ Align {
-	return Align{n.Child(selector.Align)}
+func (n GlobalDef) Align() (Align, bool) {
+	field := Align{n.Child(selector.Align)}
+	return field, field.IsValid()
 }
 
 func (n GlobalDef) Metadata() []MetadataAttachment {
@@ -4350,32 +4405,39 @@ func (n IndirectSymbolDef) Name() GlobalIdent {
 	return GlobalIdent{n.Child(selector.GlobalIdent)}
 }
 
-func (n IndirectSymbolDef) ExternLinkage() /*opt*/ ExternLinkage {
-	return ExternLinkage{n.Child(selector.ExternLinkage)}
+func (n IndirectSymbolDef) ExternLinkage() (ExternLinkage, bool) {
+	field := ExternLinkage{n.Child(selector.ExternLinkage)}
+	return field, field.IsValid()
 }
 
-func (n IndirectSymbolDef) Linkage() /*opt*/ Linkage {
-	return Linkage{n.Child(selector.Linkage)}
+func (n IndirectSymbolDef) Linkage() (Linkage, bool) {
+	field := Linkage{n.Child(selector.Linkage)}
+	return field, field.IsValid()
 }
 
-func (n IndirectSymbolDef) Preemption() /*opt*/ Preemption {
-	return Preemption{n.Child(selector.Preemption)}
+func (n IndirectSymbolDef) Preemption() (Preemption, bool) {
+	field := Preemption{n.Child(selector.Preemption)}
+	return field, field.IsValid()
 }
 
-func (n IndirectSymbolDef) Visibility() /*opt*/ Visibility {
-	return Visibility{n.Child(selector.Visibility)}
+func (n IndirectSymbolDef) Visibility() (Visibility, bool) {
+	field := Visibility{n.Child(selector.Visibility)}
+	return field, field.IsValid()
 }
 
-func (n IndirectSymbolDef) DLLStorageClass() /*opt*/ DLLStorageClass {
-	return DLLStorageClass{n.Child(selector.DLLStorageClass)}
+func (n IndirectSymbolDef) DLLStorageClass() (DLLStorageClass, bool) {
+	field := DLLStorageClass{n.Child(selector.DLLStorageClass)}
+	return field, field.IsValid()
 }
 
-func (n IndirectSymbolDef) ThreadLocal() /*opt*/ ThreadLocal {
-	return ThreadLocal{n.Child(selector.ThreadLocal)}
+func (n IndirectSymbolDef) ThreadLocal() (ThreadLocal, bool) {
+	field := ThreadLocal{n.Child(selector.ThreadLocal)}
+	return field, field.IsValid()
 }
 
-func (n IndirectSymbolDef) UnnamedAddr() /*opt*/ UnnamedAddr {
-	return UnnamedAddr{n.Child(selector.UnnamedAddr)}
+func (n IndirectSymbolDef) UnnamedAddr() (UnnamedAddr, bool) {
+	field := UnnamedAddr{n.Child(selector.UnnamedAddr)}
+	return field, field.IsValid()
 }
 
 func (n IndirectSymbolDef) IndirectSymbolKind() IndirectSymbolKind {
@@ -4398,16 +4460,19 @@ type InlineAsm struct {
 	*Node
 }
 
-func (n InlineAsm) SideEffect() /*opt*/ SideEffect {
-	return SideEffect{n.Child(selector.SideEffect)}
+func (n InlineAsm) SideEffect() (SideEffect, bool) {
+	field := SideEffect{n.Child(selector.SideEffect)}
+	return field, field.IsValid()
 }
 
-func (n InlineAsm) AlignStackTok() /*opt*/ AlignStackTok {
-	return AlignStackTok{n.Child(selector.AlignStackTok)}
+func (n InlineAsm) AlignStackTok() (AlignStackTok, bool) {
+	field := AlignStackTok{n.Child(selector.AlignStackTok)}
+	return field, field.IsValid()
 }
 
-func (n InlineAsm) IntelDialect() /*opt*/ IntelDialect {
-	return IntelDialect{n.Child(selector.IntelDialect)}
+func (n InlineAsm) IntelDialect() (IntelDialect, bool) {
+	field := IntelDialect{n.Child(selector.IntelDialect)}
+	return field, field.IsValid()
 }
 
 func (n InlineAsm) Asm() StringLit {
@@ -4588,8 +4653,9 @@ func (n InvokeTerm) ReturnAttrs() []ReturnAttribute {
 	return ret
 }
 
-func (n InvokeTerm) AddrSpace() /*opt*/ AddrSpace {
-	return AddrSpace{n.Child(selector.AddrSpace)}
+func (n InvokeTerm) AddrSpace() (AddrSpace, bool) {
+	field := AddrSpace{n.Child(selector.AddrSpace)}
+	return field, field.IsValid()
 }
 
 func (n InvokeTerm) Typ() Type {
@@ -4691,8 +4757,9 @@ type LShrExpr struct {
 	*Node
 }
 
-func (n LShrExpr) Exact() /*opt*/ Exact {
-	return Exact{n.Child(selector.Exact)}
+func (n LShrExpr) Exact() (Exact, bool) {
+	field := Exact{n.Child(selector.Exact)}
+	return field, field.IsValid()
 }
 
 func (n LShrExpr) X() TypeConst {
@@ -4707,8 +4774,9 @@ type LShrInst struct {
 	*Node
 }
 
-func (n LShrInst) Exact() /*opt*/ Exact {
-	return Exact{n.Child(selector.Exact)}
+func (n LShrInst) Exact() (Exact, bool) {
+	field := Exact{n.Child(selector.Exact)}
+	return field, field.IsValid()
 }
 
 func (n LShrInst) X() TypeValue {
@@ -4756,8 +4824,9 @@ func (n LandingPadInst) ResultType() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
-func (n LandingPadInst) Cleanup() /*opt*/ Cleanup {
-	return Cleanup{n.Child(selector.Cleanup)}
+func (n LandingPadInst) Cleanup() (Cleanup, bool) {
+	field := Cleanup{n.Child(selector.Cleanup)}
+	return field, field.IsValid()
 }
 
 func (n LandingPadInst) Clauses() []Clause {
@@ -4810,12 +4879,14 @@ type LoadInst struct {
 	*Node
 }
 
-func (n LoadInst) Atomic() /*opt*/ Atomic {
-	return Atomic{n.Child(selector.Atomic)}
+func (n LoadInst) Atomic() (Atomic, bool) {
+	field := Atomic{n.Child(selector.Atomic)}
+	return field, field.IsValid()
 }
 
-func (n LoadInst) Volatile() /*opt*/ Volatile {
-	return Volatile{n.Child(selector.Volatile)}
+func (n LoadInst) Volatile() (Volatile, bool) {
+	field := Volatile{n.Child(selector.Volatile)}
+	return field, field.IsValid()
 }
 
 func (n LoadInst) ElemType() Type {
@@ -4826,16 +4897,19 @@ func (n LoadInst) Src() TypeValue {
 	return TypeValue{n.Child(selector.TypeValue)}
 }
 
-func (n LoadInst) SyncScope() /*opt*/ SyncScope {
-	return SyncScope{n.Child(selector.SyncScope)}
+func (n LoadInst) SyncScope() (SyncScope, bool) {
+	field := SyncScope{n.Child(selector.SyncScope)}
+	return field, field.IsValid()
 }
 
-func (n LoadInst) Ordering() /*opt*/ AtomicOrdering {
-	return AtomicOrdering{n.Child(selector.AtomicOrdering)}
+func (n LoadInst) Ordering() (AtomicOrdering, bool) {
+	field := AtomicOrdering{n.Child(selector.AtomicOrdering)}
+	return field, field.IsValid()
 }
 
-func (n LoadInst) Align() /*opt*/ Align {
-	return Align{n.Child(selector.Align)}
+func (n LoadInst) Align() (Align, bool) {
+	field := Align{n.Child(selector.Align)}
+	return field, field.IsValid()
 }
 
 func (n LoadInst) Metadata() []MetadataAttachment {
@@ -4944,8 +5018,9 @@ func (n MetadataDef) ID() MetadataID {
 	return MetadataID{n.Child(selector.MetadataID)}
 }
 
-func (n MetadataDef) Distinct() /*opt*/ Distinct {
-	return Distinct{n.Child(selector.Distinct)}
+func (n MetadataDef) Distinct() (Distinct, bool) {
+	field := Distinct{n.Child(selector.Distinct)}
+	return field, field.IsValid()
 }
 
 func (n MetadataDef) MDNode() LlvmNode {
@@ -5217,8 +5292,9 @@ func (n Param) Attrs() []ParamAttribute {
 	return ret
 }
 
-func (n Param) Name() /*opt*/ LocalIdent {
-	return LocalIdent{n.Child(selector.LocalIdent)}
+func (n Param) Name() (LocalIdent, bool) {
+	field := LocalIdent{n.Child(selector.LocalIdent)}
+	return field, field.IsValid()
 }
 
 type ParamAttr struct {
@@ -5238,8 +5314,9 @@ func (n Params) Params() []Param {
 	return ret
 }
 
-func (n Params) Variadic() /*opt*/ Ellipsis {
-	return Ellipsis{n.Child(selector.Ellipsis)}
+func (n Params) Variadic() (Ellipsis, bool) {
+	field := Ellipsis{n.Child(selector.Ellipsis)}
+	return field, field.IsValid()
 }
 
 type Personality struct {
@@ -5284,8 +5361,9 @@ func (n PointerType) Elem() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
-func (n PointerType) AddrSpace() /*opt*/ AddrSpace {
-	return AddrSpace{n.Child(selector.AddrSpace)}
+func (n PointerType) AddrSpace() (AddrSpace, bool) {
+	field := AddrSpace{n.Child(selector.AddrSpace)}
+	return field, field.IsValid()
 }
 
 type Preemption struct {
@@ -5427,8 +5505,9 @@ type SDivExpr struct {
 	*Node
 }
 
-func (n SDivExpr) Exact() /*opt*/ Exact {
-	return Exact{n.Child(selector.Exact)}
+func (n SDivExpr) Exact() (Exact, bool) {
+	field := Exact{n.Child(selector.Exact)}
+	return field, field.IsValid()
 }
 
 func (n SDivExpr) X() TypeConst {
@@ -5443,8 +5522,9 @@ type SDivInst struct {
 	*Node
 }
 
-func (n SDivInst) Exact() /*opt*/ Exact {
-	return Exact{n.Child(selector.Exact)}
+func (n SDivInst) Exact() (Exact, bool) {
+	field := Exact{n.Child(selector.Exact)}
+	return field, field.IsValid()
 }
 
 func (n SDivInst) X() TypeValue {
@@ -5780,12 +5860,14 @@ type StoreInst struct {
 	*Node
 }
 
-func (n StoreInst) Atomic() /*opt*/ Atomic {
-	return Atomic{n.Child(selector.Atomic)}
+func (n StoreInst) Atomic() (Atomic, bool) {
+	field := Atomic{n.Child(selector.Atomic)}
+	return field, field.IsValid()
 }
 
-func (n StoreInst) Volatile() /*opt*/ Volatile {
-	return Volatile{n.Child(selector.Volatile)}
+func (n StoreInst) Volatile() (Volatile, bool) {
+	field := Volatile{n.Child(selector.Volatile)}
+	return field, field.IsValid()
 }
 
 func (n StoreInst) Src() TypeValue {
@@ -5796,16 +5878,19 @@ func (n StoreInst) Dst() TypeValue {
 	return TypeValue{n.Child(selector.TypeValue).Next(selector.TypeValue)}
 }
 
-func (n StoreInst) SyncScope() /*opt*/ SyncScope {
-	return SyncScope{n.Child(selector.SyncScope)}
+func (n StoreInst) SyncScope() (SyncScope, bool) {
+	field := SyncScope{n.Child(selector.SyncScope)}
+	return field, field.IsValid()
 }
 
-func (n StoreInst) Ordering() /*opt*/ AtomicOrdering {
-	return AtomicOrdering{n.Child(selector.AtomicOrdering)}
+func (n StoreInst) Ordering() (AtomicOrdering, bool) {
+	field := AtomicOrdering{n.Child(selector.AtomicOrdering)}
+	return field, field.IsValid()
 }
 
-func (n StoreInst) Align() /*opt*/ Align {
-	return Align{n.Child(selector.Align)}
+func (n StoreInst) Align() (Align, bool) {
+	field := Align{n.Child(selector.Align)}
+	return field, field.IsValid()
 }
 
 func (n StoreInst) Metadata() []MetadataAttachment {
@@ -5992,8 +6077,9 @@ type ThreadLocal struct {
 	*Node
 }
 
-func (n ThreadLocal) Model() /*opt*/ TLSModel {
-	return TLSModel{n.Child(selector.TLSModel)}
+func (n ThreadLocal) Model() (TLSModel, bool) {
+	field := TLSModel{n.Child(selector.TLSModel)}
+	return field, field.IsValid()
 }
 
 type ThrownTypesField struct {
@@ -6105,8 +6191,9 @@ type UDivExpr struct {
 	*Node
 }
 
-func (n UDivExpr) Exact() /*opt*/ Exact {
-	return Exact{n.Child(selector.Exact)}
+func (n UDivExpr) Exact() (Exact, bool) {
+	field := Exact{n.Child(selector.Exact)}
+	return field, field.IsValid()
 }
 
 func (n UDivExpr) X() TypeConst {
@@ -6121,8 +6208,9 @@ type UDivInst struct {
 	*Node
 }
 
-func (n UDivInst) Exact() /*opt*/ Exact {
-	return Exact{n.Child(selector.Exact)}
+func (n UDivInst) Exact() (Exact, bool) {
+	field := Exact{n.Child(selector.Exact)}
+	return field, field.IsValid()
 }
 
 func (n UDivInst) X() TypeValue {
