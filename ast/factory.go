@@ -375,6 +375,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &GlobalIdent{n}
 	case ll.GlobalsField:
 		return &GlobalsField{n}
+	case ll.Handlers:
+		return &Handlers{n}
 	case ll.HeaderField:
 		return &HeaderField{n}
 	case ll.ICmpExpr:
@@ -701,8 +703,6 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &UnnamedAddr{n}
 	case ll.UnreachableTerm:
 		return &UnreachableTerm{n}
-	case ll.UnwindTarget:
-		return &UnwindTarget{n}
 	case ll.UnwindToCaller:
 		return &UnwindToCaller{n}
 	case ll.UseListOrder:

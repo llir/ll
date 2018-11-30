@@ -193,6 +193,7 @@ var (
 	GlobalDef                       = func(t ll.NodeType) bool { return t == ll.GlobalDef }
 	GlobalIdent                     = func(t ll.NodeType) bool { return t == ll.GlobalIdent }
 	GlobalsField                    = func(t ll.NodeType) bool { return t == ll.GlobalsField }
+	Handlers                        = func(t ll.NodeType) bool { return t == ll.Handlers }
 	HeaderField                     = func(t ll.NodeType) bool { return t == ll.HeaderField }
 	ICmpExpr                        = func(t ll.NodeType) bool { return t == ll.ICmpExpr }
 	ICmpInst                        = func(t ll.NodeType) bool { return t == ll.ICmpInst }
@@ -356,7 +357,6 @@ var (
 	UnitField                       = func(t ll.NodeType) bool { return t == ll.UnitField }
 	UnnamedAddr                     = func(t ll.NodeType) bool { return t == ll.UnnamedAddr }
 	UnreachableTerm                 = func(t ll.NodeType) bool { return t == ll.UnreachableTerm }
-	UnwindTarget                    = func(t ll.NodeType) bool { return t == ll.UnwindTarget }
 	UnwindToCaller                  = func(t ll.NodeType) bool { return t == ll.UnwindToCaller }
 	UseListOrder                    = func(t ll.NodeType) bool { return t == ll.UseListOrder }
 	UseListOrderBB                  = func(t ll.NodeType) bool { return t == ll.UseListOrderBB }
@@ -435,6 +435,7 @@ var (
 	Terminator                      = OneOf(ll.Terminator...)
 	TopLevelEntity                  = OneOf(ll.TopLevelEntity...)
 	Type                            = OneOf(ll.Type...)
+	UnwindTarget                    = OneOf(ll.UnwindTarget...)
 	Value                           = OneOf(ll.Value...)
 	ValueInstruction                = OneOf(ll.ValueInstruction...)
 	ValueTerminator                 = OneOf(ll.ValueTerminator...)

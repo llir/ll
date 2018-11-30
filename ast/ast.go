@@ -201,6 +201,7 @@ func (n GlobalDecl) LlvmNode() *Node                 { return n.Node }
 func (n GlobalDef) LlvmNode() *Node                  { return n.Node }
 func (n GlobalIdent) LlvmNode() *Node                { return n.Node }
 func (n GlobalsField) LlvmNode() *Node               { return n.Node }
+func (n Handlers) LlvmNode() *Node                   { return n.Node }
 func (n HeaderField) LlvmNode() *Node                { return n.Node }
 func (n ICmpExpr) LlvmNode() *Node                   { return n.Node }
 func (n ICmpInst) LlvmNode() *Node                   { return n.Node }
@@ -364,7 +365,6 @@ func (n UndefConst) LlvmNode() *Node                 { return n.Node }
 func (n UnitField) LlvmNode() *Node                  { return n.Node }
 func (n UnnamedAddr) LlvmNode() *Node                { return n.Node }
 func (n UnreachableTerm) LlvmNode() *Node            { return n.Node }
-func (n UnwindTarget) LlvmNode() *Node               { return n.Node }
 func (n UnwindToCaller) LlvmNode() *Node             { return n.Node }
 func (n UseListOrder) LlvmNode() *Node               { return n.Node }
 func (n UseListOrderBB) LlvmNode() *Node             { return n.Node }
@@ -1517,6 +1517,18 @@ func (VectorType) typeNode()       {}
 func (VoidType) typeNode()         {}
 func (NilNode) typeNode()          {}
 
+type UnwindTarget interface {
+	LlvmNode
+	unwindTargetNode()
+}
+
+// unwindTargetNode() ensures that only the following types can be
+// assigned to UnwindTarget.
+//
+func (Label) unwindTargetNode()          {}
+func (UnwindToCaller) unwindTargetNode() {}
+func (NilNode) unwindTargetNode()        {}
+
 type Value interface {
 	LlvmNode
 	valueNode()
@@ -2343,17 +2355,12 @@ func (n CatchSwitchTerm) Scope() ExceptionScope {
 	return ToLlvmNode(n.Child(selector.ExceptionScope)).(ExceptionScope)
 }
 
-func (n CatchSwitchTerm) Handlers() []Label {
-	nodes := n.Children(selector.Label)
-	var ret = make([]Label, 0, len(nodes))
-	for _, node := range nodes {
-		ret = append(ret, Label{node})
-	}
-	return ret
+func (n CatchSwitchTerm) Handlers() Handlers {
+	return Handlers{n.Child(selector.Handlers)}
 }
 
 func (n CatchSwitchTerm) UnwindTarget() UnwindTarget {
-	return UnwindTarget{n.Child(selector.UnwindTarget)}
+	return ToLlvmNode(n.Child(selector.UnwindTarget)).(UnwindTarget)
 }
 
 func (n CatchSwitchTerm) Metadata() []MetadataAttachment {
@@ -2448,7 +2455,7 @@ func (n CleanupRetTerm) From() Value {
 }
 
 func (n CleanupRetTerm) UnwindTarget() UnwindTarget {
-	return UnwindTarget{n.Child(selector.UnwindTarget)}
+	return ToLlvmNode(n.Child(selector.UnwindTarget)).(UnwindTarget)
 }
 
 func (n CleanupRetTerm) Metadata() []MetadataAttachment {
@@ -4189,6 +4196,19 @@ type GlobalsField struct {
 
 func (n GlobalsField) Globals() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
+}
+
+type Handlers struct {
+	*Node
+}
+
+func (n Handlers) Labels() []Label {
+	nodes := n.Children(selector.Label)
+	var ret = make([]Label, 0, len(nodes))
+	for _, node := range nodes {
+		ret = append(ret, Label{node})
+	}
+	return ret
 }
 
 type HeaderField struct {
@@ -6219,18 +6239,6 @@ func (n UnreachableTerm) Metadata() []MetadataAttachment {
 		ret = append(ret, MetadataAttachment{node})
 	}
 	return ret
-}
-
-type UnwindTarget struct {
-	*Node
-}
-
-func (n UnwindTarget) Label() /*opt*/ Label {
-	return Label{n.Child(selector.Label)}
-}
-
-func (n UnwindTarget) UnwindToCaller() /*opt*/ UnwindToCaller {
-	return UnwindToCaller{n.Child(selector.UnwindToCaller)}
 }
 
 type UnwindToCaller struct {

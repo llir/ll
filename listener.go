@@ -199,7 +199,8 @@ const (
 	IndirectBrTerm             // Addr=TypeValue ValidTargets=(Label)* Metadata=(MetadataAttachment)*
 	InvokeTerm                 // CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Invokee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* Normal=Label Exception=Label Metadata=(MetadataAttachment)*
 	ResumeTerm                 // X=TypeValue Metadata=(MetadataAttachment)*
-	CatchSwitchTerm            // Scope=ExceptionScope Handlers=(Label)+ UnwindTarget Metadata=(MetadataAttachment)*
+	CatchSwitchTerm            // Scope=ExceptionScope Handlers UnwindTarget Metadata=(MetadataAttachment)*
+	Handlers                   // Labels=(Label)+
 	CatchRetTerm               // From=Value To=Label Metadata=(MetadataAttachment)*
 	CleanupRetTerm             // From=Value UnwindTarget Metadata=(MetadataAttachment)*
 	UnreachableTerm            // Metadata=(MetadataAttachment)*
@@ -377,7 +378,6 @@ const (
 	TypeConst // Typ=FirstClassType Val=Constant
 	TypeValue // Typ=FirstClassType Val=Value
 	UnnamedAddr
-	UnwindTarget // Label? UnwindToCaller?
 	UnwindToCaller
 	Visibility
 	Volatile
@@ -574,6 +574,7 @@ var nodeTypeStr = [...]string{
 	"InvokeTerm",
 	"ResumeTerm",
 	"CatchSwitchTerm",
+	"Handlers",
 	"CatchRetTerm",
 	"CleanupRetTerm",
 	"UnreachableTerm",
@@ -751,7 +752,6 @@ var nodeTypeStr = [...]string{
 	"TypeConst",
 	"TypeValue",
 	"UnnamedAddr",
-	"UnwindTarget",
 	"UnwindToCaller",
 	"Visibility",
 	"Volatile",
@@ -1498,6 +1498,11 @@ var Type = []NodeType{
 	TokenType,
 	VectorType,
 	VoidType,
+}
+
+var UnwindTarget = []NodeType{
+	Label,
+	UnwindToCaller,
 }
 
 var Value = []NodeType{
@@ -2287,8 +2292,9 @@ var ruleNodeType = [...]NodeType{
 	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist 'to' Label 'unwind' Label
 	ResumeTerm,                 // ResumeTerm : 'resume' TypeValue list_of_','_and_1_elements
 	ResumeTerm,                 // ResumeTerm : 'resume' TypeValue
-	CatchSwitchTerm,            // CatchSwitchTerm : 'catchswitch' 'within' ExceptionScope '[' Label_list_withsep ']' 'unwind' UnwindTarget list_of_','_and_1_elements
-	CatchSwitchTerm,            // CatchSwitchTerm : 'catchswitch' 'within' ExceptionScope '[' Label_list_withsep ']' 'unwind' UnwindTarget
+	CatchSwitchTerm,            // CatchSwitchTerm : 'catchswitch' 'within' ExceptionScope '[' Handlers ']' 'unwind' UnwindTarget list_of_','_and_1_elements
+	CatchSwitchTerm,            // CatchSwitchTerm : 'catchswitch' 'within' ExceptionScope '[' Handlers ']' 'unwind' UnwindTarget
+	Handlers,                   // Handlers : Label_list_withsep
 	CatchRetTerm,               // CatchRetTerm : 'catchret' 'from' Value 'to' Label list_of_','_and_1_elements
 	CatchRetTerm,               // CatchRetTerm : 'catchret' 'from' Value 'to' Label
 	CleanupRetTerm,             // CleanupRetTerm : 'cleanupret' 'from' Value 'unwind' UnwindTarget list_of_','_and_1_elements
@@ -2968,8 +2974,8 @@ var ruleNodeType = [...]NodeType{
 	TypeValue,                  // TypeValue : FirstClassType Value
 	UnnamedAddr,                // UnnamedAddr : 'local_unnamed_addr'
 	UnnamedAddr,                // UnnamedAddr : 'unnamed_addr'
-	UnwindTarget,               // UnwindTarget : UnwindToCaller
-	UnwindTarget,               // UnwindTarget : Label
+	0,                          // UnwindTarget : UnwindToCaller
+	0,                          // UnwindTarget : Label
 	UnwindToCaller,             // UnwindToCaller : 'to' 'caller'
 	Visibility,                 // Visibility : 'default'
 	Visibility,                 // Visibility : 'hidden'
