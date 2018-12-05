@@ -2061,7 +2061,7 @@ func (n AttrGroupDef) ID() AttrGroupID {
 	return AttrGroupID{n.Child(selector.AttrGroupID)}
 }
 
-func (n AttrGroupDef) Attrs() []FuncAttribute {
+func (n AttrGroupDef) FuncAttrs() []FuncAttribute {
 	nodes := n.Child(selector.AttrGroupID).NextAll(selector.FuncAttribute)
 	var ret = make([]FuncAttribute, 0, len(nodes))
 	for _, node := range nodes {

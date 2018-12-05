@@ -47,7 +47,7 @@ const (
 	Prologue         // TypeConst
 	Personality      // TypeConst
 	FuncBody         // Blocks=(BasicBlock)+ UseListOrders=(UseListOrder)*
-	AttrGroupDef     // ID=AttrGroupID Attrs=(FuncAttribute)*
+	AttrGroupDef     // ID=AttrGroupID FuncAttrs=(FuncAttribute)*
 	NamedMetadataDef // Name=MetadataName MDNodes=(MetadataNode)*
 	MetadataDef      // ID=MetadataID Distinct? MDNode=(MDTuple | SpecializedMDNode)
 	Distinct
