@@ -33,8 +33,7 @@ const (
 	TypeDef          // Name=LocalIdent Typ=(OpaqueType | Type)
 	ComdatDef        // Name=ComdatName Kind=SelectionKind
 	SelectionKind
-	GlobalDecl // Name=GlobalIdent ExternLinkage Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? AddrSpace? ExternallyInitialized? Immutable ContentType=Type Section? Comdat? Align? Metadata=(MetadataAttachment)* FuncAttrs=(FuncAttribute)*
-	GlobalDef  // Name=GlobalIdent Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? AddrSpace? ExternallyInitialized? Immutable ContentType=Type Init=Constant Section? Comdat? Align? Metadata=(MetadataAttachment)* FuncAttrs=(FuncAttribute)*
+	GlobalDecl // Name=GlobalIdent Linkage=(ExternLinkage | Linkage)? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? AddrSpace? ExternallyInitialized? Immutable ContentType=Type Init=Constant? Section? Comdat? Align? Metadata=(MetadataAttachment)* FuncAttrs=(FuncAttribute)*
 	ExternallyInitialized
 	Immutable
 	IndirectSymbolDef // Name=GlobalIdent ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? IndirectSymbolKind ContentType=Type IndirectSymbol
@@ -408,7 +407,6 @@ var nodeTypeStr = [...]string{
 	"ComdatDef",
 	"SelectionKind",
 	"GlobalDecl",
-	"GlobalDef",
 	"ExternallyInitialized",
 	"Immutable",
 	"IndirectSymbolDef",
@@ -1470,7 +1468,6 @@ var TopLevelEntity = []NodeType{
 	FuncDecl,
 	FuncDef,
 	GlobalDecl,
-	GlobalDef,
 	IndirectSymbolDef,
 	MetadataDef,
 	ModuleAsm,
@@ -1720,7 +1717,6 @@ var ruleNodeType = [...]NodeType{
 	0,                          // TopLevelEntity : TypeDef
 	0,                          // TopLevelEntity : ComdatDef
 	0,                          // TopLevelEntity : GlobalDecl
-	0,                          // TopLevelEntity : GlobalDef
 	0,                          // TopLevelEntity : IndirectSymbolDef
 	0,                          // TopLevelEntity : FuncDecl
 	0,                          // TopLevelEntity : FuncDef
@@ -1777,40 +1773,40 @@ var ruleNodeType = [...]NodeType{
 	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type list_of_','_and_1_elements
 	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type FuncAttribute_list
 	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat ',' Align list_of_','_and_1_elements FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat ',' Align list_of_','_and_1_elements
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat ',' Align FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat ',' Align
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat list_of_','_and_1_elements FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat list_of_','_and_1_elements
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Align list_of_','_and_1_elements FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Align list_of_','_and_1_elements
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Align FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Align
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section list_of_','_and_1_elements FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section list_of_','_and_1_elements
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat ',' Align list_of_','_and_1_elements FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat ',' Align list_of_','_and_1_elements
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat ',' Align FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat ',' Align
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat list_of_','_and_1_elements FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat list_of_','_and_1_elements
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Align list_of_','_and_1_elements FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Align list_of_','_and_1_elements
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Align FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Align
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant
 	0,                          // list_of_','_and_1_elements : list_of_','_and_1_elements ',' MetadataAttachment
 	0,                          // list_of_','_and_1_elements : ',' MetadataAttachment
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat ',' Align list_of_','_and_1_elements
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat ',' Align FuncAttribute_list
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat ',' Align
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat list_of_','_and_1_elements FuncAttribute_list
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat list_of_','_and_1_elements
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat FuncAttribute_list
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Align list_of_','_and_1_elements
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Align FuncAttribute_list
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Align
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section list_of_','_and_1_elements FuncAttribute_list
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section list_of_','_and_1_elements
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section FuncAttribute_list
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat ',' Align list_of_','_and_1_elements
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat ',' Align FuncAttribute_list
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat ',' Align
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat list_of_','_and_1_elements FuncAttribute_list
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat list_of_','_and_1_elements
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat FuncAttribute_list
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Align list_of_','_and_1_elements
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Align FuncAttribute_list
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Align
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements FuncAttribute_list
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant FuncAttribute_list
-	GlobalDef,                  // GlobalDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant
 	ExternallyInitialized,      // ExternallyInitialized : 'externally_initialized'
 	Immutable,                  // Immutable : 'constant'
 	Immutable,                  // Immutable : 'global'

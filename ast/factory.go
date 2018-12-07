@@ -369,8 +369,6 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &GetterField{n}
 	case ll.GlobalDecl:
 		return &GlobalDecl{n}
-	case ll.GlobalDef:
-		return &GlobalDef{n}
 	case ll.GlobalIdent:
 		return &GlobalIdent{n}
 	case ll.GlobalsField:

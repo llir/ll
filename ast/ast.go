@@ -198,7 +198,6 @@ func (n GetElementPtrExpr) LlvmNode() *Node          { return n.Node }
 func (n GetElementPtrInst) LlvmNode() *Node          { return n.Node }
 func (n GetterField) LlvmNode() *Node                { return n.Node }
 func (n GlobalDecl) LlvmNode() *Node                 { return n.Node }
-func (n GlobalDef) LlvmNode() *Node                  { return n.Node }
 func (n GlobalIdent) LlvmNode() *Node                { return n.Node }
 func (n GlobalsField) LlvmNode() *Node               { return n.Node }
 func (n Handlers) LlvmNode() *Node                   { return n.Node }
@@ -1480,7 +1479,6 @@ func (ComdatDef) topLevelEntityNode()         {}
 func (FuncDecl) topLevelEntityNode()          {}
 func (FuncDef) topLevelEntityNode()           {}
 func (GlobalDecl) topLevelEntityNode()        {}
-func (GlobalDef) topLevelEntityNode()         {}
 func (IndirectSymbolDef) topLevelEntityNode() {}
 func (MetadataDef) topLevelEntityNode()       {}
 func (ModuleAsm) topLevelEntityNode()         {}
@@ -2232,8 +2230,9 @@ func (n CallInst) FastMathFlags() []FastMathFlag {
 	return ret
 }
 
-func (n CallInst) CallingConv() CallingConv {
-	return ToLlvmNode(n.Child(selector.CallingConv)).(CallingConv)
+func (n CallInst) CallingConv() (CallingConv, bool) {
+	field := ToLlvmNode(n.Child(selector.CallingConv)).(CallingConv)
+	return field, field.LlvmNode() != nil
 }
 
 func (n CallInst) ReturnAttrs() []ReturnAttribute {
@@ -3871,8 +3870,9 @@ func (n FuncHeader) DLLStorageClass() (DLLStorageClass, bool) {
 	return field, field.IsValid()
 }
 
-func (n FuncHeader) CallingConv() CallingConv {
-	return ToLlvmNode(n.Child(selector.CallingConv)).(CallingConv)
+func (n FuncHeader) CallingConv() (CallingConv, bool) {
+	field := ToLlvmNode(n.Child(selector.CallingConv)).(CallingConv)
+	return field, field.LlvmNode() != nil
 }
 
 func (n FuncHeader) ReturnAttrs() []ReturnAttribute {
@@ -4068,8 +4068,9 @@ func (n GlobalDecl) Name() GlobalIdent {
 	return GlobalIdent{n.Child(selector.GlobalIdent)}
 }
 
-func (n GlobalDecl) ExternLinkage() ExternLinkage {
-	return ExternLinkage{n.Child(selector.ExternLinkage)}
+func (n GlobalDecl) Linkage() (LlvmNode, bool) {
+	field := ToLlvmNode(n.Child(selector.OneOf(ll.ExternLinkage, ll.Linkage))).(LlvmNode)
+	return field, field.LlvmNode() != nil
 }
 
 func (n GlobalDecl) Preemption() (Preemption, bool) {
@@ -4115,6 +4116,11 @@ func (n GlobalDecl) ContentType() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
+func (n GlobalDecl) Init() (Constant, bool) {
+	field := ToLlvmNode(n.Child(selector.GlobalIdent).Next(selector.Constant)).(Constant)
+	return field, field.LlvmNode() != nil
+}
+
 func (n GlobalDecl) Section() (Section, bool) {
 	field := Section{n.Child(selector.Section)}
 	return field, field.IsValid()
@@ -4140,99 +4146,6 @@ func (n GlobalDecl) Metadata() []MetadataAttachment {
 }
 
 func (n GlobalDecl) FuncAttrs() []FuncAttribute {
-	nodes := n.Children(selector.FuncAttribute)
-	var ret = make([]FuncAttribute, 0, len(nodes))
-	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(FuncAttribute))
-	}
-	return ret
-}
-
-type GlobalDef struct {
-	*Node
-}
-
-func (n GlobalDef) Name() GlobalIdent {
-	return GlobalIdent{n.Child(selector.GlobalIdent)}
-}
-
-func (n GlobalDef) Linkage() (Linkage, bool) {
-	field := Linkage{n.Child(selector.Linkage)}
-	return field, field.IsValid()
-}
-
-func (n GlobalDef) Preemption() (Preemption, bool) {
-	field := Preemption{n.Child(selector.Preemption)}
-	return field, field.IsValid()
-}
-
-func (n GlobalDef) Visibility() (Visibility, bool) {
-	field := Visibility{n.Child(selector.Visibility)}
-	return field, field.IsValid()
-}
-
-func (n GlobalDef) DLLStorageClass() (DLLStorageClass, bool) {
-	field := DLLStorageClass{n.Child(selector.DLLStorageClass)}
-	return field, field.IsValid()
-}
-
-func (n GlobalDef) ThreadLocal() (ThreadLocal, bool) {
-	field := ThreadLocal{n.Child(selector.ThreadLocal)}
-	return field, field.IsValid()
-}
-
-func (n GlobalDef) UnnamedAddr() (UnnamedAddr, bool) {
-	field := UnnamedAddr{n.Child(selector.UnnamedAddr)}
-	return field, field.IsValid()
-}
-
-func (n GlobalDef) AddrSpace() (AddrSpace, bool) {
-	field := AddrSpace{n.Child(selector.AddrSpace)}
-	return field, field.IsValid()
-}
-
-func (n GlobalDef) ExternallyInitialized() (ExternallyInitialized, bool) {
-	field := ExternallyInitialized{n.Child(selector.ExternallyInitialized)}
-	return field, field.IsValid()
-}
-
-func (n GlobalDef) Immutable() Immutable {
-	return Immutable{n.Child(selector.Immutable)}
-}
-
-func (n GlobalDef) ContentType() Type {
-	return ToLlvmNode(n.Child(selector.Type)).(Type)
-}
-
-func (n GlobalDef) Init() Constant {
-	return ToLlvmNode(n.Child(selector.GlobalIdent).Next(selector.Constant)).(Constant)
-}
-
-func (n GlobalDef) Section() (Section, bool) {
-	field := Section{n.Child(selector.Section)}
-	return field, field.IsValid()
-}
-
-func (n GlobalDef) Comdat() (Comdat, bool) {
-	field := Comdat{n.Child(selector.Comdat)}
-	return field, field.IsValid()
-}
-
-func (n GlobalDef) Align() (Align, bool) {
-	field := Align{n.Child(selector.Align)}
-	return field, field.IsValid()
-}
-
-func (n GlobalDef) Metadata() []MetadataAttachment {
-	nodes := n.Children(selector.MetadataAttachment)
-	var ret = make([]MetadataAttachment, 0, len(nodes))
-	for _, node := range nodes {
-		ret = append(ret, MetadataAttachment{node})
-	}
-	return ret
-}
-
-func (n GlobalDef) FuncAttrs() []FuncAttribute {
 	nodes := n.Children(selector.FuncAttribute)
 	var ret = make([]FuncAttribute, 0, len(nodes))
 	for _, node := range nodes {
@@ -4640,8 +4553,9 @@ type InvokeTerm struct {
 	*Node
 }
 
-func (n InvokeTerm) CallingConv() CallingConv {
-	return ToLlvmNode(n.Child(selector.CallingConv)).(CallingConv)
+func (n InvokeTerm) CallingConv() (CallingConv, bool) {
+	field := ToLlvmNode(n.Child(selector.CallingConv)).(CallingConv)
+	return field, field.LlvmNode() != nil
 }
 
 func (n InvokeTerm) ReturnAttrs() []ReturnAttribute {
@@ -5452,8 +5366,9 @@ func (n RetTerm) XTyp() LlvmNode {
 	return ToLlvmNode(n.Child(selector.OneOf(ll.ArrayType, ll.FloatType, ll.IntType, ll.LabelType, ll.MMXType, ll.NamedType, ll.PackedStructType, ll.PointerType, ll.StructType, ll.TokenType, ll.VectorType, ll.VoidType))).(LlvmNode)
 }
 
-func (n RetTerm) X() Value {
-	return ToLlvmNode(n.Child(selector.Value)).(Value)
+func (n RetTerm) X() (Value, bool) {
+	field := ToLlvmNode(n.Child(selector.Value)).(Value)
+	return field, field.LlvmNode() != nil
 }
 
 func (n RetTerm) Metadata() []MetadataAttachment {

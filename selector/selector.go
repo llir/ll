@@ -190,7 +190,6 @@ var (
 	GetElementPtrInst               = func(t ll.NodeType) bool { return t == ll.GetElementPtrInst }
 	GetterField                     = func(t ll.NodeType) bool { return t == ll.GetterField }
 	GlobalDecl                      = func(t ll.NodeType) bool { return t == ll.GlobalDecl }
-	GlobalDef                       = func(t ll.NodeType) bool { return t == ll.GlobalDef }
 	GlobalIdent                     = func(t ll.NodeType) bool { return t == ll.GlobalIdent }
 	GlobalsField                    = func(t ll.NodeType) bool { return t == ll.GlobalsField }
 	Handlers                        = func(t ll.NodeType) bool { return t == ll.Handlers }
