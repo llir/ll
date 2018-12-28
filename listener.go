@@ -339,7 +339,7 @@ const (
 	AlignPair        // N=UintLit
 	AlignStack       // N=UintLit
 	AlignStackPair   // N=UintLit
-	AllocSize        // ElemSize=UintLit N=UintLit?
+	AllocSize        // ElemSizeIndex=UintLit NElemsIndex=UintLit?
 	Args             // Args=(Arg)*
 	Arg              // Typ=(ConcreteType | MetadataType) Attrs=(ParamAttribute)* Val=(Metadata | Value)
 	Atomic

@@ -1849,11 +1849,11 @@ type AllocSize struct {
 	*Node
 }
 
-func (n AllocSize) ElemSize() UintLit {
+func (n AllocSize) ElemSizeIndex() UintLit {
 	return UintLit{n.Child(selector.UintLit)}
 }
 
-func (n AllocSize) N() (UintLit, bool) {
+func (n AllocSize) NElemsIndex() (UintLit, bool) {
 	field := UintLit{n.Child(selector.UintLit).Next(selector.UintLit)}
 	return field, field.IsValid()
 }
