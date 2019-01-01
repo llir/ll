@@ -242,7 +242,6 @@ var (
 	LocalDefTerm                    = func(t ll.NodeType) bool { return t == ll.LocalDefTerm }
 	LocalIdent                      = func(t ll.NodeType) bool { return t == ll.LocalIdent }
 	LowerBoundField                 = func(t ll.NodeType) bool { return t == ll.LowerBoundField }
-	MDFields                        = func(t ll.NodeType) bool { return t == ll.MDFields }
 	MDString                        = func(t ll.NodeType) bool { return t == ll.MDString }
 	MDTuple                         = func(t ll.NodeType) bool { return t == ll.MDTuple }
 	MMXType                         = func(t ll.NodeType) bool { return t == ll.MMXType }

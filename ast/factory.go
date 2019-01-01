@@ -473,8 +473,6 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &LocalIdent{n}
 	case ll.LowerBoundField:
 		return &LowerBoundField{n}
-	case ll.MDFields:
-		return &MDFields{n}
 	case ll.MDString:
 		return &MDString{n}
 	case ll.MDTuple:

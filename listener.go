@@ -203,8 +203,7 @@ const (
 	CatchRetTerm               // From=Value To=Label Metadata=(MetadataAttachment)*
 	CleanupRetTerm             // From=Value UnwindTarget Metadata=(MetadataAttachment)*
 	UnreachableTerm            // Metadata=(MetadataAttachment)*
-	MDTuple                    // MDFields
-	MDFields                   // MDFields=(MDField)*
+	MDTuple                    // MDFields=(MDField)*
 	MDString                   // Val=StringLit
 	MetadataAttachment         // Name=MetadataName MDNode
 	DIBasicType                // Fields=(DIBasicTypeField)*
@@ -285,7 +284,7 @@ const (
 	NameTableKindField         // NameTableKind
 	NodesField                 // Nodes=MDField
 	OffsetField                // OffsetField=UintLit
-	OperandsField              // Operands=MDFields
+	OperandsField              // Operands=(MDField)*
 	ProducerField              // Producer=StringLit
 	RetainedNodesField         // RetainedNodes=MDField
 	RetainedTypesField         // RetainedTypes=MDField
@@ -577,7 +576,6 @@ var nodeTypeStr = [...]string{
 	"CleanupRetTerm",
 	"UnreachableTerm",
 	"MDTuple",
-	"MDFields",
 	"MDString",
 	"MetadataAttachment",
 	"DIBasicType",
@@ -2297,12 +2295,11 @@ var ruleNodeType = [...]NodeType{
 	CleanupRetTerm,             // CleanupRetTerm : 'cleanupret' 'from' Value 'unwind' UnwindTarget
 	UnreachableTerm,            // UnreachableTerm : 'unreachable' list_of_','_and_1_elements
 	UnreachableTerm,            // UnreachableTerm : 'unreachable'
-	MDTuple,                    // MDTuple : '!' MDFields
 	0,                          // MDField_list_withsep : MDField_list_withsep ',' MDField
 	0,                          // MDField_list_withsep : MDField
 	0,                          // MDField_list_withsep_opt : MDField_list_withsep
 	0,                          // MDField_list_withsep_opt :
-	MDFields,                   // MDFields : '{' MDField_list_withsep_opt '}'
+	MDTuple,                    // MDTuple : '!' '{' MDField_list_withsep_opt '}'
 	0,                          // MDField : NullLit
 	0,                          // MDField : Metadata
 	0,                          // Metadata : TypeValue
@@ -2684,7 +2681,7 @@ var ruleNodeType = [...]NodeType{
 	NameTableKindField,         // NameTableKindField : 'nameTableKind:' NameTableKind
 	NodesField,                 // NodesField : 'nodes:' MDField
 	OffsetField,                // OffsetField : 'offset:' UintLit
-	OperandsField,              // OperandsField : 'operands:' MDFields
+	OperandsField,              // OperandsField : 'operands:' '{' MDField_list_withsep_opt '}'
 	ProducerField,              // ProducerField : 'producer:' StringLit
 	RetainedNodesField,         // RetainedNodesField : 'retainedNodes:' MDField
 	RetainedTypesField,         // RetainedTypesField : 'retainedTypes:' MDField

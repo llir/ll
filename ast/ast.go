@@ -250,7 +250,6 @@ func (n LocalDefInst) LlvmNode() *Node               { return n.Node }
 func (n LocalDefTerm) LlvmNode() *Node               { return n.Node }
 func (n LocalIdent) LlvmNode() *Node                 { return n.Node }
 func (n LowerBoundField) LlvmNode() *Node            { return n.Node }
-func (n MDFields) LlvmNode() *Node                   { return n.Node }
 func (n MDString) LlvmNode() *Node                   { return n.Node }
 func (n MDTuple) LlvmNode() *Node                    { return n.Node }
 func (n MMXType) LlvmNode() *Node                    { return n.Node }
@@ -4871,19 +4870,6 @@ func (n LowerBoundField) LowerBound() IntLit {
 	return IntLit{n.Child(selector.IntLit)}
 }
 
-type MDFields struct {
-	*Node
-}
-
-func (n MDFields) MDFields() []MDField {
-	nodes := n.Children(selector.MDField)
-	var ret = make([]MDField, 0, len(nodes))
-	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(MDField))
-	}
-	return ret
-}
-
 type MDString struct {
 	*Node
 }
@@ -4896,8 +4882,13 @@ type MDTuple struct {
 	*Node
 }
 
-func (n MDTuple) MDFields() MDFields {
-	return MDFields{n.Child(selector.MDFields)}
+func (n MDTuple) MDFields() []MDField {
+	nodes := n.Children(selector.MDField)
+	var ret = make([]MDField, 0, len(nodes))
+	for _, node := range nodes {
+		ret = append(ret, ToLlvmNode(node).(MDField))
+	}
+	return ret
 }
 
 type MMXType struct {
@@ -5135,8 +5126,13 @@ type OperandsField struct {
 	*Node
 }
 
-func (n OperandsField) Operands() MDFields {
-	return MDFields{n.Child(selector.MDFields)}
+func (n OperandsField) Operands() []MDField {
+	nodes := n.Children(selector.MDField)
+	var ret = make([]MDField, 0, len(nodes))
+	for _, node := range nodes {
+		ret = append(ret, ToLlvmNode(node).(MDField))
+	}
+	return ret
 }
 
 type OrExpr struct {
