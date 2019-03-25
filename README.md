@@ -5,10 +5,10 @@ This project generates lexers and parsers for LLVM IR assembly from an [EBNF gra
 ## Installation
 
 ```bash
-# Clone repo and submodules
+# Clone repo and submodules.
 git clone --recursive https://github.com/llir/ll
 
-# Install textmapper
+# Install textmapper.
 cd ll/tools/textmapper/tm-tool
 ./gen.sh
 
