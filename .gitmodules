@@ -1,3 +1,6 @@
 [submodule "grammar"]
 	path = grammar
 	url = https://github.com/llir/grammar
+[submodule "tools/textmapper"]
+	path = tools/textmapper
+	url = https://github.com/inspirer/textmapper
