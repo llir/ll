@@ -243,6 +243,7 @@ const (
 	ConfigMacrosField          // ConfigMacros=StringLit
 	ContainingTypeField        // ContainingType=MDField
 	CountField                 // Count=MDFieldOrInt
+	DebugBaseAddressField      // DebugBaseAddress=BoolLit
 	DebugInfoForProfilingField // DebugInfoForProfiling=BoolLit
 	DeclarationField           // Declaration=MDField
 	DirectoryField             // Directory=StringLit
@@ -295,6 +296,7 @@ const (
 	SetterField                // Setter=StringLit
 	SizeField                  // Size=UintLit
 	SourceField                // Source=StringLit
+	SPFlagsField               // SPFlags=DISPFlags
 	SplitDebugFilenameField    // SplitDebugFilename=StringLit
 	SplitDebugInliningField    // SplitDebugInlining=BoolLit
 	TagField                   // Tag=DwarfTag
@@ -316,6 +318,9 @@ const (
 	DIFlags // Flags=(DIFlag)+
 	DIFlagEnum
 	DIFlagInt // UintLit
+	DISPFlags // Flags=(DISPFlag)+
+	DISPFlagEnum
+	DISPFlagInt // UintLit
 	DwarfAttEncodingEnum
 	DwarfAttEncodingInt // UintLit
 	DwarfCCEnum
@@ -615,6 +620,7 @@ var nodeTypeStr = [...]string{
 	"ConfigMacrosField",
 	"ContainingTypeField",
 	"CountField",
+	"DebugBaseAddressField",
 	"DebugInfoForProfilingField",
 	"DeclarationField",
 	"DirectoryField",
@@ -667,6 +673,7 @@ var nodeTypeStr = [...]string{
 	"SetterField",
 	"SizeField",
 	"SourceField",
+	"SPFlagsField",
 	"SplitDebugFilenameField",
 	"SplitDebugInliningField",
 	"TagField",
@@ -688,6 +695,9 @@ var nodeTypeStr = [...]string{
 	"DIFlags",
 	"DIFlagEnum",
 	"DIFlagInt",
+	"DISPFlags",
+	"DISPFlagEnum",
+	"DISPFlagInt",
 	"DwarfAttEncodingEnum",
 	"DwarfAttEncodingInt",
 	"DwarfCCEnum",
@@ -888,6 +898,7 @@ var DIBasicTypeField = []NodeType{
 }
 
 var DICompileUnitField = []NodeType{
+	DebugBaseAddressField,
 	DebugInfoForProfilingField,
 	DwoIdField,
 	EmissionKindField,
@@ -1070,6 +1081,11 @@ var DIObjCPropertyField = []NodeType{
 	TypeField,
 }
 
+var DISPFlag = []NodeType{
+	DISPFlagEnum,
+	DISPFlagInt,
+}
+
 var DISubprogramField = []NodeType{
 	ContainingTypeField,
 	DeclarationField,
@@ -1082,6 +1098,7 @@ var DISubprogramField = []NodeType{
 	LinkageNameField,
 	NameField,
 	RetainedNodesField,
+	SPFlagsField,
 	ScopeField,
 	ScopeLineField,
 	TemplateParamsField,
@@ -2371,6 +2388,7 @@ var ruleNodeType = [...]NodeType{
 	0,                          // DICompileUnitField : SplitDebugInliningField
 	0,                          // DICompileUnitField : DebugInfoForProfilingField
 	0,                          // DICompileUnitField : NameTableKindField
+	0,                          // DICompileUnitField : DebugBaseAddressField
 	DICompositeType,            // DICompositeType : '!DICompositeType' '(' DICompositeTypeField_list_withsep_opt ')'
 	0,                          // DICompositeTypeField_list_withsep : DICompositeTypeField_list_withsep ',' DICompositeTypeField
 	0,                          // DICompositeTypeField_list_withsep : DICompositeTypeField
@@ -2584,6 +2602,7 @@ var ruleNodeType = [...]NodeType{
 	0,                          // DISubprogramField : VirtualIndexField
 	0,                          // DISubprogramField : ThisAdjustmentField
 	0,                          // DISubprogramField : FlagsField
+	0,                          // DISubprogramField : SPFlagsField
 	0,                          // DISubprogramField : IsOptimizedField
 	0,                          // DISubprogramField : UnitField
 	0,                          // DISubprogramField : TemplateParamsField
@@ -2640,6 +2659,7 @@ var ruleNodeType = [...]NodeType{
 	ConfigMacrosField,          // ConfigMacrosField : 'configMacros:' StringLit
 	ContainingTypeField,        // ContainingTypeField : 'containingType:' MDField
 	CountField,                 // CountField : 'count:' MDFieldOrInt
+	DebugBaseAddressField,      // DebugBaseAddressField : 'debugBaseAddress:' BoolLit
 	DebugInfoForProfilingField, // DebugInfoForProfilingField : 'debugInfoForProfiling:' BoolLit
 	DeclarationField,           // DeclarationField : 'declaration:' MDField
 	DirectoryField,             // DirectoryField : 'directory:' StringLit
@@ -2692,6 +2712,7 @@ var ruleNodeType = [...]NodeType{
 	SetterField,                // SetterField : 'setter:' StringLit
 	SizeField,                  // SizeField : 'size:' UintLit
 	SourceField,                // SourceField : 'source:' StringLit
+	SPFlagsField,               // SPFlagsField : 'spFlags:' DISPFlags
 	SplitDebugFilenameField,    // SplitDebugFilenameField : 'splitDebugFilename:' StringLit
 	SplitDebugInliningField,    // SplitDebugInliningField : 'splitDebugInlining:' BoolLit
 	TagField,                   // TagField : 'tag:' DwarfTag
@@ -2717,6 +2738,11 @@ var ruleNodeType = [...]NodeType{
 	DIFlags,                    // DIFlags : DIFlag_list_withsep
 	DIFlagEnum,                 // DIFlag : di_flag_tok
 	DIFlagInt,                  // DIFlag : UintLit
+	0,                          // DISPFlag_list_withsep : DISPFlag_list_withsep '|' DISPFlag
+	0,                          // DISPFlag_list_withsep : DISPFlag
+	DISPFlags,                  // DISPFlags : DISPFlag_list_withsep
+	DISPFlagEnum,               // DISPFlag : disp_flag_tok
+	DISPFlagInt,                // DISPFlag : UintLit
 	DwarfAttEncodingEnum,       // DwarfAttEncoding : dwarf_att_encoding_tok
 	DwarfAttEncodingInt,        // DwarfAttEncoding : UintLit
 	DwarfCCEnum,                // DwarfCC : dwarf_cc_tok

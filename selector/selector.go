@@ -98,12 +98,16 @@ var (
 	DIModule                        = func(t ll.NodeType) bool { return t == ll.DIModule }
 	DINamespace                     = func(t ll.NodeType) bool { return t == ll.DINamespace }
 	DIObjCProperty                  = func(t ll.NodeType) bool { return t == ll.DIObjCProperty }
+	DISPFlagEnum                    = func(t ll.NodeType) bool { return t == ll.DISPFlagEnum }
+	DISPFlagInt                     = func(t ll.NodeType) bool { return t == ll.DISPFlagInt }
+	DISPFlags                       = func(t ll.NodeType) bool { return t == ll.DISPFlags }
 	DISubprogram                    = func(t ll.NodeType) bool { return t == ll.DISubprogram }
 	DISubrange                      = func(t ll.NodeType) bool { return t == ll.DISubrange }
 	DISubroutineType                = func(t ll.NodeType) bool { return t == ll.DISubroutineType }
 	DITemplateTypeParameter         = func(t ll.NodeType) bool { return t == ll.DITemplateTypeParameter }
 	DITemplateValueParameter        = func(t ll.NodeType) bool { return t == ll.DITemplateValueParameter }
 	DLLStorageClass                 = func(t ll.NodeType) bool { return t == ll.DLLStorageClass }
+	DebugBaseAddressField           = func(t ll.NodeType) bool { return t == ll.DebugBaseAddressField }
 	DebugInfoForProfilingField      = func(t ll.NodeType) bool { return t == ll.DebugInfoForProfilingField }
 	DeclarationField                = func(t ll.NodeType) bool { return t == ll.DeclarationField }
 	Dereferenceable                 = func(t ll.NodeType) bool { return t == ll.Dereferenceable }
@@ -298,6 +302,7 @@ var (
 	SExtInst                        = func(t ll.NodeType) bool { return t == ll.SExtInst }
 	SIToFPExpr                      = func(t ll.NodeType) bool { return t == ll.SIToFPExpr }
 	SIToFPInst                      = func(t ll.NodeType) bool { return t == ll.SIToFPInst }
+	SPFlagsField                    = func(t ll.NodeType) bool { return t == ll.SPFlagsField }
 	SRemExpr                        = func(t ll.NodeType) bool { return t == ll.SRemExpr }
 	SRemInst                        = func(t ll.NodeType) bool { return t == ll.SRemInst }
 	ScopeField                      = func(t ll.NodeType) bool { return t == ll.ScopeField }
@@ -402,6 +407,7 @@ var (
 	DIModuleField                   = OneOf(ll.DIModuleField...)
 	DINamespaceField                = OneOf(ll.DINamespaceField...)
 	DIObjCPropertyField             = OneOf(ll.DIObjCPropertyField...)
+	DISPFlag                        = OneOf(ll.DISPFlag...)
 	DISubprogramField               = OneOf(ll.DISubprogramField...)
 	DISubrangeField                 = OneOf(ll.DISubrangeField...)
 	DISubroutineTypeField           = OneOf(ll.DISubroutineTypeField...)

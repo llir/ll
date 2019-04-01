@@ -185,6 +185,12 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &DINamespace{n}
 	case ll.DIObjCProperty:
 		return &DIObjCProperty{n}
+	case ll.DISPFlagEnum:
+		return &DISPFlagEnum{n}
+	case ll.DISPFlagInt:
+		return &DISPFlagInt{n}
+	case ll.DISPFlags:
+		return &DISPFlags{n}
 	case ll.DISubprogram:
 		return &DISubprogram{n}
 	case ll.DISubrange:
@@ -197,6 +203,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &DITemplateValueParameter{n}
 	case ll.DLLStorageClass:
 		return &DLLStorageClass{n}
+	case ll.DebugBaseAddressField:
+		return &DebugBaseAddressField{n}
 	case ll.DebugInfoForProfilingField:
 		return &DebugInfoForProfilingField{n}
 	case ll.DeclarationField:
@@ -585,6 +593,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &SIToFPExpr{n}
 	case ll.SIToFPInst:
 		return &SIToFPInst{n}
+	case ll.SPFlagsField:
+		return &SPFlagsField{n}
 	case ll.SRemExpr:
 		return &SRemExpr{n}
 	case ll.SRemInst:

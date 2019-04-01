@@ -209,6 +209,11 @@ recovered:
 				token = NODESCOLON
 				break
 			}
+		case 42:
+			if hash == 0x75a2f2aa && "debugBaseAddress:" == l.source[l.tokenOffset:l.offset] {
+				token = DEBUGBASEADDRESSCOLON
+				break
+			}
 		case 45:
 			if hash == 0xae4e252d && "retainedNodes:" == l.source[l.tokenOffset:l.offset] {
 				token = RETAINEDNODESCOLON
@@ -294,6 +299,11 @@ recovered:
 		case 77:
 			if hash == 0x2f676f4d && "header:" == l.source[l.tokenOffset:l.offset] {
 				token = HEADERCOLON
+				break
+			}
+		case 80:
+			if hash == 0x4c73e350 && "spFlags:" == l.source[l.tokenOffset:l.offset] {
+				token = SPFLAGSCOLON
 				break
 			}
 		case 81:

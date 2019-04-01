@@ -26,6 +26,7 @@ const (
 	DWARF_TAG_TOK
 	DWARF_ATT_ENCODING_TOK
 	DI_FLAG_TOK
+	DISP_FLAG_TOK
 	DWARF_LANG_TOK
 	DWARF_CC_TOK
 	CHECKSUM_KIND_TOK
@@ -374,6 +375,7 @@ const (
 	CONFIGMACROSCOLON              // configMacros:
 	CONTAININGTYPECOLON            // containingType:
 	COUNTCOLON                     // count:
+	DEBUGBASEADDRESSCOLON          // debugBaseAddress:
 	DEBUGINFOFORPROFILINGCOLON     // debugInfoForProfiling:
 	DECLARATIONCOLON               // declaration:
 	DIRECTORYCOLON                 // directory:
@@ -424,6 +426,7 @@ const (
 	SETTERCOLON                    // setter:
 	SIZECOLON                      // size:
 	SOURCECOLON                    // source:
+	SPFLAGSCOLON                   // spFlags:
 	SPLITDEBUGFILENAMECOLON        // splitDebugFilename:
 	SPLITDEBUGINLININGCOLON        // splitDebugInlining:
 	TAGCOLON                       // tag:
@@ -471,6 +474,7 @@ var tokenStr = [...]string{
 	"DWARF_TAG_TOK",
 	"DWARF_ATT_ENCODING_TOK",
 	"DI_FLAG_TOK",
+	"DISP_FLAG_TOK",
 	"DWARF_LANG_TOK",
 	"DWARF_CC_TOK",
 	"CHECKSUM_KIND_TOK",
@@ -819,6 +823,7 @@ var tokenStr = [...]string{
 	"configMacros:",
 	"containingType:",
 	"count:",
+	"debugBaseAddress:",
 	"debugInfoForProfiling:",
 	"declaration:",
 	"directory:",
@@ -869,6 +874,7 @@ var tokenStr = [...]string{
 	"setter:",
 	"size:",
 	"source:",
+	"spFlags:",
 	"splitDebugFilename:",
 	"splitDebugInlining:",
 	"tag:",

@@ -106,12 +106,16 @@ func (n DIMacroFile) LlvmNode() *Node                { return n.Node }
 func (n DIModule) LlvmNode() *Node                   { return n.Node }
 func (n DINamespace) LlvmNode() *Node                { return n.Node }
 func (n DIObjCProperty) LlvmNode() *Node             { return n.Node }
+func (n DISPFlagEnum) LlvmNode() *Node               { return n.Node }
+func (n DISPFlagInt) LlvmNode() *Node                { return n.Node }
+func (n DISPFlags) LlvmNode() *Node                  { return n.Node }
 func (n DISubprogram) LlvmNode() *Node               { return n.Node }
 func (n DISubrange) LlvmNode() *Node                 { return n.Node }
 func (n DISubroutineType) LlvmNode() *Node           { return n.Node }
 func (n DITemplateTypeParameter) LlvmNode() *Node    { return n.Node }
 func (n DITemplateValueParameter) LlvmNode() *Node   { return n.Node }
 func (n DLLStorageClass) LlvmNode() *Node            { return n.Node }
+func (n DebugBaseAddressField) LlvmNode() *Node      { return n.Node }
 func (n DebugInfoForProfilingField) LlvmNode() *Node { return n.Node }
 func (n DeclarationField) LlvmNode() *Node           { return n.Node }
 func (n Dereferenceable) LlvmNode() *Node            { return n.Node }
@@ -306,6 +310,7 @@ func (n SExtExpr) LlvmNode() *Node                   { return n.Node }
 func (n SExtInst) LlvmNode() *Node                   { return n.Node }
 func (n SIToFPExpr) LlvmNode() *Node                 { return n.Node }
 func (n SIToFPInst) LlvmNode() *Node                 { return n.Node }
+func (n SPFlagsField) LlvmNode() *Node               { return n.Node }
 func (n SRemExpr) LlvmNode() *Node                   { return n.Node }
 func (n SRemInst) LlvmNode() *Node                   { return n.Node }
 func (n ScopeField) LlvmNode() *Node                 { return n.Node }
@@ -557,6 +562,7 @@ type DICompileUnitField interface {
 // dICompileUnitFieldNode() ensures that only the following types can be
 // assigned to DICompileUnitField.
 //
+func (DebugBaseAddressField) dICompileUnitFieldNode()      {}
 func (DebugInfoForProfilingField) dICompileUnitFieldNode() {}
 func (DwoIdField) dICompileUnitFieldNode()                 {}
 func (EmissionKindField) dICompileUnitFieldNode()          {}
@@ -872,6 +878,18 @@ func (SetterField) dIObjCPropertyFieldNode()     {}
 func (TypeField) dIObjCPropertyFieldNode()       {}
 func (NilNode) dIObjCPropertyFieldNode()         {}
 
+type DISPFlag interface {
+	LlvmNode
+	dISPFlagNode()
+}
+
+// dISPFlagNode() ensures that only the following types can be
+// assigned to DISPFlag.
+//
+func (DISPFlagEnum) dISPFlagNode() {}
+func (DISPFlagInt) dISPFlagNode()  {}
+func (NilNode) dISPFlagNode()      {}
+
 type DISubprogramField interface {
 	LlvmNode
 	dISubprogramFieldNode()
@@ -891,6 +909,7 @@ func (LineField) dISubprogramFieldNode()           {}
 func (LinkageNameField) dISubprogramFieldNode()    {}
 func (NameField) dISubprogramFieldNode()           {}
 func (RetainedNodesField) dISubprogramFieldNode()  {}
+func (SPFlagsField) dISubprogramFieldNode()        {}
 func (ScopeField) dISubprogramFieldNode()          {}
 func (ScopeLineField) dISubprogramFieldNode()      {}
 func (TemplateParamsField) dISubprogramFieldNode() {}
@@ -2897,6 +2916,31 @@ func (n DIObjCProperty) Fields() []DIObjCPropertyField {
 	return ret
 }
 
+type DISPFlagEnum struct {
+	*Node
+}
+
+type DISPFlagInt struct {
+	*Node
+}
+
+func (n DISPFlagInt) UintLit() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
+}
+
+type DISPFlags struct {
+	*Node
+}
+
+func (n DISPFlags) Flags() []DISPFlag {
+	nodes := n.Children(selector.DISPFlag)
+	var ret = make([]DISPFlag, 0, len(nodes))
+	for _, node := range nodes {
+		ret = append(ret, ToLlvmNode(node).(DISPFlag))
+	}
+	return ret
+}
+
 type DISubprogram struct {
 	*Node
 }
@@ -2964,6 +3008,14 @@ func (n DITemplateValueParameter) Fields() []DITemplateValueParameterField {
 
 type DLLStorageClass struct {
 	*Node
+}
+
+type DebugBaseAddressField struct {
+	*Node
+}
+
+func (n DebugBaseAddressField) DebugBaseAddress() BoolLit {
+	return BoolLit{n.Child(selector.BoolLit)}
 }
 
 type DebugInfoForProfilingField struct {
@@ -5519,6 +5571,14 @@ func (n SIToFPInst) Metadata() []MetadataAttachment {
 		ret = append(ret, MetadataAttachment{node})
 	}
 	return ret
+}
+
+type SPFlagsField struct {
+	*Node
+}
+
+func (n SPFlagsField) SPFlags() DISPFlags {
+	return DISPFlags{n.Child(selector.DISPFlags)}
 }
 
 type SRemExpr struct {
