@@ -84,6 +84,7 @@ const (
 	ZeroInitializerConst
 	UndefConst
 	BlockAddressConst  // Func=GlobalIdent Block=LocalIdent
+	FNegExpr           // X=TypeConst
 	AddExpr            // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
 	FAddExpr           // X=TypeConst Y=TypeConst
 	SubExpr            // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
@@ -128,6 +129,7 @@ const (
 	SelectExpr         // Cond=TypeConst X=TypeConst Y=TypeConst
 	BasicBlock         // Name=LabelIdent? Insts=(Instruction)* Term=Terminator
 	LocalDefInst       // Name=LocalIdent Inst=ValueInstruction
+	FNegInst           // FastMathFlags=(FastMathFlag)* X=TypeValue Metadata=(MetadataAttachment)*
 	AddInst            // OverflowFlags=(OverflowFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
 	FAddInst           // FastMathFlags=(FastMathFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
 	SubInst            // OverflowFlags=(OverflowFlag)* X=TypeValue Y=Value Metadata=(MetadataAttachment)*
@@ -461,6 +463,7 @@ var nodeTypeStr = [...]string{
 	"ZeroInitializerConst",
 	"UndefConst",
 	"BlockAddressConst",
+	"FNegExpr",
 	"AddExpr",
 	"FAddExpr",
 	"SubExpr",
@@ -505,6 +508,7 @@ var nodeTypeStr = [...]string{
 	"SelectExpr",
 	"BasicBlock",
 	"LocalDefInst",
+	"FNegInst",
 	"AddInst",
 	"FAddInst",
 	"SubInst",
@@ -805,6 +809,7 @@ var Constant = []NodeType{
 	FCmpExpr,
 	FDivExpr,
 	FMulExpr,
+	FNegExpr,
 	FPExtExpr,
 	FPToSIExpr,
 	FPToUIExpr,
@@ -857,6 +862,7 @@ var ConstantExpr = []NodeType{
 	FCmpExpr,
 	FDivExpr,
 	FMulExpr,
+	FNegExpr,
 	FPExtExpr,
 	FPToSIExpr,
 	FPToUIExpr,
@@ -1231,6 +1237,7 @@ var Instruction = []NodeType{
 	FCmpInst,
 	FDivInst,
 	FMulInst,
+	FNegInst,
 	FPExtInst,
 	FPToSIInst,
 	FPToUIInst,
@@ -1533,6 +1540,7 @@ var Value = []NodeType{
 	FCmpExpr,
 	FDivExpr,
 	FMulExpr,
+	FNegExpr,
 	FPExtExpr,
 	FPToSIExpr,
 	FPToUIExpr,
@@ -1593,6 +1601,7 @@ var ValueInstruction = []NodeType{
 	FCmpInst,
 	FDivInst,
 	FMulInst,
+	FNegInst,
 	FPExtInst,
 	FPToSIInst,
 	FPToUIInst,
@@ -1948,6 +1957,7 @@ var ruleNodeType = [...]NodeType{
 	ZeroInitializerConst,       // ZeroInitializerConst : 'zeroinitializer'
 	UndefConst,                 // UndefConst : 'undef'
 	BlockAddressConst,          // BlockAddressConst : 'blockaddress' '(' GlobalIdent ',' LocalIdent ')'
+	0,                          // ConstantExpr : FNegExpr
 	0,                          // ConstantExpr : AddExpr
 	0,                          // ConstantExpr : FAddExpr
 	0,                          // ConstantExpr : SubExpr
@@ -1988,6 +1998,7 @@ var ruleNodeType = [...]NodeType{
 	0,                          // ConstantExpr : ICmpExpr
 	0,                          // ConstantExpr : FCmpExpr
 	0,                          // ConstantExpr : SelectExpr
+	FNegExpr,                   // FNegExpr : 'fneg' '(' TypeConst ')'
 	AddExpr,                    // AddExpr : 'add' OverflowFlag_optlist '(' TypeConst ',' TypeConst ')'
 	0,                          // OverflowFlag_optlist : OverflowFlag_optlist OverflowFlag
 	0,                          // OverflowFlag_optlist :
@@ -2044,6 +2055,7 @@ var ruleNodeType = [...]NodeType{
 	0,                          // Instruction : StoreInst
 	0,                          // Instruction : FenceInst
 	LocalDefInst,               // LocalDefInst : LocalIdent '=' ValueInstruction
+	0,                          // ValueInstruction : FNegInst
 	0,                          // ValueInstruction : AddInst
 	0,                          // ValueInstruction : FAddInst
 	0,                          // ValueInstruction : SubInst
@@ -2094,12 +2106,14 @@ var ruleNodeType = [...]NodeType{
 	0,                          // ValueInstruction : LandingPadInst
 	0,                          // ValueInstruction : CatchPadInst
 	0,                          // ValueInstruction : CleanupPadInst
+	0,                          // FastMathFlag_optlist : FastMathFlag_optlist FastMathFlag
+	0,                          // FastMathFlag_optlist :
+	FNegInst,                   // FNegInst : 'fneg' FastMathFlag_optlist TypeValue list_of_','_and_1_elements
+	FNegInst,                   // FNegInst : 'fneg' FastMathFlag_optlist TypeValue
 	AddInst,                    // AddInst : 'add' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements
 	AddInst,                    // AddInst : 'add' OverflowFlag_optlist TypeValue ',' Value
 	FAddInst,                   // FAddInst : 'fadd' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements
 	FAddInst,                   // FAddInst : 'fadd' FastMathFlag_optlist TypeValue ',' Value
-	0,                          // FastMathFlag_optlist : FastMathFlag_optlist FastMathFlag
-	0,                          // FastMathFlag_optlist :
 	SubInst,                    // SubInst : 'sub' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements
 	SubInst,                    // SubInst : 'sub' OverflowFlag_optlist TypeValue ',' Value
 	FSubInst,                   // FSubInst : 'fsub' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements

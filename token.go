@@ -107,8 +107,8 @@ const (
 	DECLARE                        // declare
 	DEFAULT                        // default
 	DEFINE                         // define
-	DEREFERENCEABLE_OR_NULL        // dereferenceable_or_null
 	DEREFERENCEABLE                // dereferenceable
+	DEREFERENCEABLE_OR_NULL        // dereferenceable_or_null
 	DISTINCT                       // distinct
 	DLLEXPORT                      // dllexport
 	DLLIMPORT                      // dllimport
@@ -133,6 +133,7 @@ const (
 	FILTER                         // filter
 	FLOAT                          // float
 	FMUL                           // fmul
+	FNEG                           // fneg
 	FP128                          // fp128
 	FPEXT                          // fpext
 	FPTOSI                         // fptosi
@@ -171,8 +172,8 @@ const (
 	LABEL                          // label
 	LANDINGPAD                     // landingpad
 	LARGEST                        // largest
-	LINKONCE_ODR                   // linkonce_odr
 	LINKONCE                       // linkonce
+	LINKONCE_ODR                   // linkonce_odr
 	LOAD                           // load
 	LOCAL_UNNAMED_ADDR             // local_unnamed_addr
 	LOCALDYNAMIC                   // localdynamic
@@ -311,14 +312,14 @@ const (
 	UNREACHABLE                    // unreachable
 	UNWIND                         // unwind
 	UREM                           // urem
-	USELISTORDER_BB                // uselistorder_bb
 	USELISTORDER                   // uselistorder
+	USELISTORDER_BB                // uselistorder_bb
 	UWTABLE                        // uwtable
 	VA_ARG                         // va_arg
 	VOID                           // void
 	VOLATILE                       // volatile
-	WEAK_ODR                       // weak_odr
 	WEAK                           // weak
+	WEAK_ODR                       // weak_odr
 	WEBKIT_JSCC                    // webkit_jscc
 	WIN64CC                        // win64cc
 	WITHIN                         // within
@@ -555,8 +556,8 @@ var tokenStr = [...]string{
 	"declare",
 	"default",
 	"define",
-	"dereferenceable_or_null",
 	"dereferenceable",
+	"dereferenceable_or_null",
 	"distinct",
 	"dllexport",
 	"dllimport",
@@ -581,6 +582,7 @@ var tokenStr = [...]string{
 	"filter",
 	"float",
 	"fmul",
+	"fneg",
 	"fp128",
 	"fpext",
 	"fptosi",
@@ -619,8 +621,8 @@ var tokenStr = [...]string{
 	"label",
 	"landingpad",
 	"largest",
-	"linkonce_odr",
 	"linkonce",
+	"linkonce_odr",
 	"load",
 	"local_unnamed_addr",
 	"localdynamic",
@@ -759,14 +761,14 @@ var tokenStr = [...]string{
 	"unreachable",
 	"unwind",
 	"urem",
-	"uselistorder_bb",
 	"uselistorder",
+	"uselistorder_bb",
 	"uwtable",
 	"va_arg",
 	"void",
 	"volatile",
-	"weak_odr",
 	"weak",
+	"weak_odr",
 	"webkit_jscc",
 	"win64cc",
 	"within",

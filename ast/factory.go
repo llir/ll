@@ -305,6 +305,10 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &FMulExpr{n}
 	case ll.FMulInst:
 		return &FMulInst{n}
+	case ll.FNegExpr:
+		return &FNegExpr{n}
+	case ll.FNegInst:
+		return &FNegInst{n}
 	case ll.FPExtExpr:
 		return &FPExtExpr{n}
 	case ll.FPExtInst:

@@ -158,6 +158,8 @@ var (
 	FDivInst                        = func(t ll.NodeType) bool { return t == ll.FDivInst }
 	FMulExpr                        = func(t ll.NodeType) bool { return t == ll.FMulExpr }
 	FMulInst                        = func(t ll.NodeType) bool { return t == ll.FMulInst }
+	FNegExpr                        = func(t ll.NodeType) bool { return t == ll.FNegExpr }
+	FNegInst                        = func(t ll.NodeType) bool { return t == ll.FNegInst }
 	FPExtExpr                       = func(t ll.NodeType) bool { return t == ll.FPExtExpr }
 	FPExtInst                       = func(t ll.NodeType) bool { return t == ll.FPExtInst }
 	FPToSIExpr                      = func(t ll.NodeType) bool { return t == ll.FPToSIExpr }
