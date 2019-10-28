@@ -87,6 +87,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &BoolLit{n}
 	case ll.BrTerm:
 		return &BrTerm{n}
+	case ll.Byval:
+		return &Byval{n}
 	case ll.CCField:
 		return &CCField{n}
 	case ll.CallInst:

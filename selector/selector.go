@@ -49,6 +49,7 @@ var (
 	BoolConst                       = func(t ll.NodeType) bool { return t == ll.BoolConst }
 	BoolLit                         = func(t ll.NodeType) bool { return t == ll.BoolLit }
 	BrTerm                          = func(t ll.NodeType) bool { return t == ll.BrTerm }
+	Byval                           = func(t ll.NodeType) bool { return t == ll.Byval }
 	CCField                         = func(t ll.NodeType) bool { return t == ll.CCField }
 	CallInst                        = func(t ll.NodeType) bool { return t == ll.CallInst }
 	CallingConvEnum                 = func(t ll.NodeType) bool { return t == ll.CallingConvEnum }

@@ -609,7 +609,7 @@ recovered:
 			hash = backupHash
 			l.rewind(backupOffset)
 		} else if l.offset == l.tokenOffset {
-			l.rewind(l.offset + 1)
+			l.rewind(l.scanOffset)
 		}
 		if token != INVALID_TOKEN {
 			goto recovered

@@ -352,6 +352,7 @@ const (
 	AtomicOrdering
 	AttrPair   // Key=StringLit Val=StringLit
 	AttrString // Val=StringLit
+	Byval      // Typ=Type?
 	CallingConvEnum
 	CallingConvInt        // UintLit
 	Comdat                // Name=ComdatName?
@@ -731,6 +732,7 @@ var nodeTypeStr = [...]string{
 	"AtomicOrdering",
 	"AttrPair",
 	"AttrString",
+	"Byval",
 	"CallingConvEnum",
 	"CallingConvInt",
 	"Comdat",
@@ -1423,6 +1425,7 @@ var ParamAttribute = []NodeType{
 	Align,
 	AttrPair,
 	AttrString,
+	Byval,
 	Dereferenceable,
 	DereferenceableOrNull,
 	ParamAttr,
@@ -2800,6 +2803,8 @@ var ruleNodeType = [...]NodeType{
 	AtomicOrdering,             // AtomicOrdering : 'unordered'
 	AttrPair,                   // AttrPair : StringLit '=' StringLit
 	AttrString,                 // AttrString : StringLit
+	Byval,                      // Byval : 'byval'
+	Byval,                      // Byval : 'byval' '(' Type ')'
 	0,                          // CallingConv : CallingConvEnum
 	0,                          // CallingConv : CallingConvInt
 	CallingConvEnum,            // CallingConvEnum : 'aarch64_vector_pcs'
@@ -2968,9 +2973,9 @@ var ruleNodeType = [...]NodeType{
 	0,                          // ParamAttribute : AttrString
 	0,                          // ParamAttribute : AttrPair
 	0,                          // ParamAttribute : Align
+	0,                          // ParamAttribute : Byval
 	0,                          // ParamAttribute : Dereferenceable
 	0,                          // ParamAttribute : ParamAttr
-	ParamAttr,                  // ParamAttr : 'byval'
 	ParamAttr,                  // ParamAttr : 'inalloca'
 	ParamAttr,                  // ParamAttr : 'inreg'
 	ParamAttr,                  // ParamAttr : 'nest'

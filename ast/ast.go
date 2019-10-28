@@ -57,6 +57,7 @@ func (n BlockAddressConst) LlvmNode() *Node          { return n.Node }
 func (n BoolConst) LlvmNode() *Node                  { return n.Node }
 func (n BoolLit) LlvmNode() *Node                    { return n.Node }
 func (n BrTerm) LlvmNode() *Node                     { return n.Node }
+func (n Byval) LlvmNode() *Node                      { return n.Node }
 func (n CCField) LlvmNode() *Node                    { return n.Node }
 func (n CallInst) LlvmNode() *Node                   { return n.Node }
 func (n CallingConvEnum) LlvmNode() *Node            { return n.Node }
@@ -1400,6 +1401,7 @@ type ParamAttribute interface {
 func (Align) paramAttributeNode()                 {}
 func (AttrPair) paramAttributeNode()              {}
 func (AttrString) paramAttributeNode()            {}
+func (Byval) paramAttributeNode()                 {}
 func (Dereferenceable) paramAttributeNode()       {}
 func (DereferenceableOrNull) paramAttributeNode() {}
 func (ParamAttr) paramAttributeNode()             {}
@@ -2227,6 +2229,15 @@ func (n BrTerm) Metadata() []MetadataAttachment {
 		ret = append(ret, MetadataAttachment{node})
 	}
 	return ret
+}
+
+type Byval struct {
+	*Node
+}
+
+func (n Byval) Typ() (Type, bool) {
+	field := ToLlvmNode(n.Child(selector.Type)).(Type)
+	return field, field.LlvmNode() != nil
 }
 
 type CCField struct {
