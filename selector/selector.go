@@ -283,6 +283,7 @@ var (
 	Param                           = func(t ll.NodeType) bool { return t == ll.Param }
 	ParamAttr                       = func(t ll.NodeType) bool { return t == ll.ParamAttr }
 	Params                          = func(t ll.NodeType) bool { return t == ll.Params }
+	Partition                       = func(t ll.NodeType) bool { return t == ll.Partition }
 	Personality                     = func(t ll.NodeType) bool { return t == ll.Personality }
 	PhiInst                         = func(t ll.NodeType) bool { return t == ll.PhiInst }
 	PointerType                     = func(t ll.NodeType) bool { return t == ll.PointerType }
@@ -308,6 +309,7 @@ var (
 	SPFlagsField                    = func(t ll.NodeType) bool { return t == ll.SPFlagsField }
 	SRemExpr                        = func(t ll.NodeType) bool { return t == ll.SRemExpr }
 	SRemInst                        = func(t ll.NodeType) bool { return t == ll.SRemInst }
+	ScalableVectorType              = func(t ll.NodeType) bool { return t == ll.ScalableVectorType }
 	ScopeField                      = func(t ll.NodeType) bool { return t == ll.ScopeField }
 	ScopeLineField                  = func(t ll.NodeType) bool { return t == ll.ScopeLineField }
 	Section                         = func(t ll.NodeType) bool { return t == ll.Section }

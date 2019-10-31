@@ -291,6 +291,7 @@ func (n PackedStructType) LlvmNode() *Node           { return n.Node }
 func (n Param) LlvmNode() *Node                      { return n.Node }
 func (n ParamAttr) LlvmNode() *Node                  { return n.Node }
 func (n Params) LlvmNode() *Node                     { return n.Node }
+func (n Partition) LlvmNode() *Node                  { return n.Node }
 func (n Personality) LlvmNode() *Node                { return n.Node }
 func (n PhiInst) LlvmNode() *Node                    { return n.Node }
 func (n PointerType) LlvmNode() *Node                { return n.Node }
@@ -316,6 +317,7 @@ func (n SIToFPInst) LlvmNode() *Node                 { return n.Node }
 func (n SPFlagsField) LlvmNode() *Node               { return n.Node }
 func (n SRemExpr) LlvmNode() *Node                   { return n.Node }
 func (n SRemInst) LlvmNode() *Node                   { return n.Node }
+func (n ScalableVectorType) LlvmNode() *Node         { return n.Node }
 func (n ScopeField) LlvmNode() *Node                 { return n.Node }
 func (n ScopeLineField) LlvmNode() *Node             { return n.Node }
 func (n Section) LlvmNode() *Node                    { return n.Node }
@@ -415,18 +417,19 @@ type ConcreteType interface {
 // concreteTypeNode() ensures that only the following types can be
 // assigned to ConcreteType.
 //
-func (ArrayType) concreteTypeNode()        {}
-func (FloatType) concreteTypeNode()        {}
-func (IntType) concreteTypeNode()          {}
-func (LabelType) concreteTypeNode()        {}
-func (MMXType) concreteTypeNode()          {}
-func (NamedType) concreteTypeNode()        {}
-func (PackedStructType) concreteTypeNode() {}
-func (PointerType) concreteTypeNode()      {}
-func (StructType) concreteTypeNode()       {}
-func (TokenType) concreteTypeNode()        {}
-func (VectorType) concreteTypeNode()       {}
-func (NilNode) concreteTypeNode()          {}
+func (ArrayType) concreteTypeNode()          {}
+func (FloatType) concreteTypeNode()          {}
+func (IntType) concreteTypeNode()            {}
+func (LabelType) concreteTypeNode()          {}
+func (MMXType) concreteTypeNode()            {}
+func (NamedType) concreteTypeNode()          {}
+func (PackedStructType) concreteTypeNode()   {}
+func (PointerType) concreteTypeNode()        {}
+func (ScalableVectorType) concreteTypeNode() {}
+func (StructType) concreteTypeNode()         {}
+func (TokenType) concreteTypeNode()          {}
+func (VectorType) concreteTypeNode()         {}
+func (NilNode) concreteTypeNode()            {}
 
 type Constant interface {
 	LlvmNode
@@ -1081,19 +1084,20 @@ type FirstClassType interface {
 // firstClassTypeNode() ensures that only the following types can be
 // assigned to FirstClassType.
 //
-func (ArrayType) firstClassTypeNode()        {}
-func (FloatType) firstClassTypeNode()        {}
-func (IntType) firstClassTypeNode()          {}
-func (LabelType) firstClassTypeNode()        {}
-func (MMXType) firstClassTypeNode()          {}
-func (MetadataType) firstClassTypeNode()     {}
-func (NamedType) firstClassTypeNode()        {}
-func (PackedStructType) firstClassTypeNode() {}
-func (PointerType) firstClassTypeNode()      {}
-func (StructType) firstClassTypeNode()       {}
-func (TokenType) firstClassTypeNode()        {}
-func (VectorType) firstClassTypeNode()       {}
-func (NilNode) firstClassTypeNode()          {}
+func (ArrayType) firstClassTypeNode()          {}
+func (FloatType) firstClassTypeNode()          {}
+func (IntType) firstClassTypeNode()            {}
+func (LabelType) firstClassTypeNode()          {}
+func (MMXType) firstClassTypeNode()            {}
+func (MetadataType) firstClassTypeNode()       {}
+func (NamedType) firstClassTypeNode()          {}
+func (PackedStructType) firstClassTypeNode()   {}
+func (PointerType) firstClassTypeNode()        {}
+func (ScalableVectorType) firstClassTypeNode() {}
+func (StructType) firstClassTypeNode()         {}
+func (TokenType) firstClassTypeNode()          {}
+func (VectorType) firstClassTypeNode()         {}
+func (NilNode) firstClassTypeNode()            {}
 
 type FuncAttribute interface {
 	LlvmNode
@@ -1524,21 +1528,22 @@ type Type interface {
 // typeNode() ensures that only the following types can be
 // assigned to Type.
 //
-func (ArrayType) typeNode()        {}
-func (FloatType) typeNode()        {}
-func (FuncType) typeNode()         {}
-func (IntType) typeNode()          {}
-func (LabelType) typeNode()        {}
-func (MMXType) typeNode()          {}
-func (MetadataType) typeNode()     {}
-func (NamedType) typeNode()        {}
-func (PackedStructType) typeNode() {}
-func (PointerType) typeNode()      {}
-func (StructType) typeNode()       {}
-func (TokenType) typeNode()        {}
-func (VectorType) typeNode()       {}
-func (VoidType) typeNode()         {}
-func (NilNode) typeNode()          {}
+func (ArrayType) typeNode()          {}
+func (FloatType) typeNode()          {}
+func (FuncType) typeNode()           {}
+func (IntType) typeNode()            {}
+func (LabelType) typeNode()          {}
+func (MMXType) typeNode()            {}
+func (MetadataType) typeNode()       {}
+func (NamedType) typeNode()          {}
+func (PackedStructType) typeNode()   {}
+func (PointerType) typeNode()        {}
+func (ScalableVectorType) typeNode() {}
+func (StructType) typeNode()         {}
+func (TokenType) typeNode()          {}
+func (VectorType) typeNode()         {}
+func (VoidType) typeNode()           {}
+func (NilNode) typeNode()            {}
 
 type UnwindTarget interface {
 	LlvmNode
@@ -1965,7 +1970,7 @@ type Arg struct {
 }
 
 func (n Arg) Typ() LlvmNode {
-	return ToLlvmNode(n.Child(selector.OneOf(ll.ArrayType, ll.FloatType, ll.IntType, ll.LabelType, ll.MMXType, ll.MetadataType, ll.NamedType, ll.PackedStructType, ll.PointerType, ll.StructType, ll.TokenType, ll.VectorType))).(LlvmNode)
+	return ToLlvmNode(n.Child(selector.OneOf(ll.ArrayType, ll.FloatType, ll.IntType, ll.LabelType, ll.MMXType, ll.MetadataType, ll.NamedType, ll.PackedStructType, ll.PointerType, ll.ScalableVectorType, ll.StructType, ll.TokenType, ll.VectorType))).(LlvmNode)
 }
 
 func (n Arg) Attrs() []ParamAttribute {
@@ -3253,7 +3258,7 @@ type ExceptionArg struct {
 }
 
 func (n ExceptionArg) Typ() LlvmNode {
-	return ToLlvmNode(n.Child(selector.OneOf(ll.ArrayType, ll.FloatType, ll.IntType, ll.LabelType, ll.MMXType, ll.MetadataType, ll.NamedType, ll.PackedStructType, ll.PointerType, ll.StructType, ll.TokenType, ll.VectorType))).(LlvmNode)
+	return ToLlvmNode(n.Child(selector.OneOf(ll.ArrayType, ll.FloatType, ll.IntType, ll.LabelType, ll.MMXType, ll.MetadataType, ll.NamedType, ll.PackedStructType, ll.PointerType, ll.ScalableVectorType, ll.StructType, ll.TokenType, ll.VectorType))).(LlvmNode)
 }
 
 func (n ExceptionArg) Val() LlvmNode {
@@ -4023,6 +4028,11 @@ func (n FuncHeader) Section() (Section, bool) {
 	return field, field.IsValid()
 }
 
+func (n FuncHeader) Partition() (Partition, bool) {
+	field := Partition{n.Child(selector.Partition)}
+	return field, field.IsValid()
+}
+
 func (n FuncHeader) Comdat() (Comdat, bool) {
 	field := Comdat{n.Child(selector.Comdat)}
 	return field, field.IsValid()
@@ -4226,6 +4236,11 @@ func (n GlobalDecl) Init() (Constant, bool) {
 
 func (n GlobalDecl) Section() (Section, bool) {
 	field := Section{n.Child(selector.Section)}
+	return field, field.IsValid()
+}
+
+func (n GlobalDecl) Partition() (Partition, bool) {
+	field := Partition{n.Child(selector.Partition)}
 	return field, field.IsValid()
 }
 
@@ -4466,6 +4481,15 @@ func (n IndirectSymbolDef) ContentType() Type {
 
 func (n IndirectSymbolDef) IndirectSymbol() IndirectSymbol {
 	return ToLlvmNode(n.Child(selector.IndirectSymbol)).(IndirectSymbol)
+}
+
+func (n IndirectSymbolDef) Partitions() []Partition {
+	nodes := n.Children(selector.Partition)
+	var ret = make([]Partition, 0, len(nodes))
+	for _, node := range nodes {
+		ret = append(ret, Partition{node})
+	}
+	return ret
 }
 
 type IndirectSymbolKind struct {
@@ -5333,6 +5357,14 @@ func (n Params) Variadic() (Ellipsis, bool) {
 	return field, field.IsValid()
 }
 
+type Partition struct {
+	*Node
+}
+
+func (n Partition) StringLit() StringLit {
+	return StringLit{n.Child(selector.StringLit)}
+}
+
 type Personality struct {
 	*Node
 }
@@ -5463,7 +5495,7 @@ type RetTerm struct {
 }
 
 func (n RetTerm) XTyp() LlvmNode {
-	return ToLlvmNode(n.Child(selector.OneOf(ll.ArrayType, ll.FloatType, ll.IntType, ll.LabelType, ll.MMXType, ll.NamedType, ll.PackedStructType, ll.PointerType, ll.StructType, ll.TokenType, ll.VectorType, ll.VoidType))).(LlvmNode)
+	return ToLlvmNode(n.Child(selector.OneOf(ll.ArrayType, ll.FloatType, ll.IntType, ll.LabelType, ll.MMXType, ll.NamedType, ll.PackedStructType, ll.PointerType, ll.ScalableVectorType, ll.StructType, ll.TokenType, ll.VectorType, ll.VoidType))).(LlvmNode)
 }
 
 func (n RetTerm) X() (Value, bool) {
@@ -5666,6 +5698,18 @@ func (n SRemInst) Metadata() []MetadataAttachment {
 	return ret
 }
 
+type ScalableVectorType struct {
+	*Node
+}
+
+func (n ScalableVectorType) Len() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
+}
+
+func (n ScalableVectorType) Elem() Type {
+	return ToLlvmNode(n.Child(selector.Type)).(Type)
+}
+
 type ScopeField struct {
 	*Node
 }
@@ -5708,6 +5752,15 @@ func (n SelectExpr) Y() TypeConst {
 
 type SelectInst struct {
 	*Node
+}
+
+func (n SelectInst) FastMathFlags() []FastMathFlag {
+	nodes := n.Children(selector.FastMathFlag)
+	var ret = make([]FastMathFlag, 0, len(nodes))
+	for _, node := range nodes {
+		ret = append(ret, FastMathFlag{node})
+	}
+	return ret
 }
 
 func (n SelectInst) Cond() TypeValue {
@@ -6171,7 +6224,7 @@ func (n TypeDef) Name() LocalIdent {
 }
 
 func (n TypeDef) Typ() LlvmNode {
-	return ToLlvmNode(n.Child(selector.OneOf(ll.ArrayType, ll.FloatType, ll.FuncType, ll.IntType, ll.LabelType, ll.MMXType, ll.MetadataType, ll.NamedType, ll.OpaqueType, ll.PackedStructType, ll.PointerType, ll.StructType, ll.TokenType, ll.VectorType, ll.VoidType))).(LlvmNode)
+	return ToLlvmNode(n.Child(selector.OneOf(ll.ArrayType, ll.FloatType, ll.FuncType, ll.IntType, ll.LabelType, ll.MMXType, ll.MetadataType, ll.NamedType, ll.OpaqueType, ll.PackedStructType, ll.PointerType, ll.ScalableVectorType, ll.StructType, ll.TokenType, ll.VectorType, ll.VoidType))).(LlvmNode)
 }
 
 type TypeField struct {

@@ -226,6 +226,7 @@ const (
 	OPTSIZE                        // optsize
 	OR                             // or
 	ORD                            // ord
+	PARTITION                      // partition
 	PERSONALITY                    // personality
 	PHI                            // phi
 	PPC_FP128                      // ppc_fp128
@@ -318,6 +319,7 @@ const (
 	VA_ARG                         // va_arg
 	VOID                           // void
 	VOLATILE                       // volatile
+	VSCALE                         // vscale
 	WEAK                           // weak
 	WEAK_ODR                       // weak_odr
 	WEBKIT_JSCC                    // webkit_jscc
@@ -675,6 +677,7 @@ var tokenStr = [...]string{
 	"optsize",
 	"or",
 	"ord",
+	"partition",
 	"personality",
 	"phi",
 	"ppc_fp128",
@@ -767,6 +770,7 @@ var tokenStr = [...]string{
 	"va_arg",
 	"void",
 	"volatile",
+	"vscale",
 	"weak",
 	"weak_odr",
 	"webkit_jscc",

@@ -555,6 +555,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &ParamAttr{n}
 	case ll.Params:
 		return &Params{n}
+	case ll.Partition:
+		return &Partition{n}
 	case ll.Personality:
 		return &Personality{n}
 	case ll.PhiInst:
@@ -605,6 +607,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &SRemExpr{n}
 	case ll.SRemInst:
 		return &SRemInst{n}
+	case ll.ScalableVectorType:
+		return &ScalableVectorType{n}
 	case ll.ScopeField:
 		return &ScopeField{n}
 	case ll.ScopeLineField:
