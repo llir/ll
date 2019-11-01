@@ -152,6 +152,7 @@ const (
 	HIDDEN                         // hidden
 	ICMP                           // icmp
 	IFUNC                          // ifunc
+	IMMARG                         // immarg
 	INACCESSIBLEMEM_OR_ARGMEMONLY  // inaccessiblemem_or_argmemonly
 	INACCESSIBLEMEMONLY            // inaccessiblememonly
 	INALLOCA                       // inalloca
@@ -200,6 +201,7 @@ const (
 	NOCF_CHECK                     // nocf_check
 	NODUPLICATE                    // noduplicate
 	NODUPLICATES                   // noduplicates
+	NOFREE                         // nofree
 	NOIMPLICITFLOAT                // noimplicitfloat
 	NOINLINE                       // noinline
 	NONE                           // none
@@ -208,6 +210,7 @@ const (
 	NORECURSE                      // norecurse
 	NOREDZONE                      // noredzone
 	NORETURN                       // noreturn
+	NOSYNC                         // nosync
 	NOTAIL                         // notail
 	NOUNWIND                       // nounwind
 	NSW                            // nsw
@@ -252,6 +255,7 @@ const (
 	SANITIZE_ADDRESS               // sanitize_address
 	SANITIZE_HWADDRESS             // sanitize_hwaddress
 	SANITIZE_MEMORY                // sanitize_memory
+	SANITIZE_MEMTAG                // sanitize_memtag
 	SANITIZE_THREAD                // sanitize_thread
 	SDIV                           // sdiv
 	SECTION                        // section
@@ -323,6 +327,7 @@ const (
 	WEAK                           // weak
 	WEAK_ODR                       // weak_odr
 	WEBKIT_JSCC                    // webkit_jscc
+	WILLRETURN                     // willreturn
 	WIN64CC                        // win64cc
 	WITHIN                         // within
 	WRITEONLY                      // writeonly
@@ -603,6 +608,7 @@ var tokenStr = [...]string{
 	"hidden",
 	"icmp",
 	"ifunc",
+	"immarg",
 	"inaccessiblemem_or_argmemonly",
 	"inaccessiblememonly",
 	"inalloca",
@@ -651,6 +657,7 @@ var tokenStr = [...]string{
 	"nocf_check",
 	"noduplicate",
 	"noduplicates",
+	"nofree",
 	"noimplicitfloat",
 	"noinline",
 	"none",
@@ -659,6 +666,7 @@ var tokenStr = [...]string{
 	"norecurse",
 	"noredzone",
 	"noreturn",
+	"nosync",
 	"notail",
 	"nounwind",
 	"nsw",
@@ -703,6 +711,7 @@ var tokenStr = [...]string{
 	"sanitize_address",
 	"sanitize_hwaddress",
 	"sanitize_memory",
+	"sanitize_memtag",
 	"sanitize_thread",
 	"sdiv",
 	"section",
@@ -774,6 +783,7 @@ var tokenStr = [...]string{
 	"weak",
 	"weak_odr",
 	"webkit_jscc",
+	"willreturn",
 	"win64cc",
 	"within",
 	"writeonly",

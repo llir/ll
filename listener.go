@@ -2982,12 +2982,14 @@ var ruleNodeType = [...]NodeType{
 	FuncAttr,                   // FuncAttr : 'nobuiltin'
 	FuncAttr,                   // FuncAttr : 'nocf_check'
 	FuncAttr,                   // FuncAttr : 'noduplicate'
+	FuncAttr,                   // FuncAttr : 'nofree'
 	FuncAttr,                   // FuncAttr : 'noimplicitfloat'
 	FuncAttr,                   // FuncAttr : 'noinline'
 	FuncAttr,                   // FuncAttr : 'nonlazybind'
 	FuncAttr,                   // FuncAttr : 'norecurse'
 	FuncAttr,                   // FuncAttr : 'noredzone'
 	FuncAttr,                   // FuncAttr : 'noreturn'
+	FuncAttr,                   // FuncAttr : 'nosync'
 	FuncAttr,                   // FuncAttr : 'nounwind'
 	FuncAttr,                   // FuncAttr : 'optforfuzzing'
 	FuncAttr,                   // FuncAttr : 'optnone'
@@ -2999,6 +3001,7 @@ var ruleNodeType = [...]NodeType{
 	FuncAttr,                   // FuncAttr : 'sanitize_address'
 	FuncAttr,                   // FuncAttr : 'sanitize_hwaddress'
 	FuncAttr,                   // FuncAttr : 'sanitize_memory'
+	FuncAttr,                   // FuncAttr : 'sanitize_memtag'
 	FuncAttr,                   // FuncAttr : 'sanitize_thread'
 	FuncAttr,                   // FuncAttr : 'shadowcallstack'
 	FuncAttr,                   // FuncAttr : 'speculatable'
@@ -3008,6 +3011,7 @@ var ruleNodeType = [...]NodeType{
 	FuncAttr,                   // FuncAttr : 'sspstrong'
 	FuncAttr,                   // FuncAttr : 'strictfp'
 	FuncAttr,                   // FuncAttr : 'uwtable'
+	FuncAttr,                   // FuncAttr : 'willreturn'
 	FuncAttr,                   // FuncAttr : 'writeonly'
 	InBounds,                   // InBounds : 'inbounds'
 	IPred,                      // IPred : 'eq'
@@ -3052,6 +3056,7 @@ var ruleNodeType = [...]NodeType{
 	0,                          // ParamAttribute : Byval
 	0,                          // ParamAttribute : Dereferenceable
 	0,                          // ParamAttribute : ParamAttr
+	ParamAttr,                  // ParamAttr : 'immarg'
 	ParamAttr,                  // ParamAttr : 'inalloca'
 	ParamAttr,                  // ParamAttr : 'inreg'
 	ParamAttr,                  // ParamAttr : 'nest'
