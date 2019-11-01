@@ -5361,7 +5361,7 @@ type Partition struct {
 	*Node
 }
 
-func (n Partition) StringLit() StringLit {
+func (n Partition) Name() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 

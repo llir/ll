@@ -376,7 +376,7 @@ const (
 	Params // Params=(Param)* Variadic=Ellipsis?
 	Param  // Typ=Type Attrs=(ParamAttribute)* Name=LocalIdent?
 	ParamAttr
-	Partition // StringLit
+	Partition // Name=StringLit
 	Preemption
 	ReturnAttr
 	Section     // Name=StringLit
