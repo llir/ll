@@ -659,9 +659,10 @@ type DIExpressionField interface {
 // dIExpressionFieldNode() ensures that only the following types can be
 // assigned to DIExpressionField.
 //
-func (DwarfOp) dIExpressionFieldNode() {}
-func (UintLit) dIExpressionFieldNode() {}
-func (NilNode) dIExpressionFieldNode() {}
+func (DwarfAttEncodingEnum) dIExpressionFieldNode() {}
+func (DwarfOp) dIExpressionFieldNode()              {}
+func (UintLit) dIExpressionFieldNode()              {}
+func (NilNode) dIExpressionFieldNode()              {}
 
 type DIFileField interface {
 	LlvmNode
@@ -989,8 +990,19 @@ type DwarfAttEncoding interface {
 // assigned to DwarfAttEncoding.
 //
 func (DwarfAttEncodingEnum) dwarfAttEncodingNode() {}
-func (DwarfAttEncodingInt) dwarfAttEncodingNode()  {}
 func (NilNode) dwarfAttEncodingNode()              {}
+
+type DwarfAttEncodingOrUint interface {
+	LlvmNode
+	dwarfAttEncodingOrUintNode()
+}
+
+// dwarfAttEncodingOrUintNode() ensures that only the following types can be
+// assigned to DwarfAttEncodingOrUint.
+//
+func (DwarfAttEncodingEnum) dwarfAttEncodingOrUintNode() {}
+func (DwarfAttEncodingInt) dwarfAttEncodingOrUintNode()  {}
+func (NilNode) dwarfAttEncodingOrUintNode()              {}
 
 type DwarfCC interface {
 	LlvmNode
@@ -3229,8 +3241,8 @@ type EncodingField struct {
 	*Node
 }
 
-func (n EncodingField) Encoding() DwarfAttEncoding {
-	return ToLlvmNode(n.Child(selector.DwarfAttEncoding)).(DwarfAttEncoding)
+func (n EncodingField) Encoding() DwarfAttEncodingOrUint {
+	return ToLlvmNode(n.Child(selector.DwarfAttEncodingOrUint)).(DwarfAttEncodingOrUint)
 }
 
 type EntityField struct {

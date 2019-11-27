@@ -419,6 +419,7 @@ var (
 	DITemplateTypeParameterField    = OneOf(ll.DITemplateTypeParameterField...)
 	DITemplateValueParameterField   = OneOf(ll.DITemplateValueParameterField...)
 	DwarfAttEncoding                = OneOf(ll.DwarfAttEncoding...)
+	DwarfAttEncodingOrUint          = OneOf(ll.DwarfAttEncodingOrUint...)
 	DwarfCC                         = OneOf(ll.DwarfCC...)
 	DwarfLang                       = OneOf(ll.DwarfLang...)
 	DwarfMacinfo                    = OneOf(ll.DwarfMacinfo...)

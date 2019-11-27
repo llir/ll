@@ -256,7 +256,7 @@ const (
 	DwoIdField                 // DwoId=UintLit
 	ElementsField              // Elements=MDField
 	EmissionKindField          // EmissionKind
-	EncodingField              // Encoding=DwarfAttEncoding
+	EncodingField              // Encoding=DwarfAttEncodingOrUint
 	EntityField                // Entity=MDField
 	EnumsField                 // Enums=MDField
 	ExportSymbolsField         // ExportSymbols=BoolLit
@@ -972,6 +972,7 @@ var DIEnumeratorField = []NodeType{
 }
 
 var DIExpressionField = []NodeType{
+	DwarfAttEncodingEnum,
 	DwarfOp,
 	UintLit,
 }
@@ -1147,6 +1148,10 @@ var DITemplateValueParameterField = []NodeType{
 }
 
 var DwarfAttEncoding = []NodeType{
+	DwarfAttEncodingEnum,
+}
+
+var DwarfAttEncodingOrUint = []NodeType{
 	DwarfAttEncodingEnum,
 	DwarfAttEncodingInt,
 }
@@ -2534,6 +2539,7 @@ var ruleNodeType = [...]NodeType{
 	0,                          // DIExpressionField_list_withsep_opt : DIExpressionField_list_withsep
 	0,                          // DIExpressionField_list_withsep_opt :
 	0,                          // DIExpressionField : UintLit
+	0,                          // DIExpressionField : DwarfAttEncoding
 	0,                          // DIExpressionField : DwarfOp
 	DIFile,                     // DIFile : '!DIFile' '(' DIFileField_list_withsep_opt ')'
 	0,                          // DIFileField_list_withsep : DIFileField_list_withsep ',' DIFileField
@@ -2762,7 +2768,7 @@ var ruleNodeType = [...]NodeType{
 	DwoIdField,                 // DwoIdField : 'dwoId:' UintLit
 	ElementsField,              // ElementsField : 'elements:' MDField
 	EmissionKindField,          // EmissionKindField : 'emissionKind:' EmissionKind
-	EncodingField,              // EncodingField : 'encoding:' DwarfAttEncoding
+	EncodingField,              // EncodingField : 'encoding:' DwarfAttEncodingOrUint
 	EntityField,                // EntityField : 'entity:' MDField
 	EnumsField,                 // EnumsField : 'enums:' MDField
 	ExportSymbolsField,         // ExportSymbolsField : 'exportSymbols:' BoolLit
@@ -2837,7 +2843,8 @@ var ruleNodeType = [...]NodeType{
 	DISPFlagEnum,               // DISPFlag : disp_flag_tok
 	DISPFlagInt,                // DISPFlag : UintLit
 	DwarfAttEncodingEnum,       // DwarfAttEncoding : dwarf_att_encoding_tok
-	DwarfAttEncodingInt,        // DwarfAttEncoding : UintLit
+	0,                          // DwarfAttEncodingOrUint : DwarfAttEncoding
+	DwarfAttEncodingInt,        // DwarfAttEncodingOrUint : UintLit
 	DwarfCCEnum,                // DwarfCC : dwarf_cc_tok
 	DwarfCCInt,                 // DwarfCC : UintLit
 	DwarfLangEnum,              // DwarfLang : dwarf_lang_tok
