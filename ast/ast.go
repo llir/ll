@@ -1129,6 +1129,25 @@ func (AttrString) funcAttributeNode()     {}
 func (FuncAttr) funcAttributeNode()       {}
 func (NilNode) funcAttributeNode()        {}
 
+type FuncAttributeAndAlign interface {
+	LlvmNode
+	funcAttributeAndAlignNode()
+}
+
+// funcAttributeAndAlignNode() ensures that only the following types can be
+// assigned to FuncAttributeAndAlign.
+//
+func (Align) funcAttributeAndAlignNode()          {}
+func (AlignPair) funcAttributeAndAlignNode()      {}
+func (AlignStack) funcAttributeAndAlignNode()     {}
+func (AlignStackPair) funcAttributeAndAlignNode() {}
+func (AllocSize) funcAttributeAndAlignNode()      {}
+func (AttrGroupID) funcAttributeAndAlignNode()    {}
+func (AttrPair) funcAttributeAndAlignNode()       {}
+func (AttrString) funcAttributeAndAlignNode()     {}
+func (FuncAttr) funcAttributeAndAlignNode()       {}
+func (NilNode) funcAttributeAndAlignNode()        {}
+
 type GenericDINodeField interface {
 	LlvmNode
 	genericDINodeFieldNode()
@@ -1431,7 +1450,6 @@ type ReturnAttribute interface {
 // returnAttributeNode() ensures that only the following types can be
 // assigned to ReturnAttribute.
 //
-func (Align) returnAttributeNode()                 {}
 func (Dereferenceable) returnAttributeNode()       {}
 func (DereferenceableOrNull) returnAttributeNode() {}
 func (ReturnAttr) returnAttributeNode()            {}
@@ -4026,11 +4044,11 @@ func (n FuncHeader) AddrSpace() (AddrSpace, bool) {
 	return field, field.IsValid()
 }
 
-func (n FuncHeader) FuncAttrs() []FuncAttribute {
-	nodes := n.Children(selector.FuncAttribute)
-	var ret = make([]FuncAttribute, 0, len(nodes))
+func (n FuncHeader) FuncAttrs() []FuncAttributeAndAlign {
+	nodes := n.Children(selector.FuncAttributeAndAlign)
+	var ret = make([]FuncAttributeAndAlign, 0, len(nodes))
 	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(FuncAttribute))
+		ret = append(ret, ToLlvmNode(node).(FuncAttributeAndAlign))
 	}
 	return ret
 }

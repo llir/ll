@@ -40,7 +40,7 @@ const (
 	IndirectSymbolKind
 	FuncDecl         // Metadata=(MetadataAttachment)* Header=FuncHeader
 	FuncDef          // Header=FuncHeader Metadata=(MetadataAttachment)* Body=FuncBody
-	FuncHeader       // ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? CallingConv? ReturnAttrs=(ReturnAttribute)* RetType=Type Name=GlobalIdent Params UnnamedAddr? AddrSpace? FuncAttrs=(FuncAttribute)* Section? Partition? Comdat? GCNode? Prefix? Prologue? Personality?
+	FuncHeader       // ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? CallingConv? ReturnAttrs=(ReturnAttribute)* RetType=Type Name=GlobalIdent Params UnnamedAddr? AddrSpace? FuncAttrs=(FuncAttributeAndAlign)* Section? Partition? Comdat? GCNode? Prefix? Prologue? Personality?
 	GCNode           // Name=StringLit
 	Prefix           // TypeConst
 	Prologue         // TypeConst
@@ -1218,6 +1218,18 @@ var FuncAttribute = []NodeType{
 	FuncAttr,
 }
 
+var FuncAttributeAndAlign = []NodeType{
+	Align,
+	AlignPair,
+	AlignStack,
+	AlignStackPair,
+	AllocSize,
+	AttrGroupID,
+	AttrPair,
+	AttrString,
+	FuncAttr,
+}
+
 var GenericDINodeField = []NodeType{
 	HeaderField,
 	OperandsField,
@@ -1443,7 +1455,6 @@ var ParamAttribute = []NodeType{
 }
 
 var ReturnAttribute = []NodeType{
-	Align,
 	Dereferenceable,
 	DereferenceableOrNull,
 	ReturnAttr,
@@ -1928,11 +1939,11 @@ var ruleNodeType = [...]NodeType{
 	0,                          // MetadataAttachment_optlist : MetadataAttachment_optlist MetadataAttachment
 	0,                          // MetadataAttachment_optlist :
 	FuncDef,                    // FuncDef : 'define' FuncHeader MetadataAttachment_optlist FuncBody
-	0,                          // FuncAttribute_optlist : FuncAttribute_optlist FuncAttribute
-	0,                          // FuncAttribute_optlist :
-	FuncHeader,                 // FuncHeader : Linkage Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttribute_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttribute_optlist Sectionopt Partitionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
-	FuncHeader,                 // FuncHeader : ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttribute_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttribute_optlist Sectionopt Partitionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
-	FuncHeader,                 // FuncHeader : Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttribute_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttribute_optlist Sectionopt Partitionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
+	0,                          // FuncAttributeAndAlign_optlist : FuncAttributeAndAlign_optlist FuncAttributeAndAlign
+	0,                          // FuncAttributeAndAlign_optlist :
+	FuncHeader,                 // FuncHeader : Linkage Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttribute_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttributeAndAlign_optlist Sectionopt Partitionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
+	FuncHeader,                 // FuncHeader : ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttribute_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttributeAndAlign_optlist Sectionopt Partitionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
+	FuncHeader,                 // FuncHeader : Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttribute_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttributeAndAlign_optlist Sectionopt Partitionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
 	0,                          // ReturnAttribute_optlist : ReturnAttribute_optlist ReturnAttribute
 	0,                          // ReturnAttribute_optlist :
 	GCNode,                     // GC : 'gc' StringLit
@@ -1945,6 +1956,8 @@ var ruleNodeType = [...]NodeType{
 	0,                          // UseListOrder_optlist : UseListOrder_optlist UseListOrder
 	0,                          // UseListOrder_optlist :
 	AttrGroupDef,               // AttrGroupDef : 'attributes' AttrGroupID '=' '{' FuncAttribute_optlist '}'
+	0,                          // FuncAttribute_optlist : FuncAttribute_optlist FuncAttribute
+	0,                          // FuncAttribute_optlist :
 	0,                          // MetadataNode_list_withsep : MetadataNode_list_withsep ',' MetadataNode
 	0,                          // MetadataNode_list_withsep : MetadataNode
 	0,                          // MetadataNode_list_withsep_opt : MetadataNode_list_withsep
@@ -2975,6 +2988,8 @@ var ruleNodeType = [...]NodeType{
 	0,                          // FuncAttribute : AlignStackPair
 	0,                          // FuncAttribute : AllocSize
 	0,                          // FuncAttribute : FuncAttr
+	0,                          // FuncAttributeAndAlign : FuncAttribute
+	0,                          // FuncAttributeAndAlign : Align
 	FuncAttr,                   // FuncAttr : 'alwaysinline'
 	FuncAttr,                   // FuncAttr : 'argmemonly'
 	FuncAttr,                   // FuncAttr : 'builtin'
@@ -3082,7 +3097,6 @@ var ruleNodeType = [...]NodeType{
 	Partition,                  // Partition : 'partition' StringLit
 	Preemption,                 // Preemption : 'dso_local'
 	Preemption,                 // Preemption : 'dso_preemptable'
-	0,                          // ReturnAttribute : Align
 	0,                          // ReturnAttribute : Dereferenceable
 	0,                          // ReturnAttribute : ReturnAttr
 	ReturnAttr,                 // ReturnAttr : 'inreg'

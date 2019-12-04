@@ -429,6 +429,7 @@ var (
 	ExceptionScope                  = OneOf(ll.ExceptionScope...)
 	FirstClassType                  = OneOf(ll.FirstClassType...)
 	FuncAttribute                   = OneOf(ll.FuncAttribute...)
+	FuncAttributeAndAlign           = OneOf(ll.FuncAttributeAndAlign...)
 	GenericDINodeField              = OneOf(ll.GenericDINodeField...)
 	IndirectSymbol                  = OneOf(ll.IndirectSymbol...)
 	Instruction                     = OneOf(ll.Instruction...)
