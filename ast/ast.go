@@ -2364,7 +2364,7 @@ func (n CallBrTerm) Normal() Label {
 	return Label{n.Child(selector.Label)}
 }
 
-func (n CallBrTerm) Other() []Label {
+func (n CallBrTerm) Others() []Label {
 	nodes := n.Child(selector.Label).NextAll(selector.Label)
 	var ret = make([]Label, 0, len(nodes))
 	for _, node := range nodes {

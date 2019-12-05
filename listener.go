@@ -200,7 +200,7 @@ const (
 	Case                       // X=TypeConst Target=Label
 	IndirectBrTerm             // Addr=TypeValue ValidTargets=(Label)* Metadata=(MetadataAttachment)*
 	InvokeTerm                 // CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Invokee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* Normal=Label Exception=Label Metadata=(MetadataAttachment)*
-	CallBrTerm                 // CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Callee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* Normal=Label Other=(Label)* Metadata=(MetadataAttachment)*
+	CallBrTerm                 // CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Callee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* Normal=Label Others=(Label)* Metadata=(MetadataAttachment)*
 	ResumeTerm                 // X=TypeValue Metadata=(MetadataAttachment)*
 	CatchSwitchTerm            // Scope=ExceptionScope Handlers UnwindTarget Metadata=(MetadataAttachment)*
 	Handlers                   // Labels=(Label)+
