@@ -1129,24 +1129,31 @@ func (AttrString) funcAttributeNode()     {}
 func (FuncAttr) funcAttributeNode()       {}
 func (NilNode) funcAttributeNode()        {}
 
-type FuncAttributeAndAlign interface {
+type FuncHdrField interface {
 	LlvmNode
-	funcAttributeAndAlignNode()
+	funcHdrFieldNode()
 }
 
-// funcAttributeAndAlignNode() ensures that only the following types can be
-// assigned to FuncAttributeAndAlign.
+// funcHdrFieldNode() ensures that only the following types can be
+// assigned to FuncHdrField.
 //
-func (Align) funcAttributeAndAlignNode()          {}
-func (AlignPair) funcAttributeAndAlignNode()      {}
-func (AlignStack) funcAttributeAndAlignNode()     {}
-func (AlignStackPair) funcAttributeAndAlignNode() {}
-func (AllocSize) funcAttributeAndAlignNode()      {}
-func (AttrGroupID) funcAttributeAndAlignNode()    {}
-func (AttrPair) funcAttributeAndAlignNode()       {}
-func (AttrString) funcAttributeAndAlignNode()     {}
-func (FuncAttr) funcAttributeAndAlignNode()       {}
-func (NilNode) funcAttributeAndAlignNode()        {}
+func (Align) funcHdrFieldNode()          {}
+func (AlignPair) funcHdrFieldNode()      {}
+func (AlignStack) funcHdrFieldNode()     {}
+func (AlignStackPair) funcHdrFieldNode() {}
+func (AllocSize) funcHdrFieldNode()      {}
+func (AttrGroupID) funcHdrFieldNode()    {}
+func (AttrPair) funcHdrFieldNode()       {}
+func (AttrString) funcHdrFieldNode()     {}
+func (Comdat) funcHdrFieldNode()         {}
+func (FuncAttr) funcHdrFieldNode()       {}
+func (GCNode) funcHdrFieldNode()         {}
+func (Partition) funcHdrFieldNode()      {}
+func (Personality) funcHdrFieldNode()    {}
+func (Prefix) funcHdrFieldNode()         {}
+func (Prologue) funcHdrFieldNode()       {}
+func (Section) funcHdrFieldNode()        {}
+func (NilNode) funcHdrFieldNode()        {}
 
 type GenericDINodeField interface {
 	LlvmNode
@@ -1160,6 +1167,20 @@ func (HeaderField) genericDINodeFieldNode()   {}
 func (OperandsField) genericDINodeFieldNode() {}
 func (TagField) genericDINodeFieldNode()      {}
 func (NilNode) genericDINodeFieldNode()       {}
+
+type GlobalField interface {
+	LlvmNode
+	globalFieldNode()
+}
+
+// globalFieldNode() ensures that only the following types can be
+// assigned to GlobalField.
+//
+func (Align) globalFieldNode()     {}
+func (Comdat) globalFieldNode()    {}
+func (Partition) globalFieldNode() {}
+func (Section) globalFieldNode()   {}
+func (NilNode) globalFieldNode()   {}
 
 type IndirectSymbol interface {
 	LlvmNode
@@ -4044,48 +4065,13 @@ func (n FuncHeader) AddrSpace() (AddrSpace, bool) {
 	return field, field.IsValid()
 }
 
-func (n FuncHeader) FuncAttrs() []FuncAttributeAndAlign {
-	nodes := n.Children(selector.FuncAttributeAndAlign)
-	var ret = make([]FuncAttributeAndAlign, 0, len(nodes))
+func (n FuncHeader) FuncHdrFields() []FuncHdrField {
+	nodes := n.Children(selector.FuncHdrField)
+	var ret = make([]FuncHdrField, 0, len(nodes))
 	for _, node := range nodes {
-		ret = append(ret, ToLlvmNode(node).(FuncAttributeAndAlign))
+		ret = append(ret, ToLlvmNode(node).(FuncHdrField))
 	}
 	return ret
-}
-
-func (n FuncHeader) Section() (Section, bool) {
-	field := Section{n.Child(selector.Section)}
-	return field, field.IsValid()
-}
-
-func (n FuncHeader) Partition() (Partition, bool) {
-	field := Partition{n.Child(selector.Partition)}
-	return field, field.IsValid()
-}
-
-func (n FuncHeader) Comdat() (Comdat, bool) {
-	field := Comdat{n.Child(selector.Comdat)}
-	return field, field.IsValid()
-}
-
-func (n FuncHeader) GCNode() (GCNode, bool) {
-	field := GCNode{n.Child(selector.GCNode)}
-	return field, field.IsValid()
-}
-
-func (n FuncHeader) Prefix() (Prefix, bool) {
-	field := Prefix{n.Child(selector.Prefix)}
-	return field, field.IsValid()
-}
-
-func (n FuncHeader) Prologue() (Prologue, bool) {
-	field := Prologue{n.Child(selector.Prologue)}
-	return field, field.IsValid()
-}
-
-func (n FuncHeader) Personality() (Personality, bool) {
-	field := Personality{n.Child(selector.Personality)}
-	return field, field.IsValid()
 }
 
 type FuncType struct {
@@ -4264,24 +4250,13 @@ func (n GlobalDecl) Init() (Constant, bool) {
 	return field, field.LlvmNode() != nil
 }
 
-func (n GlobalDecl) Section() (Section, bool) {
-	field := Section{n.Child(selector.Section)}
-	return field, field.IsValid()
-}
-
-func (n GlobalDecl) Partition() (Partition, bool) {
-	field := Partition{n.Child(selector.Partition)}
-	return field, field.IsValid()
-}
-
-func (n GlobalDecl) Comdat() (Comdat, bool) {
-	field := Comdat{n.Child(selector.Comdat)}
-	return field, field.IsValid()
-}
-
-func (n GlobalDecl) Align() (Align, bool) {
-	field := Align{n.Child(selector.Align)}
-	return field, field.IsValid()
+func (n GlobalDecl) GlobalFields() []GlobalField {
+	nodes := n.Children(selector.GlobalField)
+	var ret = make([]GlobalField, 0, len(nodes))
+	for _, node := range nodes {
+		ret = append(ret, ToLlvmNode(node).(GlobalField))
+	}
+	return ret
 }
 
 func (n GlobalDecl) Metadata() []MetadataAttachment {

@@ -33,14 +33,14 @@ const (
 	TypeDef          // Name=LocalIdent Typ=(OpaqueType | Type)
 	ComdatDef        // Name=ComdatName Kind=SelectionKind
 	SelectionKind
-	GlobalDecl // Name=GlobalIdent Linkage=(ExternLinkage | Linkage)? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? AddrSpace? ExternallyInitialized? Immutable ContentType=Type Init=Constant? Section? Partition? Comdat? Align? Metadata=(MetadataAttachment)* FuncAttrs=(FuncAttribute)*
+	GlobalDecl // Name=GlobalIdent Linkage=(ExternLinkage | Linkage)? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? AddrSpace? ExternallyInitialized? Immutable ContentType=Type Init=Constant? GlobalFields=(GlobalField)* Metadata=(MetadataAttachment)* FuncAttrs=(FuncAttribute)*
 	ExternallyInitialized
 	Immutable
 	IndirectSymbolDef // Name=GlobalIdent ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? ThreadLocal? UnnamedAddr? IndirectSymbolKind ContentType=Type IndirectSymbol Partitions=(Partition)*
 	IndirectSymbolKind
 	FuncDecl         // Metadata=(MetadataAttachment)* Header=FuncHeader
 	FuncDef          // Header=FuncHeader Metadata=(MetadataAttachment)* Body=FuncBody
-	FuncHeader       // ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? CallingConv? ReturnAttrs=(ReturnAttribute)* RetType=Type Name=GlobalIdent Params UnnamedAddr? AddrSpace? FuncAttrs=(FuncAttributeAndAlign)* Section? Partition? Comdat? GCNode? Prefix? Prologue? Personality?
+	FuncHeader       // ExternLinkage? Linkage? Preemption? Visibility? DLLStorageClass? CallingConv? ReturnAttrs=(ReturnAttribute)* RetType=Type Name=GlobalIdent Params UnnamedAddr? AddrSpace? FuncHdrFields=(FuncHdrField)*
 	GCNode           // Name=StringLit
 	Prefix           // TypeConst
 	Prologue         // TypeConst
@@ -1218,7 +1218,7 @@ var FuncAttribute = []NodeType{
 	FuncAttr,
 }
 
-var FuncAttributeAndAlign = []NodeType{
+var FuncHdrField = []NodeType{
 	Align,
 	AlignPair,
 	AlignStack,
@@ -1227,13 +1227,27 @@ var FuncAttributeAndAlign = []NodeType{
 	AttrGroupID,
 	AttrPair,
 	AttrString,
+	Comdat,
 	FuncAttr,
+	GCNode,
+	Partition,
+	Personality,
+	Prefix,
+	Prologue,
+	Section,
 }
 
 var GenericDINodeField = []NodeType{
 	HeaderField,
 	OperandsField,
 	TagField,
+}
+
+var GlobalField = []NodeType{
+	Align,
+	Comdat,
+	Partition,
+	Section,
 }
 
 var IndirectSymbol = []NodeType{
@@ -1791,143 +1805,29 @@ var ruleNodeType = [...]NodeType{
 	SelectionKind,              // SelectionKind : 'samesize'
 	0,                          // FuncAttribute_list : FuncAttribute_list FuncAttribute
 	0,                          // FuncAttribute_list : FuncAttribute
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Partition ',' Comdat ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Partition ',' Comdat ',' Align list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Partition ',' Comdat ',' Align FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Partition ',' Comdat ',' Align
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Partition ',' Comdat list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Partition ',' Comdat list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Partition ',' Comdat FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Partition ',' Comdat
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Partition ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Partition ',' Align list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Partition ',' Align FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Partition ',' Align
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Partition list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Partition list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Partition FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Partition
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Comdat ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Comdat ',' Align list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Comdat ',' Align FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Comdat ',' Align
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Comdat list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Comdat list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Comdat FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Comdat
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Align list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Align FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section ',' Align
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Section
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Partition ',' Comdat ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Partition ',' Comdat ',' Align list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Partition ',' Comdat ',' Align FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Partition ',' Comdat ',' Align
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Partition ',' Comdat list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Partition ',' Comdat list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Partition ',' Comdat FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Partition ',' Comdat
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Partition ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Partition ',' Align list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Partition ',' Align FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Partition ',' Align
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Partition list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Partition list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Partition FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Partition
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Comdat ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Comdat ',' Align list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Comdat ',' Align FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Comdat ',' Align
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Comdat list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Comdat list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Comdat FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Comdat
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Align list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Align FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type ',' Align
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type list_of_','_and_1_elements list_of_','_and_1_elements1 FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type list_of_','_and_1_elements list_of_','_and_1_elements1
 	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type list_of_','_and_1_elements FuncAttribute_list
 	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Partition ',' Comdat ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Partition ',' Comdat ',' Align list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Partition ',' Comdat ',' Align FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Partition ',' Comdat ',' Align
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Partition ',' Comdat list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Partition ',' Comdat list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Partition ',' Comdat FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Partition ',' Comdat
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Partition ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Partition ',' Align list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Partition ',' Align FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Partition ',' Align
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Partition list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Partition list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Partition FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Partition
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat ',' Align list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat ',' Align FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat ',' Align
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Comdat
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Align list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Align FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section ',' Align
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Section
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Partition ',' Comdat ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Partition ',' Comdat ',' Align list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Partition ',' Comdat ',' Align FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Partition ',' Comdat ',' Align
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Partition ',' Comdat list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Partition ',' Comdat list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Partition ',' Comdat FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Partition ',' Comdat
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Partition ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Partition ',' Align list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Partition ',' Align FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Partition ',' Align
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Partition list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Partition list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Partition FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Partition
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat ',' Align list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat ',' Align FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat ',' Align
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Comdat
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Align list_of_','_and_1_elements FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Align list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Align FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant ',' Align
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements list_of_','_and_1_elements1 FuncAttribute_list
+	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements list_of_','_and_1_elements1
 	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements FuncAttribute_list
 	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant list_of_','_and_1_elements
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant FuncAttribute_list
-	GlobalDecl,                 // GlobalDecl : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt AddrSpaceopt ExternallyInitializedopt Immutable Type Constant
-	0,                          // list_of_','_and_1_elements : list_of_','_and_1_elements ',' MetadataAttachment
-	0,                          // list_of_','_and_1_elements : ',' MetadataAttachment
+	0,                          // list_of_','_and_1_elements : list_of_','_and_1_elements ',' GlobalField
+	0,                          // list_of_','_and_1_elements :
+	0,                          // list_of_','_and_1_elements1 : list_of_','_and_1_elements1 ',' MetadataAttachment
+	0,                          // list_of_','_and_1_elements1 : ',' MetadataAttachment
+	0,                          // GlobalField : Section
+	0,                          // GlobalField : Partition
+	0,                          // GlobalField : Comdat
+	0,                          // GlobalField : Align
 	ExternallyInitialized,      // ExternallyInitialized : 'externally_initialized'
 	Immutable,                  // Immutable : 'constant'
 	Immutable,                  // Immutable : 'global'
-	IndirectSymbolDef,          // IndirectSymbolDef : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt IndirectSymbolKind Type ',' IndirectSymbol list_of_','_and_1_elements1
-	IndirectSymbolDef,          // IndirectSymbolDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt IndirectSymbolKind Type ',' IndirectSymbol list_of_','_and_1_elements1
-	0,                          // list_of_','_and_1_elements1 : list_of_','_and_1_elements1 ',' Partition
-	0,                          // list_of_','_and_1_elements1 :
+	IndirectSymbolDef,          // IndirectSymbolDef : GlobalIdent '=' ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt IndirectSymbolKind Type ',' IndirectSymbol list_of_','_and_1_elements2
+	IndirectSymbolDef,          // IndirectSymbolDef : GlobalIdent '=' Linkageopt Preemptionopt Visibilityopt DLLStorageClassopt ThreadLocalopt UnnamedAddropt IndirectSymbolKind Type ',' IndirectSymbol list_of_','_and_1_elements2
+	0,                          // list_of_','_and_1_elements2 : list_of_','_and_1_elements2 ',' Partition
+	0,                          // list_of_','_and_1_elements2 :
 	IndirectSymbolKind,         // IndirectSymbolKind : 'alias'
 	IndirectSymbolKind,         // IndirectSymbolKind : 'ifunc'
 	0,                          // IndirectSymbol : TypeConst
@@ -1939,13 +1839,22 @@ var ruleNodeType = [...]NodeType{
 	0,                          // MetadataAttachment_optlist : MetadataAttachment_optlist MetadataAttachment
 	0,                          // MetadataAttachment_optlist :
 	FuncDef,                    // FuncDef : 'define' FuncHeader MetadataAttachment_optlist FuncBody
-	0,                          // FuncAttributeAndAlign_optlist : FuncAttributeAndAlign_optlist FuncAttributeAndAlign
-	0,                          // FuncAttributeAndAlign_optlist :
-	FuncHeader,                 // FuncHeader : Linkage Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttribute_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttributeAndAlign_optlist Sectionopt Partitionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
-	FuncHeader,                 // FuncHeader : ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttribute_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttributeAndAlign_optlist Sectionopt Partitionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
-	FuncHeader,                 // FuncHeader : Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttribute_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncAttributeAndAlign_optlist Sectionopt Partitionopt Comdatopt GCopt Prefixopt Prologueopt Personalityopt
+	0,                          // FuncHdrField_optlist : FuncHdrField_optlist FuncHdrField
+	0,                          // FuncHdrField_optlist :
+	FuncHeader,                 // FuncHeader : Linkage Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttribute_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncHdrField_optlist
+	FuncHeader,                 // FuncHeader : ExternLinkage Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttribute_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncHdrField_optlist
+	FuncHeader,                 // FuncHeader : Preemptionopt Visibilityopt DLLStorageClassopt CallingConvopt ReturnAttribute_optlist Type GlobalIdent '(' Params ')' UnnamedAddropt AddrSpaceopt FuncHdrField_optlist
 	0,                          // ReturnAttribute_optlist : ReturnAttribute_optlist ReturnAttribute
 	0,                          // ReturnAttribute_optlist :
+	0,                          // FuncHdrField : FuncAttribute
+	0,                          // FuncHdrField : Section
+	0,                          // FuncHdrField : Partition
+	0,                          // FuncHdrField : Comdat
+	0,                          // FuncHdrField : Align
+	0,                          // FuncHdrField : GC
+	0,                          // FuncHdrField : Prefix
+	0,                          // FuncHdrField : Prologue
+	0,                          // FuncHdrField : Personality
 	GCNode,                     // GC : 'gc' StringLit
 	Prefix,                     // Prefix : 'prefix' TypeConst
 	Prologue,                   // Prologue : 'prologue' TypeConst
@@ -2117,13 +2026,13 @@ var ruleNodeType = [...]NodeType{
 	ExtractElementExpr,         // ExtractElementExpr : 'extractelement' '(' TypeConst ',' TypeConst ')'
 	InsertElementExpr,          // InsertElementExpr : 'insertelement' '(' TypeConst ',' TypeConst ',' TypeConst ')'
 	ShuffleVectorExpr,          // ShuffleVectorExpr : 'shufflevector' '(' TypeConst ',' TypeConst ',' TypeConst ')'
-	ExtractValueExpr,           // ExtractValueExpr : 'extractvalue' '(' TypeConst list_of_','_and_1_elements2 ')'
-	0,                          // list_of_','_and_1_elements2 : list_of_','_and_1_elements2 ',' UintLit
-	0,                          // list_of_','_and_1_elements2 :
-	InsertValueExpr,            // InsertValueExpr : 'insertvalue' '(' TypeConst ',' TypeConst list_of_','_and_1_elements2 ')'
-	GetElementPtrExpr,          // GetElementPtrExpr : 'getelementptr' InBoundsopt '(' Type ',' TypeConst list_of_','_and_1_elements3 ')'
-	0,                          // list_of_','_and_1_elements3 : list_of_','_and_1_elements3 ',' GEPIndex
+	ExtractValueExpr,           // ExtractValueExpr : 'extractvalue' '(' TypeConst list_of_','_and_1_elements3 ')'
+	0,                          // list_of_','_and_1_elements3 : list_of_','_and_1_elements3 ',' UintLit
 	0,                          // list_of_','_and_1_elements3 :
+	InsertValueExpr,            // InsertValueExpr : 'insertvalue' '(' TypeConst ',' TypeConst list_of_','_and_1_elements3 ')'
+	GetElementPtrExpr,          // GetElementPtrExpr : 'getelementptr' InBoundsopt '(' Type ',' TypeConst list_of_','_and_1_elements4 ')'
+	0,                          // list_of_','_and_1_elements4 : list_of_','_and_1_elements4 ',' GEPIndex
+	0,                          // list_of_','_and_1_elements4 :
 	GEPIndex,                   // GEPIndex : InRangeopt TypeConst
 	InRange,                    // InRange : 'inrange'
 	TruncExpr,                  // TruncExpr : 'trunc' '(' TypeConst 'to' Type ')'
@@ -2203,96 +2112,96 @@ var ruleNodeType = [...]NodeType{
 	0,                          // ValueInstruction : CleanupPadInst
 	0,                          // FastMathFlag_optlist : FastMathFlag_optlist FastMathFlag
 	0,                          // FastMathFlag_optlist :
-	FNegInst,                   // FNegInst : 'fneg' FastMathFlag_optlist TypeValue list_of_','_and_1_elements
+	FNegInst,                   // FNegInst : 'fneg' FastMathFlag_optlist TypeValue list_of_','_and_1_elements1
 	FNegInst,                   // FNegInst : 'fneg' FastMathFlag_optlist TypeValue
-	AddInst,                    // AddInst : 'add' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements
+	AddInst,                    // AddInst : 'add' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements1
 	AddInst,                    // AddInst : 'add' OverflowFlag_optlist TypeValue ',' Value
-	FAddInst,                   // FAddInst : 'fadd' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements
+	FAddInst,                   // FAddInst : 'fadd' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements1
 	FAddInst,                   // FAddInst : 'fadd' FastMathFlag_optlist TypeValue ',' Value
-	SubInst,                    // SubInst : 'sub' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements
+	SubInst,                    // SubInst : 'sub' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements1
 	SubInst,                    // SubInst : 'sub' OverflowFlag_optlist TypeValue ',' Value
-	FSubInst,                   // FSubInst : 'fsub' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements
+	FSubInst,                   // FSubInst : 'fsub' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements1
 	FSubInst,                   // FSubInst : 'fsub' FastMathFlag_optlist TypeValue ',' Value
-	MulInst,                    // MulInst : 'mul' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements
+	MulInst,                    // MulInst : 'mul' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements1
 	MulInst,                    // MulInst : 'mul' OverflowFlag_optlist TypeValue ',' Value
-	FMulInst,                   // FMulInst : 'fmul' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements
+	FMulInst,                   // FMulInst : 'fmul' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements1
 	FMulInst,                   // FMulInst : 'fmul' FastMathFlag_optlist TypeValue ',' Value
-	UDivInst,                   // UDivInst : 'udiv' Exactopt TypeValue ',' Value list_of_','_and_1_elements
+	UDivInst,                   // UDivInst : 'udiv' Exactopt TypeValue ',' Value list_of_','_and_1_elements1
 	UDivInst,                   // UDivInst : 'udiv' Exactopt TypeValue ',' Value
-	SDivInst,                   // SDivInst : 'sdiv' Exactopt TypeValue ',' Value list_of_','_and_1_elements
+	SDivInst,                   // SDivInst : 'sdiv' Exactopt TypeValue ',' Value list_of_','_and_1_elements1
 	SDivInst,                   // SDivInst : 'sdiv' Exactopt TypeValue ',' Value
-	FDivInst,                   // FDivInst : 'fdiv' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements
+	FDivInst,                   // FDivInst : 'fdiv' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements1
 	FDivInst,                   // FDivInst : 'fdiv' FastMathFlag_optlist TypeValue ',' Value
-	URemInst,                   // URemInst : 'urem' TypeValue ',' Value list_of_','_and_1_elements
+	URemInst,                   // URemInst : 'urem' TypeValue ',' Value list_of_','_and_1_elements1
 	URemInst,                   // URemInst : 'urem' TypeValue ',' Value
-	SRemInst,                   // SRemInst : 'srem' TypeValue ',' Value list_of_','_and_1_elements
+	SRemInst,                   // SRemInst : 'srem' TypeValue ',' Value list_of_','_and_1_elements1
 	SRemInst,                   // SRemInst : 'srem' TypeValue ',' Value
-	FRemInst,                   // FRemInst : 'frem' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements
+	FRemInst,                   // FRemInst : 'frem' FastMathFlag_optlist TypeValue ',' Value list_of_','_and_1_elements1
 	FRemInst,                   // FRemInst : 'frem' FastMathFlag_optlist TypeValue ',' Value
-	ShlInst,                    // ShlInst : 'shl' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements
+	ShlInst,                    // ShlInst : 'shl' OverflowFlag_optlist TypeValue ',' Value list_of_','_and_1_elements1
 	ShlInst,                    // ShlInst : 'shl' OverflowFlag_optlist TypeValue ',' Value
-	LShrInst,                   // LShrInst : 'lshr' Exactopt TypeValue ',' Value list_of_','_and_1_elements
+	LShrInst,                   // LShrInst : 'lshr' Exactopt TypeValue ',' Value list_of_','_and_1_elements1
 	LShrInst,                   // LShrInst : 'lshr' Exactopt TypeValue ',' Value
-	AShrInst,                   // AShrInst : 'ashr' Exactopt TypeValue ',' Value list_of_','_and_1_elements
+	AShrInst,                   // AShrInst : 'ashr' Exactopt TypeValue ',' Value list_of_','_and_1_elements1
 	AShrInst,                   // AShrInst : 'ashr' Exactopt TypeValue ',' Value
-	AndInst,                    // AndInst : 'and' TypeValue ',' Value list_of_','_and_1_elements
+	AndInst,                    // AndInst : 'and' TypeValue ',' Value list_of_','_and_1_elements1
 	AndInst,                    // AndInst : 'and' TypeValue ',' Value
-	OrInst,                     // OrInst : 'or' TypeValue ',' Value list_of_','_and_1_elements
+	OrInst,                     // OrInst : 'or' TypeValue ',' Value list_of_','_and_1_elements1
 	OrInst,                     // OrInst : 'or' TypeValue ',' Value
-	XorInst,                    // XorInst : 'xor' TypeValue ',' Value list_of_','_and_1_elements
+	XorInst,                    // XorInst : 'xor' TypeValue ',' Value list_of_','_and_1_elements1
 	XorInst,                    // XorInst : 'xor' TypeValue ',' Value
-	ExtractElementInst,         // ExtractElementInst : 'extractelement' TypeValue ',' TypeValue list_of_','_and_1_elements
+	ExtractElementInst,         // ExtractElementInst : 'extractelement' TypeValue ',' TypeValue list_of_','_and_1_elements1
 	ExtractElementInst,         // ExtractElementInst : 'extractelement' TypeValue ',' TypeValue
-	InsertElementInst,          // InsertElementInst : 'insertelement' TypeValue ',' TypeValue ',' TypeValue list_of_','_and_1_elements
+	InsertElementInst,          // InsertElementInst : 'insertelement' TypeValue ',' TypeValue ',' TypeValue list_of_','_and_1_elements1
 	InsertElementInst,          // InsertElementInst : 'insertelement' TypeValue ',' TypeValue ',' TypeValue
-	ShuffleVectorInst,          // ShuffleVectorInst : 'shufflevector' TypeValue ',' TypeValue ',' TypeValue list_of_','_and_1_elements
+	ShuffleVectorInst,          // ShuffleVectorInst : 'shufflevector' TypeValue ',' TypeValue ',' TypeValue list_of_','_and_1_elements1
 	ShuffleVectorInst,          // ShuffleVectorInst : 'shufflevector' TypeValue ',' TypeValue ',' TypeValue
-	ExtractValueInst,           // ExtractValueInst : 'extractvalue' TypeValue list_of_','_and_1_elements4 list_of_','_and_1_elements
-	ExtractValueInst,           // ExtractValueInst : 'extractvalue' TypeValue list_of_','_and_1_elements4
-	0,                          // list_of_','_and_1_elements4 : list_of_','_and_1_elements4 ',' UintLit
-	0,                          // list_of_','_and_1_elements4 : ',' UintLit
-	InsertValueInst,            // InsertValueInst : 'insertvalue' TypeValue ',' TypeValue list_of_','_and_1_elements4 list_of_','_and_1_elements
-	InsertValueInst,            // InsertValueInst : 'insertvalue' TypeValue ',' TypeValue list_of_','_and_1_elements4
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' Align ',' AddrSpace list_of_','_and_1_elements
+	ExtractValueInst,           // ExtractValueInst : 'extractvalue' TypeValue list_of_','_and_1_elements5 list_of_','_and_1_elements1
+	ExtractValueInst,           // ExtractValueInst : 'extractvalue' TypeValue list_of_','_and_1_elements5
+	0,                          // list_of_','_and_1_elements5 : list_of_','_and_1_elements5 ',' UintLit
+	0,                          // list_of_','_and_1_elements5 : ',' UintLit
+	InsertValueInst,            // InsertValueInst : 'insertvalue' TypeValue ',' TypeValue list_of_','_and_1_elements5 list_of_','_and_1_elements1
+	InsertValueInst,            // InsertValueInst : 'insertvalue' TypeValue ',' TypeValue list_of_','_and_1_elements5
+	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' Align ',' AddrSpace list_of_','_and_1_elements1
 	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' Align ',' AddrSpace
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' Align list_of_','_and_1_elements
+	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' Align list_of_','_and_1_elements1
 	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' Align
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' AddrSpace list_of_','_and_1_elements
+	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' AddrSpace list_of_','_and_1_elements1
 	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue ',' AddrSpace
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue list_of_','_and_1_elements
+	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue list_of_','_and_1_elements1
 	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' TypeValue
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' Align ',' AddrSpace list_of_','_and_1_elements
+	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' Align ',' AddrSpace list_of_','_and_1_elements1
 	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' Align ',' AddrSpace
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' Align list_of_','_and_1_elements
+	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' Align list_of_','_and_1_elements1
 	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' Align
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' AddrSpace list_of_','_and_1_elements
+	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' AddrSpace list_of_','_and_1_elements1
 	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type ',' AddrSpace
-	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type list_of_','_and_1_elements
+	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type list_of_','_and_1_elements1
 	AllocaInst,                 // AllocaInst : 'alloca' InAllocaopt SwiftErroropt Type
 	InAlloca,                   // InAlloca : 'inalloca'
 	SwiftError,                 // SwiftError : 'swifterror'
-	LoadInst,                   // LoadInst : 'load' Volatileopt Type ',' TypeValue ',' Align list_of_','_and_1_elements
+	LoadInst,                   // LoadInst : 'load' Volatileopt Type ',' TypeValue ',' Align list_of_','_and_1_elements1
 	LoadInst,                   // LoadInst : 'load' Volatileopt Type ',' TypeValue ',' Align
-	LoadInst,                   // LoadInst : 'load' Volatileopt Type ',' TypeValue list_of_','_and_1_elements
+	LoadInst,                   // LoadInst : 'load' Volatileopt Type ',' TypeValue list_of_','_and_1_elements1
 	LoadInst,                   // LoadInst : 'load' Volatileopt Type ',' TypeValue
-	LoadInst,                   // LoadInst : 'load' Atomic Volatileopt Type ',' TypeValue SyncScopeopt AtomicOrdering ',' Align list_of_','_and_1_elements
+	LoadInst,                   // LoadInst : 'load' Atomic Volatileopt Type ',' TypeValue SyncScopeopt AtomicOrdering ',' Align list_of_','_and_1_elements1
 	LoadInst,                   // LoadInst : 'load' Atomic Volatileopt Type ',' TypeValue SyncScopeopt AtomicOrdering ',' Align
-	LoadInst,                   // LoadInst : 'load' Atomic Volatileopt Type ',' TypeValue SyncScopeopt AtomicOrdering list_of_','_and_1_elements
+	LoadInst,                   // LoadInst : 'load' Atomic Volatileopt Type ',' TypeValue SyncScopeopt AtomicOrdering list_of_','_and_1_elements1
 	LoadInst,                   // LoadInst : 'load' Atomic Volatileopt Type ',' TypeValue SyncScopeopt AtomicOrdering
-	StoreInst,                  // StoreInst : 'store' Volatileopt TypeValue ',' TypeValue ',' Align list_of_','_and_1_elements
+	StoreInst,                  // StoreInst : 'store' Volatileopt TypeValue ',' TypeValue ',' Align list_of_','_and_1_elements1
 	StoreInst,                  // StoreInst : 'store' Volatileopt TypeValue ',' TypeValue ',' Align
-	StoreInst,                  // StoreInst : 'store' Volatileopt TypeValue ',' TypeValue list_of_','_and_1_elements
+	StoreInst,                  // StoreInst : 'store' Volatileopt TypeValue ',' TypeValue list_of_','_and_1_elements1
 	StoreInst,                  // StoreInst : 'store' Volatileopt TypeValue ',' TypeValue
-	StoreInst,                  // StoreInst : 'store' Atomic Volatileopt TypeValue ',' TypeValue SyncScopeopt AtomicOrdering ',' Align list_of_','_and_1_elements
+	StoreInst,                  // StoreInst : 'store' Atomic Volatileopt TypeValue ',' TypeValue SyncScopeopt AtomicOrdering ',' Align list_of_','_and_1_elements1
 	StoreInst,                  // StoreInst : 'store' Atomic Volatileopt TypeValue ',' TypeValue SyncScopeopt AtomicOrdering ',' Align
-	StoreInst,                  // StoreInst : 'store' Atomic Volatileopt TypeValue ',' TypeValue SyncScopeopt AtomicOrdering list_of_','_and_1_elements
+	StoreInst,                  // StoreInst : 'store' Atomic Volatileopt TypeValue ',' TypeValue SyncScopeopt AtomicOrdering list_of_','_and_1_elements1
 	StoreInst,                  // StoreInst : 'store' Atomic Volatileopt TypeValue ',' TypeValue SyncScopeopt AtomicOrdering
-	FenceInst,                  // FenceInst : 'fence' SyncScopeopt AtomicOrdering list_of_','_and_1_elements
+	FenceInst,                  // FenceInst : 'fence' SyncScopeopt AtomicOrdering list_of_','_and_1_elements1
 	FenceInst,                  // FenceInst : 'fence' SyncScopeopt AtomicOrdering
-	CmpXchgInst,                // CmpXchgInst : 'cmpxchg' Weakopt Volatileopt TypeValue ',' TypeValue ',' TypeValue SyncScopeopt AtomicOrdering AtomicOrdering list_of_','_and_1_elements
+	CmpXchgInst,                // CmpXchgInst : 'cmpxchg' Weakopt Volatileopt TypeValue ',' TypeValue ',' TypeValue SyncScopeopt AtomicOrdering AtomicOrdering list_of_','_and_1_elements1
 	CmpXchgInst,                // CmpXchgInst : 'cmpxchg' Weakopt Volatileopt TypeValue ',' TypeValue ',' TypeValue SyncScopeopt AtomicOrdering AtomicOrdering
 	Weak,                       // Weak : 'weak'
-	AtomicRMWInst,              // AtomicRMWInst : 'atomicrmw' Volatileopt AtomicOp TypeValue ',' TypeValue SyncScopeopt AtomicOrdering list_of_','_and_1_elements
+	AtomicRMWInst,              // AtomicRMWInst : 'atomicrmw' Volatileopt AtomicOp TypeValue ',' TypeValue SyncScopeopt AtomicOrdering list_of_','_and_1_elements1
 	AtomicRMWInst,              // AtomicRMWInst : 'atomicrmw' Volatileopt AtomicOp TypeValue ',' TypeValue SyncScopeopt AtomicOrdering
 	AtomicOp,                   // AtomicOp : 'add'
 	AtomicOp,                   // AtomicOp : 'and'
@@ -2307,73 +2216,73 @@ var ruleNodeType = [...]NodeType{
 	AtomicOp,                   // AtomicOp : 'umin'
 	AtomicOp,                   // AtomicOp : 'xchg'
 	AtomicOp,                   // AtomicOp : 'xor'
-	GetElementPtrInst,          // GetElementPtrInst : 'getelementptr' InBoundsopt Type ',' TypeValue list_of_','_and_1_elements5 list_of_','_and_1_elements
-	GetElementPtrInst,          // GetElementPtrInst : 'getelementptr' InBoundsopt Type ',' TypeValue list_of_','_and_1_elements5
-	0,                          // list_of_','_and_1_elements5 : list_of_','_and_1_elements5 ',' TypeValue
-	0,                          // list_of_','_and_1_elements5 :
-	TruncInst,                  // TruncInst : 'trunc' TypeValue 'to' Type list_of_','_and_1_elements
+	GetElementPtrInst,          // GetElementPtrInst : 'getelementptr' InBoundsopt Type ',' TypeValue list_of_','_and_1_elements6 list_of_','_and_1_elements1
+	GetElementPtrInst,          // GetElementPtrInst : 'getelementptr' InBoundsopt Type ',' TypeValue list_of_','_and_1_elements6
+	0,                          // list_of_','_and_1_elements6 : list_of_','_and_1_elements6 ',' TypeValue
+	0,                          // list_of_','_and_1_elements6 :
+	TruncInst,                  // TruncInst : 'trunc' TypeValue 'to' Type list_of_','_and_1_elements1
 	TruncInst,                  // TruncInst : 'trunc' TypeValue 'to' Type
-	ZExtInst,                   // ZExtInst : 'zext' TypeValue 'to' Type list_of_','_and_1_elements
+	ZExtInst,                   // ZExtInst : 'zext' TypeValue 'to' Type list_of_','_and_1_elements1
 	ZExtInst,                   // ZExtInst : 'zext' TypeValue 'to' Type
-	SExtInst,                   // SExtInst : 'sext' TypeValue 'to' Type list_of_','_and_1_elements
+	SExtInst,                   // SExtInst : 'sext' TypeValue 'to' Type list_of_','_and_1_elements1
 	SExtInst,                   // SExtInst : 'sext' TypeValue 'to' Type
-	FPTruncInst,                // FPTruncInst : 'fptrunc' TypeValue 'to' Type list_of_','_and_1_elements
+	FPTruncInst,                // FPTruncInst : 'fptrunc' TypeValue 'to' Type list_of_','_and_1_elements1
 	FPTruncInst,                // FPTruncInst : 'fptrunc' TypeValue 'to' Type
-	FPExtInst,                  // FPExtInst : 'fpext' TypeValue 'to' Type list_of_','_and_1_elements
+	FPExtInst,                  // FPExtInst : 'fpext' TypeValue 'to' Type list_of_','_and_1_elements1
 	FPExtInst,                  // FPExtInst : 'fpext' TypeValue 'to' Type
-	FPToUIInst,                 // FPToUIInst : 'fptoui' TypeValue 'to' Type list_of_','_and_1_elements
+	FPToUIInst,                 // FPToUIInst : 'fptoui' TypeValue 'to' Type list_of_','_and_1_elements1
 	FPToUIInst,                 // FPToUIInst : 'fptoui' TypeValue 'to' Type
-	FPToSIInst,                 // FPToSIInst : 'fptosi' TypeValue 'to' Type list_of_','_and_1_elements
+	FPToSIInst,                 // FPToSIInst : 'fptosi' TypeValue 'to' Type list_of_','_and_1_elements1
 	FPToSIInst,                 // FPToSIInst : 'fptosi' TypeValue 'to' Type
-	UIToFPInst,                 // UIToFPInst : 'uitofp' TypeValue 'to' Type list_of_','_and_1_elements
+	UIToFPInst,                 // UIToFPInst : 'uitofp' TypeValue 'to' Type list_of_','_and_1_elements1
 	UIToFPInst,                 // UIToFPInst : 'uitofp' TypeValue 'to' Type
-	SIToFPInst,                 // SIToFPInst : 'sitofp' TypeValue 'to' Type list_of_','_and_1_elements
+	SIToFPInst,                 // SIToFPInst : 'sitofp' TypeValue 'to' Type list_of_','_and_1_elements1
 	SIToFPInst,                 // SIToFPInst : 'sitofp' TypeValue 'to' Type
-	PtrToIntInst,               // PtrToIntInst : 'ptrtoint' TypeValue 'to' Type list_of_','_and_1_elements
+	PtrToIntInst,               // PtrToIntInst : 'ptrtoint' TypeValue 'to' Type list_of_','_and_1_elements1
 	PtrToIntInst,               // PtrToIntInst : 'ptrtoint' TypeValue 'to' Type
-	IntToPtrInst,               // IntToPtrInst : 'inttoptr' TypeValue 'to' Type list_of_','_and_1_elements
+	IntToPtrInst,               // IntToPtrInst : 'inttoptr' TypeValue 'to' Type list_of_','_and_1_elements1
 	IntToPtrInst,               // IntToPtrInst : 'inttoptr' TypeValue 'to' Type
-	BitCastInst,                // BitCastInst : 'bitcast' TypeValue 'to' Type list_of_','_and_1_elements
+	BitCastInst,                // BitCastInst : 'bitcast' TypeValue 'to' Type list_of_','_and_1_elements1
 	BitCastInst,                // BitCastInst : 'bitcast' TypeValue 'to' Type
-	AddrSpaceCastInst,          // AddrSpaceCastInst : 'addrspacecast' TypeValue 'to' Type list_of_','_and_1_elements
+	AddrSpaceCastInst,          // AddrSpaceCastInst : 'addrspacecast' TypeValue 'to' Type list_of_','_and_1_elements1
 	AddrSpaceCastInst,          // AddrSpaceCastInst : 'addrspacecast' TypeValue 'to' Type
-	ICmpInst,                   // ICmpInst : 'icmp' IPred TypeValue ',' Value list_of_','_and_1_elements
+	ICmpInst,                   // ICmpInst : 'icmp' IPred TypeValue ',' Value list_of_','_and_1_elements1
 	ICmpInst,                   // ICmpInst : 'icmp' IPred TypeValue ',' Value
-	FCmpInst,                   // FCmpInst : 'fcmp' FastMathFlag_optlist FPred TypeValue ',' Value list_of_','_and_1_elements
+	FCmpInst,                   // FCmpInst : 'fcmp' FastMathFlag_optlist FPred TypeValue ',' Value list_of_','_and_1_elements1
 	FCmpInst,                   // FCmpInst : 'fcmp' FastMathFlag_optlist FPred TypeValue ',' Value
 	0,                          // Inc_list_withsep : Inc_list_withsep ',' Inc
 	0,                          // Inc_list_withsep : Inc
-	PhiInst,                    // PhiInst : 'phi' Type Inc_list_withsep list_of_','_and_1_elements
+	PhiInst,                    // PhiInst : 'phi' Type Inc_list_withsep list_of_','_and_1_elements1
 	PhiInst,                    // PhiInst : 'phi' Type Inc_list_withsep
 	Inc,                        // Inc : '[' Value ',' LocalIdent ']'
-	SelectInst,                 // SelectInst : 'select' FastMathFlag_optlist TypeValue ',' TypeValue ',' TypeValue list_of_','_and_1_elements
+	SelectInst,                 // SelectInst : 'select' FastMathFlag_optlist TypeValue ',' TypeValue ',' TypeValue list_of_','_and_1_elements1
 	SelectInst,                 // SelectInst : 'select' FastMathFlag_optlist TypeValue ',' TypeValue ',' TypeValue
-	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']' list_of_','_and_1_elements
+	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']' list_of_','_and_1_elements1
 	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']'
-	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist list_of_','_and_1_elements
+	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist list_of_','_and_1_elements1
 	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist
 	0,                          // OperandBundle_list_withsep : OperandBundle_list_withsep ',' OperandBundle
 	0,                          // OperandBundle_list_withsep : OperandBundle
 	Tail,                       // Tail : 'musttail'
 	Tail,                       // Tail : 'notail'
 	Tail,                       // Tail : 'tail'
-	VAArgInst,                  // VAArgInst : 'va_arg' TypeValue ',' Type list_of_','_and_1_elements
+	VAArgInst,                  // VAArgInst : 'va_arg' TypeValue ',' Type list_of_','_and_1_elements1
 	VAArgInst,                  // VAArgInst : 'va_arg' TypeValue ',' Type
 	0,                          // Clause_optlist : Clause_optlist Clause
 	0,                          // Clause_optlist :
-	LandingPadInst,             // LandingPadInst : 'landingpad' Type Cleanupopt Clause_optlist list_of_','_and_1_elements
+	LandingPadInst,             // LandingPadInst : 'landingpad' Type Cleanupopt Clause_optlist list_of_','_and_1_elements1
 	LandingPadInst,             // LandingPadInst : 'landingpad' Type Cleanupopt Clause_optlist
 	Cleanup,                    // Cleanup : 'cleanup'
 	Clause,                     // Clause : ClauseType TypeValue
 	ClauseType,                 // ClauseType : 'catch'
 	ClauseType,                 // ClauseType : 'filter'
-	CatchPadInst,               // CatchPadInst : 'catchpad' 'within' LocalIdent '[' ExceptionArg_list_withsep_opt ']' list_of_','_and_1_elements
+	CatchPadInst,               // CatchPadInst : 'catchpad' 'within' LocalIdent '[' ExceptionArg_list_withsep_opt ']' list_of_','_and_1_elements1
 	CatchPadInst,               // CatchPadInst : 'catchpad' 'within' LocalIdent '[' ExceptionArg_list_withsep_opt ']'
 	0,                          // ExceptionArg_list_withsep : ExceptionArg_list_withsep ',' ExceptionArg
 	0,                          // ExceptionArg_list_withsep : ExceptionArg
 	0,                          // ExceptionArg_list_withsep_opt : ExceptionArg_list_withsep
 	0,                          // ExceptionArg_list_withsep_opt :
-	CleanupPadInst,             // CleanupPadInst : 'cleanuppad' 'within' ExceptionScope '[' ExceptionArg_list_withsep_opt ']' list_of_','_and_1_elements
+	CleanupPadInst,             // CleanupPadInst : 'cleanuppad' 'within' ExceptionScope '[' ExceptionArg_list_withsep_opt ']' list_of_','_and_1_elements1
 	CleanupPadInst,             // CleanupPadInst : 'cleanuppad' 'within' ExceptionScope '[' ExceptionArg_list_withsep_opt ']'
 	0,                          // Terminator : LocalDefTerm
 	0,                          // Terminator : ValueTerminator
@@ -2389,39 +2298,39 @@ var ruleNodeType = [...]NodeType{
 	LocalDefTerm,               // LocalDefTerm : LocalIdent '=' ValueTerminator
 	0,                          // ValueTerminator : InvokeTerm
 	0,                          // ValueTerminator : CatchSwitchTerm
-	RetTerm,                    // RetTerm : 'ret' VoidType list_of_','_and_1_elements
+	RetTerm,                    // RetTerm : 'ret' VoidType list_of_','_and_1_elements1
 	RetTerm,                    // RetTerm : 'ret' VoidType
-	RetTerm,                    // RetTerm : 'ret' ConcreteType Value list_of_','_and_1_elements
+	RetTerm,                    // RetTerm : 'ret' ConcreteType Value list_of_','_and_1_elements1
 	RetTerm,                    // RetTerm : 'ret' ConcreteType Value
-	BrTerm,                     // BrTerm : 'br' Label list_of_','_and_1_elements
+	BrTerm,                     // BrTerm : 'br' Label list_of_','_and_1_elements1
 	BrTerm,                     // BrTerm : 'br' Label
-	CondBrTerm,                 // CondBrTerm : 'br' IntType Value ',' Label ',' Label list_of_','_and_1_elements
+	CondBrTerm,                 // CondBrTerm : 'br' IntType Value ',' Label ',' Label list_of_','_and_1_elements1
 	CondBrTerm,                 // CondBrTerm : 'br' IntType Value ',' Label ',' Label
 	0,                          // Case_optlist : Case_optlist Case
 	0,                          // Case_optlist :
-	SwitchTerm,                 // SwitchTerm : 'switch' TypeValue ',' Label '[' Case_optlist ']' list_of_','_and_1_elements
+	SwitchTerm,                 // SwitchTerm : 'switch' TypeValue ',' Label '[' Case_optlist ']' list_of_','_and_1_elements1
 	SwitchTerm,                 // SwitchTerm : 'switch' TypeValue ',' Label '[' Case_optlist ']'
 	Case,                       // Case : TypeConst ',' Label
-	IndirectBrTerm,             // IndirectBrTerm : 'indirectbr' TypeValue ',' '[' Label_list_withsep_opt ']' list_of_','_and_1_elements
+	IndirectBrTerm,             // IndirectBrTerm : 'indirectbr' TypeValue ',' '[' Label_list_withsep_opt ']' list_of_','_and_1_elements1
 	IndirectBrTerm,             // IndirectBrTerm : 'indirectbr' TypeValue ',' '[' Label_list_withsep_opt ']'
 	0,                          // Label_list_withsep : Label_list_withsep ',' Label
 	0,                          // Label_list_withsep : Label
 	0,                          // Label_list_withsep_opt : Label_list_withsep
 	0,                          // Label_list_withsep_opt :
-	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']' 'to' Label 'unwind' Label list_of_','_and_1_elements
+	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']' 'to' Label 'unwind' Label list_of_','_and_1_elements1
 	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']' 'to' Label 'unwind' Label
-	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist 'to' Label 'unwind' Label list_of_','_and_1_elements
+	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist 'to' Label 'unwind' Label list_of_','_and_1_elements1
 	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist 'to' Label 'unwind' Label
-	ResumeTerm,                 // ResumeTerm : 'resume' TypeValue list_of_','_and_1_elements
+	ResumeTerm,                 // ResumeTerm : 'resume' TypeValue list_of_','_and_1_elements1
 	ResumeTerm,                 // ResumeTerm : 'resume' TypeValue
-	CatchSwitchTerm,            // CatchSwitchTerm : 'catchswitch' 'within' ExceptionScope '[' Handlers ']' 'unwind' UnwindTarget list_of_','_and_1_elements
+	CatchSwitchTerm,            // CatchSwitchTerm : 'catchswitch' 'within' ExceptionScope '[' Handlers ']' 'unwind' UnwindTarget list_of_','_and_1_elements1
 	CatchSwitchTerm,            // CatchSwitchTerm : 'catchswitch' 'within' ExceptionScope '[' Handlers ']' 'unwind' UnwindTarget
 	Handlers,                   // Handlers : Label_list_withsep
-	CatchRetTerm,               // CatchRetTerm : 'catchret' 'from' Value 'to' Label list_of_','_and_1_elements
+	CatchRetTerm,               // CatchRetTerm : 'catchret' 'from' Value 'to' Label list_of_','_and_1_elements1
 	CatchRetTerm,               // CatchRetTerm : 'catchret' 'from' Value 'to' Label
-	CleanupRetTerm,             // CleanupRetTerm : 'cleanupret' 'from' Value 'unwind' UnwindTarget list_of_','_and_1_elements
+	CleanupRetTerm,             // CleanupRetTerm : 'cleanupret' 'from' Value 'unwind' UnwindTarget list_of_','_and_1_elements1
 	CleanupRetTerm,             // CleanupRetTerm : 'cleanupret' 'from' Value 'unwind' UnwindTarget
-	UnreachableTerm,            // UnreachableTerm : 'unreachable' list_of_','_and_1_elements
+	UnreachableTerm,            // UnreachableTerm : 'unreachable' list_of_','_and_1_elements1
 	UnreachableTerm,            // UnreachableTerm : 'unreachable'
 	0,                          // MDField_list_withsep : MDField_list_withsep ',' MDField
 	0,                          // MDField_list_withsep : MDField
@@ -2988,8 +2897,6 @@ var ruleNodeType = [...]NodeType{
 	0,                          // FuncAttribute : AlignStackPair
 	0,                          // FuncAttribute : AllocSize
 	0,                          // FuncAttribute : FuncAttr
-	0,                          // FuncAttributeAndAlign : FuncAttribute
-	0,                          // FuncAttributeAndAlign : Align
 	FuncAttr,                   // FuncAttr : 'alwaysinline'
 	FuncAttr,                   // FuncAttr : 'argmemonly'
 	FuncAttr,                   // FuncAttr : 'builtin'
@@ -3140,20 +3047,6 @@ var ruleNodeType = [...]NodeType{
 	0,                          // Linkageopt :
 	0,                          // CallingConvopt : CallingConv
 	0,                          // CallingConvopt :
-	0,                          // Sectionopt : Section
-	0,                          // Sectionopt :
-	0,                          // Partitionopt : Partition
-	0,                          // Partitionopt :
-	0,                          // Comdatopt : Comdat
-	0,                          // Comdatopt :
-	0,                          // GCopt : GC
-	0,                          // GCopt :
-	0,                          // Prefixopt : Prefix
-	0,                          // Prefixopt :
-	0,                          // Prologueopt : Prologue
-	0,                          // Prologueopt :
-	0,                          // Personalityopt : Personality
-	0,                          // Personalityopt :
 	0,                          // Distinctopt : Distinct
 	0,                          // Distinctopt :
 	0,                          // SideEffectopt : SideEffect
