@@ -84,6 +84,7 @@ const (
 	BYVAL                          // byval
 	CHAR_C                         // c
 	CALL                           // call
+	CALLBR                         // callbr
 	CALLER                         // caller
 	CATCH                          // catch
 	CATCHPAD                       // catchpad
@@ -540,6 +541,7 @@ var tokenStr = [...]string{
 	"byval",
 	"c",
 	"call",
+	"callbr",
 	"caller",
 	"catch",
 	"catchpad",

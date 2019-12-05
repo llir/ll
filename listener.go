@@ -200,6 +200,7 @@ const (
 	Case                       // X=TypeConst Target=Label
 	IndirectBrTerm             // Addr=TypeValue ValidTargets=(Label)* Metadata=(MetadataAttachment)*
 	InvokeTerm                 // CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Invokee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* Normal=Label Exception=Label Metadata=(MetadataAttachment)*
+	CallBrTerm                 // CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Callee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* Normal=Label Other=(Label)* Metadata=(MetadataAttachment)*
 	ResumeTerm                 // X=TypeValue Metadata=(MetadataAttachment)*
 	CatchSwitchTerm            // Scope=ExceptionScope Handlers UnwindTarget Metadata=(MetadataAttachment)*
 	Handlers                   // Labels=(Label)+
@@ -582,6 +583,7 @@ var nodeTypeStr = [...]string{
 	"Case",
 	"IndirectBrTerm",
 	"InvokeTerm",
+	"CallBrTerm",
 	"ResumeTerm",
 	"CatchSwitchTerm",
 	"Handlers",
@@ -1510,6 +1512,7 @@ var TargetDef = []NodeType{
 
 var Terminator = []NodeType{
 	BrTerm,
+	CallBrTerm,
 	CatchRetTerm,
 	CatchSwitchTerm,
 	CleanupRetTerm,
@@ -1678,6 +1681,7 @@ var ValueInstruction = []NodeType{
 }
 
 var ValueTerminator = []NodeType{
+	CallBrTerm,
 	CatchSwitchTerm,
 	InvokeTerm,
 }
@@ -2297,6 +2301,7 @@ var ruleNodeType = [...]NodeType{
 	0,                          // Terminator : UnreachableTerm
 	LocalDefTerm,               // LocalDefTerm : LocalIdent '=' ValueTerminator
 	0,                          // ValueTerminator : InvokeTerm
+	0,                          // ValueTerminator : CallBrTerm
 	0,                          // ValueTerminator : CatchSwitchTerm
 	RetTerm,                    // RetTerm : 'ret' VoidType list_of_','_and_1_elements1
 	RetTerm,                    // RetTerm : 'ret' VoidType
@@ -2321,6 +2326,10 @@ var ruleNodeType = [...]NodeType{
 	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']' 'to' Label 'unwind' Label
 	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist 'to' Label 'unwind' Label list_of_','_and_1_elements1
 	InvokeTerm,                 // InvokeTerm : 'invoke' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist 'to' Label 'unwind' Label
+	CallBrTerm,                 // CallBrTerm : 'callbr' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']' 'to' Label '[' Label_list_withsep_opt ']' list_of_','_and_1_elements1
+	CallBrTerm,                 // CallBrTerm : 'callbr' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']' 'to' Label '[' Label_list_withsep_opt ']'
+	CallBrTerm,                 // CallBrTerm : 'callbr' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist 'to' Label '[' Label_list_withsep_opt ']' list_of_','_and_1_elements1
+	CallBrTerm,                 // CallBrTerm : 'callbr' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist 'to' Label '[' Label_list_withsep_opt ']'
 	ResumeTerm,                 // ResumeTerm : 'resume' TypeValue list_of_','_and_1_elements1
 	ResumeTerm,                 // ResumeTerm : 'resume' TypeValue
 	CatchSwitchTerm,            // CatchSwitchTerm : 'catchswitch' 'within' ExceptionScope '[' Handlers ']' 'unwind' UnwindTarget list_of_','_and_1_elements1

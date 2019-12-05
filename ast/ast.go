@@ -59,6 +59,7 @@ func (n BoolLit) LlvmNode() *Node                    { return n.Node }
 func (n BrTerm) LlvmNode() *Node                     { return n.Node }
 func (n Byval) LlvmNode() *Node                      { return n.Node }
 func (n CCField) LlvmNode() *Node                    { return n.Node }
+func (n CallBrTerm) LlvmNode() *Node                 { return n.Node }
 func (n CallInst) LlvmNode() *Node                   { return n.Node }
 func (n CallingConvEnum) LlvmNode() *Node            { return n.Node }
 func (n CallingConvInt) LlvmNode() *Node             { return n.Node }
@@ -1533,6 +1534,7 @@ type Terminator interface {
 // assigned to Terminator.
 //
 func (BrTerm) terminatorNode()          {}
+func (CallBrTerm) terminatorNode()      {}
 func (CatchRetTerm) terminatorNode()    {}
 func (CatchSwitchTerm) terminatorNode() {}
 func (CleanupRetTerm) terminatorNode()  {}
@@ -1743,6 +1745,7 @@ type ValueTerminator interface {
 // valueTerminatorNode() ensures that only the following types can be
 // assigned to ValueTerminator.
 //
+func (CallBrTerm) valueTerminatorNode()      {}
 func (CatchSwitchTerm) valueTerminatorNode() {}
 func (InvokeTerm) valueTerminatorNode()      {}
 func (NilNode) valueTerminatorNode()         {}
@@ -2302,6 +2305,81 @@ type CCField struct {
 
 func (n CCField) CC() DwarfCC {
 	return ToLlvmNode(n.Child(selector.DwarfCC)).(DwarfCC)
+}
+
+type CallBrTerm struct {
+	*Node
+}
+
+func (n CallBrTerm) CallingConv() (CallingConv, bool) {
+	field := ToLlvmNode(n.Child(selector.CallingConv)).(CallingConv)
+	return field, field.LlvmNode() != nil
+}
+
+func (n CallBrTerm) ReturnAttrs() []ReturnAttribute {
+	nodes := n.Children(selector.ReturnAttribute)
+	var ret = make([]ReturnAttribute, 0, len(nodes))
+	for _, node := range nodes {
+		ret = append(ret, ToLlvmNode(node).(ReturnAttribute))
+	}
+	return ret
+}
+
+func (n CallBrTerm) AddrSpace() (AddrSpace, bool) {
+	field := AddrSpace{n.Child(selector.AddrSpace)}
+	return field, field.IsValid()
+}
+
+func (n CallBrTerm) Typ() Type {
+	return ToLlvmNode(n.Child(selector.Type)).(Type)
+}
+
+func (n CallBrTerm) Callee() Value {
+	return ToLlvmNode(n.Child(selector.Value)).(Value)
+}
+
+func (n CallBrTerm) Args() Args {
+	return Args{n.Child(selector.Args)}
+}
+
+func (n CallBrTerm) FuncAttrs() []FuncAttribute {
+	nodes := n.Children(selector.FuncAttribute)
+	var ret = make([]FuncAttribute, 0, len(nodes))
+	for _, node := range nodes {
+		ret = append(ret, ToLlvmNode(node).(FuncAttribute))
+	}
+	return ret
+}
+
+func (n CallBrTerm) OperandBundles() []OperandBundle {
+	nodes := n.Children(selector.OperandBundle)
+	var ret = make([]OperandBundle, 0, len(nodes))
+	for _, node := range nodes {
+		ret = append(ret, OperandBundle{node})
+	}
+	return ret
+}
+
+func (n CallBrTerm) Normal() Label {
+	return Label{n.Child(selector.Label)}
+}
+
+func (n CallBrTerm) Other() []Label {
+	nodes := n.Child(selector.Label).NextAll(selector.Label)
+	var ret = make([]Label, 0, len(nodes))
+	for _, node := range nodes {
+		ret = append(ret, Label{node})
+	}
+	return ret
+}
+
+func (n CallBrTerm) Metadata() []MetadataAttachment {
+	nodes := n.Children(selector.MetadataAttachment)
+	var ret = make([]MetadataAttachment, 0, len(nodes))
+	for _, node := range nodes {
+		ret = append(ret, MetadataAttachment{node})
+	}
+	return ret
 }
 
 type CallInst struct {
