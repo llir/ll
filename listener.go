@@ -211,6 +211,7 @@ const (
 	MDString                   // Val=StringLit
 	MetadataAttachment         // Name=MetadataName MDNode
 	DIBasicType                // Fields=(DIBasicTypeField)*
+	DICommonBlock              // Fields=(DICommonBlockField)*
 	DICompileUnit              // Fields=(DICompileUnitField)*
 	DICompositeType            // Fields=(DICompositeTypeField)*
 	DIDerivedType              // Fields=(DIDerivedTypeField)*
@@ -594,6 +595,7 @@ var nodeTypeStr = [...]string{
 	"MDString",
 	"MetadataAttachment",
 	"DIBasicType",
+	"DICommonBlock",
 	"DICompileUnit",
 	"DICompositeType",
 	"DIDerivedType",
@@ -910,6 +912,14 @@ var DIBasicTypeField = []NodeType{
 	NameField,
 	SizeField,
 	TagField,
+}
+
+var DICommonBlockField = []NodeType{
+	DeclarationField,
+	FileField,
+	LineField,
+	NameField,
+	ScopeField,
 }
 
 var DICompileUnitField = []NodeType{
@@ -1319,6 +1329,7 @@ var Instruction = []NodeType{
 
 var MDField = []NodeType{
 	DIBasicType,
+	DICommonBlock,
 	DICompileUnit,
 	DICompositeType,
 	DIDerivedType,
@@ -1353,6 +1364,7 @@ var MDField = []NodeType{
 
 var MDFieldOrInt = []NodeType{
 	DIBasicType,
+	DICommonBlock,
 	DICompileUnit,
 	DICompositeType,
 	DIDerivedType,
@@ -1388,6 +1400,7 @@ var MDFieldOrInt = []NodeType{
 
 var MDNode = []NodeType{
 	DIBasicType,
+	DICommonBlock,
 	DICompileUnit,
 	DICompositeType,
 	DIDerivedType,
@@ -1419,6 +1432,7 @@ var MDNode = []NodeType{
 
 var Metadata = []NodeType{
 	DIBasicType,
+	DICommonBlock,
 	DICompileUnit,
 	DICompositeType,
 	DIDerivedType,
@@ -1478,6 +1492,7 @@ var ReturnAttribute = []NodeType{
 
 var SpecializedMDNode = []NodeType{
 	DIBasicType,
+	DICommonBlock,
 	DICompileUnit,
 	DICompositeType,
 	DIDerivedType,
@@ -2359,6 +2374,7 @@ var ruleNodeType = [...]NodeType{
 	0,                          // MDNode : MetadataID
 	0,                          // MDNode : SpecializedMDNode
 	0,                          // SpecializedMDNode : DIBasicType
+	0,                          // SpecializedMDNode : DICommonBlock
 	0,                          // SpecializedMDNode : DICompileUnit
 	0,                          // SpecializedMDNode : DICompositeType
 	0,                          // SpecializedMDNode : DIDerivedType
@@ -2395,6 +2411,16 @@ var ruleNodeType = [...]NodeType{
 	0,                          // DIBasicTypeField : AlignField
 	0,                          // DIBasicTypeField : EncodingField
 	0,                          // DIBasicTypeField : FlagsField
+	DICommonBlock,              // DICommonBlock : '!DICommonBlock' '(' DICommonBlockField_list_withsep_opt ')'
+	0,                          // DICommonBlockField_list_withsep : DICommonBlockField_list_withsep ',' DICommonBlockField
+	0,                          // DICommonBlockField_list_withsep : DICommonBlockField
+	0,                          // DICommonBlockField_list_withsep_opt : DICommonBlockField_list_withsep
+	0,                          // DICommonBlockField_list_withsep_opt :
+	0,                          // DICommonBlockField : ScopeField
+	0,                          // DICommonBlockField : DeclarationField
+	0,                          // DICommonBlockField : NameField
+	0,                          // DICommonBlockField : FileField
+	0,                          // DICommonBlockField : LineField
 	DICompileUnit,              // DICompileUnit : '!DICompileUnit' '(' DICompileUnitField_list_withsep_opt ')'
 	0,                          // DICompileUnitField_list_withsep : DICompileUnitField_list_withsep ',' DICompileUnitField
 	0,                          // DICompileUnitField_list_withsep : DICompileUnitField
@@ -2547,9 +2573,9 @@ var ruleNodeType = [...]NodeType{
 	0,                          // DILocalVariableField_list_withsep : DILocalVariableField
 	0,                          // DILocalVariableField_list_withsep_opt : DILocalVariableField_list_withsep
 	0,                          // DILocalVariableField_list_withsep_opt :
+	0,                          // DILocalVariableField : ScopeField
 	0,                          // DILocalVariableField : NameField
 	0,                          // DILocalVariableField : ArgField
-	0,                          // DILocalVariableField : ScopeField
 	0,                          // DILocalVariableField : FileField
 	0,                          // DILocalVariableField : LineField
 	0,                          // DILocalVariableField : TypeField

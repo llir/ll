@@ -86,6 +86,7 @@ func (n ConfigMacrosField) LlvmNode() *Node          { return n.Node }
 func (n ContainingTypeField) LlvmNode() *Node        { return n.Node }
 func (n CountField) LlvmNode() *Node                 { return n.Node }
 func (n DIBasicType) LlvmNode() *Node                { return n.Node }
+func (n DICommonBlock) LlvmNode() *Node              { return n.Node }
 func (n DICompileUnit) LlvmNode() *Node              { return n.Node }
 func (n DICompositeType) LlvmNode() *Node            { return n.Node }
 func (n DIDerivedType) LlvmNode() *Node              { return n.Node }
@@ -562,6 +563,21 @@ func (NameField) dIBasicTypeFieldNode()     {}
 func (SizeField) dIBasicTypeFieldNode()     {}
 func (TagField) dIBasicTypeFieldNode()      {}
 func (NilNode) dIBasicTypeFieldNode()       {}
+
+type DICommonBlockField interface {
+	LlvmNode
+	dICommonBlockFieldNode()
+}
+
+// dICommonBlockFieldNode() ensures that only the following types can be
+// assigned to DICommonBlockField.
+//
+func (DeclarationField) dICommonBlockFieldNode() {}
+func (FileField) dICommonBlockFieldNode()        {}
+func (LineField) dICommonBlockFieldNode()        {}
+func (NameField) dICommonBlockFieldNode()        {}
+func (ScopeField) dICommonBlockFieldNode()       {}
+func (NilNode) dICommonBlockFieldNode()          {}
 
 type DICompileUnitField interface {
 	LlvmNode
@@ -1271,6 +1287,7 @@ type MDField interface {
 // assigned to MDField.
 //
 func (DIBasicType) mDFieldNode()                {}
+func (DICommonBlock) mDFieldNode()              {}
 func (DICompileUnit) mDFieldNode()              {}
 func (DICompositeType) mDFieldNode()            {}
 func (DIDerivedType) mDFieldNode()              {}
@@ -1312,6 +1329,7 @@ type MDFieldOrInt interface {
 // assigned to MDFieldOrInt.
 //
 func (DIBasicType) mDFieldOrIntNode()                {}
+func (DICommonBlock) mDFieldOrIntNode()              {}
 func (DICompileUnit) mDFieldOrIntNode()              {}
 func (DICompositeType) mDFieldOrIntNode()            {}
 func (DIDerivedType) mDFieldOrIntNode()              {}
@@ -1354,6 +1372,7 @@ type MDNode interface {
 // assigned to MDNode.
 //
 func (DIBasicType) mDNodeNode()                {}
+func (DICommonBlock) mDNodeNode()              {}
 func (DICompileUnit) mDNodeNode()              {}
 func (DICompositeType) mDNodeNode()            {}
 func (DIDerivedType) mDNodeNode()              {}
@@ -1392,6 +1411,7 @@ type Metadata interface {
 // assigned to Metadata.
 //
 func (DIBasicType) metadataNode()                {}
+func (DICommonBlock) metadataNode()              {}
 func (DICompileUnit) metadataNode()              {}
 func (DICompositeType) metadataNode()            {}
 func (DIDerivedType) metadataNode()              {}
@@ -1486,6 +1506,7 @@ type SpecializedMDNode interface {
 // assigned to SpecializedMDNode.
 //
 func (DIBasicType) specializedMDNodeNode()                {}
+func (DICommonBlock) specializedMDNodeNode()              {}
 func (DICompileUnit) specializedMDNodeNode()              {}
 func (DICompositeType) specializedMDNodeNode()            {}
 func (DIDerivedType) specializedMDNodeNode()              {}
@@ -2037,7 +2058,7 @@ func (n Arg) Attrs() []ParamAttribute {
 }
 
 func (n Arg) Val() LlvmNode {
-	return ToLlvmNode(n.Child(selector.OneOf(ll.AShrExpr, ll.AddExpr, ll.AddrSpaceCastExpr, ll.AndExpr, ll.ArrayConst, ll.BitCastExpr, ll.BlockAddressConst, ll.BoolConst, ll.CharArrayConst, ll.DIBasicType, ll.DICompileUnit, ll.DICompositeType, ll.DIDerivedType, ll.DIEnumerator, ll.DIExpression, ll.DIFile, ll.DIGlobalVariable, ll.DIGlobalVariableExpression, ll.DIImportedEntity, ll.DILabel, ll.DILexicalBlock, ll.DILexicalBlockFile, ll.DILocalVariable, ll.DILocation, ll.DIMacro, ll.DIMacroFile, ll.DIModule, ll.DINamespace, ll.DIObjCProperty, ll.DISubprogram, ll.DISubrange, ll.DISubroutineType, ll.DITemplateTypeParameter, ll.DITemplateValueParameter, ll.ExtractElementExpr, ll.ExtractValueExpr, ll.FAddExpr, ll.FCmpExpr, ll.FDivExpr, ll.FMulExpr, ll.FNegExpr, ll.FPExtExpr, ll.FPToSIExpr, ll.FPToUIExpr, ll.FPTruncExpr, ll.FRemExpr, ll.FSubExpr, ll.FloatConst, ll.GenericDINode, ll.GetElementPtrExpr, ll.GlobalIdent, ll.ICmpExpr, ll.InlineAsm, ll.InsertElementExpr, ll.InsertValueExpr, ll.IntConst, ll.IntToPtrExpr, ll.LShrExpr, ll.LocalIdent, ll.MDString, ll.MDTuple, ll.MetadataID, ll.MulExpr, ll.NoneConst, ll.NullConst, ll.OrExpr, ll.PtrToIntExpr, ll.SDivExpr, ll.SExtExpr, ll.SIToFPExpr, ll.SRemExpr, ll.SelectExpr, ll.ShlExpr, ll.ShuffleVectorExpr, ll.StructConst, ll.SubExpr, ll.TruncExpr, ll.TypeValue, ll.UDivExpr, ll.UIToFPExpr, ll.URemExpr, ll.UndefConst, ll.VectorConst, ll.XorExpr, ll.ZExtExpr, ll.ZeroInitializerConst))).(LlvmNode)
+	return ToLlvmNode(n.Child(selector.OneOf(ll.AShrExpr, ll.AddExpr, ll.AddrSpaceCastExpr, ll.AndExpr, ll.ArrayConst, ll.BitCastExpr, ll.BlockAddressConst, ll.BoolConst, ll.CharArrayConst, ll.DIBasicType, ll.DICommonBlock, ll.DICompileUnit, ll.DICompositeType, ll.DIDerivedType, ll.DIEnumerator, ll.DIExpression, ll.DIFile, ll.DIGlobalVariable, ll.DIGlobalVariableExpression, ll.DIImportedEntity, ll.DILabel, ll.DILexicalBlock, ll.DILexicalBlockFile, ll.DILocalVariable, ll.DILocation, ll.DIMacro, ll.DIMacroFile, ll.DIModule, ll.DINamespace, ll.DIObjCProperty, ll.DISubprogram, ll.DISubrange, ll.DISubroutineType, ll.DITemplateTypeParameter, ll.DITemplateValueParameter, ll.ExtractElementExpr, ll.ExtractValueExpr, ll.FAddExpr, ll.FCmpExpr, ll.FDivExpr, ll.FMulExpr, ll.FNegExpr, ll.FPExtExpr, ll.FPToSIExpr, ll.FPToUIExpr, ll.FPTruncExpr, ll.FRemExpr, ll.FSubExpr, ll.FloatConst, ll.GenericDINode, ll.GetElementPtrExpr, ll.GlobalIdent, ll.ICmpExpr, ll.InlineAsm, ll.InsertElementExpr, ll.InsertValueExpr, ll.IntConst, ll.IntToPtrExpr, ll.LShrExpr, ll.LocalIdent, ll.MDString, ll.MDTuple, ll.MetadataID, ll.MulExpr, ll.NoneConst, ll.NullConst, ll.OrExpr, ll.PtrToIntExpr, ll.SDivExpr, ll.SExtExpr, ll.SIToFPExpr, ll.SRemExpr, ll.SelectExpr, ll.ShlExpr, ll.ShuffleVectorExpr, ll.StructConst, ll.SubExpr, ll.TruncExpr, ll.TypeValue, ll.UDivExpr, ll.UIToFPExpr, ll.URemExpr, ll.UndefConst, ll.VectorConst, ll.XorExpr, ll.ZExtExpr, ll.ZeroInitializerConst))).(LlvmNode)
 }
 
 type ArgField struct {
@@ -2796,6 +2817,19 @@ func (n DIBasicType) Fields() []DIBasicTypeField {
 	return ret
 }
 
+type DICommonBlock struct {
+	*Node
+}
+
+func (n DICommonBlock) Fields() []DICommonBlockField {
+	nodes := n.Children(selector.DICommonBlockField)
+	var ret = make([]DICommonBlockField, 0, len(nodes))
+	for _, node := range nodes {
+		ret = append(ret, ToLlvmNode(node).(DICommonBlockField))
+	}
+	return ret
+}
+
 type DICompileUnit struct {
 	*Node
 }
@@ -3391,7 +3425,7 @@ func (n ExceptionArg) Typ() LlvmNode {
 }
 
 func (n ExceptionArg) Val() LlvmNode {
-	return ToLlvmNode(n.Child(selector.OneOf(ll.AShrExpr, ll.AddExpr, ll.AddrSpaceCastExpr, ll.AndExpr, ll.ArrayConst, ll.BitCastExpr, ll.BlockAddressConst, ll.BoolConst, ll.CharArrayConst, ll.DIBasicType, ll.DICompileUnit, ll.DICompositeType, ll.DIDerivedType, ll.DIEnumerator, ll.DIExpression, ll.DIFile, ll.DIGlobalVariable, ll.DIGlobalVariableExpression, ll.DIImportedEntity, ll.DILabel, ll.DILexicalBlock, ll.DILexicalBlockFile, ll.DILocalVariable, ll.DILocation, ll.DIMacro, ll.DIMacroFile, ll.DIModule, ll.DINamespace, ll.DIObjCProperty, ll.DISubprogram, ll.DISubrange, ll.DISubroutineType, ll.DITemplateTypeParameter, ll.DITemplateValueParameter, ll.ExtractElementExpr, ll.ExtractValueExpr, ll.FAddExpr, ll.FCmpExpr, ll.FDivExpr, ll.FMulExpr, ll.FNegExpr, ll.FPExtExpr, ll.FPToSIExpr, ll.FPToUIExpr, ll.FPTruncExpr, ll.FRemExpr, ll.FSubExpr, ll.FloatConst, ll.GenericDINode, ll.GetElementPtrExpr, ll.GlobalIdent, ll.ICmpExpr, ll.InlineAsm, ll.InsertElementExpr, ll.InsertValueExpr, ll.IntConst, ll.IntToPtrExpr, ll.LShrExpr, ll.LocalIdent, ll.MDString, ll.MDTuple, ll.MetadataID, ll.MulExpr, ll.NoneConst, ll.NullConst, ll.OrExpr, ll.PtrToIntExpr, ll.SDivExpr, ll.SExtExpr, ll.SIToFPExpr, ll.SRemExpr, ll.SelectExpr, ll.ShlExpr, ll.ShuffleVectorExpr, ll.StructConst, ll.SubExpr, ll.TruncExpr, ll.TypeValue, ll.UDivExpr, ll.UIToFPExpr, ll.URemExpr, ll.UndefConst, ll.VectorConst, ll.XorExpr, ll.ZExtExpr, ll.ZeroInitializerConst))).(LlvmNode)
+	return ToLlvmNode(n.Child(selector.OneOf(ll.AShrExpr, ll.AddExpr, ll.AddrSpaceCastExpr, ll.AndExpr, ll.ArrayConst, ll.BitCastExpr, ll.BlockAddressConst, ll.BoolConst, ll.CharArrayConst, ll.DIBasicType, ll.DICommonBlock, ll.DICompileUnit, ll.DICompositeType, ll.DIDerivedType, ll.DIEnumerator, ll.DIExpression, ll.DIFile, ll.DIGlobalVariable, ll.DIGlobalVariableExpression, ll.DIImportedEntity, ll.DILabel, ll.DILexicalBlock, ll.DILexicalBlockFile, ll.DILocalVariable, ll.DILocation, ll.DIMacro, ll.DIMacroFile, ll.DIModule, ll.DINamespace, ll.DIObjCProperty, ll.DISubprogram, ll.DISubrange, ll.DISubroutineType, ll.DITemplateTypeParameter, ll.DITemplateValueParameter, ll.ExtractElementExpr, ll.ExtractValueExpr, ll.FAddExpr, ll.FCmpExpr, ll.FDivExpr, ll.FMulExpr, ll.FNegExpr, ll.FPExtExpr, ll.FPToSIExpr, ll.FPToUIExpr, ll.FPTruncExpr, ll.FRemExpr, ll.FSubExpr, ll.FloatConst, ll.GenericDINode, ll.GetElementPtrExpr, ll.GlobalIdent, ll.ICmpExpr, ll.InlineAsm, ll.InsertElementExpr, ll.InsertValueExpr, ll.IntConst, ll.IntToPtrExpr, ll.LShrExpr, ll.LocalIdent, ll.MDString, ll.MDTuple, ll.MetadataID, ll.MulExpr, ll.NoneConst, ll.NullConst, ll.OrExpr, ll.PtrToIntExpr, ll.SDivExpr, ll.SExtExpr, ll.SIToFPExpr, ll.SRemExpr, ll.SelectExpr, ll.ShlExpr, ll.ShuffleVectorExpr, ll.StructConst, ll.SubExpr, ll.TruncExpr, ll.TypeValue, ll.UDivExpr, ll.UIToFPExpr, ll.URemExpr, ll.UndefConst, ll.VectorConst, ll.XorExpr, ll.ZExtExpr, ll.ZeroInitializerConst))).(LlvmNode)
 }
 
 type ExportSymbolsField struct {
@@ -5140,7 +5174,7 @@ func (n MetadataDef) Distinct() (Distinct, bool) {
 }
 
 func (n MetadataDef) MDNode() LlvmNode {
-	return ToLlvmNode(n.Child(selector.OneOf(ll.DIBasicType, ll.DICompileUnit, ll.DICompositeType, ll.DIDerivedType, ll.DIEnumerator, ll.DIExpression, ll.DIFile, ll.DIGlobalVariable, ll.DIGlobalVariableExpression, ll.DIImportedEntity, ll.DILabel, ll.DILexicalBlock, ll.DILexicalBlockFile, ll.DILocalVariable, ll.DILocation, ll.DIMacro, ll.DIMacroFile, ll.DIModule, ll.DINamespace, ll.DIObjCProperty, ll.DISubprogram, ll.DISubrange, ll.DISubroutineType, ll.DITemplateTypeParameter, ll.DITemplateValueParameter, ll.GenericDINode, ll.MDTuple))).(LlvmNode)
+	return ToLlvmNode(n.Child(selector.OneOf(ll.DIBasicType, ll.DICommonBlock, ll.DICompileUnit, ll.DICompositeType, ll.DIDerivedType, ll.DIEnumerator, ll.DIExpression, ll.DIFile, ll.DIGlobalVariable, ll.DIGlobalVariableExpression, ll.DIImportedEntity, ll.DILabel, ll.DILexicalBlock, ll.DILexicalBlockFile, ll.DILocalVariable, ll.DILocation, ll.DIMacro, ll.DIMacroFile, ll.DIModule, ll.DINamespace, ll.DIObjCProperty, ll.DISubprogram, ll.DISubrange, ll.DISubroutineType, ll.DITemplateTypeParameter, ll.DITemplateValueParameter, ll.GenericDINode, ll.MDTuple))).(LlvmNode)
 }
 
 type MetadataID struct {

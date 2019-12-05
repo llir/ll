@@ -145,6 +145,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &CountField{n}
 	case ll.DIBasicType:
 		return &DIBasicType{n}
+	case ll.DICommonBlock:
+		return &DICommonBlock{n}
 	case ll.DICompileUnit:
 		return &DICompileUnit{n}
 	case ll.DICompositeType:

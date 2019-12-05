@@ -78,6 +78,7 @@ var (
 	ContainingTypeField             = func(t ll.NodeType) bool { return t == ll.ContainingTypeField }
 	CountField                      = func(t ll.NodeType) bool { return t == ll.CountField }
 	DIBasicType                     = func(t ll.NodeType) bool { return t == ll.DIBasicType }
+	DICommonBlock                   = func(t ll.NodeType) bool { return t == ll.DICommonBlock }
 	DICompileUnit                   = func(t ll.NodeType) bool { return t == ll.DICompileUnit }
 	DICompositeType                 = func(t ll.NodeType) bool { return t == ll.DICompositeType }
 	DIDerivedType                   = func(t ll.NodeType) bool { return t == ll.DIDerivedType }
@@ -393,6 +394,7 @@ var (
 	Constant                        = OneOf(ll.Constant...)
 	ConstantExpr                    = OneOf(ll.ConstantExpr...)
 	DIBasicTypeField                = OneOf(ll.DIBasicTypeField...)
+	DICommonBlockField              = OneOf(ll.DICommonBlockField...)
 	DICompileUnitField              = OneOf(ll.DICompileUnitField...)
 	DICompositeTypeField            = OneOf(ll.DICompositeTypeField...)
 	DIDerivedTypeField              = OneOf(ll.DIDerivedTypeField...)

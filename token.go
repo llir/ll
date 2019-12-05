@@ -348,6 +348,7 @@ const (
 	ZEROINITIALIZER                // zeroinitializer
 	ZEXT                           // zext
 	EXCLDIBASICTYPE                // !DIBasicType
+	EXCLDICOMMONBLOCK              // !DICommonBlock
 	EXCLDICOMPILEUNIT              // !DICompileUnit
 	EXCLDICOMPOSITETYPE            // !DICompositeType
 	EXCLDIDERIVEDTYPE              // !DIDerivedType
@@ -805,6 +806,7 @@ var tokenStr = [...]string{
 	"zeroinitializer",
 	"zext",
 	"!DIBasicType",
+	"!DICommonBlock",
 	"!DICompileUnit",
 	"!DICompositeType",
 	"!DIDerivedType",

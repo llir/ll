@@ -586,6 +586,11 @@ recovered:
 				token = EXCLDILOCATION
 				break
 			}
+		case 28:
+			if hash == 0x9920ad1c && "!DICommonBlock" == l.source[l.tokenOffset:l.offset] {
+				token = EXCLDICOMMONBLOCK
+				break
+			}
 		case 29:
 			if hash == 0x4689e9bd && "!DIGlobalVariableExpression" == l.source[l.tokenOffset:l.offset] {
 				token = EXCLDIGLOBALVARIABLEEXPRESSION
