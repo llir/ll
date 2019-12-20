@@ -16,3 +16,7 @@ cd ll/tools/textmapper/tm-tool
 cd ../../..
 make
 ```
+
+## License
+
+The `llir/ll` project is dual-licensed to the [public domain](UNLICENSE) and under a [zero-clause BSD license](LICENSE). You may choose either license to govern your use of `llir/ll`.
