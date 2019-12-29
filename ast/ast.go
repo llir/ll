@@ -1093,17 +1093,17 @@ func (EmissionKindEnum) emissionKindNode() {}
 func (EmissionKindInt) emissionKindNode()  {}
 func (NilNode) emissionKindNode()          {}
 
-type ExceptionScope interface {
+type ExceptionPad interface {
 	LlvmNode
-	exceptionScopeNode()
+	exceptionPadNode()
 }
 
-// exceptionScopeNode() ensures that only the following types can be
-// assigned to ExceptionScope.
+// exceptionPadNode() ensures that only the following types can be
+// assigned to ExceptionPad.
 //
-func (LocalIdent) exceptionScopeNode() {}
-func (NoneConst) exceptionScopeNode()  {}
-func (NilNode) exceptionScopeNode()    {}
+func (LocalIdent) exceptionPadNode() {}
+func (NoneConst) exceptionPadNode()  {}
+func (NilNode) exceptionPadNode()    {}
 
 type FirstClassType interface {
 	LlvmNode
@@ -2381,11 +2381,11 @@ func (n CallBrTerm) OperandBundles() []OperandBundle {
 	return ret
 }
 
-func (n CallBrTerm) Normal() Label {
+func (n CallBrTerm) NormalRetTarget() Label {
 	return Label{n.Child(selector.Label)}
 }
 
-func (n CallBrTerm) Others() []Label {
+func (n CallBrTerm) OtherRetTargets() []Label {
 	nodes := n.Child(selector.Label).NextAll(selector.Label)
 	var ret = make([]Label, 0, len(nodes))
 	for _, node := range nodes {
@@ -2507,7 +2507,7 @@ type CatchPadInst struct {
 	*Node
 }
 
-func (n CatchPadInst) Scope() LocalIdent {
+func (n CatchPadInst) CatchSwitch() LocalIdent {
 	return LocalIdent{n.Child(selector.LocalIdent)}
 }
 
@@ -2533,11 +2533,11 @@ type CatchRetTerm struct {
 	*Node
 }
 
-func (n CatchRetTerm) From() Value {
+func (n CatchRetTerm) CatchPad() Value {
 	return ToLlvmNode(n.Child(selector.Value)).(Value)
 }
 
-func (n CatchRetTerm) To() Label {
+func (n CatchRetTerm) Target() Label {
 	return Label{n.Child(selector.Label)}
 }
 
@@ -2554,15 +2554,15 @@ type CatchSwitchTerm struct {
 	*Node
 }
 
-func (n CatchSwitchTerm) Scope() ExceptionScope {
-	return ToLlvmNode(n.Child(selector.ExceptionScope)).(ExceptionScope)
+func (n CatchSwitchTerm) ParentPad() ExceptionPad {
+	return ToLlvmNode(n.Child(selector.ExceptionPad)).(ExceptionPad)
 }
 
 func (n CatchSwitchTerm) Handlers() Handlers {
 	return Handlers{n.Child(selector.Handlers)}
 }
 
-func (n CatchSwitchTerm) UnwindTarget() UnwindTarget {
+func (n CatchSwitchTerm) DefaultUnwindTarget() UnwindTarget {
 	return ToLlvmNode(n.Child(selector.UnwindTarget)).(UnwindTarget)
 }
 
@@ -2627,8 +2627,8 @@ type CleanupPadInst struct {
 	*Node
 }
 
-func (n CleanupPadInst) Scope() ExceptionScope {
-	return ToLlvmNode(n.Child(selector.ExceptionScope)).(ExceptionScope)
+func (n CleanupPadInst) ParentPad() ExceptionPad {
+	return ToLlvmNode(n.Child(selector.ExceptionPad)).(ExceptionPad)
 }
 
 func (n CleanupPadInst) Args() []ExceptionArg {
@@ -2653,7 +2653,7 @@ type CleanupRetTerm struct {
 	*Node
 }
 
-func (n CleanupRetTerm) From() Value {
+func (n CleanupRetTerm) CleanupPad() Value {
 	return ToLlvmNode(n.Child(selector.Value)).(Value)
 }
 
@@ -4846,11 +4846,11 @@ func (n InvokeTerm) OperandBundles() []OperandBundle {
 	return ret
 }
 
-func (n InvokeTerm) Normal() Label {
+func (n InvokeTerm) NormalRetTarget() Label {
 	return Label{n.Child(selector.Label)}
 }
 
-func (n InvokeTerm) Exception() Label {
+func (n InvokeTerm) ExceptionRetTarget() Label {
 	return Label{n.Child(selector.Label).Next(selector.Label)}
 }
 
@@ -5884,11 +5884,11 @@ func (n SelectInst) Cond() TypeValue {
 	return TypeValue{n.Child(selector.TypeValue)}
 }
 
-func (n SelectInst) X() TypeValue {
+func (n SelectInst) ValueTrue() TypeValue {
 	return TypeValue{n.Child(selector.TypeValue).Next(selector.TypeValue)}
 }
 
-func (n SelectInst) Y() TypeValue {
+func (n SelectInst) ValueFalse() TypeValue {
 	return TypeValue{n.Child(selector.TypeValue).Next(selector.TypeValue).Next(selector.TypeValue)}
 }
 

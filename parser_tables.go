@@ -491,7 +491,7 @@ var symbolStr = [...]string{
 	"Ellipsis",
 	"Exact",
 	"ExceptionArg",
-	"ExceptionScope",
+	"ExceptionPad",
 	"FastMathFlag",
 	"FPred",
 	"FuncAttribute",

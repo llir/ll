@@ -429,7 +429,7 @@ var (
 	DwarfTag                        = OneOf(ll.DwarfTag...)
 	DwarfVirtuality                 = OneOf(ll.DwarfVirtuality...)
 	EmissionKind                    = OneOf(ll.EmissionKind...)
-	ExceptionScope                  = OneOf(ll.ExceptionScope...)
+	ExceptionPad                    = OneOf(ll.ExceptionPad...)
 	FirstClassType                  = OneOf(ll.FirstClassType...)
 	FuncAttribute                   = OneOf(ll.FuncAttribute...)
 	FuncHdrField                    = OneOf(ll.FuncHdrField...)

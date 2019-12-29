@@ -182,7 +182,7 @@ const (
 	FCmpInst          // FastMathFlags=(FastMathFlag)* Pred=FPred X=TypeValue Y=Value Metadata=(MetadataAttachment)*
 	PhiInst           // Typ=Type Incs=(Inc)+ Metadata=(MetadataAttachment)*
 	Inc               // X=Value Pred=LocalIdent
-	SelectInst        // FastMathFlags=(FastMathFlag)* Cond=TypeValue X=TypeValue Y=TypeValue Metadata=(MetadataAttachment)*
+	SelectInst        // FastMathFlags=(FastMathFlag)* Cond=TypeValue ValueTrue=TypeValue ValueFalse=TypeValue Metadata=(MetadataAttachment)*
 	CallInst          // Tail? FastMathFlags=(FastMathFlag)* CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Callee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* Metadata=(MetadataAttachment)*
 	Tail
 	VAArgInst      // ArgList=TypeValue ArgType=Type Metadata=(MetadataAttachment)*
@@ -190,8 +190,8 @@ const (
 	Cleanup
 	Clause // ClauseType X=TypeValue
 	ClauseType
-	CatchPadInst               // Scope=LocalIdent Args=(ExceptionArg)* Metadata=(MetadataAttachment)*
-	CleanupPadInst             // Scope=ExceptionScope Args=(ExceptionArg)* Metadata=(MetadataAttachment)*
+	CatchPadInst               // CatchSwitch=LocalIdent Args=(ExceptionArg)* Metadata=(MetadataAttachment)*
+	CleanupPadInst             // ParentPad=ExceptionPad Args=(ExceptionArg)* Metadata=(MetadataAttachment)*
 	LocalDefTerm               // Name=LocalIdent Term=ValueTerminator
 	RetTerm                    // XTyp=(ConcreteType | VoidType) X=Value? Metadata=(MetadataAttachment)*
 	BrTerm                     // Target=Label Metadata=(MetadataAttachment)*
@@ -199,13 +199,13 @@ const (
 	SwitchTerm                 // X=TypeValue Default=Label Cases=(Case)* Metadata=(MetadataAttachment)*
 	Case                       // X=TypeConst Target=Label
 	IndirectBrTerm             // Addr=TypeValue ValidTargets=(Label)* Metadata=(MetadataAttachment)*
-	InvokeTerm                 // CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Invokee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* Normal=Label Exception=Label Metadata=(MetadataAttachment)*
-	CallBrTerm                 // CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Callee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* Normal=Label Others=(Label)* Metadata=(MetadataAttachment)*
+	InvokeTerm                 // CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Invokee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* NormalRetTarget=Label ExceptionRetTarget=Label Metadata=(MetadataAttachment)*
+	CallBrTerm                 // CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Callee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* NormalRetTarget=Label OtherRetTargets=(Label)* Metadata=(MetadataAttachment)*
 	ResumeTerm                 // X=TypeValue Metadata=(MetadataAttachment)*
-	CatchSwitchTerm            // Scope=ExceptionScope Handlers UnwindTarget Metadata=(MetadataAttachment)*
+	CatchSwitchTerm            // ParentPad=ExceptionPad Handlers DefaultUnwindTarget=UnwindTarget Metadata=(MetadataAttachment)*
 	Handlers                   // Labels=(Label)+
-	CatchRetTerm               // From=Value To=Label Metadata=(MetadataAttachment)*
-	CleanupRetTerm             // From=Value UnwindTarget Metadata=(MetadataAttachment)*
+	CatchRetTerm               // CatchPad=Value Target=Label Metadata=(MetadataAttachment)*
+	CleanupRetTerm             // CleanupPad=Value UnwindTarget Metadata=(MetadataAttachment)*
 	UnreachableTerm            // Metadata=(MetadataAttachment)*
 	MDTuple                    // MDFields=(MDField)*
 	MDString                   // Val=StringLit
@@ -1198,7 +1198,7 @@ var EmissionKind = []NodeType{
 	EmissionKindInt,
 }
 
-var ExceptionScope = []NodeType{
+var ExceptionPad = []NodeType{
 	LocalIdent,
 	NoneConst,
 }
@@ -2301,8 +2301,8 @@ var ruleNodeType = [...]NodeType{
 	0,                          // ExceptionArg_list_withsep : ExceptionArg
 	0,                          // ExceptionArg_list_withsep_opt : ExceptionArg_list_withsep
 	0,                          // ExceptionArg_list_withsep_opt :
-	CleanupPadInst,             // CleanupPadInst : 'cleanuppad' 'within' ExceptionScope '[' ExceptionArg_list_withsep_opt ']' list_of_','_and_1_elements1
-	CleanupPadInst,             // CleanupPadInst : 'cleanuppad' 'within' ExceptionScope '[' ExceptionArg_list_withsep_opt ']'
+	CleanupPadInst,             // CleanupPadInst : 'cleanuppad' 'within' ExceptionPad '[' ExceptionArg_list_withsep_opt ']' list_of_','_and_1_elements1
+	CleanupPadInst,             // CleanupPadInst : 'cleanuppad' 'within' ExceptionPad '[' ExceptionArg_list_withsep_opt ']'
 	0,                          // Terminator : LocalDefTerm
 	0,                          // Terminator : ValueTerminator
 	0,                          // Terminator : RetTerm
@@ -2347,8 +2347,8 @@ var ruleNodeType = [...]NodeType{
 	CallBrTerm,                 // CallBrTerm : 'callbr' CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist 'to' Label '[' Label_list_withsep_opt ']'
 	ResumeTerm,                 // ResumeTerm : 'resume' TypeValue list_of_','_and_1_elements1
 	ResumeTerm,                 // ResumeTerm : 'resume' TypeValue
-	CatchSwitchTerm,            // CatchSwitchTerm : 'catchswitch' 'within' ExceptionScope '[' Handlers ']' 'unwind' UnwindTarget list_of_','_and_1_elements1
-	CatchSwitchTerm,            // CatchSwitchTerm : 'catchswitch' 'within' ExceptionScope '[' Handlers ']' 'unwind' UnwindTarget
+	CatchSwitchTerm,            // CatchSwitchTerm : 'catchswitch' 'within' ExceptionPad '[' Handlers ']' 'unwind' UnwindTarget list_of_','_and_1_elements1
+	CatchSwitchTerm,            // CatchSwitchTerm : 'catchswitch' 'within' ExceptionPad '[' Handlers ']' 'unwind' UnwindTarget
 	Handlers,                   // Handlers : Label_list_withsep
 	CatchRetTerm,               // CatchRetTerm : 'catchret' 'from' Value 'to' Label list_of_','_and_1_elements1
 	CatchRetTerm,               // CatchRetTerm : 'catchret' 'from' Value 'to' Label
@@ -2898,8 +2898,8 @@ var ruleNodeType = [...]NodeType{
 	Exact,                      // Exact : 'exact'
 	ExceptionArg,               // ExceptionArg : ConcreteType Value
 	ExceptionArg,               // ExceptionArg : MetadataType Metadata
-	0,                          // ExceptionScope : NoneConst
-	0,                          // ExceptionScope : LocalIdent
+	0,                          // ExceptionPad : NoneConst
+	0,                          // ExceptionPad : LocalIdent
 	FastMathFlag,               // FastMathFlag : 'afn'
 	FastMathFlag,               // FastMathFlag : 'arcp'
 	FastMathFlag,               // FastMathFlag : 'contract'
