@@ -2789,12 +2789,12 @@ var ruleNodeType = [...]NodeType{
 	0,                          // MDFieldOrInt : MDField
 	0,                          // MDFieldOrInt : IntLit
 	ChecksumKind,               // ChecksumKind : checksum_kind_tok
-	0,                          // DIFlag_list_withsep : DIFlag_list_withsep '|' DIFlag
+	0,                          // DIFlag_list_withsep : DIFlag_list_withsep pipe_tok DIFlag
 	0,                          // DIFlag_list_withsep : DIFlag
 	DIFlags,                    // DIFlags : DIFlag_list_withsep
 	DIFlagEnum,                 // DIFlag : di_flag_tok
 	DIFlagInt,                  // DIFlag : UintLit
-	0,                          // DISPFlag_list_withsep : DISPFlag_list_withsep '|' DISPFlag
+	0,                          // DISPFlag_list_withsep : DISPFlag_list_withsep pipe_tok DISPFlag
 	0,                          // DISPFlag_list_withsep : DISPFlag
 	DISPFlags,                  // DISPFlags : DISPFlag_list_withsep
 	DISPFlagEnum,               // DISPFlag : disp_flag_tok

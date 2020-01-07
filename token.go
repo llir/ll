@@ -464,7 +464,7 @@ const (
 	LT
 	ASSIGN
 	GT
-	OR1
+	PIPE_TOK
 
 	NumTokens
 )
@@ -922,7 +922,7 @@ var tokenStr = [...]string{
 	"LT",
 	"ASSIGN",
 	"GT",
-	"OR1",
+	"PIPE_TOK",
 }
 
 func (tok Token) String() string {
