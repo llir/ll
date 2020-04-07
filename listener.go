@@ -180,7 +180,7 @@ const (
 	AddrSpaceCastInst // From=TypeValue To=Type Metadata=(MetadataAttachment)*
 	ICmpInst          // Pred=IPred X=TypeValue Y=Value Metadata=(MetadataAttachment)*
 	FCmpInst          // FastMathFlags=(FastMathFlag)* Pred=FPred X=TypeValue Y=Value Metadata=(MetadataAttachment)*
-	PhiInst           // Typ=Type Incs=(Inc)+ Metadata=(MetadataAttachment)*
+	PhiInst           // FastMathFlags=(FastMathFlag)* Typ=Type Incs=(Inc)+ Metadata=(MetadataAttachment)*
 	Inc               // X=Value Pred=LocalIdent
 	SelectInst        // FastMathFlags=(FastMathFlag)* Cond=TypeValue ValueTrue=TypeValue ValueFalse=TypeValue Metadata=(MetadataAttachment)*
 	CallInst          // Tail? FastMathFlags=(FastMathFlag)* CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Callee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* Metadata=(MetadataAttachment)*
@@ -2269,8 +2269,12 @@ var ruleNodeType = [...]NodeType{
 	ICmpInst,                   // ICmpInst : 'icmp' IPred TypeValue ',' Value
 	FCmpInst,                   // FCmpInst : 'fcmp' FastMathFlag_optlist FPred TypeValue ',' Value list_of_','_and_1_elements1
 	FCmpInst,                   // FCmpInst : 'fcmp' FastMathFlag_optlist FPred TypeValue ',' Value
+	0,                          // FastMathFlag_list : FastMathFlag_list FastMathFlag
+	0,                          // FastMathFlag_list : FastMathFlag
 	0,                          // Inc_list_withsep : Inc_list_withsep ',' Inc
 	0,                          // Inc_list_withsep : Inc
+	PhiInst,                    // PhiInst : 'phi' FastMathFlag_list Type Inc_list_withsep list_of_','_and_1_elements1
+	PhiInst,                    // PhiInst : 'phi' FastMathFlag_list Type Inc_list_withsep
 	PhiInst,                    // PhiInst : 'phi' Type Inc_list_withsep list_of_','_and_1_elements1
 	PhiInst,                    // PhiInst : 'phi' Type Inc_list_withsep
 	Inc,                        // Inc : '[' Value ',' LocalIdent ']'

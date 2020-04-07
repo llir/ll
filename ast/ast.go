@@ -5494,6 +5494,15 @@ type PhiInst struct {
 	*Node
 }
 
+func (n PhiInst) FastMathFlags() []FastMathFlag {
+	nodes := n.Children(selector.FastMathFlag)
+	var ret = make([]FastMathFlag, 0, len(nodes))
+	for _, node := range nodes {
+		ret = append(ret, FastMathFlag{node})
+	}
+	return ret
+}
+
 func (n PhiInst) Typ() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
