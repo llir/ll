@@ -235,7 +235,6 @@ var (
 	IsLocalField                    = func(t ll.NodeType) bool { return t == ll.IsLocalField }
 	IsOptimizedField                = func(t ll.NodeType) bool { return t == ll.IsOptimizedField }
 	IsUnsignedField                 = func(t ll.NodeType) bool { return t == ll.IsUnsignedField }
-	IsysrootField                   = func(t ll.NodeType) bool { return t == ll.IsysrootField }
 	LShrExpr                        = func(t ll.NodeType) bool { return t == ll.LShrExpr }
 	LShrInst                        = func(t ll.NodeType) bool { return t == ll.LShrInst }
 	Label                           = func(t ll.NodeType) bool { return t == ll.Label }
@@ -338,6 +337,7 @@ var (
 	SwiftError                      = func(t ll.NodeType) bool { return t == ll.SwiftError }
 	SwitchTerm                      = func(t ll.NodeType) bool { return t == ll.SwitchTerm }
 	SyncScope                       = func(t ll.NodeType) bool { return t == ll.SyncScope }
+	SysrootField                    = func(t ll.NodeType) bool { return t == ll.SysrootField }
 	TLSModel                        = func(t ll.NodeType) bool { return t == ll.TLSModel }
 	TagField                        = func(t ll.NodeType) bool { return t == ll.TagField }
 	Tail                            = func(t ll.NodeType) bool { return t == ll.Tail }

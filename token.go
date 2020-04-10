@@ -415,7 +415,7 @@ const (
 	ISLOCALCOLON                   // isLocal:
 	ISOPTIMIZEDCOLON               // isOptimized:
 	ISUNSIGNEDCOLON                // isUnsigned:
-	ISYSROOTCOLON                  // isysroot:
+	SYSROOTCOLON                   // sysroot:
 	LANGUAGECOLON                  // language:
 	LINECOLON                      // line:
 	LINKAGENAMECOLON               // linkageName:
@@ -873,7 +873,7 @@ var tokenStr = [...]string{
 	"isLocal:",
 	"isOptimized:",
 	"isUnsigned:",
-	"isysroot:",
+	"sysroot:",
 	"language:",
 	"line:",
 	"linkageName:",
