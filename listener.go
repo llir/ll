@@ -2269,14 +2269,10 @@ var ruleNodeType = [...]NodeType{
 	ICmpInst,                   // ICmpInst : 'icmp' IPred TypeValue ',' Value
 	FCmpInst,                   // FCmpInst : 'fcmp' FastMathFlag_optlist FPred TypeValue ',' Value list_of_','_and_1_elements1
 	FCmpInst,                   // FCmpInst : 'fcmp' FastMathFlag_optlist FPred TypeValue ',' Value
-	0,                          // FastMathFlag_list : FastMathFlag_list FastMathFlag
-	0,                          // FastMathFlag_list : FastMathFlag
 	0,                          // Inc_list_withsep : Inc_list_withsep ',' Inc
 	0,                          // Inc_list_withsep : Inc
-	PhiInst,                    // PhiInst : 'phi' FastMathFlag_list Type Inc_list_withsep list_of_','_and_1_elements1
-	PhiInst,                    // PhiInst : 'phi' FastMathFlag_list Type Inc_list_withsep
-	PhiInst,                    // PhiInst : 'phi' Type Inc_list_withsep list_of_','_and_1_elements1
-	PhiInst,                    // PhiInst : 'phi' Type Inc_list_withsep
+	PhiInst,                    // PhiInst : 'phi' FastMathFlag_optlist Type Inc_list_withsep list_of_','_and_1_elements1
+	PhiInst,                    // PhiInst : 'phi' FastMathFlag_optlist Type Inc_list_withsep
 	Inc,                        // Inc : '[' Value ',' LocalIdent ']'
 	SelectInst,                 // SelectInst : 'select' FastMathFlag_optlist TypeValue ',' TypeValue ',' TypeValue list_of_','_and_1_elements1
 	SelectInst,                 // SelectInst : 'select' FastMathFlag_optlist TypeValue ',' TypeValue ',' TypeValue
