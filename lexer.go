@@ -320,11 +320,6 @@ recovered:
 				token = SCOPELINECOLON
 				break
 			}
-		case 84:
-			if hash == 0x45c29c54 && "isysroot:" == l.source[l.tokenOffset:l.offset] {
-				token = ISYSROOTCOLON
-				break
-			}
 		case 85:
 			if hash == 0xaba949d5 && "align:" == l.source[l.tokenOffset:l.offset] {
 				token = ALIGNCOLON
@@ -424,6 +419,11 @@ recovered:
 		case 105:
 			if hash == 0xcee59ce9 && "value:" == l.source[l.tokenOffset:l.offset] {
 				token = VALUECOLON
+				break
+			}
+		case 107:
+			if hash == 0x75b114eb && "sysroot:" == l.source[l.tokenOffset:l.offset] {
+				token = SYSROOTCOLON
 				break
 			}
 		case 109:

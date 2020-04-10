@@ -243,7 +243,6 @@ func (n IsImplicitCodeField) LlvmNode() *Node        { return n.Node }
 func (n IsLocalField) LlvmNode() *Node               { return n.Node }
 func (n IsOptimizedField) LlvmNode() *Node           { return n.Node }
 func (n IsUnsignedField) LlvmNode() *Node            { return n.Node }
-func (n IsysrootField) LlvmNode() *Node              { return n.Node }
 func (n LShrExpr) LlvmNode() *Node                   { return n.Node }
 func (n LShrInst) LlvmNode() *Node                   { return n.Node }
 func (n Label) LlvmNode() *Node                      { return n.Node }
@@ -346,6 +345,7 @@ func (n SubInst) LlvmNode() *Node                    { return n.Node }
 func (n SwiftError) LlvmNode() *Node                 { return n.Node }
 func (n SwitchTerm) LlvmNode() *Node                 { return n.Node }
 func (n SyncScope) LlvmNode() *Node                  { return n.Node }
+func (n SysrootField) LlvmNode() *Node               { return n.Node }
 func (n TLSModel) LlvmNode() *Node                   { return n.Node }
 func (n TagField) LlvmNode() *Node                   { return n.Node }
 func (n Tail) LlvmNode() *Node                       { return n.Node }
@@ -869,9 +869,9 @@ type DIModuleField interface {
 //
 func (ConfigMacrosField) dIModuleFieldNode() {}
 func (IncludePathField) dIModuleFieldNode()  {}
-func (IsysrootField) dIModuleFieldNode()     {}
 func (NameField) dIModuleFieldNode()         {}
 func (ScopeField) dIModuleFieldNode()        {}
+func (SysrootField) dIModuleFieldNode()      {}
 func (NilNode) dIModuleFieldNode()           {}
 
 type DINamespaceField interface {
@@ -4903,14 +4903,6 @@ func (n IsUnsignedField) IsUnsigned() BoolLit {
 	return BoolLit{n.Child(selector.BoolLit)}
 }
 
-type IsysrootField struct {
-	*Node
-}
-
-func (n IsysrootField) Isysroot() StringLit {
-	return StringLit{n.Child(selector.StringLit)}
-}
-
 type LShrExpr struct {
 	*Node
 }
@@ -6224,6 +6216,14 @@ type SyncScope struct {
 }
 
 func (n SyncScope) Scope() StringLit {
+	return StringLit{n.Child(selector.StringLit)}
+}
+
+type SysrootField struct {
+	*Node
+}
+
+func (n SysrootField) Sysroot() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 

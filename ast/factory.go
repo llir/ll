@@ -459,8 +459,6 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &IsOptimizedField{n}
 	case ll.IsUnsignedField:
 		return &IsUnsignedField{n}
-	case ll.IsysrootField:
-		return &IsysrootField{n}
 	case ll.LShrExpr:
 		return &LShrExpr{n}
 	case ll.LShrInst:
@@ -665,6 +663,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &SwitchTerm{n}
 	case ll.SyncScope:
 		return &SyncScope{n}
+	case ll.SysrootField:
+		return &SysrootField{n}
 	case ll.TLSModel:
 		return &TLSModel{n}
 	case ll.TagField:

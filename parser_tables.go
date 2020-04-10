@@ -410,7 +410,7 @@ var symbolStr = [...]string{
 	"IsLocalField",
 	"IsOptimizedField",
 	"IsUnsignedField",
-	"IsysrootField",
+	"SysrootField",
 	"LanguageField",
 	"LineField",
 	"LinkageNameField",

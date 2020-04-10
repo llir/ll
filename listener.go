@@ -280,7 +280,7 @@ const (
 	IsLocalField               // IsLocal=BoolLit
 	IsOptimizedField           // IsOptimized=BoolLit
 	IsUnsignedField            // IsUnsigned=BoolLit
-	IsysrootField              // Isysroot=StringLit
+	SysrootField               // Sysroot=StringLit
 	LanguageField              // Language=DwarfLang
 	LineField                  // Line=IntLit
 	LinkageNameField           // LinkageName=StringLit
@@ -664,7 +664,7 @@ var nodeTypeStr = [...]string{
 	"IsLocalField",
 	"IsOptimizedField",
 	"IsUnsignedField",
-	"IsysrootField",
+	"SysrootField",
 	"LanguageField",
 	"LineField",
 	"LinkageNameField",
@@ -1086,9 +1086,9 @@ var DIMacroFileField = []NodeType{
 var DIModuleField = []NodeType{
 	ConfigMacrosField,
 	IncludePathField,
-	IsysrootField,
 	NameField,
 	ScopeField,
+	SysrootField,
 }
 
 var DINamespaceField = []NodeType{
@@ -1745,7 +1745,7 @@ var ruleNodeType = [...]NodeType{
 	LabelIdent,                 // LabelIdent : 'isLocal:'
 	LabelIdent,                 // LabelIdent : 'isOptimized:'
 	LabelIdent,                 // LabelIdent : 'isUnsigned:'
-	LabelIdent,                 // LabelIdent : 'isysroot:'
+	LabelIdent,                 // LabelIdent : 'sysroot:'
 	LabelIdent,                 // LabelIdent : 'language:'
 	LabelIdent,                 // LabelIdent : 'line:'
 	LabelIdent,                 // LabelIdent : 'linkageName:'
@@ -2618,7 +2618,7 @@ var ruleNodeType = [...]NodeType{
 	0,                          // DIModuleField : NameField
 	0,                          // DIModuleField : ConfigMacrosField
 	0,                          // DIModuleField : IncludePathField
-	0,                          // DIModuleField : IsysrootField
+	0,                          // DIModuleField : SysrootField
 	DINamespace,                // DINamespace : '!DINamespace' '(' DINamespaceField_list_withsep_opt ')'
 	0,                          // DINamespaceField_list_withsep : DINamespaceField_list_withsep ',' DINamespaceField
 	0,                          // DINamespaceField_list_withsep : DINamespaceField
@@ -2747,7 +2747,7 @@ var ruleNodeType = [...]NodeType{
 	IsLocalField,               // IsLocalField : 'isLocal:' BoolLit
 	IsOptimizedField,           // IsOptimizedField : 'isOptimized:' BoolLit
 	IsUnsignedField,            // IsUnsignedField : 'isUnsigned:' BoolLit
-	IsysrootField,              // IsysrootField : 'isysroot:' StringLit
+	SysrootField,               // SysrootField : 'sysroot:' StringLit
 	LanguageField,              // LanguageField : 'language:' DwarfLang
 	LineField,                  // LineField : 'line:' IntLit
 	LinkageNameField,           // LinkageNameField : 'linkageName:' StringLit
