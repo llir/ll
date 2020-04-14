@@ -233,6 +233,7 @@ const (
 	PARTITION                      // partition
 	PERSONALITY                    // personality
 	PHI                            // phi
+	FREEZE                         // freeze
 	PPC_FP128                      // ppc_fp128
 	PREFIX                         // prefix
 	PRESERVE_ALLCC                 // preserve_allcc
@@ -691,6 +692,7 @@ var tokenStr = [...]string{
 	"partition",
 	"personality",
 	"phi",
+	"freeze",
 	"ppc_fp128",
 	"prefix",
 	"preserve_allcc",

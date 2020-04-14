@@ -194,6 +194,7 @@ func (n FloatConst) LlvmNode() *Node                 { return n.Node }
 func (n FloatKind) LlvmNode() *Node                  { return n.Node }
 func (n FloatLit) LlvmNode() *Node                   { return n.Node }
 func (n FloatType) LlvmNode() *Node                  { return n.Node }
+func (n FreezeInst) LlvmNode() *Node                 { return n.Node }
 func (n FuncAttr) LlvmNode() *Node                   { return n.Node }
 func (n FuncBody) LlvmNode() *Node                   { return n.Node }
 func (n FuncDecl) LlvmNode() *Node                   { return n.Node }
@@ -1247,6 +1248,7 @@ func (FPTruncInst) instructionNode()        {}
 func (FRemInst) instructionNode()           {}
 func (FSubInst) instructionNode()           {}
 func (FenceInst) instructionNode()          {}
+func (FreezeInst) instructionNode()         {}
 func (GetElementPtrInst) instructionNode()  {}
 func (ICmpInst) instructionNode()           {}
 func (InsertElementInst) instructionNode()  {}
@@ -1729,6 +1731,7 @@ func (FPToUIInst) valueInstructionNode()         {}
 func (FPTruncInst) valueInstructionNode()        {}
 func (FRemInst) valueInstructionNode()           {}
 func (FSubInst) valueInstructionNode()           {}
+func (FreezeInst) valueInstructionNode()         {}
 func (GetElementPtrInst) valueInstructionNode()  {}
 func (ICmpInst) valueInstructionNode()           {}
 func (InsertElementInst) valueInstructionNode()  {}
@@ -4046,6 +4049,14 @@ type FloatType struct {
 
 func (n FloatType) FloatKind() FloatKind {
 	return FloatKind{n.Child(selector.FloatKind)}
+}
+
+type FreezeInst struct {
+	*Node
+}
+
+func (n FreezeInst) X() TypeValue {
+	return TypeValue{n.Child(selector.TypeValue)}
 }
 
 type FuncAttr struct {

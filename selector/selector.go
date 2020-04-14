@@ -186,6 +186,7 @@ var (
 	FloatKind                       = func(t ll.NodeType) bool { return t == ll.FloatKind }
 	FloatLit                        = func(t ll.NodeType) bool { return t == ll.FloatLit }
 	FloatType                       = func(t ll.NodeType) bool { return t == ll.FloatType }
+	FreezeInst                      = func(t ll.NodeType) bool { return t == ll.FreezeInst }
 	FuncAttr                        = func(t ll.NodeType) bool { return t == ll.FuncAttr }
 	FuncBody                        = func(t ll.NodeType) bool { return t == ll.FuncBody }
 	FuncDecl                        = func(t ll.NodeType) bool { return t == ll.FuncDecl }
