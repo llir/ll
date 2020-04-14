@@ -361,6 +361,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &FloatLit{n}
 	case ll.FloatType:
 		return &FloatType{n}
+	case ll.FreezeInst:
+		return &FreezeInst{n}
 	case ll.FuncAttr:
 		return &FuncAttr{n}
 	case ll.FuncBody:

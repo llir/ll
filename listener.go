@@ -183,6 +183,7 @@ const (
 	PhiInst           // FastMathFlags=(FastMathFlag)* Typ=Type Incs=(Inc)+ Metadata=(MetadataAttachment)*
 	Inc               // X=Value Pred=LocalIdent
 	SelectInst        // FastMathFlags=(FastMathFlag)* Cond=TypeValue ValueTrue=TypeValue ValueFalse=TypeValue Metadata=(MetadataAttachment)*
+	FreezeInst        // X=TypeValue
 	CallInst          // Tail? FastMathFlags=(FastMathFlag)* CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Callee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* Metadata=(MetadataAttachment)*
 	Tail
 	VAArgInst      // ArgList=TypeValue ArgType=Type Metadata=(MetadataAttachment)*
@@ -567,6 +568,7 @@ var nodeTypeStr = [...]string{
 	"PhiInst",
 	"Inc",
 	"SelectInst",
+	"FreezeInst",
 	"CallInst",
 	"Tail",
 	"VAArgInst",
@@ -1296,6 +1298,7 @@ var Instruction = []NodeType{
 	FRemInst,
 	FSubInst,
 	FenceInst,
+	FreezeInst,
 	GetElementPtrInst,
 	ICmpInst,
 	InsertElementInst,
@@ -1666,6 +1669,7 @@ var ValueInstruction = []NodeType{
 	FPTruncInst,
 	FRemInst,
 	FSubInst,
+	FreezeInst,
 	GetElementPtrInst,
 	ICmpInst,
 	InsertElementInst,
@@ -2124,6 +2128,7 @@ var ruleNodeType = [...]NodeType{
 	0,                          // ValueInstruction : FCmpInst
 	0,                          // ValueInstruction : PhiInst
 	0,                          // ValueInstruction : SelectInst
+	0,                          // ValueInstruction : FreezeInst
 	0,                          // ValueInstruction : CallInst
 	0,                          // ValueInstruction : VAArgInst
 	0,                          // ValueInstruction : LandingPadInst
@@ -2276,6 +2281,7 @@ var ruleNodeType = [...]NodeType{
 	Inc,                        // Inc : '[' Value ',' LocalIdent ']'
 	SelectInst,                 // SelectInst : 'select' FastMathFlag_optlist TypeValue ',' TypeValue ',' TypeValue list_of_','_and_1_elements1
 	SelectInst,                 // SelectInst : 'select' FastMathFlag_optlist TypeValue ',' TypeValue ',' TypeValue
+	FreezeInst,                 // FreezeInst : 'freeze' TypeValue
 	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']' list_of_','_and_1_elements1
 	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist '[' OperandBundle_list_withsep ']'
 	CallInst,                   // CallInst : Tailopt 'call' FastMathFlag_optlist CallingConvopt ReturnAttribute_optlist AddrSpaceopt Type Value '(' Args ')' FuncAttribute_optlist list_of_','_and_1_elements1

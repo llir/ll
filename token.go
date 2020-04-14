@@ -140,6 +140,7 @@ const (
 	FPTOSI                         // fptosi
 	FPTOUI                         // fptoui
 	FPTRUNC                        // fptrunc
+	FREEZE                         // freeze
 	FREM                           // frem
 	FROM                           // from
 	FSUB                           // fsub
@@ -598,6 +599,7 @@ var tokenStr = [...]string{
 	"fptosi",
 	"fptoui",
 	"fptrunc",
+	"freeze",
 	"frem",
 	"from",
 	"fsub",
