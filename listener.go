@@ -2128,12 +2128,12 @@ var ruleNodeType = [...]NodeType{
 	0,                          // ValueInstruction : FCmpInst
 	0,                          // ValueInstruction : PhiInst
 	0,                          // ValueInstruction : SelectInst
+	0,                          // ValueInstruction : FreezeInst
 	0,                          // ValueInstruction : CallInst
 	0,                          // ValueInstruction : VAArgInst
 	0,                          // ValueInstruction : LandingPadInst
 	0,                          // ValueInstruction : CatchPadInst
 	0,                          // ValueInstruction : CleanupPadInst
-	0,                          // ValueInstruction : FreezeInst
 	0,                          // FastMathFlag_optlist : FastMathFlag_optlist FastMathFlag
 	0,                          // FastMathFlag_optlist :
 	FNegInst,                   // FNegInst : 'fneg' FastMathFlag_optlist TypeValue list_of_','_and_1_elements1
