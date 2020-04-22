@@ -3032,6 +3032,7 @@ var ruleNodeType = [...]NodeType{
 	ParamAttr,                  // ParamAttr : 'nest'
 	ParamAttr,                  // ParamAttr : 'noalias'
 	ParamAttr,                  // ParamAttr : 'nocapture'
+	ParamAttr,                  // ParamAttr : 'nofree'
 	ParamAttr,                  // ParamAttr : 'nonnull'
 	ParamAttr,                  // ParamAttr : 'readnone'
 	ParamAttr,                  // ParamAttr : 'readonly'
