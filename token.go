@@ -69,6 +69,9 @@ const (
 	ARM_AAPCS_VFPCC                // arm_aapcs_vfpcc
 	ARM_AAPCSCC                    // arm_aapcscc
 	ARM_APCSCC                     // arm_apcscc
+	CFGUARD_CHECKCC                // cfguard_checkcc
+	TAILCC                         // tailcc
+	AARCH64_SVE_VECTOR_PCS         // aarch64_sve_vector_pcs
 	ASHR                           // ashr
 	ASM                            // asm
 	ATOMIC                         // atomic
@@ -528,6 +531,9 @@ var tokenStr = [...]string{
 	"arm_aapcs_vfpcc",
 	"arm_aapcscc",
 	"arm_apcscc",
+	"cfguard_checkcc",
+	"tailcc",
+	"aarch64_sve_vector_pcs",
 	"ashr",
 	"asm",
 	"atomic",
