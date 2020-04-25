@@ -39,6 +39,7 @@ const (
 	FLOAT_LIT_TOK
 	STRING_LIT_TOK
 	INT_TYPE_TOK
+	AARCH64_SVE_VECTOR_PCS         // aarch64_sve_vector_pcs
 	AARCH64_VECTOR_PCS             // aarch64_vector_pcs
 	ACQ_REL                        // acq_rel
 	ACQUIRE                        // acquire
@@ -69,9 +70,6 @@ const (
 	ARM_AAPCS_VFPCC                // arm_aapcs_vfpcc
 	ARM_AAPCSCC                    // arm_aapcscc
 	ARM_APCSCC                     // arm_apcscc
-	CFGUARD_CHECKCC                // cfguard_checkcc
-	TAILCC                         // tailcc
-	AARCH64_SVE_VECTOR_PCS         // aarch64_sve_vector_pcs
 	ASHR                           // ashr
 	ASM                            // asm
 	ATOMIC                         // atomic
@@ -95,6 +93,7 @@ const (
 	CATCHSWITCH                    // catchswitch
 	CC                             // cc
 	CCC                            // ccc
+	CFGUARD_CHECKCC                // cfguard_checkcc
 	CLEANUP                        // cleanup
 	CLEANUPPAD                     // cleanuppad
 	CLEANUPRET                     // cleanupret
@@ -297,6 +296,7 @@ const (
 	SWITCH                         // switch
 	SYNCSCOPE                      // syncscope
 	TAIL                           // tail
+	TAILCC                         // tailcc
 	TARGET                         // target
 	THREAD_LOCAL                   // thread_local
 	TO                             // to
@@ -501,6 +501,7 @@ var tokenStr = [...]string{
 	"FLOAT_LIT_TOK",
 	"STRING_LIT_TOK",
 	"INT_TYPE_TOK",
+	"aarch64_sve_vector_pcs",
 	"aarch64_vector_pcs",
 	"acq_rel",
 	"acquire",
@@ -531,9 +532,6 @@ var tokenStr = [...]string{
 	"arm_aapcs_vfpcc",
 	"arm_aapcscc",
 	"arm_apcscc",
-	"cfguard_checkcc",
-	"tailcc",
-	"aarch64_sve_vector_pcs",
 	"ashr",
 	"asm",
 	"atomic",
@@ -557,6 +555,7 @@ var tokenStr = [...]string{
 	"catchswitch",
 	"cc",
 	"ccc",
+	"cfguard_checkcc",
 	"cleanup",
 	"cleanuppad",
 	"cleanupret",
@@ -759,6 +758,7 @@ var tokenStr = [...]string{
 	"switch",
 	"syncscope",
 	"tail",
+	"tailcc",
 	"target",
 	"thread_local",
 	"to",
