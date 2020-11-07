@@ -9,6 +9,8 @@ import (
 
 func ToLlvmNode(n *Node) LlvmNode {
 	switch n.Type() {
+	case ll.APINotesField:
+		return &APINotesField{n}
 	case ll.AShrExpr:
 		return &AShrExpr{n}
 	case ll.AShrInst:
@@ -665,8 +667,6 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &SwitchTerm{n}
 	case ll.SyncScope:
 		return &SyncScope{n}
-	case ll.SysrootField:
-		return &SysrootField{n}
 	case ll.TLSModel:
 		return &TLSModel{n}
 	case ll.TagField:

@@ -229,6 +229,11 @@ recovered:
 				token = IDENTIFIERCOLON
 				break
 			}
+		case 51:
+			if hash == 0x14e78833 && "apinotes:" == l.source[l.tokenOffset:l.offset] {
+				token = APINOTESCOLON
+				break
+			}
 		case 54:
 			if hash == 0x6a45736 && "unit:" == l.source[l.tokenOffset:l.offset] {
 				token = UNITCOLON
@@ -419,11 +424,6 @@ recovered:
 		case 105:
 			if hash == 0xcee59ce9 && "value:" == l.source[l.tokenOffset:l.offset] {
 				token = VALUECOLON
-				break
-			}
-		case 107:
-			if hash == 0x75b114eb && "sysroot:" == l.source[l.tokenOffset:l.offset] {
-				token = SYSROOTCOLON
 				break
 			}
 		case 109:

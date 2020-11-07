@@ -18,6 +18,7 @@ type NilNode struct{}
 var nilInstance = &NilNode{}
 
 // All types implement LlvmNode.
+func (n APINotesField) LlvmNode() *Node              { return n.Node }
 func (n AShrExpr) LlvmNode() *Node                   { return n.Node }
 func (n AShrInst) LlvmNode() *Node                   { return n.Node }
 func (n AddExpr) LlvmNode() *Node                    { return n.Node }
@@ -346,7 +347,6 @@ func (n SubInst) LlvmNode() *Node                    { return n.Node }
 func (n SwiftError) LlvmNode() *Node                 { return n.Node }
 func (n SwitchTerm) LlvmNode() *Node                 { return n.Node }
 func (n SyncScope) LlvmNode() *Node                  { return n.Node }
-func (n SysrootField) LlvmNode() *Node               { return n.Node }
 func (n TLSModel) LlvmNode() *Node                   { return n.Node }
 func (n TagField) LlvmNode() *Node                   { return n.Node }
 func (n Tail) LlvmNode() *Node                       { return n.Node }
@@ -868,11 +868,13 @@ type DIModuleField interface {
 // dIModuleFieldNode() ensures that only the following types can be
 // assigned to DIModuleField.
 //
+func (APINotesField) dIModuleFieldNode()     {}
 func (ConfigMacrosField) dIModuleFieldNode() {}
+func (FileField) dIModuleFieldNode()         {}
 func (IncludePathField) dIModuleFieldNode()  {}
+func (LineField) dIModuleFieldNode()         {}
 func (NameField) dIModuleFieldNode()         {}
 func (ScopeField) dIModuleFieldNode()        {}
-func (SysrootField) dIModuleFieldNode()      {}
 func (NilNode) dIModuleFieldNode()           {}
 
 type DINamespaceField interface {
@@ -1775,6 +1777,14 @@ func (InvokeTerm) valueTerminatorNode()      {}
 func (NilNode) valueTerminatorNode()         {}
 
 // Types.
+
+type APINotesField struct {
+	*Node
+}
+
+func (n APINotesField) APINotes() StringLit {
+	return StringLit{n.Child(selector.StringLit)}
+}
 
 type AShrExpr struct {
 	*Node
@@ -6227,14 +6237,6 @@ type SyncScope struct {
 }
 
 func (n SyncScope) Scope() StringLit {
-	return StringLit{n.Child(selector.StringLit)}
-}
-
-type SysrootField struct {
-	*Node
-}
-
-func (n SysrootField) Sysroot() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 
