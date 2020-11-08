@@ -281,7 +281,7 @@ const (
 	IsLocalField               // IsLocal=BoolLit
 	IsOptimizedField           // IsOptimized=BoolLit
 	IsUnsignedField            // IsUnsigned=BoolLit
-	SysrootField               // Sysroot=StringLit
+	APINotesField              // APINotes=StringLit
 	LanguageField              // Language=DwarfLang
 	LineField                  // Line=IntLit
 	LinkageNameField           // LinkageName=StringLit
@@ -666,7 +666,7 @@ var nodeTypeStr = [...]string{
 	"IsLocalField",
 	"IsOptimizedField",
 	"IsUnsignedField",
-	"SysrootField",
+	"APINotesField",
 	"LanguageField",
 	"LineField",
 	"LinkageNameField",
@@ -1086,11 +1086,13 @@ var DIMacroFileField = []NodeType{
 }
 
 var DIModuleField = []NodeType{
+	APINotesField,
 	ConfigMacrosField,
+	FileField,
 	IncludePathField,
+	LineField,
 	NameField,
 	ScopeField,
-	SysrootField,
 }
 
 var DINamespaceField = []NodeType{
@@ -1749,7 +1751,7 @@ var ruleNodeType = [...]NodeType{
 	LabelIdent,                 // LabelIdent : 'isLocal:'
 	LabelIdent,                 // LabelIdent : 'isOptimized:'
 	LabelIdent,                 // LabelIdent : 'isUnsigned:'
-	LabelIdent,                 // LabelIdent : 'sysroot:'
+	LabelIdent,                 // LabelIdent : 'apinotes:'
 	LabelIdent,                 // LabelIdent : 'language:'
 	LabelIdent,                 // LabelIdent : 'line:'
 	LabelIdent,                 // LabelIdent : 'linkageName:'
@@ -2624,7 +2626,9 @@ var ruleNodeType = [...]NodeType{
 	0,                          // DIModuleField : NameField
 	0,                          // DIModuleField : ConfigMacrosField
 	0,                          // DIModuleField : IncludePathField
-	0,                          // DIModuleField : SysrootField
+	0,                          // DIModuleField : APINotesField
+	0,                          // DIModuleField : FileField
+	0,                          // DIModuleField : LineField
 	DINamespace,                // DINamespace : '!DINamespace' '(' DINamespaceField_list_withsep_opt ')'
 	0,                          // DINamespaceField_list_withsep : DINamespaceField_list_withsep ',' DINamespaceField
 	0,                          // DINamespaceField_list_withsep : DINamespaceField
@@ -2753,7 +2757,7 @@ var ruleNodeType = [...]NodeType{
 	IsLocalField,               // IsLocalField : 'isLocal:' BoolLit
 	IsOptimizedField,           // IsOptimizedField : 'isOptimized:' BoolLit
 	IsUnsignedField,            // IsUnsignedField : 'isUnsigned:' BoolLit
-	SysrootField,               // SysrootField : 'sysroot:' StringLit
+	APINotesField,              // APINotesField : 'apinotes:' StringLit
 	LanguageField,              // LanguageField : 'language:' DwarfLang
 	LineField,                  // LineField : 'line:' IntLit
 	LinkageNameField,           // LinkageNameField : 'linkageName:' StringLit

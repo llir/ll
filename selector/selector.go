@@ -10,6 +10,7 @@ type Selector func(nt ll.NodeType) bool
 
 var (
 	Any                             = func(t ll.NodeType) bool { return true }
+	APINotesField                   = func(t ll.NodeType) bool { return t == ll.APINotesField }
 	AShrExpr                        = func(t ll.NodeType) bool { return t == ll.AShrExpr }
 	AShrInst                        = func(t ll.NodeType) bool { return t == ll.AShrInst }
 	AddExpr                         = func(t ll.NodeType) bool { return t == ll.AddExpr }
@@ -338,7 +339,6 @@ var (
 	SwiftError                      = func(t ll.NodeType) bool { return t == ll.SwiftError }
 	SwitchTerm                      = func(t ll.NodeType) bool { return t == ll.SwitchTerm }
 	SyncScope                       = func(t ll.NodeType) bool { return t == ll.SyncScope }
-	SysrootField                    = func(t ll.NodeType) bool { return t == ll.SysrootField }
 	TLSModel                        = func(t ll.NodeType) bool { return t == ll.TLSModel }
 	TagField                        = func(t ll.NodeType) bool { return t == ll.TagField }
 	Tail                            = func(t ll.NodeType) bool { return t == ll.Tail }
