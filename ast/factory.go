@@ -651,6 +651,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &SplitDebugInliningField{n}
 	case ll.StoreInst:
 		return &StoreInst{n}
+	case ll.StrideField:
+		return &StrideField{n}
 	case ll.StringLit:
 		return &StringLit{n}
 	case ll.StructConst:
@@ -727,6 +729,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &UnreachableTerm{n}
 	case ll.UnwindToCaller:
 		return &UnwindToCaller{n}
+	case ll.UpperBoundField:
+		return &UpperBoundField{n}
 	case ll.UseListOrder:
 		return &UseListOrder{n}
 	case ll.UseListOrderBB:

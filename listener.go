@@ -285,7 +285,7 @@ const (
 	LanguageField              // Language=DwarfLang
 	LineField                  // Line=IntLit
 	LinkageNameField           // LinkageName=StringLit
-	LowerBoundField            // LowerBound=IntLit
+	LowerBoundField            // LowerBound=MDFieldOrInt
 	MacrosField                // Macros=MDField
 	NameField                  // Name=StringLit
 	NameTableKindField         // NameTableKind
@@ -305,6 +305,7 @@ const (
 	SPFlagsField               // SPFlags=DISPFlags
 	SplitDebugFilenameField    // SplitDebugFilename=StringLit
 	SplitDebugInliningField    // SplitDebugInlining=BoolLit
+	StrideField                // Stride=MDFieldOrInt
 	TagField                   // Tag=DwarfTag
 	TemplateParamsField        // TemplateParams=MDField
 	ThisAdjustmentField        // ThisAdjustment=IntLit
@@ -313,6 +314,7 @@ const (
 	TypeMacinfoField           // Typ=DwarfMacinfo
 	TypesField                 // Types=MDField
 	UnitField                  // Unit=MDField
+	UpperBoundField            // UpperBound=MDFieldOrInt
 	ValueField                 // Value=MDField
 	ValueIntField              // Value=IntLit
 	ValueStringField           // Value=StringLit
@@ -690,6 +692,7 @@ var nodeTypeStr = [...]string{
 	"SPFlagsField",
 	"SplitDebugFilenameField",
 	"SplitDebugInliningField",
+	"StrideField",
 	"TagField",
 	"TemplateParamsField",
 	"ThisAdjustmentField",
@@ -698,6 +701,7 @@ var nodeTypeStr = [...]string{
 	"TypeMacinfoField",
 	"TypesField",
 	"UnitField",
+	"UpperBoundField",
 	"ValueField",
 	"ValueIntField",
 	"ValueStringField",
@@ -1143,6 +1147,8 @@ var DISubprogramField = []NodeType{
 var DISubrangeField = []NodeType{
 	CountField,
 	LowerBoundField,
+	StrideField,
+	UpperBoundField,
 }
 
 var DISubroutineTypeField = []NodeType{
@@ -2682,6 +2688,8 @@ var ruleNodeType = [...]NodeType{
 	0,                          // DISubrangeField_list_withsep_opt :
 	0,                          // DISubrangeField : CountField
 	0,                          // DISubrangeField : LowerBoundField
+	0,                          // DISubrangeField : UpperBoundField
+	0,                          // DISubrangeField : StrideField
 	DISubroutineType,           // DISubroutineType : '!DISubroutineType' '(' DISubroutineTypeField_list_withsep_opt ')'
 	0,                          // DISubroutineTypeField_list_withsep : DISubroutineTypeField_list_withsep ',' DISubroutineTypeField
 	0,                          // DISubroutineTypeField_list_withsep : DISubroutineTypeField
@@ -2761,7 +2769,7 @@ var ruleNodeType = [...]NodeType{
 	LanguageField,              // LanguageField : 'language:' DwarfLang
 	LineField,                  // LineField : 'line:' IntLit
 	LinkageNameField,           // LinkageNameField : 'linkageName:' StringLit
-	LowerBoundField,            // LowerBoundField : 'lowerBound:' IntLit
+	LowerBoundField,            // LowerBoundField : 'lowerBound:' MDFieldOrInt
 	MacrosField,                // MacrosField : 'macros:' MDField
 	NameField,                  // NameField : 'name:' StringLit
 	NameTableKindField,         // NameTableKindField : 'nameTableKind:' NameTableKind
@@ -2781,6 +2789,7 @@ var ruleNodeType = [...]NodeType{
 	SPFlagsField,               // SPFlagsField : 'spFlags:' DISPFlags
 	SplitDebugFilenameField,    // SplitDebugFilenameField : 'splitDebugFilename:' StringLit
 	SplitDebugInliningField,    // SplitDebugInliningField : 'splitDebugInlining:' BoolLit
+	StrideField,                // StrideField : 'stride:' MDFieldOrInt
 	TagField,                   // TagField : 'tag:' DwarfTag
 	TemplateParamsField,        // TemplateParamsField : 'templateParams:' MDField
 	ThisAdjustmentField,        // ThisAdjustmentField : 'thisAdjustment:' IntLit
@@ -2789,6 +2798,7 @@ var ruleNodeType = [...]NodeType{
 	TypeMacinfoField,           // TypeMacinfoField : 'type:' DwarfMacinfo
 	TypesField,                 // TypesField : 'types:' MDField
 	UnitField,                  // UnitField : 'unit:' MDField
+	UpperBoundField,            // UpperBoundField : 'upperBound:' MDFieldOrInt
 	ValueField,                 // ValueField : 'value:' MDField
 	ValueIntField,              // ValueIntField : 'value:' IntLit
 	ValueStringField,           // ValueStringField : 'value:' StringLit

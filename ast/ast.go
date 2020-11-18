@@ -339,6 +339,7 @@ func (n SourceFilename) LlvmNode() *Node             { return n.Node }
 func (n SplitDebugFilenameField) LlvmNode() *Node    { return n.Node }
 func (n SplitDebugInliningField) LlvmNode() *Node    { return n.Node }
 func (n StoreInst) LlvmNode() *Node                  { return n.Node }
+func (n StrideField) LlvmNode() *Node                { return n.Node }
 func (n StringLit) LlvmNode() *Node                  { return n.Node }
 func (n StructConst) LlvmNode() *Node                { return n.Node }
 func (n StructType) LlvmNode() *Node                 { return n.Node }
@@ -377,6 +378,7 @@ func (n UnitField) LlvmNode() *Node                  { return n.Node }
 func (n UnnamedAddr) LlvmNode() *Node                { return n.Node }
 func (n UnreachableTerm) LlvmNode() *Node            { return n.Node }
 func (n UnwindToCaller) LlvmNode() *Node             { return n.Node }
+func (n UpperBoundField) LlvmNode() *Node            { return n.Node }
 func (n UseListOrder) LlvmNode() *Node               { return n.Node }
 func (n UseListOrderBB) LlvmNode() *Node             { return n.Node }
 func (n VAArgInst) LlvmNode() *Node                  { return n.Node }
@@ -960,6 +962,8 @@ type DISubrangeField interface {
 //
 func (CountField) dISubrangeFieldNode()      {}
 func (LowerBoundField) dISubrangeFieldNode() {}
+func (StrideField) dISubrangeFieldNode()     {}
+func (UpperBoundField) dISubrangeFieldNode() {}
 func (NilNode) dISubrangeFieldNode()         {}
 
 type DISubroutineTypeField interface {
@@ -5124,8 +5128,8 @@ type LowerBoundField struct {
 	*Node
 }
 
-func (n LowerBoundField) LowerBound() IntLit {
-	return IntLit{n.Child(selector.IntLit)}
+func (n LowerBoundField) LowerBound() MDFieldOrInt {
+	return ToLlvmNode(n.Child(selector.MDFieldOrInt)).(MDFieldOrInt)
 }
 
 type MDString struct {
@@ -6117,6 +6121,14 @@ func (n StoreInst) Metadata() []MetadataAttachment {
 	return ret
 }
 
+type StrideField struct {
+	*Node
+}
+
+func (n StrideField) Stride() MDFieldOrInt {
+	return ToLlvmNode(n.Child(selector.MDFieldOrInt)).(MDFieldOrInt)
+}
+
 type StringLit struct {
 	*Node
 }
@@ -6546,6 +6558,14 @@ func (n UnreachableTerm) Metadata() []MetadataAttachment {
 
 type UnwindToCaller struct {
 	*Node
+}
+
+type UpperBoundField struct {
+	*Node
+}
+
+func (n UpperBoundField) UpperBound() MDFieldOrInt {
+	return ToLlvmNode(n.Child(selector.MDFieldOrInt)).(MDFieldOrInt)
 }
 
 type UseListOrder struct {

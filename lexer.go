@@ -111,6 +111,11 @@ recovered:
 				token = DECLARATIONCOLON
 				break
 			}
+		case 1:
+			if hash == 0x8fd67c81 && "stride:" == l.source[l.tokenOffset:l.offset] {
+				token = STRIDECOLON
+				break
+			}
 		case 7:
 			if hash == 0xa3b52e07 && "offset:" == l.source[l.tokenOffset:l.offset] {
 				token = OFFSETCOLON
@@ -261,6 +266,10 @@ recovered:
 		case 62:
 			if hash == 0x5ceba3e && "file:" == l.source[l.tokenOffset:l.offset] {
 				token = FILECOLON
+				break
+			}
+			if hash == 0xcbe7b9be && "upperBound:" == l.source[l.tokenOffset:l.offset] {
+				token = UPPERBOUNDCOLON
 				break
 			}
 		case 64:

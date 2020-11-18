@@ -331,6 +331,7 @@ var (
 	SplitDebugFilenameField         = func(t ll.NodeType) bool { return t == ll.SplitDebugFilenameField }
 	SplitDebugInliningField         = func(t ll.NodeType) bool { return t == ll.SplitDebugInliningField }
 	StoreInst                       = func(t ll.NodeType) bool { return t == ll.StoreInst }
+	StrideField                     = func(t ll.NodeType) bool { return t == ll.StrideField }
 	StringLit                       = func(t ll.NodeType) bool { return t == ll.StringLit }
 	StructConst                     = func(t ll.NodeType) bool { return t == ll.StructConst }
 	StructType                      = func(t ll.NodeType) bool { return t == ll.StructType }
@@ -369,6 +370,7 @@ var (
 	UnnamedAddr                     = func(t ll.NodeType) bool { return t == ll.UnnamedAddr }
 	UnreachableTerm                 = func(t ll.NodeType) bool { return t == ll.UnreachableTerm }
 	UnwindToCaller                  = func(t ll.NodeType) bool { return t == ll.UnwindToCaller }
+	UpperBoundField                 = func(t ll.NodeType) bool { return t == ll.UpperBoundField }
 	UseListOrder                    = func(t ll.NodeType) bool { return t == ll.UseListOrder }
 	UseListOrderBB                  = func(t ll.NodeType) bool { return t == ll.UseListOrderBB }
 	VAArgInst                       = func(t ll.NodeType) bool { return t == ll.VAArgInst }

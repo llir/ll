@@ -80,6 +80,7 @@ const (
 	AVR_SIGNALCC                   // avr_signalcc
 	BITCAST                        // bitcast
 	BLOCKADDRESS                   // blockaddress
+	BLOCKCOUNT                     // blockcount
 	BR                             // br
 	BUILTIN                        // builtin
 	BYVAL                          // byval
@@ -208,6 +209,7 @@ const (
 	NOFREE                         // nofree
 	NOIMPLICITFLOAT                // noimplicitfloat
 	NOINLINE                       // noinline
+	NOMERGE                        // nomerge
 	NONE                           // none
 	NONLAZYBIND                    // nonlazybind
 	NONNULL                        // nonnull
@@ -216,10 +218,12 @@ const (
 	NORETURN                       // noreturn
 	NOSYNC                         // nosync
 	NOTAIL                         // notail
+	NOUNDEF                        // noundef
 	NOUNWIND                       // nounwind
 	NSW                            // nsw
 	NSZ                            // nsz
 	NULL                           // null
+	NULL_POINTER_IS_VALID          // null_pointer_is_valid
 	NUW                            // nuw
 	OEQ                            // oeq
 	OGE                            // oge
@@ -233,10 +237,13 @@ const (
 	OPTSIZE                        // optsize
 	OR                             // or
 	ORD                            // ord
+	PARAM                          // param
+	PARAMS                         // params
 	PARTITION                      // partition
 	PERSONALITY                    // personality
 	PHI                            // phi
 	PPC_FP128                      // ppc_fp128
+	PREALLOCATED                   // preallocated
 	PREFIX                         // prefix
 	PRESERVE_ALLCC                 // preserve_allcc
 	PRESERVE_MOSTCC                // preserve_mostcc
@@ -326,6 +333,7 @@ const (
 	USELISTORDER_BB                // uselistorder_bb
 	UWTABLE                        // uwtable
 	VA_ARG                         // va_arg
+	VCALL_VISIBILITY               // vcall_visibility
 	VOID                           // void
 	VOLATILE                       // volatile
 	VSCALE                         // vscale
@@ -443,6 +451,7 @@ const (
 	SPFLAGSCOLON                   // spFlags:
 	SPLITDEBUGFILENAMECOLON        // splitDebugFilename:
 	SPLITDEBUGINLININGCOLON        // splitDebugInlining:
+	STRIDECOLON                    // stride:
 	TAGCOLON                       // tag:
 	TEMPLATEPARAMSCOLON            // templateParams:
 	THISADJUSTMENTCOLON            // thisAdjustment:
@@ -450,6 +459,7 @@ const (
 	TYPECOLON                      // type:
 	TYPESCOLON                     // types:
 	UNITCOLON                      // unit:
+	UPPERBOUNDCOLON                // upperBound:
 	VALUECOLON                     // value:
 	VARCOLON                       // var:
 	VIRTUALINDEXCOLON              // virtualIndex:
@@ -542,6 +552,7 @@ var tokenStr = [...]string{
 	"avr_signalcc",
 	"bitcast",
 	"blockaddress",
+	"blockcount",
 	"br",
 	"builtin",
 	"byval",
@@ -670,6 +681,7 @@ var tokenStr = [...]string{
 	"nofree",
 	"noimplicitfloat",
 	"noinline",
+	"nomerge",
 	"none",
 	"nonlazybind",
 	"nonnull",
@@ -678,10 +690,12 @@ var tokenStr = [...]string{
 	"noreturn",
 	"nosync",
 	"notail",
+	"noundef",
 	"nounwind",
 	"nsw",
 	"nsz",
 	"null",
+	"null_pointer_is_valid",
 	"nuw",
 	"oeq",
 	"oge",
@@ -695,10 +709,13 @@ var tokenStr = [...]string{
 	"optsize",
 	"or",
 	"ord",
+	"param",
+	"params",
 	"partition",
 	"personality",
 	"phi",
 	"ppc_fp128",
+	"preallocated",
 	"prefix",
 	"preserve_allcc",
 	"preserve_mostcc",
@@ -788,6 +805,7 @@ var tokenStr = [...]string{
 	"uselistorder_bb",
 	"uwtable",
 	"va_arg",
+	"vcall_visibility",
 	"void",
 	"volatile",
 	"vscale",
@@ -905,6 +923,7 @@ var tokenStr = [...]string{
 	"spFlags:",
 	"splitDebugFilename:",
 	"splitDebugInlining:",
+	"stride:",
 	"tag:",
 	"templateParams:",
 	"thisAdjustment:",
@@ -912,6 +931,7 @@ var tokenStr = [...]string{
 	"type:",
 	"types:",
 	"unit:",
+	"upperBound:",
 	"value:",
 	"var:",
 	"virtualIndex:",
