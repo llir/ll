@@ -119,6 +119,7 @@ func (n DISubroutineType) LlvmNode() *Node           { return n.Node }
 func (n DITemplateTypeParameter) LlvmNode() *Node    { return n.Node }
 func (n DITemplateValueParameter) LlvmNode() *Node   { return n.Node }
 func (n DLLStorageClass) LlvmNode() *Node            { return n.Node }
+func (n DataLocationField) LlvmNode() *Node          { return n.Node }
 func (n DebugBaseAddressField) LlvmNode() *Node      { return n.Node }
 func (n DebugInfoForProfilingField) LlvmNode() *Node { return n.Node }
 func (n DeclarationField) LlvmNode() *Node           { return n.Node }
@@ -620,6 +621,7 @@ type DICompositeTypeField interface {
 //
 func (AlignField) dICompositeTypeFieldNode()          {}
 func (BaseTypeField) dICompositeTypeFieldNode()       {}
+func (DataLocationField) dICompositeTypeFieldNode()   {}
 func (DiscriminatorField) dICompositeTypeFieldNode()  {}
 func (ElementsField) dICompositeTypeFieldNode()       {}
 func (FileField) dICompositeTypeFieldNode()           {}
@@ -3211,6 +3213,14 @@ func (n DITemplateValueParameter) Fields() []DITemplateValueParameterField {
 
 type DLLStorageClass struct {
 	*Node
+}
+
+type DataLocationField struct {
+	*Node
+}
+
+func (n DataLocationField) DataLocation() MDField {
+	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
 type DebugBaseAddressField struct {

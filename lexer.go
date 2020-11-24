@@ -177,6 +177,10 @@ recovered:
 				break
 			}
 		case 27:
+			if hash == 0x4d09869b && "dataLocation:" == l.source[l.tokenOffset:l.offset] {
+				token = DATALOCATIONCOLON
+				break
+			}
 			if hash == 0x765eff9b && "setter:" == l.source[l.tokenOffset:l.offset] {
 				token = SETTERCOLON
 				break

@@ -397,6 +397,7 @@ const (
 	CONFIGMACROSCOLON              // configMacros:
 	CONTAININGTYPECOLON            // containingType:
 	COUNTCOLON                     // count:
+	DATALOCATIONCOLON              // dataLocation:
 	DEBUGBASEADDRESSCOLON          // debugBaseAddress:
 	DEBUGINFOFORPROFILINGCOLON     // debugInfoForProfiling:
 	DECLARATIONCOLON               // declaration:
@@ -869,6 +870,7 @@ var tokenStr = [...]string{
 	"configMacros:",
 	"containingType:",
 	"count:",
+	"dataLocation:",
 	"debugBaseAddress:",
 	"debugInfoForProfiling:",
 	"declaration:",

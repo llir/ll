@@ -211,6 +211,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &DITemplateValueParameter{n}
 	case ll.DLLStorageClass:
 		return &DLLStorageClass{n}
+	case ll.DataLocationField:
+		return &DataLocationField{n}
 	case ll.DebugBaseAddressField:
 		return &DebugBaseAddressField{n}
 	case ll.DebugInfoForProfilingField:

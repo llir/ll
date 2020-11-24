@@ -254,6 +254,7 @@ const (
 	DeclarationField           // Declaration=MDField
 	DirectoryField             // Directory=StringLit
 	DiscriminatorField         // Discriminator=MDField
+	DataLocationField          // DataLocation=MDField
 	DiscriminatorIntField      // Discriminator=UintLit
 	DwarfAddressSpaceField     // DwarfAddressSpace=UintLit
 	DwoIdField                 // DwoId=UintLit
@@ -641,6 +642,7 @@ var nodeTypeStr = [...]string{
 	"DeclarationField",
 	"DirectoryField",
 	"DiscriminatorField",
+	"DataLocationField",
 	"DiscriminatorIntField",
 	"DwarfAddressSpaceField",
 	"DwoIdField",
@@ -952,6 +954,7 @@ var DICompileUnitField = []NodeType{
 var DICompositeTypeField = []NodeType{
 	AlignField,
 	BaseTypeField,
+	DataLocationField,
 	DiscriminatorField,
 	ElementsField,
 	FileField,
@@ -2479,6 +2482,7 @@ var ruleNodeType = [...]NodeType{
 	0,                          // DICompositeTypeField : TemplateParamsField
 	0,                          // DICompositeTypeField : IdentifierField
 	0,                          // DICompositeTypeField : DiscriminatorField
+	0,                          // DICompositeTypeField : DataLocationField
 	DIDerivedType,              // DIDerivedType : '!DIDerivedType' '(' DIDerivedTypeField_list_withsep_opt ')'
 	0,                          // DIDerivedTypeField_list_withsep : DIDerivedTypeField_list_withsep ',' DIDerivedTypeField
 	0,                          // DIDerivedTypeField_list_withsep : DIDerivedTypeField
@@ -2738,6 +2742,7 @@ var ruleNodeType = [...]NodeType{
 	DeclarationField,           // DeclarationField : 'declaration:' MDField
 	DirectoryField,             // DirectoryField : 'directory:' StringLit
 	DiscriminatorField,         // DiscriminatorField : 'discriminator:' MDField
+	DataLocationField,          // DataLocationField : 'dataLocation:' MDField
 	DiscriminatorIntField,      // DiscriminatorIntField : 'discriminator:' UintLit
 	DwarfAddressSpaceField,     // DwarfAddressSpaceField : 'dwarfAddressSpace:' UintLit
 	DwoIdField,                 // DwoIdField : 'dwoId:' UintLit

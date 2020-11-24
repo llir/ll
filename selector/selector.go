@@ -111,6 +111,7 @@ var (
 	DITemplateTypeParameter         = func(t ll.NodeType) bool { return t == ll.DITemplateTypeParameter }
 	DITemplateValueParameter        = func(t ll.NodeType) bool { return t == ll.DITemplateValueParameter }
 	DLLStorageClass                 = func(t ll.NodeType) bool { return t == ll.DLLStorageClass }
+	DataLocationField               = func(t ll.NodeType) bool { return t == ll.DataLocationField }
 	DebugBaseAddressField           = func(t ll.NodeType) bool { return t == ll.DebugBaseAddressField }
 	DebugInfoForProfilingField      = func(t ll.NodeType) bool { return t == ll.DebugInfoForProfilingField }
 	DeclarationField                = func(t ll.NodeType) bool { return t == ll.DeclarationField }
