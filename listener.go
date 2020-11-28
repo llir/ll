@@ -1935,6 +1935,7 @@ var ruleNodeType = [...]NodeType{
 	IntType,                    // IntType : int_type_tok
 	FloatType,                  // FloatType : FloatKind
 	FloatKind,                  // FloatKind : 'half'
+	FloatKind,                  // FloatKind : 'bfloat'
 	FloatKind,                  // FloatKind : 'float'
 	FloatKind,                  // FloatKind : 'double'
 	FloatKind,                  // FloatKind : 'x86_fp80'

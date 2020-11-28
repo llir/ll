@@ -78,6 +78,7 @@ const (
 	AVAILABLE_EXTERNALLY           // available_externally
 	AVR_INTRCC                     // avr_intrcc
 	AVR_SIGNALCC                   // avr_signalcc
+	BFLOAT                         // bfloat
 	BITCAST                        // bitcast
 	BLOCKADDRESS                   // blockaddress
 	BLOCKCOUNT                     // blockcount
@@ -551,6 +552,7 @@ var tokenStr = [...]string{
 	"available_externally",
 	"avr_intrcc",
 	"avr_signalcc",
+	"bfloat",
 	"bitcast",
 	"blockaddress",
 	"blockcount",
