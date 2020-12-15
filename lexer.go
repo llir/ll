@@ -224,6 +224,10 @@ recovered:
 				break
 			}
 		case 45:
+			if hash == 0xcc4d9ead && "rangesBaseAddress:" == l.source[l.tokenOffset:l.offset] {
+				token = RANGESBASEADDRESSCOLON
+				break
+			}
 			if hash == 0xae4e252d && "retainedNodes:" == l.source[l.tokenOffset:l.offset] {
 				token = RETAINEDNODESCOLON
 				break
@@ -277,6 +281,10 @@ recovered:
 				break
 			}
 		case 64:
+			if hash == 0x35cb40 && "sdk:" == l.source[l.tokenOffset:l.offset] {
+				token = SDKCOLON
+				break
+			}
 			if hash == 0x69b5840 && "type:" == l.source[l.tokenOffset:l.offset] {
 				token = TYPECOLON
 				break
@@ -437,6 +445,11 @@ recovered:
 		case 105:
 			if hash == 0xcee59ce9 && "value:" == l.source[l.tokenOffset:l.offset] {
 				token = VALUECOLON
+				break
+			}
+		case 107:
+			if hash == 0x75b114eb && "sysroot:" == l.source[l.tokenOffset:l.offset] {
+				token = SYSROOTCOLON
 				break
 			}
 		case 109:

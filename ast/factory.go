@@ -213,8 +213,6 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &DLLStorageClass{n}
 	case ll.DataLocationField:
 		return &DataLocationField{n}
-	case ll.DebugBaseAddressField:
-		return &DebugBaseAddressField{n}
 	case ll.DebugInfoForProfilingField:
 		return &DebugInfoForProfilingField{n}
 	case ll.DeclarationField:
@@ -583,6 +581,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &PtrToIntExpr{n}
 	case ll.PtrToIntInst:
 		return &PtrToIntInst{n}
+	case ll.RangesBaseAddressField:
+		return &RangesBaseAddressField{n}
 	case ll.ResumeTerm:
 		return &ResumeTerm{n}
 	case ll.RetTerm:
@@ -597,6 +597,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &RuntimeLangField{n}
 	case ll.RuntimeVersionField:
 		return &RuntimeVersionField{n}
+	case ll.SDKField:
+		return &SDKField{n}
 	case ll.SDivExpr:
 		return &SDivExpr{n}
 	case ll.SDivInst:
@@ -671,6 +673,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &SwitchTerm{n}
 	case ll.SyncScope:
 		return &SyncScope{n}
+	case ll.SysrootField:
+		return &SysrootField{n}
 	case ll.TLSModel:
 		return &TLSModel{n}
 	case ll.TagField:

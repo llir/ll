@@ -112,7 +112,6 @@ var (
 	DITemplateValueParameter        = func(t ll.NodeType) bool { return t == ll.DITemplateValueParameter }
 	DLLStorageClass                 = func(t ll.NodeType) bool { return t == ll.DLLStorageClass }
 	DataLocationField               = func(t ll.NodeType) bool { return t == ll.DataLocationField }
-	DebugBaseAddressField           = func(t ll.NodeType) bool { return t == ll.DebugBaseAddressField }
 	DebugInfoForProfilingField      = func(t ll.NodeType) bool { return t == ll.DebugInfoForProfilingField }
 	DeclarationField                = func(t ll.NodeType) bool { return t == ll.DeclarationField }
 	Dereferenceable                 = func(t ll.NodeType) bool { return t == ll.Dereferenceable }
@@ -297,6 +296,7 @@ var (
 	Prologue                        = func(t ll.NodeType) bool { return t == ll.Prologue }
 	PtrToIntExpr                    = func(t ll.NodeType) bool { return t == ll.PtrToIntExpr }
 	PtrToIntInst                    = func(t ll.NodeType) bool { return t == ll.PtrToIntInst }
+	RangesBaseAddressField          = func(t ll.NodeType) bool { return t == ll.RangesBaseAddressField }
 	ResumeTerm                      = func(t ll.NodeType) bool { return t == ll.ResumeTerm }
 	RetTerm                         = func(t ll.NodeType) bool { return t == ll.RetTerm }
 	RetainedNodesField              = func(t ll.NodeType) bool { return t == ll.RetainedNodesField }
@@ -304,6 +304,7 @@ var (
 	ReturnAttr                      = func(t ll.NodeType) bool { return t == ll.ReturnAttr }
 	RuntimeLangField                = func(t ll.NodeType) bool { return t == ll.RuntimeLangField }
 	RuntimeVersionField             = func(t ll.NodeType) bool { return t == ll.RuntimeVersionField }
+	SDKField                        = func(t ll.NodeType) bool { return t == ll.SDKField }
 	SDivExpr                        = func(t ll.NodeType) bool { return t == ll.SDivExpr }
 	SDivInst                        = func(t ll.NodeType) bool { return t == ll.SDivInst }
 	SExtExpr                        = func(t ll.NodeType) bool { return t == ll.SExtExpr }
@@ -341,6 +342,7 @@ var (
 	SwiftError                      = func(t ll.NodeType) bool { return t == ll.SwiftError }
 	SwitchTerm                      = func(t ll.NodeType) bool { return t == ll.SwitchTerm }
 	SyncScope                       = func(t ll.NodeType) bool { return t == ll.SyncScope }
+	SysrootField                    = func(t ll.NodeType) bool { return t == ll.SysrootField }
 	TLSModel                        = func(t ll.NodeType) bool { return t == ll.TLSModel }
 	TagField                        = func(t ll.NodeType) bool { return t == ll.TagField }
 	Tail                            = func(t ll.NodeType) bool { return t == ll.Tail }

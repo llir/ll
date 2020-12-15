@@ -120,7 +120,6 @@ func (n DITemplateTypeParameter) LlvmNode() *Node    { return n.Node }
 func (n DITemplateValueParameter) LlvmNode() *Node   { return n.Node }
 func (n DLLStorageClass) LlvmNode() *Node            { return n.Node }
 func (n DataLocationField) LlvmNode() *Node          { return n.Node }
-func (n DebugBaseAddressField) LlvmNode() *Node      { return n.Node }
 func (n DebugInfoForProfilingField) LlvmNode() *Node { return n.Node }
 func (n DeclarationField) LlvmNode() *Node           { return n.Node }
 func (n Dereferenceable) LlvmNode() *Node            { return n.Node }
@@ -305,6 +304,7 @@ func (n ProducerField) LlvmNode() *Node              { return n.Node }
 func (n Prologue) LlvmNode() *Node                   { return n.Node }
 func (n PtrToIntExpr) LlvmNode() *Node               { return n.Node }
 func (n PtrToIntInst) LlvmNode() *Node               { return n.Node }
+func (n RangesBaseAddressField) LlvmNode() *Node     { return n.Node }
 func (n ResumeTerm) LlvmNode() *Node                 { return n.Node }
 func (n RetTerm) LlvmNode() *Node                    { return n.Node }
 func (n RetainedNodesField) LlvmNode() *Node         { return n.Node }
@@ -312,6 +312,7 @@ func (n RetainedTypesField) LlvmNode() *Node         { return n.Node }
 func (n ReturnAttr) LlvmNode() *Node                 { return n.Node }
 func (n RuntimeLangField) LlvmNode() *Node           { return n.Node }
 func (n RuntimeVersionField) LlvmNode() *Node        { return n.Node }
+func (n SDKField) LlvmNode() *Node                   { return n.Node }
 func (n SDivExpr) LlvmNode() *Node                   { return n.Node }
 func (n SDivInst) LlvmNode() *Node                   { return n.Node }
 func (n SExtExpr) LlvmNode() *Node                   { return n.Node }
@@ -349,6 +350,7 @@ func (n SubInst) LlvmNode() *Node                    { return n.Node }
 func (n SwiftError) LlvmNode() *Node                 { return n.Node }
 func (n SwitchTerm) LlvmNode() *Node                 { return n.Node }
 func (n SyncScope) LlvmNode() *Node                  { return n.Node }
+func (n SysrootField) LlvmNode() *Node               { return n.Node }
 func (n TLSModel) LlvmNode() *Node                   { return n.Node }
 func (n TagField) LlvmNode() *Node                   { return n.Node }
 func (n Tail) LlvmNode() *Node                       { return n.Node }
@@ -591,7 +593,6 @@ type DICompileUnitField interface {
 // dICompileUnitFieldNode() ensures that only the following types can be
 // assigned to DICompileUnitField.
 //
-func (DebugBaseAddressField) dICompileUnitFieldNode()      {}
 func (DebugInfoForProfilingField) dICompileUnitFieldNode() {}
 func (DwoIdField) dICompileUnitFieldNode()                 {}
 func (EmissionKindField) dICompileUnitFieldNode()          {}
@@ -605,10 +606,13 @@ func (LanguageField) dICompileUnitFieldNode()              {}
 func (MacrosField) dICompileUnitFieldNode()                {}
 func (NameTableKindField) dICompileUnitFieldNode()         {}
 func (ProducerField) dICompileUnitFieldNode()              {}
+func (RangesBaseAddressField) dICompileUnitFieldNode()     {}
 func (RetainedTypesField) dICompileUnitFieldNode()         {}
 func (RuntimeVersionField) dICompileUnitFieldNode()        {}
+func (SDKField) dICompileUnitFieldNode()                   {}
 func (SplitDebugFilenameField) dICompileUnitFieldNode()    {}
 func (SplitDebugInliningField) dICompileUnitFieldNode()    {}
+func (SysrootField) dICompileUnitFieldNode()               {}
 func (NilNode) dICompileUnitFieldNode()                    {}
 
 type DICompositeTypeField interface {
@@ -3223,14 +3227,6 @@ func (n DataLocationField) DataLocation() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
-type DebugBaseAddressField struct {
-	*Node
-}
-
-func (n DebugBaseAddressField) DebugBaseAddress() BoolLit {
-	return BoolLit{n.Child(selector.BoolLit)}
-}
-
 type DebugInfoForProfilingField struct {
 	*Node
 }
@@ -5626,6 +5622,14 @@ func (n PtrToIntInst) Metadata() []MetadataAttachment {
 	return ret
 }
 
+type RangesBaseAddressField struct {
+	*Node
+}
+
+func (n RangesBaseAddressField) RangesBaseAddress() BoolLit {
+	return BoolLit{n.Child(selector.BoolLit)}
+}
+
 type ResumeTerm struct {
 	*Node
 }
@@ -5699,6 +5703,14 @@ type RuntimeVersionField struct {
 
 func (n RuntimeVersionField) RuntimeVersion() UintLit {
 	return UintLit{n.Child(selector.UintLit)}
+}
+
+type SDKField struct {
+	*Node
+}
+
+func (n SDKField) SDK() StringLit {
+	return StringLit{n.Child(selector.StringLit)}
 }
 
 type SDivExpr struct {
@@ -6259,6 +6271,14 @@ type SyncScope struct {
 }
 
 func (n SyncScope) Scope() StringLit {
+	return StringLit{n.Child(selector.StringLit)}
+}
+
+type SysrootField struct {
+	*Node
+}
+
+func (n SysrootField) Sysroot() StringLit {
 	return StringLit{n.Child(selector.StringLit)}
 }
 

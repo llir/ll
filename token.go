@@ -388,6 +388,7 @@ const (
 	EXCLDITEMPLATEVALUEPARAMETER   // !DITemplateValueParameter
 	EXCLGENERICDINODE              // !GenericDINode
 	ALIGNCOLON                     // align:
+	APINOTESCOLON                  // apinotes:
 	ARGCOLON                       // arg:
 	ATTRIBUTESCOLON                // attributes:
 	BASETYPECOLON                  // baseType:
@@ -429,7 +430,6 @@ const (
 	ISLOCALCOLON                   // isLocal:
 	ISOPTIMIZEDCOLON               // isOptimized:
 	ISUNSIGNEDCOLON                // isUnsigned:
-	APINOTESCOLON                  // apinotes:
 	LANGUAGECOLON                  // language:
 	LINECOLON                      // line:
 	LINKAGENAMECOLON               // linkageName:
@@ -441,12 +441,14 @@ const (
 	OFFSETCOLON                    // offset:
 	OPERANDSCOLON                  // operands:
 	PRODUCERCOLON                  // producer:
+	RANGESBASEADDRESSCOLON         // rangesBaseAddress:
 	RETAINEDNODESCOLON             // retainedNodes:
 	RETAINEDTYPESCOLON             // retainedTypes:
 	RUNTIMELANGCOLON               // runtimeLang:
 	RUNTIMEVERSIONCOLON            // runtimeVersion:
 	SCOPECOLON                     // scope:
 	SCOPELINECOLON                 // scopeLine:
+	SDKCOLON                       // sdk:
 	SETTERCOLON                    // setter:
 	SIZECOLON                      // size:
 	SOURCECOLON                    // source:
@@ -454,6 +456,7 @@ const (
 	SPLITDEBUGFILENAMECOLON        // splitDebugFilename:
 	SPLITDEBUGINLININGCOLON        // splitDebugInlining:
 	STRIDECOLON                    // stride:
+	SYSROOTCOLON                   // sysroot:
 	TAGCOLON                       // tag:
 	TEMPLATEPARAMSCOLON            // templateParams:
 	THISADJUSTMENTCOLON            // thisAdjustment:
@@ -862,6 +865,7 @@ var tokenStr = [...]string{
 	"!DITemplateValueParameter",
 	"!GenericDINode",
 	"align:",
+	"apinotes:",
 	"arg:",
 	"attributes:",
 	"baseType:",
@@ -903,7 +907,6 @@ var tokenStr = [...]string{
 	"isLocal:",
 	"isOptimized:",
 	"isUnsigned:",
-	"apinotes:",
 	"language:",
 	"line:",
 	"linkageName:",
@@ -915,12 +918,14 @@ var tokenStr = [...]string{
 	"offset:",
 	"operands:",
 	"producer:",
+	"rangesBaseAddress:",
 	"retainedNodes:",
 	"retainedTypes:",
 	"runtimeLang:",
 	"runtimeVersion:",
 	"scope:",
 	"scopeLine:",
+	"sdk:",
 	"setter:",
 	"size:",
 	"source:",
@@ -928,6 +933,7 @@ var tokenStr = [...]string{
 	"splitDebugFilename:",
 	"splitDebugInlining:",
 	"stride:",
+	"sysroot:",
 	"tag:",
 	"templateParams:",
 	"thisAdjustment:",

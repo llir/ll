@@ -249,7 +249,6 @@ const (
 	ConfigMacrosField          // ConfigMacros=StringLit
 	ContainingTypeField        // ContainingType=MDField
 	CountField                 // Count=MDFieldOrInt
-	DebugBaseAddressField      // DebugBaseAddress=BoolLit
 	DebugInfoForProfilingField // DebugInfoForProfiling=BoolLit
 	DeclarationField           // Declaration=MDField
 	DirectoryField             // Directory=StringLit
@@ -294,12 +293,14 @@ const (
 	OffsetField                // OffsetField=UintLit
 	OperandsField              // Operands=(MDField)*
 	ProducerField              // Producer=StringLit
+	RangesBaseAddressField     // RangesBaseAddress=BoolLit
 	RetainedNodesField         // RetainedNodes=MDField
 	RetainedTypesField         // RetainedTypes=MDField
 	RuntimeLangField           // RuntimeLang=DwarfLang
 	RuntimeVersionField        // RuntimeVersion=UintLit
 	ScopeField                 // Scope=MDField
 	ScopeLineField             // ScopeLine=IntLit
+	SDKField                   // SDK=StringLit
 	SetterField                // Setter=StringLit
 	SizeField                  // Size=UintLit
 	SourceField                // Source=StringLit
@@ -307,6 +308,7 @@ const (
 	SplitDebugFilenameField    // SplitDebugFilename=StringLit
 	SplitDebugInliningField    // SplitDebugInlining=BoolLit
 	StrideField                // Stride=MDFieldOrInt
+	SysrootField               // Sysroot=StringLit
 	TagField                   // Tag=DwarfTag
 	TemplateParamsField        // TemplateParams=MDField
 	ThisAdjustmentField        // ThisAdjustment=IntLit
@@ -637,7 +639,6 @@ var nodeTypeStr = [...]string{
 	"ConfigMacrosField",
 	"ContainingTypeField",
 	"CountField",
-	"DebugBaseAddressField",
 	"DebugInfoForProfilingField",
 	"DeclarationField",
 	"DirectoryField",
@@ -682,12 +683,14 @@ var nodeTypeStr = [...]string{
 	"OffsetField",
 	"OperandsField",
 	"ProducerField",
+	"RangesBaseAddressField",
 	"RetainedNodesField",
 	"RetainedTypesField",
 	"RuntimeLangField",
 	"RuntimeVersionField",
 	"ScopeField",
 	"ScopeLineField",
+	"SDKField",
 	"SetterField",
 	"SizeField",
 	"SourceField",
@@ -695,6 +698,7 @@ var nodeTypeStr = [...]string{
 	"SplitDebugFilenameField",
 	"SplitDebugInliningField",
 	"StrideField",
+	"SysrootField",
 	"TagField",
 	"TemplateParamsField",
 	"ThisAdjustmentField",
@@ -931,7 +935,6 @@ var DICommonBlockField = []NodeType{
 }
 
 var DICompileUnitField = []NodeType{
-	DebugBaseAddressField,
 	DebugInfoForProfilingField,
 	DwoIdField,
 	EmissionKindField,
@@ -945,10 +948,13 @@ var DICompileUnitField = []NodeType{
 	MacrosField,
 	NameTableKindField,
 	ProducerField,
+	RangesBaseAddressField,
 	RetainedTypesField,
 	RuntimeVersionField,
+	SDKField,
 	SplitDebugFilenameField,
 	SplitDebugInliningField,
+	SysrootField,
 }
 
 var DICompositeTypeField = []NodeType{
@@ -2461,7 +2467,9 @@ var ruleNodeType = [...]NodeType{
 	0,                          // DICompileUnitField : SplitDebugInliningField
 	0,                          // DICompileUnitField : DebugInfoForProfilingField
 	0,                          // DICompileUnitField : NameTableKindField
-	0,                          // DICompileUnitField : DebugBaseAddressField
+	0,                          // DICompileUnitField : RangesBaseAddressField
+	0,                          // DICompileUnitField : SysrootField
+	0,                          // DICompileUnitField : SDKField
 	DICompositeType,            // DICompositeType : '!DICompositeType' '(' DICompositeTypeField_list_withsep_opt ')'
 	0,                          // DICompositeTypeField_list_withsep : DICompositeTypeField_list_withsep ',' DICompositeTypeField
 	0,                          // DICompositeTypeField_list_withsep : DICompositeTypeField
@@ -2738,7 +2746,6 @@ var ruleNodeType = [...]NodeType{
 	ConfigMacrosField,          // ConfigMacrosField : 'configMacros:' StringLit
 	ContainingTypeField,        // ContainingTypeField : 'containingType:' MDField
 	CountField,                 // CountField : 'count:' MDFieldOrInt
-	DebugBaseAddressField,      // DebugBaseAddressField : 'debugBaseAddress:' BoolLit
 	DebugInfoForProfilingField, // DebugInfoForProfilingField : 'debugInfoForProfiling:' BoolLit
 	DeclarationField,           // DeclarationField : 'declaration:' MDField
 	DirectoryField,             // DirectoryField : 'directory:' StringLit
@@ -2783,12 +2790,14 @@ var ruleNodeType = [...]NodeType{
 	OffsetField,                // OffsetField : 'offset:' UintLit
 	OperandsField,              // OperandsField : 'operands:' '{' MDField_list_withsep_opt '}'
 	ProducerField,              // ProducerField : 'producer:' StringLit
+	RangesBaseAddressField,     // RangesBaseAddressField : 'rangesBaseAddress:' BoolLit
 	RetainedNodesField,         // RetainedNodesField : 'retainedNodes:' MDField
 	RetainedTypesField,         // RetainedTypesField : 'retainedTypes:' MDField
 	RuntimeLangField,           // RuntimeLangField : 'runtimeLang:' DwarfLang
 	RuntimeVersionField,        // RuntimeVersionField : 'runtimeVersion:' UintLit
 	ScopeField,                 // ScopeField : 'scope:' MDField
 	ScopeLineField,             // ScopeLineField : 'scopeLine:' IntLit
+	SDKField,                   // SDKField : 'sdk:' StringLit
 	SetterField,                // SetterField : 'setter:' StringLit
 	SizeField,                  // SizeField : 'size:' UintLit
 	SourceField,                // SourceField : 'source:' StringLit
@@ -2796,6 +2805,7 @@ var ruleNodeType = [...]NodeType{
 	SplitDebugFilenameField,    // SplitDebugFilenameField : 'splitDebugFilename:' StringLit
 	SplitDebugInliningField,    // SplitDebugInliningField : 'splitDebugInlining:' BoolLit
 	StrideField,                // StrideField : 'stride:' MDFieldOrInt
+	SysrootField,               // SysrootField : 'sysroot:' StringLit
 	TagField,                   // TagField : 'tag:' DwarfTag
 	TemplateParamsField,        // TemplateParamsField : 'templateParams:' MDField
 	ThisAdjustmentField,        // ThisAdjustmentField : 'thisAdjustment:' IntLit
