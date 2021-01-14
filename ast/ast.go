@@ -122,6 +122,7 @@ func (n DLLStorageClass) LlvmNode() *Node            { return n.Node }
 func (n DataLocationField) LlvmNode() *Node          { return n.Node }
 func (n DebugInfoForProfilingField) LlvmNode() *Node { return n.Node }
 func (n DeclarationField) LlvmNode() *Node           { return n.Node }
+func (n DefaultedField) LlvmNode() *Node             { return n.Node }
 func (n Dereferenceable) LlvmNode() *Node            { return n.Node }
 func (n DereferenceableOrNull) LlvmNode() *Node      { return n.Node }
 func (n DirectoryField) LlvmNode() *Node             { return n.Node }
@@ -993,9 +994,10 @@ type DITemplateTypeParameterField interface {
 // dITemplateTypeParameterFieldNode() ensures that only the following types can be
 // assigned to DITemplateTypeParameterField.
 //
-func (NameField) dITemplateTypeParameterFieldNode() {}
-func (TypeField) dITemplateTypeParameterFieldNode() {}
-func (NilNode) dITemplateTypeParameterFieldNode()   {}
+func (DefaultedField) dITemplateTypeParameterFieldNode() {}
+func (NameField) dITemplateTypeParameterFieldNode()      {}
+func (TypeField) dITemplateTypeParameterFieldNode()      {}
+func (NilNode) dITemplateTypeParameterFieldNode()        {}
 
 type DITemplateValueParameterField interface {
 	LlvmNode
@@ -1005,11 +1007,12 @@ type DITemplateValueParameterField interface {
 // dITemplateValueParameterFieldNode() ensures that only the following types can be
 // assigned to DITemplateValueParameterField.
 //
-func (NameField) dITemplateValueParameterFieldNode()  {}
-func (TagField) dITemplateValueParameterFieldNode()   {}
-func (TypeField) dITemplateValueParameterFieldNode()  {}
-func (ValueField) dITemplateValueParameterFieldNode() {}
-func (NilNode) dITemplateValueParameterFieldNode()    {}
+func (DefaultedField) dITemplateValueParameterFieldNode() {}
+func (NameField) dITemplateValueParameterFieldNode()      {}
+func (TagField) dITemplateValueParameterFieldNode()       {}
+func (TypeField) dITemplateValueParameterFieldNode()      {}
+func (ValueField) dITemplateValueParameterFieldNode()     {}
+func (NilNode) dITemplateValueParameterFieldNode()        {}
 
 type DwarfAttEncoding interface {
 	LlvmNode
@@ -3241,6 +3244,14 @@ type DeclarationField struct {
 
 func (n DeclarationField) Declaration() MDField {
 	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
+}
+
+type DefaultedField struct {
+	*Node
+}
+
+func (n DefaultedField) Name() BoolLit {
+	return BoolLit{n.Child(selector.BoolLit)}
 }
 
 type Dereferenceable struct {

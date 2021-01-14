@@ -114,6 +114,7 @@ var (
 	DataLocationField               = func(t ll.NodeType) bool { return t == ll.DataLocationField }
 	DebugInfoForProfilingField      = func(t ll.NodeType) bool { return t == ll.DebugInfoForProfilingField }
 	DeclarationField                = func(t ll.NodeType) bool { return t == ll.DeclarationField }
+	DefaultedField                  = func(t ll.NodeType) bool { return t == ll.DefaultedField }
 	Dereferenceable                 = func(t ll.NodeType) bool { return t == ll.Dereferenceable }
 	DereferenceableOrNull           = func(t ll.NodeType) bool { return t == ll.DereferenceableOrNull }
 	DirectoryField                  = func(t ll.NodeType) bool { return t == ll.DirectoryField }

@@ -254,6 +254,7 @@ const (
 	DirectoryField             // Directory=StringLit
 	DiscriminatorField         // Discriminator=MDField
 	DataLocationField          // DataLocation=MDField
+	DefaultedField             // Name=BoolLit
 	DiscriminatorIntField      // Discriminator=UintLit
 	DwarfAddressSpaceField     // DwarfAddressSpace=UintLit
 	DwoIdField                 // DwoId=UintLit
@@ -644,6 +645,7 @@ var nodeTypeStr = [...]string{
 	"DirectoryField",
 	"DiscriminatorField",
 	"DataLocationField",
+	"DefaultedField",
 	"DiscriminatorIntField",
 	"DwarfAddressSpaceField",
 	"DwoIdField",
@@ -1167,11 +1169,13 @@ var DISubroutineTypeField = []NodeType{
 }
 
 var DITemplateTypeParameterField = []NodeType{
+	DefaultedField,
 	NameField,
 	TypeField,
 }
 
 var DITemplateValueParameterField = []NodeType{
+	DefaultedField,
 	NameField,
 	TagField,
 	TypeField,
@@ -2718,6 +2722,7 @@ var ruleNodeType = [...]NodeType{
 	0,                          // DITemplateTypeParameterField_list_withsep_opt :
 	0,                          // DITemplateTypeParameterField : NameField
 	0,                          // DITemplateTypeParameterField : TypeField
+	0,                          // DITemplateTypeParameterField : DefaultedField
 	DITemplateValueParameter,   // DITemplateValueParameter : '!DITemplateValueParameter' '(' DITemplateValueParameterField_list_withsep_opt ')'
 	0,                          // DITemplateValueParameterField_list_withsep : DITemplateValueParameterField_list_withsep ',' DITemplateValueParameterField
 	0,                          // DITemplateValueParameterField_list_withsep : DITemplateValueParameterField
@@ -2726,6 +2731,7 @@ var ruleNodeType = [...]NodeType{
 	0,                          // DITemplateValueParameterField : TagField
 	0,                          // DITemplateValueParameterField : NameField
 	0,                          // DITemplateValueParameterField : TypeField
+	0,                          // DITemplateValueParameterField : DefaultedField
 	0,                          // DITemplateValueParameterField : ValueField
 	GenericDINode,              // GenericDINode : '!GenericDINode' '(' GenericDINodeField_list_withsep_opt ')'
 	0,                          // GenericDINodeField_list_withsep : GenericDINodeField_list_withsep ',' GenericDINodeField
@@ -2751,6 +2757,7 @@ var ruleNodeType = [...]NodeType{
 	DirectoryField,             // DirectoryField : 'directory:' StringLit
 	DiscriminatorField,         // DiscriminatorField : 'discriminator:' MDField
 	DataLocationField,          // DataLocationField : 'dataLocation:' MDField
+	DefaultedField,             // DefaultedField : 'defaulted:' BoolLit
 	DiscriminatorIntField,      // DiscriminatorIntField : 'discriminator:' UintLit
 	DwarfAddressSpaceField,     // DwarfAddressSpaceField : 'dwarfAddressSpace:' UintLit
 	DwoIdField,                 // DwoIdField : 'dwoId:' UintLit
@@ -2982,20 +2989,20 @@ var ruleNodeType = [...]NodeType{
 	FuncAttr,                   // FuncAttr : 'jumptable'
 	FuncAttr,                   // FuncAttr : 'minsize'
 	FuncAttr,                   // FuncAttr : 'naked'
-	FuncAttr,                   // FuncAttr : 'null_pointer_is_valid'
 	FuncAttr,                   // FuncAttr : 'nobuiltin'
 	FuncAttr,                   // FuncAttr : 'nocf_check'
 	FuncAttr,                   // FuncAttr : 'noduplicate'
 	FuncAttr,                   // FuncAttr : 'nofree'
-	FuncAttr,                   // FuncAttr : 'nomerge'
 	FuncAttr,                   // FuncAttr : 'noimplicitfloat'
 	FuncAttr,                   // FuncAttr : 'noinline'
+	FuncAttr,                   // FuncAttr : 'nomerge'
 	FuncAttr,                   // FuncAttr : 'nonlazybind'
 	FuncAttr,                   // FuncAttr : 'norecurse'
 	FuncAttr,                   // FuncAttr : 'noredzone'
 	FuncAttr,                   // FuncAttr : 'noreturn'
 	FuncAttr,                   // FuncAttr : 'nosync'
 	FuncAttr,                   // FuncAttr : 'nounwind'
+	FuncAttr,                   // FuncAttr : 'null_pointer_is_valid'
 	FuncAttr,                   // FuncAttr : 'optforfuzzing'
 	FuncAttr,                   // FuncAttr : 'optnone'
 	FuncAttr,                   // FuncAttr : 'optsize'
@@ -3069,8 +3076,8 @@ var ruleNodeType = [...]NodeType{
 	ParamAttr,                  // ParamAttr : 'nocapture'
 	ParamAttr,                  // ParamAttr : 'nofree'
 	ParamAttr,                  // ParamAttr : 'nomerge'
-	ParamAttr,                  // ParamAttr : 'noundef'
 	ParamAttr,                  // ParamAttr : 'nonnull'
+	ParamAttr,                  // ParamAttr : 'noundef'
 	ParamAttr,                  // ParamAttr : 'readnone'
 	ParamAttr,                  // ParamAttr : 'readonly'
 	ParamAttr,                  // ParamAttr : 'returned'
@@ -3087,8 +3094,8 @@ var ruleNodeType = [...]NodeType{
 	0,                          // ReturnAttribute : ReturnAttr
 	ReturnAttr,                 // ReturnAttr : 'inreg'
 	ReturnAttr,                 // ReturnAttr : 'noalias'
-	ReturnAttr,                 // ReturnAttr : 'nonnull'
 	ReturnAttr,                 // ReturnAttr : 'nomerge'
+	ReturnAttr,                 // ReturnAttr : 'nonnull'
 	ReturnAttr,                 // ReturnAttr : 'noundef'
 	ReturnAttr,                 // ReturnAttr : 'signext'
 	ReturnAttr,                 // ReturnAttr : 'zeroext'

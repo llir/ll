@@ -403,6 +403,7 @@ const (
 	DEBUGBASEADDRESSCOLON          // debugBaseAddress:
 	DEBUGINFOFORPROFILINGCOLON     // debugInfoForProfiling:
 	DECLARATIONCOLON               // declaration:
+	DEFAULTEDCOLON                 // defaulted:
 	DIRECTORYCOLON                 // directory:
 	DISCRIMINATORCOLON             // discriminator:
 	DWARFADDRESSSPACECOLON         // dwarfAddressSpace:
@@ -880,6 +881,7 @@ var tokenStr = [...]string{
 	"debugBaseAddress:",
 	"debugInfoForProfiling:",
 	"declaration:",
+	"defaulted:",
 	"directory:",
 	"discriminator:",
 	"dwarfAddressSpace:",

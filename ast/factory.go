@@ -217,6 +217,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &DebugInfoForProfilingField{n}
 	case ll.DeclarationField:
 		return &DeclarationField{n}
+	case ll.DefaultedField:
+		return &DefaultedField{n}
 	case ll.Dereferenceable:
 		return &Dereferenceable{n}
 	case ll.DereferenceableOrNull:

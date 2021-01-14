@@ -172,6 +172,10 @@ recovered:
 				break
 			}
 		case 26:
+			if hash == 0x28737d9a && "defaulted:" == l.source[l.tokenOffset:l.offset] {
+				token = DEFAULTEDCOLON
+				break
+			}
 			if hash == 0x7e83e59a && "templateParams:" == l.source[l.tokenOffset:l.offset] {
 				token = TEMPLATEPARAMSCOLON
 				break
