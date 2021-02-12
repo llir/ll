@@ -299,6 +299,7 @@ func (n Partition) LlvmNode() *Node                  { return n.Node }
 func (n Personality) LlvmNode() *Node                { return n.Node }
 func (n PhiInst) LlvmNode() *Node                    { return n.Node }
 func (n PointerType) LlvmNode() *Node                { return n.Node }
+func (n Preallocated) LlvmNode() *Node               { return n.Node }
 func (n Preemption) LlvmNode() *Node                 { return n.Node }
 func (n Prefix) LlvmNode() *Node                     { return n.Node }
 func (n ProducerField) LlvmNode() *Node              { return n.Node }
@@ -1160,6 +1161,7 @@ func (AttrGroupID) funcAttributeNode()    {}
 func (AttrPair) funcAttributeNode()       {}
 func (AttrString) funcAttributeNode()     {}
 func (FuncAttr) funcAttributeNode()       {}
+func (Preallocated) funcAttributeNode()   {}
 func (NilNode) funcAttributeNode()        {}
 
 type FuncHdrField interface {
@@ -1183,6 +1185,7 @@ func (FuncAttr) funcHdrFieldNode()       {}
 func (GCNode) funcHdrFieldNode()         {}
 func (Partition) funcHdrFieldNode()      {}
 func (Personality) funcHdrFieldNode()    {}
+func (Preallocated) funcHdrFieldNode()   {}
 func (Prefix) funcHdrFieldNode()         {}
 func (Prologue) funcHdrFieldNode()       {}
 func (Section) funcHdrFieldNode()        {}
@@ -1499,6 +1502,7 @@ func (Byval) paramAttributeNode()                 {}
 func (Dereferenceable) paramAttributeNode()       {}
 func (DereferenceableOrNull) paramAttributeNode() {}
 func (ParamAttr) paramAttributeNode()             {}
+func (Preallocated) paramAttributeNode()          {}
 func (NilNode) paramAttributeNode()               {}
 
 type ReturnAttribute interface {
@@ -5570,6 +5574,14 @@ func (n PointerType) Elem() Type {
 func (n PointerType) AddrSpace() (AddrSpace, bool) {
 	field := AddrSpace{n.Child(selector.AddrSpace)}
 	return field, field.IsValid()
+}
+
+type Preallocated struct {
+	*Node
+}
+
+func (n Preallocated) Type() Type {
+	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
 type Preemption struct {

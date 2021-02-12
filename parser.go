@@ -46,7 +46,7 @@ const (
 )
 
 func (p *Parser) Parse(lexer *Lexer) error {
-	return p.parse(0, 2344, lexer)
+	return p.parse(0, 2350, lexer)
 }
 
 func (p *Parser) parse(start, end int16, lexer *Lexer) error {
@@ -88,7 +88,7 @@ func (p *Parser) parse(start, end int16, lexer *Lexer) error {
 				return err
 			}
 			if debugSyntax {
-				fmt.Printf("reduced to: %v\n", Symbol(entry.sym.symbol))
+				fmt.Printf("reduced to: %v\n", symbolName(entry.sym.symbol))
 			}
 			state = gotoState(stack[len(stack)-1].state, entry.sym.symbol)
 			entry.state = state
@@ -105,7 +105,7 @@ func (p *Parser) parse(start, end int16, lexer *Lexer) error {
 				state: state,
 			})
 			if debugSyntax {
-				fmt.Printf("shift: %v (%s)\n", Symbol(p.next.symbol), lexer.Text())
+				fmt.Printf("shift: %v (%s)\n", symbolName(p.next.symbol), lexer.Text())
 			}
 			if state != -1 && p.next.symbol != eoiToken {
 				p.next.symbol = noToken
@@ -170,18 +170,17 @@ func gotoState(state int16, symbol int32) int16 {
 
 func (p *Parser) fetchNext(lexer *Lexer, stack []stackEntry) {
 restart:
-	token := lexer.Next()
-	switch token {
+	tok := lexer.Next()
+	switch tok {
 	case INVALID_TOKEN:
 		goto restart
 	}
-	p.next.symbol = int32(token)
+	p.next.symbol = int32(tok)
 	p.next.offset, p.next.endoffset = lexer.Pos()
 }
 
 func (p *Parser) applyRule(rule int32, lhs *stackEntry, rhs []stackEntry, lexer *Lexer) (err error) {
-	nt := ruleNodeType[rule]
-	if nt != 0 {
+	if nt := tmRuleType[rule]; nt != 0 {
 		p.listener(nt, lhs.sym.offset, lhs.sym.endoffset)
 	}
 	return
