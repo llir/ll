@@ -5580,7 +5580,7 @@ type Preallocated struct {
 	*Node
 }
 
-func (n Preallocated) Type() Type {
+func (n Preallocated) Typ() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
