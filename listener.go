@@ -3007,6 +3007,7 @@ var ruleNodeType = [...]NodeType{
 	FuncAttr,                   // FuncAttr : 'noredzone'
 	FuncAttr,                   // FuncAttr : 'noreturn'
 	FuncAttr,                   // FuncAttr : 'nosync'
+	FuncAttr,                   // FuncAttr : 'noundef'
 	FuncAttr,                   // FuncAttr : 'nounwind'
 	FuncAttr,                   // FuncAttr : 'null_pointer_is_valid'
 	FuncAttr,                   // FuncAttr : 'optforfuzzing'
