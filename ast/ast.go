@@ -1563,6 +1563,7 @@ type TargetDef interface {
 // targetDefNode() ensures that only the following types can be
 // assigned to TargetDef.
 //
+func (SourceFilename) targetDefNode()   {}
 func (TargetDataLayout) targetDefNode() {}
 func (TargetTriple) targetDefNode()     {}
 func (NilNode) targetDefNode()          {}
@@ -1607,9 +1608,6 @@ func (IndirectSymbolDef) topLevelEntityNode() {}
 func (MetadataDef) topLevelEntityNode()       {}
 func (ModuleAsm) topLevelEntityNode()         {}
 func (NamedMetadataDef) topLevelEntityNode()  {}
-func (SourceFilename) topLevelEntityNode()    {}
-func (TargetDataLayout) topLevelEntityNode()  {}
-func (TargetTriple) topLevelEntityNode()      {}
 func (TypeDef) topLevelEntityNode()           {}
 func (UseListOrder) topLevelEntityNode()      {}
 func (UseListOrderBB) topLevelEntityNode()    {}
@@ -5229,6 +5227,15 @@ type MetadataType struct {
 
 type Module struct {
 	*Node
+}
+
+func (n Module) TargetDefs() []TargetDef {
+	nodes := n.Children(selector.TargetDef)
+	var ret = make([]TargetDef, 0, len(nodes))
+	for _, node := range nodes {
+		ret = append(ret, ToLlvmNode(node).(TargetDef))
+	}
+	return ret
 }
 
 func (n Module) TopLevelEntities() []TopLevelEntity {

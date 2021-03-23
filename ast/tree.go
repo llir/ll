@@ -3,10 +3,11 @@
 package ast
 
 import (
-	"github.com/llir/ll"
-	"github.com/llir/ll/selector"
 	"sort"
 	"strings"
+
+	"github.com/llir/ll"
+	"github.com/llir/ll/selector"
 )
 
 // Tree is a parse tree for some content.
