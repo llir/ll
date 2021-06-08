@@ -90,6 +90,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &BoolLit{n}
 	case ll.BrTerm:
 		return &BrTerm{n}
+	case ll.ByRefAttr:
+		return &ByRefAttr{n}
 	case ll.Byval:
 		return &Byval{n}
 	case ll.CCField:
@@ -666,6 +668,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &StringLit{n}
 	case ll.StructConst:
 		return &StructConst{n}
+	case ll.StructRetAttr:
+		return &StructRetAttr{n}
 	case ll.StructType:
 		return &StructType{n}
 	case ll.SubExpr:

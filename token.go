@@ -84,6 +84,7 @@ const (
 	BLOCKCOUNT                     // blockcount
 	BR                             // br
 	BUILTIN                        // builtin
+	BYREF                          // byref
 	BYVAL                          // byval
 	CHAR_C                         // c
 	CALL                           // call
@@ -156,6 +157,7 @@ const (
 	HHVM_CCC                       // hhvm_ccc
 	HHVMCC                         // hhvmcc
 	HIDDEN                         // hidden
+	HOT                            // hot
 	ICMP                           // icmp
 	IFUNC                          // ifunc
 	IMMARG                         // immarg
@@ -194,6 +196,7 @@ const (
 	MONOTONIC                      // monotonic
 	MSP430_INTRCC                  // msp430_intrcc
 	MUL                            // mul
+	MUSTPROGRESS                   // mustprogress
 	MUSTTAIL                       // musttail
 	NAKED                          // naked
 	NAND                           // nand
@@ -203,6 +206,7 @@ const (
 	NNAN                           // nnan
 	NOALIAS                        // noalias
 	NOBUILTIN                      // nobuiltin
+	NOCALLBACK                     // nocallback
 	NOCAPTURE                      // nocapture
 	NOCF_CHECK                     // nocf_check
 	NODUPLICATE                    // noduplicate
@@ -214,6 +218,7 @@ const (
 	NONE                           // none
 	NONLAZYBIND                    // nonlazybind
 	NONNULL                        // nonnull
+	NOPROFILE                      // noprofile
 	NORECURSE                      // norecurse
 	NOREDZONE                      // noredzone
 	NORETURN                       // noreturn
@@ -345,7 +350,6 @@ const (
 	WIN64CC                        // win64cc
 	WITHIN                         // within
 	WRITEONLY                      // writeonly
-	CHAR_X                         // x
 	X86_64_SYSVCC                  // x86_64_sysvcc
 	X86_FASTCALLCC                 // x86_fastcallcc
 	X86_FP80                       // x86_fp80
@@ -355,6 +359,7 @@ const (
 	X86_STDCALLCC                  // x86_stdcallcc
 	X86_THISCALLCC                 // x86_thiscallcc
 	X86_VECTORCALLCC               // x86_vectorcallcc
+	CHAR_X                         // x
 	XCHG                           // xchg
 	XOR                            // xor
 	ZEROEXT                        // zeroext
@@ -562,6 +567,7 @@ var tokenStr = [...]string{
 	"blockcount",
 	"br",
 	"builtin",
+	"byref",
 	"byval",
 	"c",
 	"call",
@@ -634,6 +640,7 @@ var tokenStr = [...]string{
 	"hhvm_ccc",
 	"hhvmcc",
 	"hidden",
+	"hot",
 	"icmp",
 	"ifunc",
 	"immarg",
@@ -672,6 +679,7 @@ var tokenStr = [...]string{
 	"monotonic",
 	"msp430_intrcc",
 	"mul",
+	"mustprogress",
 	"musttail",
 	"naked",
 	"nand",
@@ -681,6 +689,7 @@ var tokenStr = [...]string{
 	"nnan",
 	"noalias",
 	"nobuiltin",
+	"nocallback",
 	"nocapture",
 	"nocf_check",
 	"noduplicate",
@@ -692,6 +701,7 @@ var tokenStr = [...]string{
 	"none",
 	"nonlazybind",
 	"nonnull",
+	"noprofile",
 	"norecurse",
 	"noredzone",
 	"noreturn",
@@ -823,7 +833,6 @@ var tokenStr = [...]string{
 	"win64cc",
 	"within",
 	"writeonly",
-	"x",
 	"x86_64_sysvcc",
 	"x86_fastcallcc",
 	"x86_fp80",
@@ -833,6 +842,7 @@ var tokenStr = [...]string{
 	"x86_stdcallcc",
 	"x86_thiscallcc",
 	"x86_vectorcallcc",
+	"x",
 	"xchg",
 	"xor",
 	"zeroext",

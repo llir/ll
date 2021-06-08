@@ -58,6 +58,7 @@ func (n BlockAddressConst) LlvmNode() *Node          { return n.Node }
 func (n BoolConst) LlvmNode() *Node                  { return n.Node }
 func (n BoolLit) LlvmNode() *Node                    { return n.Node }
 func (n BrTerm) LlvmNode() *Node                     { return n.Node }
+func (n ByRefAttr) LlvmNode() *Node                  { return n.Node }
 func (n Byval) LlvmNode() *Node                      { return n.Node }
 func (n CCField) LlvmNode() *Node                    { return n.Node }
 func (n CallBrTerm) LlvmNode() *Node                 { return n.Node }
@@ -346,6 +347,7 @@ func (n StoreInst) LlvmNode() *Node                  { return n.Node }
 func (n StrideField) LlvmNode() *Node                { return n.Node }
 func (n StringLit) LlvmNode() *Node                  { return n.Node }
 func (n StructConst) LlvmNode() *Node                { return n.Node }
+func (n StructRetAttr) LlvmNode() *Node              { return n.Node }
 func (n StructType) LlvmNode() *Node                 { return n.Node }
 func (n SubExpr) LlvmNode() *Node                    { return n.Node }
 func (n SubInst) LlvmNode() *Node                    { return n.Node }
@@ -1498,11 +1500,13 @@ type ParamAttribute interface {
 func (Align) paramAttributeNode()                 {}
 func (AttrPair) paramAttributeNode()              {}
 func (AttrString) paramAttributeNode()            {}
+func (ByRefAttr) paramAttributeNode()             {}
 func (Byval) paramAttributeNode()                 {}
 func (Dereferenceable) paramAttributeNode()       {}
 func (DereferenceableOrNull) paramAttributeNode() {}
 func (ParamAttr) paramAttributeNode()             {}
 func (Preallocated) paramAttributeNode()          {}
+func (StructRetAttr) paramAttributeNode()         {}
 func (NilNode) paramAttributeNode()               {}
 
 type ReturnAttribute interface {
@@ -2337,6 +2341,14 @@ func (n BrTerm) Metadata() []MetadataAttachment {
 		ret = append(ret, MetadataAttachment{node})
 	}
 	return ret
+}
+
+type ByRefAttr struct {
+	*Node
+}
+
+func (n ByRefAttr) Typ() Type {
+	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
 type Byval struct {
@@ -6196,6 +6208,14 @@ func (n StructConst) Fields() []TypeConst {
 		ret = append(ret, TypeConst{node})
 	}
 	return ret
+}
+
+type StructRetAttr struct {
+	*Node
+}
+
+func (n StructRetAttr) Typ() Type {
+	return ToLlvmNode(n.Child(selector.Type)).(Type)
 }
 
 type StructType struct {

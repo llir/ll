@@ -50,6 +50,7 @@ var (
 	BoolConst                       = func(t ll.NodeType) bool { return t == ll.BoolConst }
 	BoolLit                         = func(t ll.NodeType) bool { return t == ll.BoolLit }
 	BrTerm                          = func(t ll.NodeType) bool { return t == ll.BrTerm }
+	ByRefAttr                       = func(t ll.NodeType) bool { return t == ll.ByRefAttr }
 	Byval                           = func(t ll.NodeType) bool { return t == ll.Byval }
 	CCField                         = func(t ll.NodeType) bool { return t == ll.CCField }
 	CallBrTerm                      = func(t ll.NodeType) bool { return t == ll.CallBrTerm }
@@ -338,6 +339,7 @@ var (
 	StrideField                     = func(t ll.NodeType) bool { return t == ll.StrideField }
 	StringLit                       = func(t ll.NodeType) bool { return t == ll.StringLit }
 	StructConst                     = func(t ll.NodeType) bool { return t == ll.StructConst }
+	StructRetAttr                   = func(t ll.NodeType) bool { return t == ll.StructRetAttr }
 	StructType                      = func(t ll.NodeType) bool { return t == ll.StructType }
 	SubExpr                         = func(t ll.NodeType) bool { return t == ll.SubExpr }
 	SubInst                         = func(t ll.NodeType) bool { return t == ll.SubInst }
