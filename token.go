@@ -55,6 +55,7 @@ const (
 	ALWAYSINLINE                   // alwaysinline
 	AMDGPU_CS                      // amdgpu_cs
 	AMDGPU_ES                      // amdgpu_es
+	AMDGPU_GFX                     // amdgpu_gfx
 	AMDGPU_GS                      // amdgpu_gs
 	AMDGPU_HS                      // amdgpu_hs
 	AMDGPU_KERNEL                  // amdgpu_kernel
@@ -120,6 +121,7 @@ const (
 	DLLIMPORT                      // dllimport
 	DOUBLE                         // double
 	DSO_LOCAL                      // dso_local
+	DSO_LOCAL_EQUIVALENT           // dso_local_equivalent
 	DSO_PREEMPTABLE                // dso_preemptable
 	EQ                             // eq
 	EXACT                          // exact
@@ -248,6 +250,7 @@ const (
 	PARTITION                      // partition
 	PERSONALITY                    // personality
 	PHI                            // phi
+	POISON                         // poison
 	PPC_FP128                      // ppc_fp128
 	PREALLOCATED                   // preallocated
 	PREFIX                         // prefix
@@ -432,6 +435,7 @@ const (
 	INCLUDEPATHCOLON               // includePath:
 	INLINEDATCOLON                 // inlinedAt:
 	ISDEFINITIONCOLON              // isDefinition:
+	ISDECLCOLON                    // isDecl:
 	ISIMPLICITCODECOLON            // isImplicitCode:
 	ISLOCALCOLON                   // isLocal:
 	ISOPTIMIZEDCOLON               // isOptimized:
@@ -538,6 +542,7 @@ var tokenStr = [...]string{
 	"alwaysinline",
 	"amdgpu_cs",
 	"amdgpu_es",
+	"amdgpu_gfx",
 	"amdgpu_gs",
 	"amdgpu_hs",
 	"amdgpu_kernel",
@@ -603,6 +608,7 @@ var tokenStr = [...]string{
 	"dllimport",
 	"double",
 	"dso_local",
+	"dso_local_equivalent",
 	"dso_preemptable",
 	"eq",
 	"exact",
@@ -731,6 +737,7 @@ var tokenStr = [...]string{
 	"partition",
 	"personality",
 	"phi",
+	"poison",
 	"ppc_fp128",
 	"preallocated",
 	"prefix",
@@ -915,6 +922,7 @@ var tokenStr = [...]string{
 	"includePath:",
 	"inlinedAt:",
 	"isDefinition:",
+	"isDecl:",
 	"isImplicitCode:",
 	"isLocal:",
 	"isOptimized:",

@@ -458,6 +458,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &IntelDialect{n}
 	case ll.InvokeTerm:
 		return &InvokeTerm{n}
+	case ll.IsDeclField:
+		return &IsDeclField{n}
 	case ll.IsDefinitionField:
 		return &IsDefinitionField{n}
 	case ll.IsImplicitCodeField:

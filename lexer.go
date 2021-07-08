@@ -307,6 +307,10 @@ recovered:
 				token = DWARFADDRESSSPACECOLON
 				break
 			}
+			if hash == 0x7a9945c6 && "isDecl:" == l.source[l.tokenOffset:l.offset] {
+				token = ISDECLCOLON
+				break
+			}
 			if hash == 0x6234ec6 && "line:" == l.source[l.tokenOffset:l.offset] {
 				token = LINECOLON
 				break
@@ -662,7 +666,7 @@ func (l *Lexer) Pos() (start, end int) {
 	return
 }
 
-// Line returns the line number of the last token returned by Next().
+// Line returns the line number of the last token returned by Next() (1-based).
 func (l *Lexer) Line() int {
 	return l.tokenLine
 }

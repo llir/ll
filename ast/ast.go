@@ -242,6 +242,7 @@ func (n IntToPtrInst) LlvmNode() *Node               { return n.Node }
 func (n IntType) LlvmNode() *Node                    { return n.Node }
 func (n IntelDialect) LlvmNode() *Node               { return n.Node }
 func (n InvokeTerm) LlvmNode() *Node                 { return n.Node }
+func (n IsDeclField) LlvmNode() *Node                { return n.Node }
 func (n IsDefinitionField) LlvmNode() *Node          { return n.Node }
 func (n IsImplicitCodeField) LlvmNode() *Node        { return n.Node }
 func (n IsLocalField) LlvmNode() *Node               { return n.Node }
@@ -884,6 +885,7 @@ func (APINotesField) dIModuleFieldNode()     {}
 func (ConfigMacrosField) dIModuleFieldNode() {}
 func (FileField) dIModuleFieldNode()         {}
 func (IncludePathField) dIModuleFieldNode()  {}
+func (IsDeclField) dIModuleFieldNode()       {}
 func (LineField) dIModuleFieldNode()         {}
 func (NameField) dIModuleFieldNode()         {}
 func (ScopeField) dIModuleFieldNode()        {}
@@ -4917,6 +4919,14 @@ func (n InvokeTerm) Metadata() []MetadataAttachment {
 		ret = append(ret, MetadataAttachment{node})
 	}
 	return ret
+}
+
+type IsDeclField struct {
+	*Node
+}
+
+func (n IsDeclField) IsDecl() BoolLit {
+	return BoolLit{n.Child(selector.BoolLit)}
 }
 
 type IsDefinitionField struct {

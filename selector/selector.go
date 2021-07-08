@@ -234,6 +234,7 @@ var (
 	IntType                         = func(t ll.NodeType) bool { return t == ll.IntType }
 	IntelDialect                    = func(t ll.NodeType) bool { return t == ll.IntelDialect }
 	InvokeTerm                      = func(t ll.NodeType) bool { return t == ll.InvokeTerm }
+	IsDeclField                     = func(t ll.NodeType) bool { return t == ll.IsDeclField }
 	IsDefinitionField               = func(t ll.NodeType) bool { return t == ll.IsDefinitionField }
 	IsImplicitCodeField             = func(t ll.NodeType) bool { return t == ll.IsImplicitCodeField }
 	IsLocalField                    = func(t ll.NodeType) bool { return t == ll.IsLocalField }
