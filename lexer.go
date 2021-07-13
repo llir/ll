@@ -140,6 +140,11 @@ recovered:
 				token = IMPORTSCOLON
 				break
 			}
+		case 14:
+			if hash == 0x674398e && "rank:" == l.source[l.tokenOffset:l.offset] {
+				token = RANKCOLON
+				break
+			}
 		case 15:
 			if hash == 0xfb94388f && "getter:" == l.source[l.tokenOffset:l.offset] {
 				token = GETTERCOLON
@@ -354,6 +359,11 @@ recovered:
 				token = SCOPELINECOLON
 				break
 			}
+		case 83:
+			if hash == 0x8e024053 && "allocated:" == l.source[l.tokenOffset:l.offset] {
+				token = ALLOCATEDCOLON
+				break
+			}
 		case 85:
 			if hash == 0xaba949d5 && "align:" == l.source[l.tokenOffset:l.offset] {
 				token = ALIGNCOLON
@@ -485,6 +495,11 @@ recovered:
 			}
 			if hash == 0x371df3 && "var:" == l.source[l.tokenOffset:l.offset] {
 				token = VARCOLON
+				break
+			}
+		case 116:
+			if hash == 0xfac8cbf4 && "associated:" == l.source[l.tokenOffset:l.offset] {
+				token = ASSOCIATEDCOLON
 				break
 			}
 		case 121:

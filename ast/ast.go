@@ -34,6 +34,7 @@ func (n AlignStackPair) LlvmNode() *Node             { return n.Node }
 func (n AlignStackTok) LlvmNode() *Node              { return n.Node }
 func (n AllocSize) LlvmNode() *Node                  { return n.Node }
 func (n AllocaInst) LlvmNode() *Node                 { return n.Node }
+func (n AllocatedField) LlvmNode() *Node             { return n.Node }
 func (n AndExpr) LlvmNode() *Node                    { return n.Node }
 func (n AndInst) LlvmNode() *Node                    { return n.Node }
 func (n Arg) LlvmNode() *Node                        { return n.Node }
@@ -41,6 +42,7 @@ func (n ArgField) LlvmNode() *Node                   { return n.Node }
 func (n Args) LlvmNode() *Node                       { return n.Node }
 func (n ArrayConst) LlvmNode() *Node                 { return n.Node }
 func (n ArrayType) LlvmNode() *Node                  { return n.Node }
+func (n AssociatedField) LlvmNode() *Node            { return n.Node }
 func (n Atomic) LlvmNode() *Node                     { return n.Node }
 func (n AtomicOp) LlvmNode() *Node                   { return n.Node }
 func (n AtomicOrdering) LlvmNode() *Node             { return n.Node }
@@ -309,6 +311,7 @@ func (n Prologue) LlvmNode() *Node                   { return n.Node }
 func (n PtrToIntExpr) LlvmNode() *Node               { return n.Node }
 func (n PtrToIntInst) LlvmNode() *Node               { return n.Node }
 func (n RangesBaseAddressField) LlvmNode() *Node     { return n.Node }
+func (n RankField) LlvmNode() *Node                  { return n.Node }
 func (n ResumeTerm) LlvmNode() *Node                 { return n.Node }
 func (n RetTerm) LlvmNode() *Node                    { return n.Node }
 func (n RetainedNodesField) LlvmNode() *Node         { return n.Node }
@@ -629,6 +632,8 @@ type DICompositeTypeField interface {
 // assigned to DICompositeTypeField.
 //
 func (AlignField) dICompositeTypeFieldNode()          {}
+func (AllocatedField) dICompositeTypeFieldNode()      {}
+func (AssociatedField) dICompositeTypeFieldNode()     {}
 func (BaseTypeField) dICompositeTypeFieldNode()       {}
 func (DataLocationField) dICompositeTypeFieldNode()   {}
 func (DiscriminatorField) dICompositeTypeFieldNode()  {}
@@ -639,6 +644,7 @@ func (IdentifierField) dICompositeTypeFieldNode()     {}
 func (LineField) dICompositeTypeFieldNode()           {}
 func (NameField) dICompositeTypeFieldNode()           {}
 func (OffsetField) dICompositeTypeFieldNode()         {}
+func (RankField) dICompositeTypeFieldNode()           {}
 func (RuntimeLangField) dICompositeTypeFieldNode()    {}
 func (ScopeField) dICompositeTypeFieldNode()          {}
 func (SizeField) dICompositeTypeFieldNode()           {}
@@ -2041,6 +2047,14 @@ func (n AllocaInst) Metadata() []MetadataAttachment {
 	return ret
 }
 
+type AllocatedField struct {
+	*Node
+}
+
+func (n AllocatedField) Allocated() MDField {
+	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
+}
+
 type AndExpr struct {
 	*Node
 }
@@ -2139,6 +2153,14 @@ func (n ArrayType) Len() UintLit {
 
 func (n ArrayType) Elem() Type {
 	return ToLlvmNode(n.Child(selector.Type)).(Type)
+}
+
+type AssociatedField struct {
+	*Node
+}
+
+func (n AssociatedField) Associated() MDField {
+	return ToLlvmNode(n.Child(selector.MDField)).(MDField)
 }
 
 type Atomic struct {
@@ -5680,6 +5702,14 @@ type RangesBaseAddressField struct {
 
 func (n RangesBaseAddressField) RangesBaseAddress() BoolLit {
 	return BoolLit{n.Child(selector.BoolLit)}
+}
+
+type RankField struct {
+	*Node
+}
+
+func (n RankField) Rank() MDFieldOrInt {
+	return ToLlvmNode(n.Child(selector.MDFieldOrInt)).(MDFieldOrInt)
 }
 
 type ResumeTerm struct {

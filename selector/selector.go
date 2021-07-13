@@ -26,6 +26,7 @@ var (
 	AlignStackTok                   = func(t ll.NodeType) bool { return t == ll.AlignStackTok }
 	AllocSize                       = func(t ll.NodeType) bool { return t == ll.AllocSize }
 	AllocaInst                      = func(t ll.NodeType) bool { return t == ll.AllocaInst }
+	AllocatedField                  = func(t ll.NodeType) bool { return t == ll.AllocatedField }
 	AndExpr                         = func(t ll.NodeType) bool { return t == ll.AndExpr }
 	AndInst                         = func(t ll.NodeType) bool { return t == ll.AndInst }
 	Arg                             = func(t ll.NodeType) bool { return t == ll.Arg }
@@ -33,6 +34,7 @@ var (
 	Args                            = func(t ll.NodeType) bool { return t == ll.Args }
 	ArrayConst                      = func(t ll.NodeType) bool { return t == ll.ArrayConst }
 	ArrayType                       = func(t ll.NodeType) bool { return t == ll.ArrayType }
+	AssociatedField                 = func(t ll.NodeType) bool { return t == ll.AssociatedField }
 	Atomic                          = func(t ll.NodeType) bool { return t == ll.Atomic }
 	AtomicOp                        = func(t ll.NodeType) bool { return t == ll.AtomicOp }
 	AtomicOrdering                  = func(t ll.NodeType) bool { return t == ll.AtomicOrdering }
@@ -301,6 +303,7 @@ var (
 	PtrToIntExpr                    = func(t ll.NodeType) bool { return t == ll.PtrToIntExpr }
 	PtrToIntInst                    = func(t ll.NodeType) bool { return t == ll.PtrToIntInst }
 	RangesBaseAddressField          = func(t ll.NodeType) bool { return t == ll.RangesBaseAddressField }
+	RankField                       = func(t ll.NodeType) bool { return t == ll.RankField }
 	ResumeTerm                      = func(t ll.NodeType) bool { return t == ll.ResumeTerm }
 	RetTerm                         = func(t ll.NodeType) bool { return t == ll.RetTerm }
 	RetainedNodesField              = func(t ll.NodeType) bool { return t == ll.RetainedNodesField }

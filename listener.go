@@ -239,7 +239,9 @@ const (
 	DITemplateValueParameter   // Fields=(DITemplateValueParameterField)*
 	GenericDINode              // Fields=(GenericDINodeField)*
 	AlignField                 // Align=UintLit
+	AllocatedField             // Allocated=MDField
 	ArgField                   // Arg=UintLit
+	AssociatedField            // Associated=MDField
 	AttributesField            // Attributes=UintLit
 	BaseTypeField              // BaseType=MDField
 	CCField                    // CC=DwarfCC
@@ -296,6 +298,7 @@ const (
 	OperandsField              // Operands=(MDField)*
 	ProducerField              // Producer=StringLit
 	RangesBaseAddressField     // RangesBaseAddress=BoolLit
+	RankField                  // Rank=MDFieldOrInt
 	RetainedNodesField         // RetainedNodes=MDField
 	RetainedTypesField         // RetainedTypes=MDField
 	RuntimeLangField           // RuntimeLang=DwarfLang
@@ -634,7 +637,9 @@ var nodeTypeStr = [...]string{
 	"DITemplateValueParameter",
 	"GenericDINode",
 	"AlignField",
+	"AllocatedField",
 	"ArgField",
+	"AssociatedField",
 	"AttributesField",
 	"BaseTypeField",
 	"CCField",
@@ -691,6 +696,7 @@ var nodeTypeStr = [...]string{
 	"OperandsField",
 	"ProducerField",
 	"RangesBaseAddressField",
+	"RankField",
 	"RetainedNodesField",
 	"RetainedTypesField",
 	"RuntimeLangField",
@@ -969,6 +975,8 @@ var DICompileUnitField = []NodeType{
 
 var DICompositeTypeField = []NodeType{
 	AlignField,
+	AllocatedField,
+	AssociatedField,
 	BaseTypeField,
 	DataLocationField,
 	DiscriminatorField,
@@ -979,6 +987,7 @@ var DICompositeTypeField = []NodeType{
 	LineField,
 	NameField,
 	OffsetField,
+	RankField,
 	RuntimeLangField,
 	ScopeField,
 	SizeField,

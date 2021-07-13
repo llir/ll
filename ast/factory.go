@@ -42,6 +42,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &AllocSize{n}
 	case ll.AllocaInst:
 		return &AllocaInst{n}
+	case ll.AllocatedField:
+		return &AllocatedField{n}
 	case ll.AndExpr:
 		return &AndExpr{n}
 	case ll.AndInst:
@@ -56,6 +58,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &ArrayConst{n}
 	case ll.ArrayType:
 		return &ArrayType{n}
+	case ll.AssociatedField:
+		return &AssociatedField{n}
 	case ll.Atomic:
 		return &Atomic{n}
 	case ll.AtomicOp:
@@ -592,6 +596,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &PtrToIntInst{n}
 	case ll.RangesBaseAddressField:
 		return &RangesBaseAddressField{n}
+	case ll.RankField:
+		return &RankField{n}
 	case ll.ResumeTerm:
 		return &ResumeTerm{n}
 	case ll.RetTerm:

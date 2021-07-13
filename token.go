@@ -396,8 +396,10 @@ const (
 	EXCLDITEMPLATEVALUEPARAMETER   // !DITemplateValueParameter
 	EXCLGENERICDINODE              // !GenericDINode
 	ALIGNCOLON                     // align:
+	ALLOCATEDCOLON                 // allocated:
 	APINOTESCOLON                  // apinotes:
 	ARGCOLON                       // arg:
+	ASSOCIATEDCOLON                // associated:
 	ATTRIBUTESCOLON                // attributes:
 	BASETYPECOLON                  // baseType:
 	CCCOLON                        // cc:
@@ -434,8 +436,8 @@ const (
 	IMPORTSCOLON                   // imports:
 	INCLUDEPATHCOLON               // includePath:
 	INLINEDATCOLON                 // inlinedAt:
-	ISDEFINITIONCOLON              // isDefinition:
 	ISDECLCOLON                    // isDecl:
+	ISDEFINITIONCOLON              // isDefinition:
 	ISIMPLICITCODECOLON            // isImplicitCode:
 	ISLOCALCOLON                   // isLocal:
 	ISOPTIMIZEDCOLON               // isOptimized:
@@ -452,6 +454,7 @@ const (
 	OPERANDSCOLON                  // operands:
 	PRODUCERCOLON                  // producer:
 	RANGESBASEADDRESSCOLON         // rangesBaseAddress:
+	RANKCOLON                      // rank:
 	RETAINEDNODESCOLON             // retainedNodes:
 	RETAINEDTYPESCOLON             // retainedTypes:
 	RUNTIMELANGCOLON               // runtimeLang:
@@ -883,8 +886,10 @@ var tokenStr = [...]string{
 	"!DITemplateValueParameter",
 	"!GenericDINode",
 	"align:",
+	"allocated:",
 	"apinotes:",
 	"arg:",
+	"associated:",
 	"attributes:",
 	"baseType:",
 	"cc:",
@@ -921,8 +926,8 @@ var tokenStr = [...]string{
 	"imports:",
 	"includePath:",
 	"inlinedAt:",
-	"isDefinition:",
 	"isDecl:",
+	"isDefinition:",
 	"isImplicitCode:",
 	"isLocal:",
 	"isOptimized:",
@@ -939,6 +944,7 @@ var tokenStr = [...]string{
 	"operands:",
 	"producer:",
 	"rangesBaseAddress:",
+	"rank:",
 	"retainedNodes:",
 	"retainedTypes:",
 	"runtimeLang:",
