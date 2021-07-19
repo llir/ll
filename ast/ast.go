@@ -303,6 +303,7 @@ func (n Partition) LlvmNode() *Node                  { return n.Node }
 func (n Personality) LlvmNode() *Node                { return n.Node }
 func (n PhiInst) LlvmNode() *Node                    { return n.Node }
 func (n PointerType) LlvmNode() *Node                { return n.Node }
+func (n PoisonConst) LlvmNode() *Node                { return n.Node }
 func (n Preallocated) LlvmNode() *Node               { return n.Node }
 func (n Preemption) LlvmNode() *Node                 { return n.Node }
 func (n Prefix) LlvmNode() *Node                     { return n.Node }
@@ -490,6 +491,7 @@ func (MulExpr) constantNode()              {}
 func (NoneConst) constantNode()            {}
 func (NullConst) constantNode()            {}
 func (OrExpr) constantNode()               {}
+func (PoisonConst) constantNode()          {}
 func (PtrToIntExpr) constantNode()         {}
 func (SDivExpr) constantNode()             {}
 func (SExtExpr) constantNode()             {}
@@ -1707,6 +1709,7 @@ func (MulExpr) valueNode()              {}
 func (NoneConst) valueNode()            {}
 func (NullConst) valueNode()            {}
 func (OrExpr) valueNode()               {}
+func (PoisonConst) valueNode()          {}
 func (PtrToIntExpr) valueNode()         {}
 func (SDivExpr) valueNode()             {}
 func (SExtExpr) valueNode()             {}
@@ -2106,7 +2109,7 @@ func (n Arg) Attrs() []ParamAttribute {
 }
 
 func (n Arg) Val() LlvmNode {
-	return ToLlvmNode(n.Child(selector.OneOf(ll.AShrExpr, ll.AddExpr, ll.AddrSpaceCastExpr, ll.AndExpr, ll.ArrayConst, ll.BitCastExpr, ll.BlockAddressConst, ll.BoolConst, ll.CharArrayConst, ll.DIBasicType, ll.DICommonBlock, ll.DICompileUnit, ll.DICompositeType, ll.DIDerivedType, ll.DIEnumerator, ll.DIExpression, ll.DIFile, ll.DIGlobalVariable, ll.DIGlobalVariableExpression, ll.DIImportedEntity, ll.DILabel, ll.DILexicalBlock, ll.DILexicalBlockFile, ll.DILocalVariable, ll.DILocation, ll.DIMacro, ll.DIMacroFile, ll.DIModule, ll.DINamespace, ll.DIObjCProperty, ll.DISubprogram, ll.DISubrange, ll.DISubroutineType, ll.DITemplateTypeParameter, ll.DITemplateValueParameter, ll.ExtractElementExpr, ll.ExtractValueExpr, ll.FAddExpr, ll.FCmpExpr, ll.FDivExpr, ll.FMulExpr, ll.FNegExpr, ll.FPExtExpr, ll.FPToSIExpr, ll.FPToUIExpr, ll.FPTruncExpr, ll.FRemExpr, ll.FSubExpr, ll.FloatConst, ll.GenericDINode, ll.GetElementPtrExpr, ll.GlobalIdent, ll.ICmpExpr, ll.InlineAsm, ll.InsertElementExpr, ll.InsertValueExpr, ll.IntConst, ll.IntToPtrExpr, ll.LShrExpr, ll.LocalIdent, ll.MDString, ll.MDTuple, ll.MetadataID, ll.MulExpr, ll.NoneConst, ll.NullConst, ll.OrExpr, ll.PtrToIntExpr, ll.SDivExpr, ll.SExtExpr, ll.SIToFPExpr, ll.SRemExpr, ll.SelectExpr, ll.ShlExpr, ll.ShuffleVectorExpr, ll.StructConst, ll.SubExpr, ll.TruncExpr, ll.TypeValue, ll.UDivExpr, ll.UIToFPExpr, ll.URemExpr, ll.UndefConst, ll.VectorConst, ll.XorExpr, ll.ZExtExpr, ll.ZeroInitializerConst))).(LlvmNode)
+	return ToLlvmNode(n.Child(selector.OneOf(ll.AShrExpr, ll.AddExpr, ll.AddrSpaceCastExpr, ll.AndExpr, ll.ArrayConst, ll.BitCastExpr, ll.BlockAddressConst, ll.BoolConst, ll.CharArrayConst, ll.DIBasicType, ll.DICommonBlock, ll.DICompileUnit, ll.DICompositeType, ll.DIDerivedType, ll.DIEnumerator, ll.DIExpression, ll.DIFile, ll.DIGlobalVariable, ll.DIGlobalVariableExpression, ll.DIImportedEntity, ll.DILabel, ll.DILexicalBlock, ll.DILexicalBlockFile, ll.DILocalVariable, ll.DILocation, ll.DIMacro, ll.DIMacroFile, ll.DIModule, ll.DINamespace, ll.DIObjCProperty, ll.DISubprogram, ll.DISubrange, ll.DISubroutineType, ll.DITemplateTypeParameter, ll.DITemplateValueParameter, ll.ExtractElementExpr, ll.ExtractValueExpr, ll.FAddExpr, ll.FCmpExpr, ll.FDivExpr, ll.FMulExpr, ll.FNegExpr, ll.FPExtExpr, ll.FPToSIExpr, ll.FPToUIExpr, ll.FPTruncExpr, ll.FRemExpr, ll.FSubExpr, ll.FloatConst, ll.GenericDINode, ll.GetElementPtrExpr, ll.GlobalIdent, ll.ICmpExpr, ll.InlineAsm, ll.InsertElementExpr, ll.InsertValueExpr, ll.IntConst, ll.IntToPtrExpr, ll.LShrExpr, ll.LocalIdent, ll.MDString, ll.MDTuple, ll.MetadataID, ll.MulExpr, ll.NoneConst, ll.NullConst, ll.OrExpr, ll.PoisonConst, ll.PtrToIntExpr, ll.SDivExpr, ll.SExtExpr, ll.SIToFPExpr, ll.SRemExpr, ll.SelectExpr, ll.ShlExpr, ll.ShuffleVectorExpr, ll.StructConst, ll.SubExpr, ll.TruncExpr, ll.TypeValue, ll.UDivExpr, ll.UIToFPExpr, ll.URemExpr, ll.UndefConst, ll.VectorConst, ll.XorExpr, ll.ZExtExpr, ll.ZeroInitializerConst))).(LlvmNode)
 }
 
 type ArgField struct {
@@ -3497,7 +3500,7 @@ func (n ExceptionArg) Typ() LlvmNode {
 }
 
 func (n ExceptionArg) Val() LlvmNode {
-	return ToLlvmNode(n.Child(selector.OneOf(ll.AShrExpr, ll.AddExpr, ll.AddrSpaceCastExpr, ll.AndExpr, ll.ArrayConst, ll.BitCastExpr, ll.BlockAddressConst, ll.BoolConst, ll.CharArrayConst, ll.DIBasicType, ll.DICommonBlock, ll.DICompileUnit, ll.DICompositeType, ll.DIDerivedType, ll.DIEnumerator, ll.DIExpression, ll.DIFile, ll.DIGlobalVariable, ll.DIGlobalVariableExpression, ll.DIImportedEntity, ll.DILabel, ll.DILexicalBlock, ll.DILexicalBlockFile, ll.DILocalVariable, ll.DILocation, ll.DIMacro, ll.DIMacroFile, ll.DIModule, ll.DINamespace, ll.DIObjCProperty, ll.DISubprogram, ll.DISubrange, ll.DISubroutineType, ll.DITemplateTypeParameter, ll.DITemplateValueParameter, ll.ExtractElementExpr, ll.ExtractValueExpr, ll.FAddExpr, ll.FCmpExpr, ll.FDivExpr, ll.FMulExpr, ll.FNegExpr, ll.FPExtExpr, ll.FPToSIExpr, ll.FPToUIExpr, ll.FPTruncExpr, ll.FRemExpr, ll.FSubExpr, ll.FloatConst, ll.GenericDINode, ll.GetElementPtrExpr, ll.GlobalIdent, ll.ICmpExpr, ll.InlineAsm, ll.InsertElementExpr, ll.InsertValueExpr, ll.IntConst, ll.IntToPtrExpr, ll.LShrExpr, ll.LocalIdent, ll.MDString, ll.MDTuple, ll.MetadataID, ll.MulExpr, ll.NoneConst, ll.NullConst, ll.OrExpr, ll.PtrToIntExpr, ll.SDivExpr, ll.SExtExpr, ll.SIToFPExpr, ll.SRemExpr, ll.SelectExpr, ll.ShlExpr, ll.ShuffleVectorExpr, ll.StructConst, ll.SubExpr, ll.TruncExpr, ll.TypeValue, ll.UDivExpr, ll.UIToFPExpr, ll.URemExpr, ll.UndefConst, ll.VectorConst, ll.XorExpr, ll.ZExtExpr, ll.ZeroInitializerConst))).(LlvmNode)
+	return ToLlvmNode(n.Child(selector.OneOf(ll.AShrExpr, ll.AddExpr, ll.AddrSpaceCastExpr, ll.AndExpr, ll.ArrayConst, ll.BitCastExpr, ll.BlockAddressConst, ll.BoolConst, ll.CharArrayConst, ll.DIBasicType, ll.DICommonBlock, ll.DICompileUnit, ll.DICompositeType, ll.DIDerivedType, ll.DIEnumerator, ll.DIExpression, ll.DIFile, ll.DIGlobalVariable, ll.DIGlobalVariableExpression, ll.DIImportedEntity, ll.DILabel, ll.DILexicalBlock, ll.DILexicalBlockFile, ll.DILocalVariable, ll.DILocation, ll.DIMacro, ll.DIMacroFile, ll.DIModule, ll.DINamespace, ll.DIObjCProperty, ll.DISubprogram, ll.DISubrange, ll.DISubroutineType, ll.DITemplateTypeParameter, ll.DITemplateValueParameter, ll.ExtractElementExpr, ll.ExtractValueExpr, ll.FAddExpr, ll.FCmpExpr, ll.FDivExpr, ll.FMulExpr, ll.FNegExpr, ll.FPExtExpr, ll.FPToSIExpr, ll.FPToUIExpr, ll.FPTruncExpr, ll.FRemExpr, ll.FSubExpr, ll.FloatConst, ll.GenericDINode, ll.GetElementPtrExpr, ll.GlobalIdent, ll.ICmpExpr, ll.InlineAsm, ll.InsertElementExpr, ll.InsertValueExpr, ll.IntConst, ll.IntToPtrExpr, ll.LShrExpr, ll.LocalIdent, ll.MDString, ll.MDTuple, ll.MetadataID, ll.MulExpr, ll.NoneConst, ll.NullConst, ll.OrExpr, ll.PoisonConst, ll.PtrToIntExpr, ll.SDivExpr, ll.SExtExpr, ll.SIToFPExpr, ll.SRemExpr, ll.SelectExpr, ll.ShlExpr, ll.ShuffleVectorExpr, ll.StructConst, ll.SubExpr, ll.TruncExpr, ll.TypeValue, ll.UDivExpr, ll.UIToFPExpr, ll.URemExpr, ll.UndefConst, ll.VectorConst, ll.XorExpr, ll.ZExtExpr, ll.ZeroInitializerConst))).(LlvmNode)
 }
 
 type ExportSymbolsField struct {
@@ -5625,6 +5628,10 @@ func (n PointerType) Elem() Type {
 func (n PointerType) AddrSpace() (AddrSpace, bool) {
 	field := AddrSpace{n.Child(selector.AddrSpace)}
 	return field, field.IsValid()
+}
+
+type PoisonConst struct {
+	*Node
 }
 
 type Preallocated struct {

@@ -580,6 +580,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &PhiInst{n}
 	case ll.PointerType:
 		return &PointerType{n}
+	case ll.PoisonConst:
+		return &PoisonConst{n}
 	case ll.Preallocated:
 		return &Preallocated{n}
 	case ll.Preemption:

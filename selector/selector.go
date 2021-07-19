@@ -295,6 +295,7 @@ var (
 	Personality                     = func(t ll.NodeType) bool { return t == ll.Personality }
 	PhiInst                         = func(t ll.NodeType) bool { return t == ll.PhiInst }
 	PointerType                     = func(t ll.NodeType) bool { return t == ll.PointerType }
+	PoisonConst                     = func(t ll.NodeType) bool { return t == ll.PoisonConst }
 	Preallocated                    = func(t ll.NodeType) bool { return t == ll.Preallocated }
 	Preemption                      = func(t ll.NodeType) bool { return t == ll.Preemption }
 	Prefix                          = func(t ll.NodeType) bool { return t == ll.Prefix }

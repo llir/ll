@@ -84,6 +84,7 @@ const (
 	VectorConst    // Elems=(TypeConst)*
 	ZeroInitializerConst
 	UndefConst
+	PoisonConst
 	BlockAddressConst  // Func=GlobalIdent Block=LocalIdent
 	FNegExpr           // X=TypeConst
 	AddExpr            // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
@@ -482,6 +483,7 @@ var nodeTypeStr = [...]string{
 	"VectorConst",
 	"ZeroInitializerConst",
 	"UndefConst",
+	"PoisonConst",
 	"BlockAddressConst",
 	"FNegExpr",
 	"AddExpr",
@@ -868,6 +870,7 @@ var Constant = []NodeType{
 	NoneConst,
 	NullConst,
 	OrExpr,
+	PoisonConst,
 	PtrToIntExpr,
 	SDivExpr,
 	SExtExpr,
@@ -1665,6 +1668,7 @@ var Value = []NodeType{
 	NoneConst,
 	NullConst,
 	OrExpr,
+	PoisonConst,
 	PtrToIntExpr,
 	SDivExpr,
 	SExtExpr,
