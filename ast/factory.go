@@ -152,6 +152,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &ContainingTypeField{n}
 	case ll.CountField:
 		return &CountField{n}
+	case ll.DIArgList:
+		return &DIArgList{n}
 	case ll.DIBasicType:
 		return &DIBasicType{n}
 	case ll.DICommonBlock:
@@ -268,6 +270,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &DwarfVirtualityInt{n}
 	case ll.DwoIdField:
 		return &DwoIdField{n}
+	case ll.ElementType:
+		return &ElementType{n}
 	case ll.ElementsField:
 		return &ElementsField{n}
 	case ll.Ellipsis:
@@ -422,6 +426,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &ImportsField{n}
 	case ll.InAlloca:
 		return &InAlloca{n}
+	case ll.InAllocatok:
+		return &InAllocatok{n}
 	case ll.InBounds:
 		return &InBounds{n}
 	case ll.InRange:
@@ -752,6 +758,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &UnnamedAddr{n}
 	case ll.UnreachableTerm:
 		return &UnreachableTerm{n}
+	case ll.Unwind:
+		return &Unwind{n}
 	case ll.UnwindToCaller:
 		return &UnwindToCaller{n}
 	case ll.UpperBoundField:
@@ -762,6 +770,10 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &UseListOrderBB{n}
 	case ll.VAArgInst:
 		return &VAArgInst{n}
+	case ll.VScaleRange:
+		return &VScaleRange{n}
+	case ll.VScaleRangetok:
+		return &VScaleRangetok{n}
 	case ll.ValueField:
 		return &ValueField{n}
 	case ll.ValueIntField:
