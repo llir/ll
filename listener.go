@@ -69,10 +69,11 @@ const (
 	PackedStructType // Fields=(Type)*
 	OpaqueType
 	NamedType // Name=LocalIdent
-	InlineAsm // SideEffect? AlignStackTok? IntelDialect? Asm=StringLit Constraints=StringLit
+	InlineAsm // SideEffect? AlignStackTok? IntelDialect? Unwind? Asm=StringLit Constraints=StringLit
 	SideEffect
 	AlignStackTok
 	IntelDialect
+	Unwind
 	BoolConst  // BoolLit
 	IntConst   // IntLit
 	FloatConst // FloatLit
@@ -155,15 +156,15 @@ const (
 	ShuffleVectorInst  // X=TypeValue Y=TypeValue Mask=TypeValue Metadata=(MetadataAttachment)*
 	ExtractValueInst   // X=TypeValue Indices=(UintLit)+ Metadata=(MetadataAttachment)*
 	InsertValueInst    // X=TypeValue Elem=TypeValue Indices=(UintLit)+ Metadata=(MetadataAttachment)*
-	AllocaInst         // InAlloca? SwiftError? ElemType=Type NElems=TypeValue? Align? AddrSpace? Metadata=(MetadataAttachment)*
-	InAlloca
+	AllocaInst         // InAllocatok? SwiftError? ElemType=Type NElems=TypeValue? Align? AddrSpace? Metadata=(MetadataAttachment)*
+	InAllocatok
 	SwiftError
 	LoadInst    // Atomic? Volatile? ElemType=Type Src=TypeValue SyncScope? Ordering=AtomicOrdering? Align? Metadata=(MetadataAttachment)*
 	StoreInst   // Atomic? Volatile? Src=TypeValue Dst=TypeValue SyncScope? Ordering=AtomicOrdering? Align? Metadata=(MetadataAttachment)*
 	FenceInst   // SyncScope? Ordering=AtomicOrdering Metadata=(MetadataAttachment)*
-	CmpXchgInst // Weak? Volatile? Ptr=TypeValue Cmp=TypeValue New=TypeValue SyncScope? SuccessOrdering=AtomicOrdering FailureOrdering=AtomicOrdering Metadata=(MetadataAttachment)*
+	CmpXchgInst // Weak? Volatile? Ptr=TypeValue Cmp=TypeValue New=TypeValue SyncScope? SuccessOrdering=AtomicOrdering FailureOrdering=AtomicOrdering Align? Metadata=(MetadataAttachment)*
 	Weak
-	AtomicRMWInst // Volatile? Op=AtomicOp Dst=TypeValue X=TypeValue SyncScope? Ordering=AtomicOrdering Metadata=(MetadataAttachment)*
+	AtomicRMWInst // Volatile? Op=AtomicOp Dst=TypeValue X=TypeValue SyncScope? Ordering=AtomicOrdering Align? Metadata=(MetadataAttachment)*
 	AtomicOp
 	GetElementPtrInst // InBounds? ElemType=Type Src=TypeValue Indices=(TypeValue)* Metadata=(MetadataAttachment)*
 	TruncInst         // From=TypeValue To=Type Metadata=(MetadataAttachment)*
@@ -212,6 +213,7 @@ const (
 	MDTuple                    // MDFields=(MDField)*
 	MDString                   // Val=StringLit
 	MetadataAttachment         // Name=MetadataName MDNode
+	DIArgList                  // Fields=(TypeValue)*
 	DIBasicType                // Fields=(DIBasicTypeField)*
 	DICommonBlock              // Fields=(DICommonBlockField)*
 	DICompileUnit              // Fields=(DICompileUnitField)*
@@ -373,6 +375,7 @@ const (
 	Comdat                // Name=ComdatName?
 	Dereferenceable       // N=UintLit
 	DereferenceableOrNull // N=UintLit
+	ElementType           // Typ=Type
 	DLLStorageClass
 	Ellipsis
 	Exact
@@ -381,6 +384,7 @@ const (
 	FPred
 	FuncAttr
 	InBounds
+	InAlloca // Typ=Type
 	IPred
 	Label // Typ=LabelType Name=LocalIdent
 	Linkage
@@ -406,6 +410,8 @@ const (
 	UnwindToCaller
 	Visibility
 	Volatile
+	VScaleRangetok
+	VScaleRange // Min=UintLit Max=UintLit?
 	NodeTypeMax
 )
 
@@ -472,6 +478,7 @@ var nodeTypeStr = [...]string{
 	"SideEffect",
 	"AlignStackTok",
 	"IntelDialect",
+	"Unwind",
 	"BoolConst",
 	"IntConst",
 	"FloatConst",
@@ -555,7 +562,7 @@ var nodeTypeStr = [...]string{
 	"ExtractValueInst",
 	"InsertValueInst",
 	"AllocaInst",
-	"InAlloca",
+	"InAllocatok",
 	"SwiftError",
 	"LoadInst",
 	"StoreInst",
@@ -611,6 +618,7 @@ var nodeTypeStr = [...]string{
 	"MDTuple",
 	"MDString",
 	"MetadataAttachment",
+	"DIArgList",
 	"DIBasicType",
 	"DICommonBlock",
 	"DICompileUnit",
@@ -772,6 +780,7 @@ var nodeTypeStr = [...]string{
 	"Comdat",
 	"Dereferenceable",
 	"DereferenceableOrNull",
+	"ElementType",
 	"DLLStorageClass",
 	"Ellipsis",
 	"Exact",
@@ -780,6 +789,7 @@ var nodeTypeStr = [...]string{
 	"FPred",
 	"FuncAttr",
 	"InBounds",
+	"InAlloca",
 	"IPred",
 	"Label",
 	"Linkage",
@@ -805,6 +815,8 @@ var nodeTypeStr = [...]string{
 	"UnwindToCaller",
 	"Visibility",
 	"Volatile",
+	"VScaleRangetok",
+	"VScaleRange",
 }
 
 func (t NodeType) String() string {
@@ -1273,6 +1285,8 @@ var FuncAttribute = []NodeType{
 	AttrString,
 	FuncAttr,
 	Preallocated,
+	VScaleRange,
+	VScaleRangetok,
 }
 
 var FuncHdrField = []NodeType{
@@ -1293,6 +1307,8 @@ var FuncHdrField = []NodeType{
 	Prefix,
 	Prologue,
 	Section,
+	VScaleRange,
+	VScaleRangetok,
 }
 
 var GenericDINodeField = []NodeType{
@@ -1375,6 +1391,7 @@ var Instruction = []NodeType{
 }
 
 var MDField = []NodeType{
+	DIArgList,
 	DIBasicType,
 	DICommonBlock,
 	DICompileUnit,
@@ -1410,6 +1427,7 @@ var MDField = []NodeType{
 }
 
 var MDFieldOrInt = []NodeType{
+	DIArgList,
 	DIBasicType,
 	DICommonBlock,
 	DICompileUnit,
@@ -1478,6 +1496,7 @@ var MDNode = []NodeType{
 }
 
 var Metadata = []NodeType{
+	DIArgList,
 	DIBasicType,
 	DICommonBlock,
 	DICompileUnit,
@@ -1523,12 +1542,15 @@ var NameTableKind = []NodeType{
 
 var ParamAttribute = []NodeType{
 	Align,
+	AlignStack,
 	AttrPair,
 	AttrString,
 	ByRefAttr,
 	Byval,
 	Dereferenceable,
 	DereferenceableOrNull,
+	ElementType,
+	InAlloca,
 	ParamAttr,
 	Preallocated,
 	StructRetAttr,

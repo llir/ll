@@ -124,6 +124,7 @@ const (
 	DSO_LOCAL_EQUIVALENT           // dso_local_equivalent
 	DSO_PREEMPTABLE                // dso_preemptable
 	EQ                             // eq
+	ELEMENTTYPE                    // elementtype
 	EXACT                          // exact
 	EXACTMATCH                     // exactmatch
 	EXTERN_WEAK                    // extern_weak
@@ -212,7 +213,7 @@ const (
 	NOCAPTURE                      // nocapture
 	NOCF_CHECK                     // nocf_check
 	NODUPLICATE                    // noduplicate
-	NODUPLICATES                   // noduplicates
+	NODEDUPLICATE                  // nodeduplicate
 	NOFREE                         // nofree
 	NOIMPLICITFLOAT                // noimplicitfloat
 	NOINLINE                       // noinline
@@ -228,6 +229,7 @@ const (
 	NOTAIL                         // notail
 	NOUNDEF                        // noundef
 	NOUNWIND                       // nounwind
+	NOSANITIZE_COVERAGE            // nosanitize_coverage
 	NSW                            // nsw
 	NSZ                            // nsz
 	NULL                           // null
@@ -259,6 +261,7 @@ const (
 	PRIVATE                        // private
 	PROLOGUE                       // prologue
 	PROTECTED                      // protected
+	PTR                            // ptr
 	PTRTOINT                       // ptrtoint
 	PTX_DEVICE                     // ptx_device
 	PTX_KERNEL                     // ptx_kernel
@@ -310,6 +313,8 @@ const (
 	SWIFTERROR                     // swifterror
 	SWIFTSELF                      // swiftself
 	SWITCH                         // switch
+	SWIFTTAILCC                    // swifttailcc
+	SWIFTASYNC                     // swiftasync
 	SYNCSCOPE                      // syncscope
 	TAIL                           // tail
 	TAILCC                         // tailcc
@@ -345,7 +350,9 @@ const (
 	VCALL_VISIBILITY               // vcall_visibility
 	VOID                           // void
 	VOLATILE                       // volatile
+	VSCALE_RANGE                   // vscale_range
 	VSCALE                         // vscale
+	VISIBILITY                     // visibility
 	WEAK                           // weak
 	WEAK_ODR                       // weak_odr
 	WEBKIT_JSCC                    // webkit_jscc
@@ -368,6 +375,7 @@ const (
 	ZEROEXT                        // zeroext
 	ZEROINITIALIZER                // zeroinitializer
 	ZEXT                           // zext
+	EXCLDIARGLIST                  // !DIArgList
 	EXCLDIBASICTYPE                // !DIBasicType
 	EXCLDICOMMONBLOCK              // !DICommonBlock
 	EXCLDICOMPILEUNIT              // !DICompileUnit
@@ -614,6 +622,7 @@ var tokenStr = [...]string{
 	"dso_local_equivalent",
 	"dso_preemptable",
 	"eq",
+	"elementtype",
 	"exact",
 	"exactmatch",
 	"extern_weak",
@@ -702,7 +711,7 @@ var tokenStr = [...]string{
 	"nocapture",
 	"nocf_check",
 	"noduplicate",
-	"noduplicates",
+	"nodeduplicate",
 	"nofree",
 	"noimplicitfloat",
 	"noinline",
@@ -718,6 +727,7 @@ var tokenStr = [...]string{
 	"notail",
 	"noundef",
 	"nounwind",
+	"nosanitize_coverage",
 	"nsw",
 	"nsz",
 	"null",
@@ -749,6 +759,7 @@ var tokenStr = [...]string{
 	"private",
 	"prologue",
 	"protected",
+	"ptr",
 	"ptrtoint",
 	"ptx_device",
 	"ptx_kernel",
@@ -800,6 +811,8 @@ var tokenStr = [...]string{
 	"swifterror",
 	"swiftself",
 	"switch",
+	"swifttailcc",
+	"swiftasync",
 	"syncscope",
 	"tail",
 	"tailcc",
@@ -835,7 +848,9 @@ var tokenStr = [...]string{
 	"vcall_visibility",
 	"void",
 	"volatile",
+	"vscale_range",
 	"vscale",
+	"visibility",
 	"weak",
 	"weak_odr",
 	"webkit_jscc",
@@ -858,6 +873,7 @@ var tokenStr = [...]string{
 	"zeroext",
 	"zeroinitializer",
 	"zext",
+	"!DIArgList",
 	"!DIBasicType",
 	"!DICommonBlock",
 	"!DICompileUnit",

@@ -589,6 +589,10 @@ recovered:
 				break
 			}
 		case 14:
+			if hash == 0xb5a7f8ce && "!DIArgList" == l.source[l.tokenOffset:l.offset] {
+				token = EXCLDIARGLIST
+				break
+			}
 			if hash == 0xf21cda2e && "!DILabel" == l.source[l.tokenOffset:l.offset] {
 				token = EXCLDILABEL
 				break

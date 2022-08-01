@@ -89,6 +89,7 @@ func (n CondBrTerm) LlvmNode() *Node                 { return n.Node }
 func (n ConfigMacrosField) LlvmNode() *Node          { return n.Node }
 func (n ContainingTypeField) LlvmNode() *Node        { return n.Node }
 func (n CountField) LlvmNode() *Node                 { return n.Node }
+func (n DIArgList) LlvmNode() *Node                  { return n.Node }
 func (n DIBasicType) LlvmNode() *Node                { return n.Node }
 func (n DICommonBlock) LlvmNode() *Node              { return n.Node }
 func (n DICompileUnit) LlvmNode() *Node              { return n.Node }
@@ -147,6 +148,7 @@ func (n DwarfTagInt) LlvmNode() *Node                { return n.Node }
 func (n DwarfVirtualityEnum) LlvmNode() *Node        { return n.Node }
 func (n DwarfVirtualityInt) LlvmNode() *Node         { return n.Node }
 func (n DwoIdField) LlvmNode() *Node                 { return n.Node }
+func (n ElementType) LlvmNode() *Node                { return n.Node }
 func (n ElementsField) LlvmNode() *Node              { return n.Node }
 func (n Ellipsis) LlvmNode() *Node                   { return n.Node }
 func (n EmissionKindEnum) LlvmNode() *Node           { return n.Node }
@@ -224,6 +226,7 @@ func (n IdentifierField) LlvmNode() *Node            { return n.Node }
 func (n Immutable) LlvmNode() *Node                  { return n.Node }
 func (n ImportsField) LlvmNode() *Node               { return n.Node }
 func (n InAlloca) LlvmNode() *Node                   { return n.Node }
+func (n InAllocatok) LlvmNode() *Node                { return n.Node }
 func (n InBounds) LlvmNode() *Node                   { return n.Node }
 func (n InRange) LlvmNode() *Node                    { return n.Node }
 func (n Inc) LlvmNode() *Node                        { return n.Node }
@@ -389,11 +392,14 @@ func (n UndefConst) LlvmNode() *Node                 { return n.Node }
 func (n UnitField) LlvmNode() *Node                  { return n.Node }
 func (n UnnamedAddr) LlvmNode() *Node                { return n.Node }
 func (n UnreachableTerm) LlvmNode() *Node            { return n.Node }
+func (n Unwind) LlvmNode() *Node                     { return n.Node }
 func (n UnwindToCaller) LlvmNode() *Node             { return n.Node }
 func (n UpperBoundField) LlvmNode() *Node            { return n.Node }
 func (n UseListOrder) LlvmNode() *Node               { return n.Node }
 func (n UseListOrderBB) LlvmNode() *Node             { return n.Node }
 func (n VAArgInst) LlvmNode() *Node                  { return n.Node }
+func (n VScaleRange) LlvmNode() *Node                { return n.Node }
+func (n VScaleRangetok) LlvmNode() *Node             { return n.Node }
 func (n ValueField) LlvmNode() *Node                 { return n.Node }
 func (n ValueIntField) LlvmNode() *Node              { return n.Node }
 func (n ValueStringField) LlvmNode() *Node           { return n.Node }
@@ -1174,6 +1180,8 @@ func (AttrPair) funcAttributeNode()       {}
 func (AttrString) funcAttributeNode()     {}
 func (FuncAttr) funcAttributeNode()       {}
 func (Preallocated) funcAttributeNode()   {}
+func (VScaleRange) funcAttributeNode()    {}
+func (VScaleRangetok) funcAttributeNode() {}
 func (NilNode) funcAttributeNode()        {}
 
 type FuncHdrField interface {
@@ -1201,6 +1209,8 @@ func (Preallocated) funcHdrFieldNode()   {}
 func (Prefix) funcHdrFieldNode()         {}
 func (Prologue) funcHdrFieldNode()       {}
 func (Section) funcHdrFieldNode()        {}
+func (VScaleRange) funcHdrFieldNode()    {}
+func (VScaleRangetok) funcHdrFieldNode() {}
 func (NilNode) funcHdrFieldNode()        {}
 
 type GenericDINodeField interface {
@@ -1318,6 +1328,7 @@ type MDField interface {
 // mDFieldNode() ensures that only the following types can be
 // assigned to MDField.
 //
+func (DIArgList) mDFieldNode()                  {}
 func (DIBasicType) mDFieldNode()                {}
 func (DICommonBlock) mDFieldNode()              {}
 func (DICompileUnit) mDFieldNode()              {}
@@ -1360,6 +1371,7 @@ type MDFieldOrInt interface {
 // mDFieldOrIntNode() ensures that only the following types can be
 // assigned to MDFieldOrInt.
 //
+func (DIArgList) mDFieldOrIntNode()                  {}
 func (DIBasicType) mDFieldOrIntNode()                {}
 func (DICommonBlock) mDFieldOrIntNode()              {}
 func (DICompileUnit) mDFieldOrIntNode()              {}
@@ -1442,6 +1454,7 @@ type Metadata interface {
 // metadataNode() ensures that only the following types can be
 // assigned to Metadata.
 //
+func (DIArgList) metadataNode()                  {}
 func (DIBasicType) metadataNode()                {}
 func (DICommonBlock) metadataNode()              {}
 func (DICompileUnit) metadataNode()              {}
@@ -1508,12 +1521,15 @@ type ParamAttribute interface {
 // assigned to ParamAttribute.
 //
 func (Align) paramAttributeNode()                 {}
+func (AlignStack) paramAttributeNode()            {}
 func (AttrPair) paramAttributeNode()              {}
 func (AttrString) paramAttributeNode()            {}
 func (ByRefAttr) paramAttributeNode()             {}
 func (Byval) paramAttributeNode()                 {}
 func (Dereferenceable) paramAttributeNode()       {}
 func (DereferenceableOrNull) paramAttributeNode() {}
+func (ElementType) paramAttributeNode()           {}
+func (InAlloca) paramAttributeNode()              {}
 func (ParamAttr) paramAttributeNode()             {}
 func (Preallocated) paramAttributeNode()          {}
 func (StructRetAttr) paramAttributeNode()         {}
@@ -2012,8 +2028,8 @@ type AllocaInst struct {
 	*Node
 }
 
-func (n AllocaInst) InAlloca() (InAlloca, bool) {
-	field := InAlloca{n.Child(selector.InAlloca)}
+func (n AllocaInst) InAllocatok() (InAllocatok, bool) {
+	field := InAllocatok{n.Child(selector.InAllocatok)}
 	return field, field.IsValid()
 }
 
@@ -2109,7 +2125,7 @@ func (n Arg) Attrs() []ParamAttribute {
 }
 
 func (n Arg) Val() LlvmNode {
-	return ToLlvmNode(n.Child(selector.OneOf(ll.AShrExpr, ll.AddExpr, ll.AddrSpaceCastExpr, ll.AndExpr, ll.ArrayConst, ll.BitCastExpr, ll.BlockAddressConst, ll.BoolConst, ll.CharArrayConst, ll.DIBasicType, ll.DICommonBlock, ll.DICompileUnit, ll.DICompositeType, ll.DIDerivedType, ll.DIEnumerator, ll.DIExpression, ll.DIFile, ll.DIGlobalVariable, ll.DIGlobalVariableExpression, ll.DIImportedEntity, ll.DILabel, ll.DILexicalBlock, ll.DILexicalBlockFile, ll.DILocalVariable, ll.DILocation, ll.DIMacro, ll.DIMacroFile, ll.DIModule, ll.DINamespace, ll.DIObjCProperty, ll.DISubprogram, ll.DISubrange, ll.DISubroutineType, ll.DITemplateTypeParameter, ll.DITemplateValueParameter, ll.ExtractElementExpr, ll.ExtractValueExpr, ll.FAddExpr, ll.FCmpExpr, ll.FDivExpr, ll.FMulExpr, ll.FNegExpr, ll.FPExtExpr, ll.FPToSIExpr, ll.FPToUIExpr, ll.FPTruncExpr, ll.FRemExpr, ll.FSubExpr, ll.FloatConst, ll.GenericDINode, ll.GetElementPtrExpr, ll.GlobalIdent, ll.ICmpExpr, ll.InlineAsm, ll.InsertElementExpr, ll.InsertValueExpr, ll.IntConst, ll.IntToPtrExpr, ll.LShrExpr, ll.LocalIdent, ll.MDString, ll.MDTuple, ll.MetadataID, ll.MulExpr, ll.NoneConst, ll.NullConst, ll.OrExpr, ll.PoisonConst, ll.PtrToIntExpr, ll.SDivExpr, ll.SExtExpr, ll.SIToFPExpr, ll.SRemExpr, ll.SelectExpr, ll.ShlExpr, ll.ShuffleVectorExpr, ll.StructConst, ll.SubExpr, ll.TruncExpr, ll.TypeValue, ll.UDivExpr, ll.UIToFPExpr, ll.URemExpr, ll.UndefConst, ll.VectorConst, ll.XorExpr, ll.ZExtExpr, ll.ZeroInitializerConst))).(LlvmNode)
+	return ToLlvmNode(n.Child(selector.OneOf(ll.AShrExpr, ll.AddExpr, ll.AddrSpaceCastExpr, ll.AndExpr, ll.ArrayConst, ll.BitCastExpr, ll.BlockAddressConst, ll.BoolConst, ll.CharArrayConst, ll.DIArgList, ll.DIBasicType, ll.DICommonBlock, ll.DICompileUnit, ll.DICompositeType, ll.DIDerivedType, ll.DIEnumerator, ll.DIExpression, ll.DIFile, ll.DIGlobalVariable, ll.DIGlobalVariableExpression, ll.DIImportedEntity, ll.DILabel, ll.DILexicalBlock, ll.DILexicalBlockFile, ll.DILocalVariable, ll.DILocation, ll.DIMacro, ll.DIMacroFile, ll.DIModule, ll.DINamespace, ll.DIObjCProperty, ll.DISubprogram, ll.DISubrange, ll.DISubroutineType, ll.DITemplateTypeParameter, ll.DITemplateValueParameter, ll.ExtractElementExpr, ll.ExtractValueExpr, ll.FAddExpr, ll.FCmpExpr, ll.FDivExpr, ll.FMulExpr, ll.FNegExpr, ll.FPExtExpr, ll.FPToSIExpr, ll.FPToUIExpr, ll.FPTruncExpr, ll.FRemExpr, ll.FSubExpr, ll.FloatConst, ll.GenericDINode, ll.GetElementPtrExpr, ll.GlobalIdent, ll.ICmpExpr, ll.InlineAsm, ll.InsertElementExpr, ll.InsertValueExpr, ll.IntConst, ll.IntToPtrExpr, ll.LShrExpr, ll.LocalIdent, ll.MDString, ll.MDTuple, ll.MetadataID, ll.MulExpr, ll.NoneConst, ll.NullConst, ll.OrExpr, ll.PoisonConst, ll.PtrToIntExpr, ll.SDivExpr, ll.SExtExpr, ll.SIToFPExpr, ll.SRemExpr, ll.SelectExpr, ll.ShlExpr, ll.ShuffleVectorExpr, ll.StructConst, ll.SubExpr, ll.TruncExpr, ll.TypeValue, ll.UDivExpr, ll.UIToFPExpr, ll.URemExpr, ll.UndefConst, ll.VectorConst, ll.XorExpr, ll.ZExtExpr, ll.ZeroInitializerConst))).(LlvmNode)
 }
 
 type ArgField struct {
@@ -2206,6 +2222,11 @@ func (n AtomicRMWInst) SyncScope() (SyncScope, bool) {
 
 func (n AtomicRMWInst) Ordering() AtomicOrdering {
 	return AtomicOrdering{n.Child(selector.AtomicOrdering)}
+}
+
+func (n AtomicRMWInst) Align() (Align, bool) {
+	field := Align{n.Child(selector.Align)}
+	return field, field.IsValid()
 }
 
 func (n AtomicRMWInst) Metadata() []MetadataAttachment {
@@ -2776,6 +2797,11 @@ func (n CmpXchgInst) FailureOrdering() AtomicOrdering {
 	return AtomicOrdering{n.Child(selector.AtomicOrdering).Next(selector.AtomicOrdering)}
 }
 
+func (n CmpXchgInst) Align() (Align, bool) {
+	field := Align{n.Child(selector.Align)}
+	return field, field.IsValid()
+}
+
 func (n CmpXchgInst) Metadata() []MetadataAttachment {
 	nodes := n.Children(selector.MetadataAttachment)
 	var ret = make([]MetadataAttachment, 0, len(nodes))
@@ -2869,6 +2895,19 @@ type CountField struct {
 
 func (n CountField) Count() MDFieldOrInt {
 	return ToLlvmNode(n.Child(selector.MDFieldOrInt)).(MDFieldOrInt)
+}
+
+type DIArgList struct {
+	*Node
+}
+
+func (n DIArgList) Fields() []TypeValue {
+	nodes := n.Children(selector.TypeValue)
+	var ret = make([]TypeValue, 0, len(nodes))
+	for _, node := range nodes {
+		ret = append(ret, TypeValue{node})
+	}
+	return ret
 }
 
 type DIBasicType struct {
@@ -3431,6 +3470,14 @@ func (n DwoIdField) DwoId() UintLit {
 	return UintLit{n.Child(selector.UintLit)}
 }
 
+type ElementType struct {
+	*Node
+}
+
+func (n ElementType) Typ() Type {
+	return ToLlvmNode(n.Child(selector.Type)).(Type)
+}
+
 type ElementsField struct {
 	*Node
 }
@@ -3500,7 +3547,7 @@ func (n ExceptionArg) Typ() LlvmNode {
 }
 
 func (n ExceptionArg) Val() LlvmNode {
-	return ToLlvmNode(n.Child(selector.OneOf(ll.AShrExpr, ll.AddExpr, ll.AddrSpaceCastExpr, ll.AndExpr, ll.ArrayConst, ll.BitCastExpr, ll.BlockAddressConst, ll.BoolConst, ll.CharArrayConst, ll.DIBasicType, ll.DICommonBlock, ll.DICompileUnit, ll.DICompositeType, ll.DIDerivedType, ll.DIEnumerator, ll.DIExpression, ll.DIFile, ll.DIGlobalVariable, ll.DIGlobalVariableExpression, ll.DIImportedEntity, ll.DILabel, ll.DILexicalBlock, ll.DILexicalBlockFile, ll.DILocalVariable, ll.DILocation, ll.DIMacro, ll.DIMacroFile, ll.DIModule, ll.DINamespace, ll.DIObjCProperty, ll.DISubprogram, ll.DISubrange, ll.DISubroutineType, ll.DITemplateTypeParameter, ll.DITemplateValueParameter, ll.ExtractElementExpr, ll.ExtractValueExpr, ll.FAddExpr, ll.FCmpExpr, ll.FDivExpr, ll.FMulExpr, ll.FNegExpr, ll.FPExtExpr, ll.FPToSIExpr, ll.FPToUIExpr, ll.FPTruncExpr, ll.FRemExpr, ll.FSubExpr, ll.FloatConst, ll.GenericDINode, ll.GetElementPtrExpr, ll.GlobalIdent, ll.ICmpExpr, ll.InlineAsm, ll.InsertElementExpr, ll.InsertValueExpr, ll.IntConst, ll.IntToPtrExpr, ll.LShrExpr, ll.LocalIdent, ll.MDString, ll.MDTuple, ll.MetadataID, ll.MulExpr, ll.NoneConst, ll.NullConst, ll.OrExpr, ll.PoisonConst, ll.PtrToIntExpr, ll.SDivExpr, ll.SExtExpr, ll.SIToFPExpr, ll.SRemExpr, ll.SelectExpr, ll.ShlExpr, ll.ShuffleVectorExpr, ll.StructConst, ll.SubExpr, ll.TruncExpr, ll.TypeValue, ll.UDivExpr, ll.UIToFPExpr, ll.URemExpr, ll.UndefConst, ll.VectorConst, ll.XorExpr, ll.ZExtExpr, ll.ZeroInitializerConst))).(LlvmNode)
+	return ToLlvmNode(n.Child(selector.OneOf(ll.AShrExpr, ll.AddExpr, ll.AddrSpaceCastExpr, ll.AndExpr, ll.ArrayConst, ll.BitCastExpr, ll.BlockAddressConst, ll.BoolConst, ll.CharArrayConst, ll.DIArgList, ll.DIBasicType, ll.DICommonBlock, ll.DICompileUnit, ll.DICompositeType, ll.DIDerivedType, ll.DIEnumerator, ll.DIExpression, ll.DIFile, ll.DIGlobalVariable, ll.DIGlobalVariableExpression, ll.DIImportedEntity, ll.DILabel, ll.DILexicalBlock, ll.DILexicalBlockFile, ll.DILocalVariable, ll.DILocation, ll.DIMacro, ll.DIMacroFile, ll.DIModule, ll.DINamespace, ll.DIObjCProperty, ll.DISubprogram, ll.DISubrange, ll.DISubroutineType, ll.DITemplateTypeParameter, ll.DITemplateValueParameter, ll.ExtractElementExpr, ll.ExtractValueExpr, ll.FAddExpr, ll.FCmpExpr, ll.FDivExpr, ll.FMulExpr, ll.FNegExpr, ll.FPExtExpr, ll.FPToSIExpr, ll.FPToUIExpr, ll.FPTruncExpr, ll.FRemExpr, ll.FSubExpr, ll.FloatConst, ll.GenericDINode, ll.GetElementPtrExpr, ll.GlobalIdent, ll.ICmpExpr, ll.InlineAsm, ll.InsertElementExpr, ll.InsertValueExpr, ll.IntConst, ll.IntToPtrExpr, ll.LShrExpr, ll.LocalIdent, ll.MDString, ll.MDTuple, ll.MetadataID, ll.MulExpr, ll.NoneConst, ll.NullConst, ll.OrExpr, ll.PoisonConst, ll.PtrToIntExpr, ll.SDivExpr, ll.SExtExpr, ll.SIToFPExpr, ll.SRemExpr, ll.SelectExpr, ll.ShlExpr, ll.ShuffleVectorExpr, ll.StructConst, ll.SubExpr, ll.TruncExpr, ll.TypeValue, ll.UDivExpr, ll.UIToFPExpr, ll.URemExpr, ll.UndefConst, ll.VectorConst, ll.XorExpr, ll.ZExtExpr, ll.ZeroInitializerConst))).(LlvmNode)
 }
 
 type ExportSymbolsField struct {
@@ -4574,6 +4621,14 @@ type InAlloca struct {
 	*Node
 }
 
+func (n InAlloca) Typ() Type {
+	return ToLlvmNode(n.Child(selector.Type)).(Type)
+}
+
+type InAllocatok struct {
+	*Node
+}
+
 type InBounds struct {
 	*Node
 }
@@ -4712,6 +4767,11 @@ func (n InlineAsm) AlignStackTok() (AlignStackTok, bool) {
 
 func (n InlineAsm) IntelDialect() (IntelDialect, bool) {
 	field := IntelDialect{n.Child(selector.IntelDialect)}
+	return field, field.IsValid()
+}
+
+func (n InlineAsm) Unwind() (Unwind, bool) {
+	field := Unwind{n.Child(selector.Unwind)}
 	return field, field.IsValid()
 }
 
@@ -6683,6 +6743,10 @@ func (n UnreachableTerm) Metadata() []MetadataAttachment {
 	return ret
 }
 
+type Unwind struct {
+	*Node
+}
+
 type UnwindToCaller struct {
 	*Node
 }
@@ -6752,6 +6816,23 @@ func (n VAArgInst) Metadata() []MetadataAttachment {
 		ret = append(ret, MetadataAttachment{node})
 	}
 	return ret
+}
+
+type VScaleRange struct {
+	*Node
+}
+
+func (n VScaleRange) Min() UintLit {
+	return UintLit{n.Child(selector.UintLit)}
+}
+
+func (n VScaleRange) Max() (UintLit, bool) {
+	field := UintLit{n.Child(selector.UintLit).Next(selector.UintLit)}
+	return field, field.IsValid()
+}
+
+type VScaleRangetok struct {
+	*Node
 }
 
 type ValueField struct {

@@ -81,6 +81,7 @@ var (
 	ConfigMacrosField               = func(t ll.NodeType) bool { return t == ll.ConfigMacrosField }
 	ContainingTypeField             = func(t ll.NodeType) bool { return t == ll.ContainingTypeField }
 	CountField                      = func(t ll.NodeType) bool { return t == ll.CountField }
+	DIArgList                       = func(t ll.NodeType) bool { return t == ll.DIArgList }
 	DIBasicType                     = func(t ll.NodeType) bool { return t == ll.DIBasicType }
 	DICommonBlock                   = func(t ll.NodeType) bool { return t == ll.DICommonBlock }
 	DICompileUnit                   = func(t ll.NodeType) bool { return t == ll.DICompileUnit }
@@ -139,6 +140,7 @@ var (
 	DwarfVirtualityEnum             = func(t ll.NodeType) bool { return t == ll.DwarfVirtualityEnum }
 	DwarfVirtualityInt              = func(t ll.NodeType) bool { return t == ll.DwarfVirtualityInt }
 	DwoIdField                      = func(t ll.NodeType) bool { return t == ll.DwoIdField }
+	ElementType                     = func(t ll.NodeType) bool { return t == ll.ElementType }
 	ElementsField                   = func(t ll.NodeType) bool { return t == ll.ElementsField }
 	Ellipsis                        = func(t ll.NodeType) bool { return t == ll.Ellipsis }
 	EmissionKindEnum                = func(t ll.NodeType) bool { return t == ll.EmissionKindEnum }
@@ -216,6 +218,7 @@ var (
 	Immutable                       = func(t ll.NodeType) bool { return t == ll.Immutable }
 	ImportsField                    = func(t ll.NodeType) bool { return t == ll.ImportsField }
 	InAlloca                        = func(t ll.NodeType) bool { return t == ll.InAlloca }
+	InAllocatok                     = func(t ll.NodeType) bool { return t == ll.InAllocatok }
 	InBounds                        = func(t ll.NodeType) bool { return t == ll.InBounds }
 	InRange                         = func(t ll.NodeType) bool { return t == ll.InRange }
 	Inc                             = func(t ll.NodeType) bool { return t == ll.Inc }
@@ -381,11 +384,14 @@ var (
 	UnitField                       = func(t ll.NodeType) bool { return t == ll.UnitField }
 	UnnamedAddr                     = func(t ll.NodeType) bool { return t == ll.UnnamedAddr }
 	UnreachableTerm                 = func(t ll.NodeType) bool { return t == ll.UnreachableTerm }
+	Unwind                          = func(t ll.NodeType) bool { return t == ll.Unwind }
 	UnwindToCaller                  = func(t ll.NodeType) bool { return t == ll.UnwindToCaller }
 	UpperBoundField                 = func(t ll.NodeType) bool { return t == ll.UpperBoundField }
 	UseListOrder                    = func(t ll.NodeType) bool { return t == ll.UseListOrder }
 	UseListOrderBB                  = func(t ll.NodeType) bool { return t == ll.UseListOrderBB }
 	VAArgInst                       = func(t ll.NodeType) bool { return t == ll.VAArgInst }
+	VScaleRange                     = func(t ll.NodeType) bool { return t == ll.VScaleRange }
+	VScaleRangetok                  = func(t ll.NodeType) bool { return t == ll.VScaleRangetok }
 	ValueField                      = func(t ll.NodeType) bool { return t == ll.ValueField }
 	ValueIntField                   = func(t ll.NodeType) bool { return t == ll.ValueIntField }
 	ValueStringField                = func(t ll.NodeType) bool { return t == ll.ValueStringField }
