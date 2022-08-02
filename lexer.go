@@ -176,6 +176,11 @@ recovered:
 				token = RUNTIMELANGCOLON
 				break
 			}
+		case 22:
+			if hash == 0xf01e996 && "annotations:" == l.source[l.tokenOffset:l.offset] {
+				token = ANNOTATIONSCOLON
+				break
+			}
 		case 26:
 			if hash == 0x28737d9a && "defaulted:" == l.source[l.tokenOffset:l.offset] {
 				token = DEFAULTEDCOLON
@@ -307,6 +312,10 @@ recovered:
 				token = CHECKSUMKINDCOLON
 				break
 			}
+			if hash == 0x94454c3 && "stringLength:" == l.source[l.tokenOffset:l.offset] {
+				token = STRINGLENGTHCOLON
+				break
+			}
 		case 70:
 			if hash == 0xc58c5f46 && "dwarfAddressSpace:" == l.source[l.tokenOffset:l.offset] {
 				token = DWARFADDRESSSPACECOLON
@@ -333,6 +342,11 @@ recovered:
 		case 74:
 			if hash == 0x96ae4b4a && "linkageName:" == l.source[l.tokenOffset:l.offset] {
 				token = LINKAGENAMECOLON
+				break
+			}
+		case 75:
+			if hash == 0x6b2f65cb && "stringLengthExpression:" == l.source[l.tokenOffset:l.offset] {
+				token = STRINGLENGTHEXPRESSIONCOLON
 				break
 			}
 		case 77:
@@ -405,6 +419,10 @@ recovered:
 		case 92:
 			if hash == 0x9bf65c && "debugInfoForProfiling:" == l.source[l.tokenOffset:l.offset] {
 				token = DEBUGINFOFORPROFILINGCOLON
+				break
+			}
+			if hash == 0xdb62f9dc && "stringLocationExpression:" == l.source[l.tokenOffset:l.offset] {
+				token = STRINGLOCATIONEXPRESSIONCOLON
 				break
 			}
 		case 93:
@@ -613,6 +631,10 @@ recovered:
 			}
 			if hash == 0x4dbccab1 && "!DIDerivedType" == l.source[l.tokenOffset:l.offset] {
 				token = EXCLDIDERIVEDTYPE
+				break
+			}
+			if hash == 0x58598bf1 && "!DIStringType" == l.source[l.tokenOffset:l.offset] {
+				token = EXCLDISTRINGTYPE
 				break
 			}
 		case 18:

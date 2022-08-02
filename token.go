@@ -39,458 +39,468 @@ const (
 	FLOAT_LIT_TOK
 	STRING_LIT_TOK
 	INT_TYPE_TOK
-	AARCH64_SVE_VECTOR_PCS         // aarch64_sve_vector_pcs
-	AARCH64_VECTOR_PCS             // aarch64_vector_pcs
-	ACQ_REL                        // acq_rel
-	ACQUIRE                        // acquire
-	ADD                            // add
-	ADDRSPACE                      // addrspace
-	ADDRSPACECAST                  // addrspacecast
-	AFN                            // afn
-	ALIAS                          // alias
-	ALIGN                          // align
-	ALIGNSTACK                     // alignstack
-	ALLOCA                         // alloca
-	ALLOCSIZE                      // allocsize
-	ALWAYSINLINE                   // alwaysinline
-	AMDGPU_CS                      // amdgpu_cs
-	AMDGPU_ES                      // amdgpu_es
-	AMDGPU_GFX                     // amdgpu_gfx
-	AMDGPU_GS                      // amdgpu_gs
-	AMDGPU_HS                      // amdgpu_hs
-	AMDGPU_KERNEL                  // amdgpu_kernel
-	AMDGPU_LS                      // amdgpu_ls
-	AMDGPU_PS                      // amdgpu_ps
-	AMDGPU_VS                      // amdgpu_vs
-	AND                            // and
-	ANY                            // any
-	ANYREGCC                       // anyregcc
-	APPENDING                      // appending
-	ARCP                           // arcp
-	ARGMEMONLY                     // argmemonly
-	ARM_AAPCS_VFPCC                // arm_aapcs_vfpcc
-	ARM_AAPCSCC                    // arm_aapcscc
-	ARM_APCSCC                     // arm_apcscc
-	ASHR                           // ashr
-	ASM                            // asm
-	ATOMIC                         // atomic
-	ATOMICRMW                      // atomicrmw
-	ATTRIBUTES                     // attributes
-	AVAILABLE_EXTERNALLY           // available_externally
-	AVR_INTRCC                     // avr_intrcc
-	AVR_SIGNALCC                   // avr_signalcc
-	BFLOAT                         // bfloat
-	BITCAST                        // bitcast
-	BLOCKADDRESS                   // blockaddress
-	BLOCKCOUNT                     // blockcount
-	BR                             // br
-	BUILTIN                        // builtin
-	BYREF                          // byref
-	BYVAL                          // byval
-	CHAR_C                         // c
-	CALL                           // call
-	CALLBR                         // callbr
-	CALLER                         // caller
-	CATCH                          // catch
-	CATCHPAD                       // catchpad
-	CATCHRET                       // catchret
-	CATCHSWITCH                    // catchswitch
-	CC                             // cc
-	CCC                            // ccc
-	CFGUARD_CHECKCC                // cfguard_checkcc
-	CLEANUP                        // cleanup
-	CLEANUPPAD                     // cleanuppad
-	CLEANUPRET                     // cleanupret
-	CMPXCHG                        // cmpxchg
-	COLD                           // cold
-	COLDCC                         // coldcc
-	COMDAT                         // comdat
-	COMMON                         // common
-	CONSTANT                       // constant
-	CONTRACT                       // contract
-	CONVERGENT                     // convergent
-	CXX_FAST_TLSCC                 // cxx_fast_tlscc
-	DATALAYOUT                     // datalayout
-	DECLARE                        // declare
-	DEFAULT                        // default
-	DEFINE                         // define
-	DEREFERENCEABLE                // dereferenceable
-	DEREFERENCEABLE_OR_NULL        // dereferenceable_or_null
-	DISTINCT                       // distinct
-	DLLEXPORT                      // dllexport
-	DLLIMPORT                      // dllimport
-	DOUBLE                         // double
-	DSO_LOCAL                      // dso_local
-	DSO_LOCAL_EQUIVALENT           // dso_local_equivalent
-	DSO_PREEMPTABLE                // dso_preemptable
-	EQ                             // eq
-	ELEMENTTYPE                    // elementtype
-	EXACT                          // exact
-	EXACTMATCH                     // exactmatch
-	EXTERN_WEAK                    // extern_weak
-	EXTERNAL                       // external
-	EXTERNALLY_INITIALIZED         // externally_initialized
-	EXTRACTELEMENT                 // extractelement
-	EXTRACTVALUE                   // extractvalue
-	FADD                           // fadd
-	FALSE                          // false
-	FAST                           // fast
-	FASTCC                         // fastcc
-	FCMP                           // fcmp
-	FDIV                           // fdiv
-	FENCE                          // fence
-	FILTER                         // filter
-	FLOAT                          // float
-	FMUL                           // fmul
-	FNEG                           // fneg
-	FP128                          // fp128
-	FPEXT                          // fpext
-	FPTOSI                         // fptosi
-	FPTOUI                         // fptoui
-	FPTRUNC                        // fptrunc
-	FREEZE                         // freeze
-	FREM                           // frem
-	FROM                           // from
-	FSUB                           // fsub
-	GC                             // gc
-	GETELEMENTPTR                  // getelementptr
-	GHCCC                          // ghccc
-	GLOBAL                         // global
-	HALF                           // half
-	HHVM_CCC                       // hhvm_ccc
-	HHVMCC                         // hhvmcc
-	HIDDEN                         // hidden
-	HOT                            // hot
-	ICMP                           // icmp
-	IFUNC                          // ifunc
-	IMMARG                         // immarg
-	INACCESSIBLEMEM_OR_ARGMEMONLY  // inaccessiblemem_or_argmemonly
-	INACCESSIBLEMEMONLY            // inaccessiblememonly
-	INALLOCA                       // inalloca
-	INBOUNDS                       // inbounds
-	INDIRECTBR                     // indirectbr
-	INITIALEXEC                    // initialexec
-	INLINEHINT                     // inlinehint
-	INRANGE                        // inrange
-	INREG                          // inreg
-	INSERTELEMENT                  // insertelement
-	INSERTVALUE                    // insertvalue
-	INTEL_OCL_BICC                 // intel_ocl_bicc
-	INTELDIALECT                   // inteldialect
-	INTERNAL                       // internal
-	INTTOPTR                       // inttoptr
-	INVOKE                         // invoke
-	JUMPTABLE                      // jumptable
-	LABEL                          // label
-	LANDINGPAD                     // landingpad
-	LARGEST                        // largest
-	LINKONCE                       // linkonce
-	LINKONCE_ODR                   // linkonce_odr
-	LOAD                           // load
-	LOCAL_UNNAMED_ADDR             // local_unnamed_addr
-	LOCALDYNAMIC                   // localdynamic
-	LOCALEXEC                      // localexec
-	LSHR                           // lshr
-	MAX                            // max
-	METADATA                       // metadata
-	MIN                            // min
-	MINSIZE                        // minsize
-	MODULE                         // module
-	MONOTONIC                      // monotonic
-	MSP430_INTRCC                  // msp430_intrcc
-	MUL                            // mul
-	MUSTPROGRESS                   // mustprogress
-	MUSTTAIL                       // musttail
-	NAKED                          // naked
-	NAND                           // nand
-	NE                             // ne
-	NEST                           // nest
-	NINF                           // ninf
-	NNAN                           // nnan
-	NOALIAS                        // noalias
-	NOBUILTIN                      // nobuiltin
-	NOCALLBACK                     // nocallback
-	NOCAPTURE                      // nocapture
-	NOCF_CHECK                     // nocf_check
-	NODUPLICATE                    // noduplicate
-	NODEDUPLICATE                  // nodeduplicate
-	NOFREE                         // nofree
-	NOIMPLICITFLOAT                // noimplicitfloat
-	NOINLINE                       // noinline
-	NOMERGE                        // nomerge
-	NONE                           // none
-	NONLAZYBIND                    // nonlazybind
-	NONNULL                        // nonnull
-	NOPROFILE                      // noprofile
-	NORECURSE                      // norecurse
-	NOREDZONE                      // noredzone
-	NORETURN                       // noreturn
-	NOSYNC                         // nosync
-	NOTAIL                         // notail
-	NOUNDEF                        // noundef
-	NOUNWIND                       // nounwind
-	NOSANITIZE_COVERAGE            // nosanitize_coverage
-	NSW                            // nsw
-	NSZ                            // nsz
-	NULL                           // null
-	NULL_POINTER_IS_VALID          // null_pointer_is_valid
-	NUW                            // nuw
-	OEQ                            // oeq
-	OGE                            // oge
-	OGT                            // ogt
-	OLE                            // ole
-	OLT                            // olt
-	ONE                            // one
-	OPAQUE                         // opaque
-	OPTFORFUZZING                  // optforfuzzing
-	OPTNONE                        // optnone
-	OPTSIZE                        // optsize
-	OR                             // or
-	ORD                            // ord
-	PARAM                          // param
-	PARAMS                         // params
-	PARTITION                      // partition
-	PERSONALITY                    // personality
-	PHI                            // phi
-	POISON                         // poison
-	PPC_FP128                      // ppc_fp128
-	PREALLOCATED                   // preallocated
-	PREFIX                         // prefix
-	PRESERVE_ALLCC                 // preserve_allcc
-	PRESERVE_MOSTCC                // preserve_mostcc
-	PRIVATE                        // private
-	PROLOGUE                       // prologue
-	PROTECTED                      // protected
-	PTR                            // ptr
-	PTRTOINT                       // ptrtoint
-	PTX_DEVICE                     // ptx_device
-	PTX_KERNEL                     // ptx_kernel
-	READNONE                       // readnone
-	READONLY                       // readonly
-	REASSOC                        // reassoc
-	RELEASE                        // release
-	RESUME                         // resume
-	RET                            // ret
-	RETURNED                       // returned
-	RETURNS_TWICE                  // returns_twice
-	SAFESTACK                      // safestack
-	SAMESIZE                       // samesize
-	SANITIZE_ADDRESS               // sanitize_address
-	SANITIZE_HWADDRESS             // sanitize_hwaddress
-	SANITIZE_MEMORY                // sanitize_memory
-	SANITIZE_MEMTAG                // sanitize_memtag
-	SANITIZE_THREAD                // sanitize_thread
-	SDIV                           // sdiv
-	SECTION                        // section
-	SELECT                         // select
-	SEQ_CST                        // seq_cst
-	SEXT                           // sext
-	SGE                            // sge
-	SGT                            // sgt
-	SHADOWCALLSTACK                // shadowcallstack
-	SHL                            // shl
-	SHUFFLEVECTOR                  // shufflevector
-	SIDEEFFECT                     // sideeffect
-	SIGNEXT                        // signext
-	SINGLETHREAD                   // singlethread
-	SITOFP                         // sitofp
-	SLE                            // sle
-	SLT                            // slt
-	SOURCE_FILENAME                // source_filename
-	SPECULATABLE                   // speculatable
-	SPECULATIVE_LOAD_HARDENING     // speculative_load_hardening
-	SPIR_FUNC                      // spir_func
-	SPIR_KERNEL                    // spir_kernel
-	SREM                           // srem
-	SRET                           // sret
-	SSP                            // ssp
-	SSPREQ                         // sspreq
-	SSPSTRONG                      // sspstrong
-	STORE                          // store
-	STRICTFP                       // strictfp
-	SUB                            // sub
-	SWIFTCC                        // swiftcc
-	SWIFTERROR                     // swifterror
-	SWIFTSELF                      // swiftself
-	SWITCH                         // switch
-	SWIFTTAILCC                    // swifttailcc
-	SWIFTASYNC                     // swiftasync
-	SYNCSCOPE                      // syncscope
-	TAIL                           // tail
-	TAILCC                         // tailcc
-	TARGET                         // target
-	THREAD_LOCAL                   // thread_local
-	TO                             // to
-	TOKEN                          // token
-	TRIPLE                         // triple
-	TRUE                           // true
-	TRUNC                          // trunc
-	TYPE                           // type
-	UDIV                           // udiv
-	UEQ                            // ueq
-	UGE                            // uge
-	UGT                            // ugt
-	UITOFP                         // uitofp
-	ULE                            // ule
-	ULT                            // ult
-	UMAX                           // umax
-	UMIN                           // umin
-	UNDEF                          // undef
-	UNE                            // une
-	UNNAMED_ADDR                   // unnamed_addr
-	UNO                            // uno
-	UNORDERED                      // unordered
-	UNREACHABLE                    // unreachable
-	UNWIND                         // unwind
-	UREM                           // urem
-	USELISTORDER                   // uselistorder
-	USELISTORDER_BB                // uselistorder_bb
-	UWTABLE                        // uwtable
-	VA_ARG                         // va_arg
-	VCALL_VISIBILITY               // vcall_visibility
-	VOID                           // void
-	VOLATILE                       // volatile
-	VSCALE_RANGE                   // vscale_range
-	VSCALE                         // vscale
-	VISIBILITY                     // visibility
-	WEAK                           // weak
-	WEAK_ODR                       // weak_odr
-	WEBKIT_JSCC                    // webkit_jscc
-	WILLRETURN                     // willreturn
-	WIN64CC                        // win64cc
-	WITHIN                         // within
-	WRITEONLY                      // writeonly
-	X86_64_SYSVCC                  // x86_64_sysvcc
-	X86_FASTCALLCC                 // x86_fastcallcc
-	X86_FP80                       // x86_fp80
-	X86_INTRCC                     // x86_intrcc
-	X86_MMX                        // x86_mmx
-	X86_REGCALLCC                  // x86_regcallcc
-	X86_STDCALLCC                  // x86_stdcallcc
-	X86_THISCALLCC                 // x86_thiscallcc
-	X86_VECTORCALLCC               // x86_vectorcallcc
-	CHAR_X                         // x
-	XCHG                           // xchg
-	XOR                            // xor
-	ZEROEXT                        // zeroext
-	ZEROINITIALIZER                // zeroinitializer
-	ZEXT                           // zext
-	EXCLDIARGLIST                  // !DIArgList
-	EXCLDIBASICTYPE                // !DIBasicType
-	EXCLDICOMMONBLOCK              // !DICommonBlock
-	EXCLDICOMPILEUNIT              // !DICompileUnit
-	EXCLDICOMPOSITETYPE            // !DICompositeType
-	EXCLDIDERIVEDTYPE              // !DIDerivedType
-	EXCLDIENUMERATOR               // !DIEnumerator
-	EXCLDIEXPRESSION               // !DIExpression
-	EXCLDIFILE                     // !DIFile
-	EXCLDIGLOBALVARIABLE           // !DIGlobalVariable
-	EXCLDIGLOBALVARIABLEEXPRESSION // !DIGlobalVariableExpression
-	EXCLDIIMPORTEDENTITY           // !DIImportedEntity
-	EXCLDILABEL                    // !DILabel
-	EXCLDILEXICALBLOCK             // !DILexicalBlock
-	EXCLDILEXICALBLOCKFILE         // !DILexicalBlockFile
-	EXCLDILOCALVARIABLE            // !DILocalVariable
-	EXCLDILOCATION                 // !DILocation
-	EXCLDIMACRO                    // !DIMacro
-	EXCLDIMACROFILE                // !DIMacroFile
-	EXCLDIMODULE                   // !DIModule
-	EXCLDINAMESPACE                // !DINamespace
-	EXCLDIOBJCPROPERTY             // !DIObjCProperty
-	EXCLDISUBPROGRAM               // !DISubprogram
-	EXCLDISUBRANGE                 // !DISubrange
-	EXCLDISUBROUTINETYPE           // !DISubroutineType
-	EXCLDITEMPLATETYPEPARAMETER    // !DITemplateTypeParameter
-	EXCLDITEMPLATEVALUEPARAMETER   // !DITemplateValueParameter
-	EXCLGENERICDINODE              // !GenericDINode
-	ALIGNCOLON                     // align:
-	ALLOCATEDCOLON                 // allocated:
-	APINOTESCOLON                  // apinotes:
-	ARGCOLON                       // arg:
-	ASSOCIATEDCOLON                // associated:
-	ATTRIBUTESCOLON                // attributes:
-	BASETYPECOLON                  // baseType:
-	CCCOLON                        // cc:
-	CHECKSUMCOLON                  // checksum:
-	CHECKSUMKINDCOLON              // checksumkind:
-	COLUMNCOLON                    // column:
-	CONFIGMACROSCOLON              // configMacros:
-	CONTAININGTYPECOLON            // containingType:
-	COUNTCOLON                     // count:
-	DATALOCATIONCOLON              // dataLocation:
-	DEBUGBASEADDRESSCOLON          // debugBaseAddress:
-	DEBUGINFOFORPROFILINGCOLON     // debugInfoForProfiling:
-	DECLARATIONCOLON               // declaration:
-	DEFAULTEDCOLON                 // defaulted:
-	DIRECTORYCOLON                 // directory:
-	DISCRIMINATORCOLON             // discriminator:
-	DWARFADDRESSSPACECOLON         // dwarfAddressSpace:
-	DWOIDCOLON                     // dwoId:
-	ELEMENTSCOLON                  // elements:
-	EMISSIONKINDCOLON              // emissionKind:
-	ENCODINGCOLON                  // encoding:
-	ENTITYCOLON                    // entity:
-	ENUMSCOLON                     // enums:
-	EXPORTSYMBOLSCOLON             // exportSymbols:
-	EXPRCOLON                      // expr:
-	EXTRADATACOLON                 // extraData:
-	FILECOLON                      // file:
-	FILENAMECOLON                  // filename:
-	FLAGSCOLON                     // flags:
-	GETTERCOLON                    // getter:
-	GLOBALSCOLON                   // globals:
-	HEADERCOLON                    // header:
-	IDENTIFIERCOLON                // identifier:
-	IMPORTSCOLON                   // imports:
-	INCLUDEPATHCOLON               // includePath:
-	INLINEDATCOLON                 // inlinedAt:
-	ISDECLCOLON                    // isDecl:
-	ISDEFINITIONCOLON              // isDefinition:
-	ISIMPLICITCODECOLON            // isImplicitCode:
-	ISLOCALCOLON                   // isLocal:
-	ISOPTIMIZEDCOLON               // isOptimized:
-	ISUNSIGNEDCOLON                // isUnsigned:
-	LANGUAGECOLON                  // language:
-	LINECOLON                      // line:
-	LINKAGENAMECOLON               // linkageName:
-	LOWERBOUNDCOLON                // lowerBound:
-	MACROSCOLON                    // macros:
-	NAMECOLON                      // name:
-	NAMETABLEKINDCOLON             // nameTableKind:
-	NODESCOLON                     // nodes:
-	OFFSETCOLON                    // offset:
-	OPERANDSCOLON                  // operands:
-	PRODUCERCOLON                  // producer:
-	RANGESBASEADDRESSCOLON         // rangesBaseAddress:
-	RANKCOLON                      // rank:
-	RETAINEDNODESCOLON             // retainedNodes:
-	RETAINEDTYPESCOLON             // retainedTypes:
-	RUNTIMELANGCOLON               // runtimeLang:
-	RUNTIMEVERSIONCOLON            // runtimeVersion:
-	SCOPECOLON                     // scope:
-	SCOPELINECOLON                 // scopeLine:
-	SDKCOLON                       // sdk:
-	SETTERCOLON                    // setter:
-	SIZECOLON                      // size:
-	SOURCECOLON                    // source:
-	SPFLAGSCOLON                   // spFlags:
-	SPLITDEBUGFILENAMECOLON        // splitDebugFilename:
-	SPLITDEBUGINLININGCOLON        // splitDebugInlining:
-	STRIDECOLON                    // stride:
-	SYSROOTCOLON                   // sysroot:
-	TAGCOLON                       // tag:
-	TEMPLATEPARAMSCOLON            // templateParams:
-	THISADJUSTMENTCOLON            // thisAdjustment:
-	THROWNTYPESCOLON               // thrownTypes:
-	TYPECOLON                      // type:
-	TYPESCOLON                     // types:
-	UNITCOLON                      // unit:
-	UPPERBOUNDCOLON                // upperBound:
-	VALUECOLON                     // value:
-	VARCOLON                       // var:
-	VIRTUALINDEXCOLON              // virtualIndex:
-	VIRTUALITYCOLON                // virtuality:
-	VTABLEHOLDERCOLON              // vtableHolder:
+	NOUNWIND                          // nounwind
+	AARCH64_SVE_VECTOR_PCS            // aarch64_sve_vector_pcs
+	AARCH64_VECTOR_PCS                // aarch64_vector_pcs
+	ACQ_REL                           // acq_rel
+	ACQUIRE                           // acquire
+	ADD                               // add
+	ADDRSPACE                         // addrspace
+	ADDRSPACECAST                     // addrspacecast
+	AFN                               // afn
+	ALIAS                             // alias
+	ALIGN                             // align
+	ALIGNSTACK                        // alignstack
+	ALLOCA                            // alloca
+	ALLOCSIZE                         // allocsize
+	ALWAYSINLINE                      // alwaysinline
+	AMDGPU_CS                         // amdgpu_cs
+	AMDGPU_ES                         // amdgpu_es
+	AMDGPU_GFX                        // amdgpu_gfx
+	AMDGPU_GS                         // amdgpu_gs
+	AMDGPU_HS                         // amdgpu_hs
+	AMDGPU_KERNEL                     // amdgpu_kernel
+	AMDGPU_LS                         // amdgpu_ls
+	AMDGPU_PS                         // amdgpu_ps
+	AMDGPU_VS                         // amdgpu_vs
+	AND                               // and
+	ANY                               // any
+	ANYREGCC                          // anyregcc
+	APPENDING                         // appending
+	ARCP                              // arcp
+	ARGMEMONLY                        // argmemonly
+	ARM_AAPCS_VFPCC                   // arm_aapcs_vfpcc
+	ARM_AAPCSCC                       // arm_aapcscc
+	ARM_APCSCC                        // arm_apcscc
+	ASHR                              // ashr
+	ASM                               // asm
+	ATOMIC                            // atomic
+	ATOMICRMW                         // atomicrmw
+	ATTRIBUTES                        // attributes
+	AVAILABLE_EXTERNALLY              // available_externally
+	AVR_INTRCC                        // avr_intrcc
+	AVR_SIGNALCC                      // avr_signalcc
+	BFLOAT                            // bfloat
+	BITCAST                           // bitcast
+	BLOCKADDRESS                      // blockaddress
+	BLOCKCOUNT                        // blockcount
+	BR                                // br
+	BUILTIN                           // builtin
+	BYREF                             // byref
+	BYVAL                             // byval
+	CHAR_C                            // c
+	CALL                              // call
+	CALLBR                            // callbr
+	CALLER                            // caller
+	CATCH                             // catch
+	CATCHPAD                          // catchpad
+	CATCHRET                          // catchret
+	CATCHSWITCH                       // catchswitch
+	CC                                // cc
+	CCC                               // ccc
+	CFGUARD_CHECKCC                   // cfguard_checkcc
+	CLEANUP                           // cleanup
+	CLEANUPPAD                        // cleanuppad
+	CLEANUPRET                        // cleanupret
+	CMPXCHG                           // cmpxchg
+	COLD                              // cold
+	COLDCC                            // coldcc
+	COMDAT                            // comdat
+	COMMON                            // common
+	CONSTANT                          // constant
+	CONTRACT                          // contract
+	CONVERGENT                        // convergent
+	CXX_FAST_TLSCC                    // cxx_fast_tlscc
+	DATALAYOUT                        // datalayout
+	DECLARE                           // declare
+	DEFAULT                           // default
+	DEFINE                            // define
+	DEREFERENCEABLE                   // dereferenceable
+	DEREFERENCEABLE_OR_NULL           // dereferenceable_or_null
+	DISABLE_SANITIZER_INSTRUMENTATION // disable_sanitizer_instrumentation
+	DISTINCT                          // distinct
+	DLLEXPORT                         // dllexport
+	DLLIMPORT                         // dllimport
+	DOUBLE                            // double
+	DSO_LOCAL                         // dso_local
+	DSO_LOCAL_EQUIVALENT              // dso_local_equivalent
+	DSO_PREEMPTABLE                   // dso_preemptable
+	ELEMENTTYPE                       // elementtype
+	EQ                                // eq
+	EXACT                             // exact
+	EXACTMATCH                        // exactmatch
+	EXTERN_WEAK                       // extern_weak
+	EXTERNAL                          // external
+	EXTERNALLY_INITIALIZED            // externally_initialized
+	EXTRACTELEMENT                    // extractelement
+	EXTRACTVALUE                      // extractvalue
+	FADD                              // fadd
+	FALSE                             // false
+	FAST                              // fast
+	FASTCC                            // fastcc
+	FCMP                              // fcmp
+	FDIV                              // fdiv
+	FENCE                             // fence
+	FILTER                            // filter
+	FLOAT                             // float
+	FMUL                              // fmul
+	FNEG                              // fneg
+	FP128                             // fp128
+	FPEXT                             // fpext
+	FPTOSI                            // fptosi
+	FPTOUI                            // fptoui
+	FPTRUNC                           // fptrunc
+	FREEZE                            // freeze
+	FREM                              // frem
+	FROM                              // from
+	FSUB                              // fsub
+	GC                                // gc
+	GETELEMENTPTR                     // getelementptr
+	GHCCC                             // ghccc
+	GLOBAL                            // global
+	HALF                              // half
+	HASUNKNOWNCALL                    // hasUnknownCall
+	HHVM_CCC                          // hhvm_ccc
+	HHVMCC                            // hhvmcc
+	HIDDEN                            // hidden
+	HOT                               // hot
+	ICMP                              // icmp
+	IFUNC                             // ifunc
+	IMMARG                            // immarg
+	INACCESSIBLEMEM_OR_ARGMEMONLY     // inaccessiblemem_or_argmemonly
+	INACCESSIBLEMEMONLY               // inaccessiblememonly
+	INALLOCA                          // inalloca
+	INBOUNDS                          // inbounds
+	INDIRECTBR                        // indirectbr
+	INITIALEXEC                       // initialexec
+	INLINEHINT                        // inlinehint
+	INRANGE                           // inrange
+	INREG                             // inreg
+	INSERTELEMENT                     // insertelement
+	INSERTVALUE                       // insertvalue
+	INTEL_OCL_BICC                    // intel_ocl_bicc
+	INTELDIALECT                      // inteldialect
+	INTERNAL                          // internal
+	INTTOPTR                          // inttoptr
+	INVOKE                            // invoke
+	JUMPTABLE                         // jumptable
+	LABEL                             // label
+	LANDINGPAD                        // landingpad
+	LARGEST                           // largest
+	LINKONCE                          // linkonce
+	LINKONCE_ODR                      // linkonce_odr
+	LOAD                              // load
+	LOCAL_UNNAMED_ADDR                // local_unnamed_addr
+	LOCALDYNAMIC                      // localdynamic
+	LOCALEXEC                         // localexec
+	LSHR                              // lshr
+	MAX                               // max
+	MAYTHROW                          // mayThrow
+	METADATA                          // metadata
+	MIN                               // min
+	MINSIZE                           // minsize
+	MODULE                            // module
+	MONOTONIC                         // monotonic
+	MSP430_INTRCC                     // msp430_intrcc
+	MUL                               // mul
+	MUSTBEUNREACHABLE                 // mustBeUnreachable
+	MUSTPROGRESS                      // mustprogress
+	MUSTTAIL                          // musttail
+	NAKED                             // naked
+	NAND                              // nand
+	NE                                // ne
+	NEST                              // nest
+	NINF                              // ninf
+	NNAN                              // nnan
+	NO_CFI                            // no_cfi
+	NOALIAS                           // noalias
+	NOBUILTIN                         // nobuiltin
+	NOCALLBACK                        // nocallback
+	NOCAPTURE                         // nocapture
+	NOCF_CHECK                        // nocf_check
+	NODEDUPLICATE                     // nodeduplicate
+	NODUPLICATE                       // noduplicate
+	NOFREE                            // nofree
+	NOIMPLICITFLOAT                   // noimplicitfloat
+	NOINLINE                          // noinline
+	NOMERGE                           // nomerge
+	NONE                              // none
+	NONLAZYBIND                       // nonlazybind
+	NONNULL                           // nonnull
+	NOPROFILE                         // noprofile
+	NORECURSE                         // norecurse
+	NOREDZONE                         // noredzone
+	NORETURN                          // noreturn
+	NOSANITIZE_COVERAGE               // nosanitize_coverage
+	NOSYNC                            // nosync
+	NOTAIL                            // notail
+	NOUNDEF                           // noundef
+	NSW                               // nsw
+	NSZ                               // nsz
+	NULL                              // null
+	NULL_POINTER_IS_VALID             // null_pointer_is_valid
+	NUW                               // nuw
+	OEQ                               // oeq
+	OGE                               // oge
+	OGT                               // ogt
+	OLE                               // ole
+	OLT                               // olt
+	ONE                               // one
+	OPAQUE                            // opaque
+	OPTFORFUZZING                     // optforfuzzing
+	OPTNONE                           // optnone
+	OPTSIZE                           // optsize
+	OR                                // or
+	ORD                               // ord
+	PARAM                             // param
+	PARAMS                            // params
+	PARTITION                         // partition
+	PERSONALITY                       // personality
+	PHI                               // phi
+	POISON                            // poison
+	PPC_FP128                         // ppc_fp128
+	PREALLOCATED                      // preallocated
+	PREFIX                            // prefix
+	PRESERVE_ALLCC                    // preserve_allcc
+	PRESERVE_MOSTCC                   // preserve_mostcc
+	PRIVATE                           // private
+	PROLOGUE                          // prologue
+	PROTECTED                         // protected
+	PTR                               // ptr
+	PTRTOINT                          // ptrtoint
+	PTX_DEVICE                        // ptx_device
+	PTX_KERNEL                        // ptx_kernel
+	READNONE                          // readnone
+	READONLY                          // readonly
+	REASSOC                           // reassoc
+	RELEASE                           // release
+	RESUME                            // resume
+	RET                               // ret
+	RETURNED                          // returned
+	RETURNS_TWICE                     // returns_twice
+	SAFESTACK                         // safestack
+	SAMESIZE                          // samesize
+	SANITIZE_ADDRESS                  // sanitize_address
+	SANITIZE_HWADDRESS                // sanitize_hwaddress
+	SANITIZE_MEMORY                   // sanitize_memory
+	SANITIZE_MEMTAG                   // sanitize_memtag
+	SANITIZE_THREAD                   // sanitize_thread
+	SDIV                              // sdiv
+	SECTION                           // section
+	SELECT                            // select
+	SEQ_CST                           // seq_cst
+	SEXT                              // sext
+	SGE                               // sge
+	SGT                               // sgt
+	SHADOWCALLSTACK                   // shadowcallstack
+	SHL                               // shl
+	SHUFFLEVECTOR                     // shufflevector
+	SIDEEFFECT                        // sideeffect
+	SIGNEXT                           // signext
+	SINGLETHREAD                      // singlethread
+	SITOFP                            // sitofp
+	SLE                               // sle
+	SLT                               // slt
+	SOURCE_FILENAME                   // source_filename
+	SPECULATABLE                      // speculatable
+	SPECULATIVE_LOAD_HARDENING        // speculative_load_hardening
+	SPIR_FUNC                         // spir_func
+	SPIR_KERNEL                       // spir_kernel
+	SREM                              // srem
+	SRET                              // sret
+	SSP                               // ssp
+	SSPREQ                            // sspreq
+	SSPSTRONG                         // sspstrong
+	STORE                             // store
+	STRICTFP                          // strictfp
+	SUB                               // sub
+	SWIFTASYNC                        // swiftasync
+	SWIFTCC                           // swiftcc
+	SWIFTERROR                        // swifterror
+	SWIFTSELF                         // swiftself
+	SWIFTTAILCC                       // swifttailcc
+	SWITCH                            // switch
+	SYNCSCOPE                         // syncscope
+	TAIL                              // tail
+	TAILCC                            // tailcc
+	TARGET                            // target
+	THREAD_LOCAL                      // thread_local
+	TO                                // to
+	TOKEN                             // token
+	TRIPLE                            // triple
+	TRUE                              // true
+	TRUNC                             // trunc
+	TYPE                              // type
+	UDIV                              // udiv
+	UEQ                               // ueq
+	UGE                               // uge
+	UGT                               // ugt
+	UITOFP                            // uitofp
+	ULE                               // ule
+	ULT                               // ult
+	UMAX                              // umax
+	UMIN                              // umin
+	UNDEF                             // undef
+	UNE                               // une
+	UNNAMED_ADDR                      // unnamed_addr
+	UNO                               // uno
+	UNORDERED                         // unordered
+	UNREACHABLE                       // unreachable
+	UNWIND                            // unwind
+	UREM                              // urem
+	USELISTORDER                      // uselistorder
+	USELISTORDER_BB                   // uselistorder_bb
+	UWTABLE                           // uwtable
+	VA_ARG                            // va_arg
+	VCALL_VISIBILITY                  // vcall_visibility
+	VISIBILITY                        // visibility
+	VOID                              // void
+	VOLATILE                          // volatile
+	VSCALE                            // vscale
+	VSCALE_RANGE                      // vscale_range
+	WEAK                              // weak
+	WEAK_ODR                          // weak_odr
+	WEBKIT_JSCC                       // webkit_jscc
+	WILLRETURN                        // willreturn
+	WIN64CC                           // win64cc
+	WITHIN                            // within
+	WRITEONLY                         // writeonly
+	X86_64_SYSVCC                     // x86_64_sysvcc
+	X86_FASTCALLCC                    // x86_fastcallcc
+	X86_FP80                          // x86_fp80
+	X86_INTRCC                        // x86_intrcc
+	X86_MMX                           // x86_mmx
+	X86_REGCALLCC                     // x86_regcallcc
+	X86_STDCALLCC                     // x86_stdcallcc
+	X86_THISCALLCC                    // x86_thiscallcc
+	X86_VECTORCALLCC                  // x86_vectorcallcc
+	CHAR_X                            // x
+	XCHG                              // xchg
+	XOR                               // xor
+	ZEROEXT                           // zeroext
+	ZEROINITIALIZER                   // zeroinitializer
+	ZEXT                              // zext
+	EXCLDIARGLIST                     // !DIArgList
+	EXCLDIBASICTYPE                   // !DIBasicType
+	EXCLDICOMMONBLOCK                 // !DICommonBlock
+	EXCLDICOMPILEUNIT                 // !DICompileUnit
+	EXCLDICOMPOSITETYPE               // !DICompositeType
+	EXCLDIDERIVEDTYPE                 // !DIDerivedType
+	EXCLDIENUMERATOR                  // !DIEnumerator
+	EXCLDIEXPRESSION                  // !DIExpression
+	EXCLDIFILE                        // !DIFile
+	EXCLDIGLOBALVARIABLE              // !DIGlobalVariable
+	EXCLDIGLOBALVARIABLEEXPRESSION    // !DIGlobalVariableExpression
+	EXCLDIIMPORTEDENTITY              // !DIImportedEntity
+	EXCLDILABEL                       // !DILabel
+	EXCLDILEXICALBLOCK                // !DILexicalBlock
+	EXCLDILEXICALBLOCKFILE            // !DILexicalBlockFile
+	EXCLDILOCALVARIABLE               // !DILocalVariable
+	EXCLDILOCATION                    // !DILocation
+	EXCLDIMACRO                       // !DIMacro
+	EXCLDIMACROFILE                   // !DIMacroFile
+	EXCLDIMODULE                      // !DIModule
+	EXCLDINAMESPACE                   // !DINamespace
+	EXCLDIOBJCPROPERTY                // !DIObjCProperty
+	EXCLDISTRINGTYPE                  // !DIStringType
+	EXCLDISUBPROGRAM                  // !DISubprogram
+	EXCLDISUBRANGE                    // !DISubrange
+	EXCLDISUBROUTINETYPE              // !DISubroutineType
+	EXCLDITEMPLATETYPEPARAMETER       // !DITemplateTypeParameter
+	EXCLDITEMPLATEVALUEPARAMETER      // !DITemplateValueParameter
+	EXCLGENERICDINODE                 // !GenericDINode
+	ALIGNCOLON                        // align:
+	ALLOCATEDCOLON                    // allocated:
+	ANNOTATIONSCOLON                  // annotations:
+	APINOTESCOLON                     // apinotes:
+	ARGCOLON                          // arg:
+	ASSOCIATEDCOLON                   // associated:
+	ATTRIBUTESCOLON                   // attributes:
+	BASETYPECOLON                     // baseType:
+	CCCOLON                           // cc:
+	CHECKSUMCOLON                     // checksum:
+	CHECKSUMKINDCOLON                 // checksumkind:
+	COLUMNCOLON                       // column:
+	CONFIGMACROSCOLON                 // configMacros:
+	CONTAININGTYPECOLON               // containingType:
+	COUNTCOLON                        // count:
+	DATALOCATIONCOLON                 // dataLocation:
+	DEBUGBASEADDRESSCOLON             // debugBaseAddress:
+	DEBUGINFOFORPROFILINGCOLON        // debugInfoForProfiling:
+	DECLARATIONCOLON                  // declaration:
+	DEFAULTEDCOLON                    // defaulted:
+	DIRECTORYCOLON                    // directory:
+	DISCRIMINATORCOLON                // discriminator:
+	DWARFADDRESSSPACECOLON            // dwarfAddressSpace:
+	DWOIDCOLON                        // dwoId:
+	ELEMENTSCOLON                     // elements:
+	EMISSIONKINDCOLON                 // emissionKind:
+	ENCODINGCOLON                     // encoding:
+	ENTITYCOLON                       // entity:
+	ENUMSCOLON                        // enums:
+	EXPORTSYMBOLSCOLON                // exportSymbols:
+	EXPRCOLON                         // expr:
+	EXTRADATACOLON                    // extraData:
+	FILECOLON                         // file:
+	FILENAMECOLON                     // filename:
+	FLAGSCOLON                        // flags:
+	GETTERCOLON                       // getter:
+	GLOBALSCOLON                      // globals:
+	HEADERCOLON                       // header:
+	IDENTIFIERCOLON                   // identifier:
+	IMPORTSCOLON                      // imports:
+	INCLUDEPATHCOLON                  // includePath:
+	INLINEDATCOLON                    // inlinedAt:
+	ISDECLCOLON                       // isDecl:
+	ISDEFINITIONCOLON                 // isDefinition:
+	ISIMPLICITCODECOLON               // isImplicitCode:
+	ISLOCALCOLON                      // isLocal:
+	ISOPTIMIZEDCOLON                  // isOptimized:
+	ISUNSIGNEDCOLON                   // isUnsigned:
+	LANGUAGECOLON                     // language:
+	LINECOLON                         // line:
+	LINKAGENAMECOLON                  // linkageName:
+	LOWERBOUNDCOLON                   // lowerBound:
+	MACROSCOLON                       // macros:
+	NAMECOLON                         // name:
+	NAMETABLEKINDCOLON                // nameTableKind:
+	NODESCOLON                        // nodes:
+	OFFSETCOLON                       // offset:
+	OPERANDSCOLON                     // operands:
+	PRODUCERCOLON                     // producer:
+	RANGESBASEADDRESSCOLON            // rangesBaseAddress:
+	RANKCOLON                         // rank:
+	RETAINEDNODESCOLON                // retainedNodes:
+	RETAINEDTYPESCOLON                // retainedTypes:
+	RUNTIMELANGCOLON                  // runtimeLang:
+	RUNTIMEVERSIONCOLON               // runtimeVersion:
+	SCOPECOLON                        // scope:
+	SCOPELINECOLON                    // scopeLine:
+	SDKCOLON                          // sdk:
+	SETTERCOLON                       // setter:
+	SIZECOLON                         // size:
+	SOURCECOLON                       // source:
+	SPFLAGSCOLON                      // spFlags:
+	SPLITDEBUGFILENAMECOLON           // splitDebugFilename:
+	SPLITDEBUGINLININGCOLON           // splitDebugInlining:
+	STRIDECOLON                       // stride:
+	STRINGLENGTHCOLON                 // stringLength:
+	STRINGLENGTHEXPRESSIONCOLON       // stringLengthExpression:
+	STRINGLOCATIONEXPRESSIONCOLON     // stringLocationExpression:
+	SYSROOTCOLON                      // sysroot:
+	TAGCOLON                          // tag:
+	TEMPLATEPARAMSCOLON               // templateParams:
+	THISADJUSTMENTCOLON               // thisAdjustment:
+	THROWNTYPESCOLON                  // thrownTypes:
+	TYPECOLON                         // type:
+	TYPESCOLON                        // types:
+	UNITCOLON                         // unit:
+	UPPERBOUNDCOLON                   // upperBound:
+	VALUECOLON                        // value:
+	VARCOLON                          // var:
+	VIRTUALINDEXCOLON                 // virtualIndex:
+	VIRTUALITYCOLON                   // virtuality:
+	VTABLEHOLDERCOLON                 // vtableHolder:
 	COMMA
 	EXCL
 	DOTDOTDOT // ...
@@ -537,6 +547,7 @@ var tokenStr = [...]string{
 	"FLOAT_LIT_TOK",
 	"STRING_LIT_TOK",
 	"INT_TYPE_TOK",
+	"nounwind",
 	"aarch64_sve_vector_pcs",
 	"aarch64_vector_pcs",
 	"acq_rel",
@@ -614,6 +625,7 @@ var tokenStr = [...]string{
 	"define",
 	"dereferenceable",
 	"dereferenceable_or_null",
+	"disable_sanitizer_instrumentation",
 	"distinct",
 	"dllexport",
 	"dllimport",
@@ -621,8 +633,8 @@ var tokenStr = [...]string{
 	"dso_local",
 	"dso_local_equivalent",
 	"dso_preemptable",
-	"eq",
 	"elementtype",
+	"eq",
 	"exact",
 	"exactmatch",
 	"extern_weak",
@@ -655,6 +667,7 @@ var tokenStr = [...]string{
 	"ghccc",
 	"global",
 	"half",
+	"hasUnknownCall",
 	"hhvm_ccc",
 	"hhvmcc",
 	"hidden",
@@ -690,6 +703,7 @@ var tokenStr = [...]string{
 	"localexec",
 	"lshr",
 	"max",
+	"mayThrow",
 	"metadata",
 	"min",
 	"minsize",
@@ -697,6 +711,7 @@ var tokenStr = [...]string{
 	"monotonic",
 	"msp430_intrcc",
 	"mul",
+	"mustBeUnreachable",
 	"mustprogress",
 	"musttail",
 	"naked",
@@ -705,13 +720,14 @@ var tokenStr = [...]string{
 	"nest",
 	"ninf",
 	"nnan",
+	"no_cfi",
 	"noalias",
 	"nobuiltin",
 	"nocallback",
 	"nocapture",
 	"nocf_check",
-	"noduplicate",
 	"nodeduplicate",
+	"noduplicate",
 	"nofree",
 	"noimplicitfloat",
 	"noinline",
@@ -723,11 +739,10 @@ var tokenStr = [...]string{
 	"norecurse",
 	"noredzone",
 	"noreturn",
+	"nosanitize_coverage",
 	"nosync",
 	"notail",
 	"noundef",
-	"nounwind",
-	"nosanitize_coverage",
 	"nsw",
 	"nsz",
 	"null",
@@ -807,12 +822,12 @@ var tokenStr = [...]string{
 	"store",
 	"strictfp",
 	"sub",
+	"swiftasync",
 	"swiftcc",
 	"swifterror",
 	"swiftself",
-	"switch",
 	"swifttailcc",
-	"swiftasync",
+	"switch",
 	"syncscope",
 	"tail",
 	"tailcc",
@@ -846,11 +861,11 @@ var tokenStr = [...]string{
 	"uwtable",
 	"va_arg",
 	"vcall_visibility",
+	"visibility",
 	"void",
 	"volatile",
-	"vscale_range",
 	"vscale",
-	"visibility",
+	"vscale_range",
 	"weak",
 	"weak_odr",
 	"webkit_jscc",
@@ -895,6 +910,7 @@ var tokenStr = [...]string{
 	"!DIModule",
 	"!DINamespace",
 	"!DIObjCProperty",
+	"!DIStringType",
 	"!DISubprogram",
 	"!DISubrange",
 	"!DISubroutineType",
@@ -903,6 +919,7 @@ var tokenStr = [...]string{
 	"!GenericDINode",
 	"align:",
 	"allocated:",
+	"annotations:",
 	"apinotes:",
 	"arg:",
 	"associated:",
@@ -975,6 +992,9 @@ var tokenStr = [...]string{
 	"splitDebugFilename:",
 	"splitDebugInlining:",
 	"stride:",
+	"stringLength:",
+	"stringLengthExpression:",
+	"stringLocationExpression:",
 	"sysroot:",
 	"tag:",
 	"templateParams:",
