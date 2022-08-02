@@ -24,6 +24,7 @@ var (
 	AlignStack                      = func(t ll.NodeType) bool { return t == ll.AlignStack }
 	AlignStackPair                  = func(t ll.NodeType) bool { return t == ll.AlignStackPair }
 	AlignStackTok                   = func(t ll.NodeType) bool { return t == ll.AlignStackTok }
+	AllocKind                       = func(t ll.NodeType) bool { return t == ll.AllocKind }
 	AllocSize                       = func(t ll.NodeType) bool { return t == ll.AllocSize }
 	AllocaInst                      = func(t ll.NodeType) bool { return t == ll.AllocaInst }
 	AllocatedField                  = func(t ll.NodeType) bool { return t == ll.AllocatedField }
@@ -161,15 +162,11 @@ var (
 	ExtraDataField                  = func(t ll.NodeType) bool { return t == ll.ExtraDataField }
 	ExtractElementExpr              = func(t ll.NodeType) bool { return t == ll.ExtractElementExpr }
 	ExtractElementInst              = func(t ll.NodeType) bool { return t == ll.ExtractElementInst }
-	ExtractValueExpr                = func(t ll.NodeType) bool { return t == ll.ExtractValueExpr }
 	ExtractValueInst                = func(t ll.NodeType) bool { return t == ll.ExtractValueInst }
-	FAddExpr                        = func(t ll.NodeType) bool { return t == ll.FAddExpr }
 	FAddInst                        = func(t ll.NodeType) bool { return t == ll.FAddInst }
 	FCmpExpr                        = func(t ll.NodeType) bool { return t == ll.FCmpExpr }
 	FCmpInst                        = func(t ll.NodeType) bool { return t == ll.FCmpInst }
-	FDivExpr                        = func(t ll.NodeType) bool { return t == ll.FDivExpr }
 	FDivInst                        = func(t ll.NodeType) bool { return t == ll.FDivInst }
-	FMulExpr                        = func(t ll.NodeType) bool { return t == ll.FMulExpr }
 	FMulInst                        = func(t ll.NodeType) bool { return t == ll.FMulInst }
 	FNegExpr                        = func(t ll.NodeType) bool { return t == ll.FNegExpr }
 	FNegInst                        = func(t ll.NodeType) bool { return t == ll.FNegInst }
@@ -182,9 +179,7 @@ var (
 	FPTruncExpr                     = func(t ll.NodeType) bool { return t == ll.FPTruncExpr }
 	FPTruncInst                     = func(t ll.NodeType) bool { return t == ll.FPTruncInst }
 	FPred                           = func(t ll.NodeType) bool { return t == ll.FPred }
-	FRemExpr                        = func(t ll.NodeType) bool { return t == ll.FRemExpr }
 	FRemInst                        = func(t ll.NodeType) bool { return t == ll.FRemInst }
-	FSubExpr                        = func(t ll.NodeType) bool { return t == ll.FSubExpr }
 	FSubInst                        = func(t ll.NodeType) bool { return t == ll.FSubInst }
 	FastMathFlag                    = func(t ll.NodeType) bool { return t == ll.FastMathFlag }
 	FenceInst                       = func(t ll.NodeType) bool { return t == ll.FenceInst }
@@ -233,7 +228,6 @@ var (
 	InlinedAtField                  = func(t ll.NodeType) bool { return t == ll.InlinedAtField }
 	InsertElementExpr               = func(t ll.NodeType) bool { return t == ll.InsertElementExpr }
 	InsertElementInst               = func(t ll.NodeType) bool { return t == ll.InsertElementInst }
-	InsertValueExpr                 = func(t ll.NodeType) bool { return t == ll.InsertValueExpr }
 	InsertValueInst                 = func(t ll.NodeType) bool { return t == ll.InsertValueInst }
 	IntConst                        = func(t ll.NodeType) bool { return t == ll.IntConst }
 	IntLit                          = func(t ll.NodeType) bool { return t == ll.IntLit }
@@ -320,15 +314,14 @@ var (
 	RuntimeLangField                = func(t ll.NodeType) bool { return t == ll.RuntimeLangField }
 	RuntimeVersionField             = func(t ll.NodeType) bool { return t == ll.RuntimeVersionField }
 	SDKField                        = func(t ll.NodeType) bool { return t == ll.SDKField }
-	SDivExpr                        = func(t ll.NodeType) bool { return t == ll.SDivExpr }
 	SDivInst                        = func(t ll.NodeType) bool { return t == ll.SDivInst }
 	SExtExpr                        = func(t ll.NodeType) bool { return t == ll.SExtExpr }
 	SExtInst                        = func(t ll.NodeType) bool { return t == ll.SExtInst }
 	SIToFPExpr                      = func(t ll.NodeType) bool { return t == ll.SIToFPExpr }
 	SIToFPInst                      = func(t ll.NodeType) bool { return t == ll.SIToFPInst }
 	SPFlagsField                    = func(t ll.NodeType) bool { return t == ll.SPFlagsField }
-	SRemExpr                        = func(t ll.NodeType) bool { return t == ll.SRemExpr }
 	SRemInst                        = func(t ll.NodeType) bool { return t == ll.SRemInst }
+	SanitizerKind                   = func(t ll.NodeType) bool { return t == ll.SanitizerKind }
 	ScalableVectorType              = func(t ll.NodeType) bool { return t == ll.ScalableVectorType }
 	ScopeField                      = func(t ll.NodeType) bool { return t == ll.ScopeField }
 	ScopeLineField                  = func(t ll.NodeType) bool { return t == ll.ScopeLineField }
@@ -366,6 +359,7 @@ var (
 	TagField                        = func(t ll.NodeType) bool { return t == ll.TagField }
 	Tail                            = func(t ll.NodeType) bool { return t == ll.Tail }
 	TargetDataLayout                = func(t ll.NodeType) bool { return t == ll.TargetDataLayout }
+	TargetFuncNameField             = func(t ll.NodeType) bool { return t == ll.TargetFuncNameField }
 	TargetTriple                    = func(t ll.NodeType) bool { return t == ll.TargetTriple }
 	TemplateParamsField             = func(t ll.NodeType) bool { return t == ll.TemplateParamsField }
 	ThisAdjustmentField             = func(t ll.NodeType) bool { return t == ll.ThisAdjustmentField }
@@ -380,11 +374,9 @@ var (
 	TypeMacinfoField                = func(t ll.NodeType) bool { return t == ll.TypeMacinfoField }
 	TypeValue                       = func(t ll.NodeType) bool { return t == ll.TypeValue }
 	TypesField                      = func(t ll.NodeType) bool { return t == ll.TypesField }
-	UDivExpr                        = func(t ll.NodeType) bool { return t == ll.UDivExpr }
 	UDivInst                        = func(t ll.NodeType) bool { return t == ll.UDivInst }
 	UIToFPExpr                      = func(t ll.NodeType) bool { return t == ll.UIToFPExpr }
 	UIToFPInst                      = func(t ll.NodeType) bool { return t == ll.UIToFPInst }
-	URemExpr                        = func(t ll.NodeType) bool { return t == ll.URemExpr }
 	URemInst                        = func(t ll.NodeType) bool { return t == ll.URemInst }
 	UintLit                         = func(t ll.NodeType) bool { return t == ll.UintLit }
 	UndefConst                      = func(t ll.NodeType) bool { return t == ll.UndefConst }
@@ -392,18 +384,20 @@ var (
 	UnnamedAddr                     = func(t ll.NodeType) bool { return t == ll.UnnamedAddr }
 	UnreachableTerm                 = func(t ll.NodeType) bool { return t == ll.UnreachableTerm }
 	Unwind                          = func(t ll.NodeType) bool { return t == ll.Unwind }
+	UnwindTable                     = func(t ll.NodeType) bool { return t == ll.UnwindTable }
+	UnwindTableKind                 = func(t ll.NodeType) bool { return t == ll.UnwindTableKind }
 	UnwindToCaller                  = func(t ll.NodeType) bool { return t == ll.UnwindToCaller }
 	UpperBoundField                 = func(t ll.NodeType) bool { return t == ll.UpperBoundField }
 	UseListOrder                    = func(t ll.NodeType) bool { return t == ll.UseListOrder }
 	UseListOrderBB                  = func(t ll.NodeType) bool { return t == ll.UseListOrderBB }
 	VAArgInst                       = func(t ll.NodeType) bool { return t == ll.VAArgInst }
-	VScaleRange                     = func(t ll.NodeType) bool { return t == ll.VScaleRange }
-	VScaleRangetok                  = func(t ll.NodeType) bool { return t == ll.VScaleRangetok }
 	ValueField                      = func(t ll.NodeType) bool { return t == ll.ValueField }
 	ValueIntField                   = func(t ll.NodeType) bool { return t == ll.ValueIntField }
 	ValueStringField                = func(t ll.NodeType) bool { return t == ll.ValueStringField }
 	VarField                        = func(t ll.NodeType) bool { return t == ll.VarField }
 	VectorConst                     = func(t ll.NodeType) bool { return t == ll.VectorConst }
+	VectorScaleRange                = func(t ll.NodeType) bool { return t == ll.VectorScaleRange }
+	VectorScaleRangetok             = func(t ll.NodeType) bool { return t == ll.VectorScaleRangetok }
 	VectorType                      = func(t ll.NodeType) bool { return t == ll.VectorType }
 	VirtualIndexField               = func(t ll.NodeType) bool { return t == ll.VirtualIndexField }
 	VirtualityField                 = func(t ll.NodeType) bool { return t == ll.VirtualityField }

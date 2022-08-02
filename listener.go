@@ -91,17 +91,8 @@ const (
 	NoCFIConst              // Func=GlobalIdent
 	FNegExpr                // X=TypeConst
 	AddExpr                 // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
-	FAddExpr                // X=TypeConst Y=TypeConst
 	SubExpr                 // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
-	FSubExpr                // X=TypeConst Y=TypeConst
 	MulExpr                 // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
-	FMulExpr                // X=TypeConst Y=TypeConst
-	UDivExpr                // Exact? X=TypeConst Y=TypeConst
-	SDivExpr                // Exact? X=TypeConst Y=TypeConst
-	FDivExpr                // X=TypeConst Y=TypeConst
-	URemExpr                // X=TypeConst Y=TypeConst
-	SRemExpr                // X=TypeConst Y=TypeConst
-	FRemExpr                // X=TypeConst Y=TypeConst
 	ShlExpr                 // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
 	LShrExpr                // Exact? X=TypeConst Y=TypeConst
 	AShrExpr                // Exact? X=TypeConst Y=TypeConst
@@ -111,8 +102,6 @@ const (
 	ExtractElementExpr      // X=TypeConst Index=TypeConst
 	InsertElementExpr       // X=TypeConst Elem=TypeConst Index=TypeConst
 	ShuffleVectorExpr       // X=TypeConst Y=TypeConst Mask=TypeConst
-	ExtractValueExpr        // X=TypeConst Indices=(UintLit)*
-	InsertValueExpr         // X=TypeConst Elem=TypeConst Indices=(UintLit)*
 	GetElementPtrExpr       // InBounds? ElemType=Type Src=TypeConst Indices=(GEPIndex)*
 	GEPIndex                // InRange? Index=TypeConst
 	InRange
@@ -325,6 +314,7 @@ const (
 	StringLocationExpressionField // StringLocationExpression=MDField
 	SysrootField                  // Sysroot=StringLit
 	TagField                      // Tag=DwarfTag
+	TargetFuncNameField           // TargetFuncName=StringLit
 	TemplateParamsField           // TemplateParams=MDField
 	ThisAdjustmentField           // ThisAdjustment=IntLit
 	ThrownTypesField              // ThrownTypes=MDField
@@ -369,6 +359,7 @@ const (
 	AlignPair        // N=UintLit
 	AlignStack       // N=UintLit
 	AlignStackPair   // N=UintLit
+	AllocKind        // AllocKinds=StringLit
 	AllocSize        // ElemSizeIndex=UintLit NElemsIndex=UintLit?
 	Args             // Args=(Arg)*
 	Arg              // Typ=(ConcreteType | MetadataType) Attrs=(ParamAttribute)* Val=(Metadata | Value)
@@ -407,6 +398,7 @@ const (
 	Preemption
 	StructRetAttr // Typ=Type
 	ReturnAttr
+	SanitizerKind
 	Section     // Name=StringLit
 	SyncScope   // Scope=StringLit
 	ThreadLocal // Model=TLSModel?
@@ -414,11 +406,13 @@ const (
 	TypeConst // Typ=FirstClassType Val=Constant
 	TypeValue // Typ=FirstClassType Val=Value
 	UnnamedAddr
+	UnwindTable // Kind=UnwindTableKind?
+	UnwindTableKind
 	UnwindToCaller
+	VectorScaleRangetok
+	VectorScaleRange // Min=UintLit Max=UintLit?
 	Visibility
 	Volatile
-	VScaleRangetok
-	VScaleRange // Min=UintLit Max=UintLit?
 	NodeTypeMax
 )
 
@@ -503,17 +497,8 @@ var nodeTypeStr = [...]string{
 	"NoCFIConst",
 	"FNegExpr",
 	"AddExpr",
-	"FAddExpr",
 	"SubExpr",
-	"FSubExpr",
 	"MulExpr",
-	"FMulExpr",
-	"UDivExpr",
-	"SDivExpr",
-	"FDivExpr",
-	"URemExpr",
-	"SRemExpr",
-	"FRemExpr",
 	"ShlExpr",
 	"LShrExpr",
 	"AShrExpr",
@@ -523,8 +508,6 @@ var nodeTypeStr = [...]string{
 	"ExtractElementExpr",
 	"InsertElementExpr",
 	"ShuffleVectorExpr",
-	"ExtractValueExpr",
-	"InsertValueExpr",
 	"GetElementPtrExpr",
 	"GEPIndex",
 	"InRange",
@@ -737,6 +720,7 @@ var nodeTypeStr = [...]string{
 	"StringLocationExpressionField",
 	"SysrootField",
 	"TagField",
+	"TargetFuncNameField",
 	"TemplateParamsField",
 	"ThisAdjustmentField",
 	"ThrownTypesField",
@@ -781,6 +765,7 @@ var nodeTypeStr = [...]string{
 	"AlignPair",
 	"AlignStack",
 	"AlignStackPair",
+	"AllocKind",
 	"AllocSize",
 	"Args",
 	"Arg",
@@ -819,6 +804,7 @@ var nodeTypeStr = [...]string{
 	"Preemption",
 	"StructRetAttr",
 	"ReturnAttr",
+	"SanitizerKind",
 	"Section",
 	"SyncScope",
 	"ThreadLocal",
@@ -826,11 +812,13 @@ var nodeTypeStr = [...]string{
 	"TypeConst",
 	"TypeValue",
 	"UnnamedAddr",
+	"UnwindTable",
+	"UnwindTableKind",
 	"UnwindToCaller",
+	"VectorScaleRangetok",
+	"VectorScaleRange",
 	"Visibility",
 	"Volatile",
-	"VScaleRangetok",
-	"VScaleRange",
 }
 
 func (t NodeType) String() string {
@@ -872,24 +860,17 @@ var Constant = []NodeType{
 	CharArrayConst,
 	DSOLocalEquivalentConst,
 	ExtractElementExpr,
-	ExtractValueExpr,
-	FAddExpr,
 	FCmpExpr,
-	FDivExpr,
-	FMulExpr,
 	FNegExpr,
 	FPExtExpr,
 	FPToSIExpr,
 	FPToUIExpr,
 	FPTruncExpr,
-	FRemExpr,
-	FSubExpr,
 	FloatConst,
 	GetElementPtrExpr,
 	GlobalIdent,
 	ICmpExpr,
 	InsertElementExpr,
-	InsertValueExpr,
 	IntConst,
 	IntToPtrExpr,
 	LShrExpr,
@@ -900,19 +881,15 @@ var Constant = []NodeType{
 	OrExpr,
 	PoisonConst,
 	PtrToIntExpr,
-	SDivExpr,
 	SExtExpr,
 	SIToFPExpr,
-	SRemExpr,
 	SelectExpr,
 	ShlExpr,
 	ShuffleVectorExpr,
 	StructConst,
 	SubExpr,
 	TruncExpr,
-	UDivExpr,
 	UIToFPExpr,
-	URemExpr,
 	UndefConst,
 	VectorConst,
 	XorExpr,
@@ -927,39 +904,28 @@ var ConstantExpr = []NodeType{
 	AndExpr,
 	BitCastExpr,
 	ExtractElementExpr,
-	ExtractValueExpr,
-	FAddExpr,
 	FCmpExpr,
-	FDivExpr,
-	FMulExpr,
 	FNegExpr,
 	FPExtExpr,
 	FPToSIExpr,
 	FPToUIExpr,
 	FPTruncExpr,
-	FRemExpr,
-	FSubExpr,
 	GetElementPtrExpr,
 	ICmpExpr,
 	InsertElementExpr,
-	InsertValueExpr,
 	IntToPtrExpr,
 	LShrExpr,
 	MulExpr,
 	OrExpr,
 	PtrToIntExpr,
-	SDivExpr,
 	SExtExpr,
 	SIToFPExpr,
-	SRemExpr,
 	SelectExpr,
 	ShlExpr,
 	ShuffleVectorExpr,
 	SubExpr,
 	TruncExpr,
-	UDivExpr,
 	UIToFPExpr,
-	URemExpr,
 	XorExpr,
 	ZExtExpr,
 }
@@ -1212,6 +1178,7 @@ var DISubprogramField = []NodeType{
 	SPFlagsField,
 	ScopeField,
 	ScopeLineField,
+	TargetFuncNameField,
 	TemplateParamsField,
 	ThisAdjustmentField,
 	ThrownTypesField,
@@ -1312,14 +1279,16 @@ var FuncAttribute = []NodeType{
 	AlignPair,
 	AlignStack,
 	AlignStackPair,
+	AllocKind,
 	AllocSize,
 	AttrGroupID,
 	AttrPair,
 	AttrString,
 	FuncAttr,
 	Preallocated,
-	VScaleRange,
-	VScaleRangetok,
+	UnwindTable,
+	VectorScaleRange,
+	VectorScaleRangetok,
 }
 
 var FuncHdrField = []NodeType{
@@ -1327,6 +1296,7 @@ var FuncHdrField = []NodeType{
 	AlignPair,
 	AlignStack,
 	AlignStackPair,
+	AllocKind,
 	AllocSize,
 	AttrGroupID,
 	AttrPair,
@@ -1340,8 +1310,9 @@ var FuncHdrField = []NodeType{
 	Prefix,
 	Prologue,
 	Section,
-	VScaleRange,
-	VScaleRangetok,
+	UnwindTable,
+	VectorScaleRange,
+	VectorScaleRangetok,
 }
 
 var GenericDINodeField = []NodeType{
@@ -1354,6 +1325,7 @@ var GlobalField = []NodeType{
 	Align,
 	Comdat,
 	Partition,
+	SanitizerKind,
 	Section,
 }
 
@@ -1702,25 +1674,18 @@ var Value = []NodeType{
 	CharArrayConst,
 	DSOLocalEquivalentConst,
 	ExtractElementExpr,
-	ExtractValueExpr,
-	FAddExpr,
 	FCmpExpr,
-	FDivExpr,
-	FMulExpr,
 	FNegExpr,
 	FPExtExpr,
 	FPToSIExpr,
 	FPToUIExpr,
 	FPTruncExpr,
-	FRemExpr,
-	FSubExpr,
 	FloatConst,
 	GetElementPtrExpr,
 	GlobalIdent,
 	ICmpExpr,
 	InlineAsm,
 	InsertElementExpr,
-	InsertValueExpr,
 	IntConst,
 	IntToPtrExpr,
 	LShrExpr,
@@ -1732,19 +1697,15 @@ var Value = []NodeType{
 	OrExpr,
 	PoisonConst,
 	PtrToIntExpr,
-	SDivExpr,
 	SExtExpr,
 	SIToFPExpr,
-	SRemExpr,
 	SelectExpr,
 	ShlExpr,
 	ShuffleVectorExpr,
 	StructConst,
 	SubExpr,
 	TruncExpr,
-	UDivExpr,
 	UIToFPExpr,
-	URemExpr,
 	UndefConst,
 	VectorConst,
 	XorExpr,

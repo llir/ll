@@ -38,6 +38,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &AlignStackPair{n}
 	case ll.AlignStackTok:
 		return &AlignStackTok{n}
+	case ll.AllocKind:
+		return &AllocKind{n}
 	case ll.AllocSize:
 		return &AllocSize{n}
 	case ll.AllocaInst:
@@ -312,24 +314,16 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &ExtractElementExpr{n}
 	case ll.ExtractElementInst:
 		return &ExtractElementInst{n}
-	case ll.ExtractValueExpr:
-		return &ExtractValueExpr{n}
 	case ll.ExtractValueInst:
 		return &ExtractValueInst{n}
-	case ll.FAddExpr:
-		return &FAddExpr{n}
 	case ll.FAddInst:
 		return &FAddInst{n}
 	case ll.FCmpExpr:
 		return &FCmpExpr{n}
 	case ll.FCmpInst:
 		return &FCmpInst{n}
-	case ll.FDivExpr:
-		return &FDivExpr{n}
 	case ll.FDivInst:
 		return &FDivInst{n}
-	case ll.FMulExpr:
-		return &FMulExpr{n}
 	case ll.FMulInst:
 		return &FMulInst{n}
 	case ll.FNegExpr:
@@ -354,12 +348,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &FPTruncInst{n}
 	case ll.FPred:
 		return &FPred{n}
-	case ll.FRemExpr:
-		return &FRemExpr{n}
 	case ll.FRemInst:
 		return &FRemInst{n}
-	case ll.FSubExpr:
-		return &FSubExpr{n}
 	case ll.FSubInst:
 		return &FSubInst{n}
 	case ll.FastMathFlag:
@@ -456,8 +446,6 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &InsertElementExpr{n}
 	case ll.InsertElementInst:
 		return &InsertElementInst{n}
-	case ll.InsertValueExpr:
-		return &InsertValueExpr{n}
 	case ll.InsertValueInst:
 		return &InsertValueInst{n}
 	case ll.IntConst:
@@ -630,8 +618,6 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &RuntimeVersionField{n}
 	case ll.SDKField:
 		return &SDKField{n}
-	case ll.SDivExpr:
-		return &SDivExpr{n}
 	case ll.SDivInst:
 		return &SDivInst{n}
 	case ll.SExtExpr:
@@ -644,10 +630,10 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &SIToFPInst{n}
 	case ll.SPFlagsField:
 		return &SPFlagsField{n}
-	case ll.SRemExpr:
-		return &SRemExpr{n}
 	case ll.SRemInst:
 		return &SRemInst{n}
+	case ll.SanitizerKind:
+		return &SanitizerKind{n}
 	case ll.ScalableVectorType:
 		return &ScalableVectorType{n}
 	case ll.ScopeField:
@@ -722,6 +708,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &Tail{n}
 	case ll.TargetDataLayout:
 		return &TargetDataLayout{n}
+	case ll.TargetFuncNameField:
+		return &TargetFuncNameField{n}
 	case ll.TargetTriple:
 		return &TargetTriple{n}
 	case ll.TemplateParamsField:
@@ -750,16 +738,12 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &TypeValue{n}
 	case ll.TypesField:
 		return &TypesField{n}
-	case ll.UDivExpr:
-		return &UDivExpr{n}
 	case ll.UDivInst:
 		return &UDivInst{n}
 	case ll.UIToFPExpr:
 		return &UIToFPExpr{n}
 	case ll.UIToFPInst:
 		return &UIToFPInst{n}
-	case ll.URemExpr:
-		return &URemExpr{n}
 	case ll.URemInst:
 		return &URemInst{n}
 	case ll.UintLit:
@@ -774,6 +758,10 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &UnreachableTerm{n}
 	case ll.Unwind:
 		return &Unwind{n}
+	case ll.UnwindTable:
+		return &UnwindTable{n}
+	case ll.UnwindTableKind:
+		return &UnwindTableKind{n}
 	case ll.UnwindToCaller:
 		return &UnwindToCaller{n}
 	case ll.UpperBoundField:
@@ -784,10 +772,6 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &UseListOrderBB{n}
 	case ll.VAArgInst:
 		return &VAArgInst{n}
-	case ll.VScaleRange:
-		return &VScaleRange{n}
-	case ll.VScaleRangetok:
-		return &VScaleRangetok{n}
 	case ll.ValueField:
 		return &ValueField{n}
 	case ll.ValueIntField:
@@ -798,6 +782,10 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &VarField{n}
 	case ll.VectorConst:
 		return &VectorConst{n}
+	case ll.VectorScaleRange:
+		return &VectorScaleRange{n}
+	case ll.VectorScaleRangetok:
+		return &VectorScaleRangetok{n}
 	case ll.VectorType:
 		return &VectorType{n}
 	case ll.VirtualIndexField:

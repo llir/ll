@@ -186,6 +186,10 @@ recovered:
 				token = DEFAULTEDCOLON
 				break
 			}
+			if hash == 0x77bfc01a && "targetFuncName:" == l.source[l.tokenOffset:l.offset] {
+				token = TARGETFUNCNAMECOLON
+				break
+			}
 			if hash == 0x7e83e59a && "templateParams:" == l.source[l.tokenOffset:l.offset] {
 				token = TEMPLATEPARAMSCOLON
 				break
