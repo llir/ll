@@ -52,6 +52,9 @@ const (
 	ALIGN                             // align
 	ALIGNSTACK                        // alignstack
 	ALLOCA                            // alloca
+	ALLOCALIGN                        // allocalign
+	ALLOCKIND                         // allockind
+	ALLOCPTR                          // allocptr
 	ALLOCSIZE                         // allocsize
 	ALWAYSINLINE                      // alwaysinline
 	AMDGPU_CS                         // amdgpu_cs
@@ -74,6 +77,7 @@ const (
 	ARM_APCSCC                        // arm_apcscc
 	ASHR                              // ashr
 	ASM                               // asm
+	ASYNC                             // async
 	ATOMIC                            // atomic
 	ATOMICRMW                         // atomicrmw
 	ATTRIBUTES                        // attributes
@@ -143,7 +147,10 @@ const (
 	FENCE                             // fence
 	FILTER                            // filter
 	FLOAT                             // float
+	FMAX                              // fmax
+	FMIN                              // fmin
 	FMUL                              // fmul
+	FN_RET_THUNK_EXTERN               // fn_ret_thunk_extern
 	FNEG                              // fneg
 	FP128                             // fp128
 	FPEXT                             // fpext
@@ -213,6 +220,8 @@ const (
 	NINF                              // ninf
 	NNAN                              // nnan
 	NO_CFI                            // no_cfi
+	NO_SANITIZE_ADDRESS               // no_sanitize_address
+	NO_SANITIZE_HWADDRESS             // no_sanitize_hwaddress
 	NOALIAS                           // noalias
 	NOBUILTIN                         // nobuiltin
 	NOCALLBACK                        // nocallback
@@ -231,6 +240,7 @@ const (
 	NORECURSE                         // norecurse
 	NOREDZONE                         // noredzone
 	NORETURN                          // noreturn
+	NOSANITIZE_BOUNDS                 // nosanitize_bounds
 	NOSANITIZE_COVERAGE               // nosanitize_coverage
 	NOSYNC                            // nosync
 	NOTAIL                            // notail
@@ -263,6 +273,7 @@ const (
 	PREFIX                            // prefix
 	PRESERVE_ALLCC                    // preserve_allcc
 	PRESERVE_MOSTCC                   // preserve_mostcc
+	PRESPLITCOROUTINE                 // presplitcoroutine
 	PRIVATE                           // private
 	PROLOGUE                          // prologue
 	PROTECTED                         // protected
@@ -281,6 +292,7 @@ const (
 	SAFESTACK                         // safestack
 	SAMESIZE                          // samesize
 	SANITIZE_ADDRESS                  // sanitize_address
+	SANITIZE_ADDRESS_DYNINIT          // sanitize_address_dyninit
 	SANITIZE_HWADDRESS                // sanitize_hwaddress
 	SANITIZE_MEMORY                   // sanitize_memory
 	SANITIZE_MEMTAG                   // sanitize_memtag
@@ -320,6 +332,7 @@ const (
 	SWIFTSELF                         // swiftself
 	SWIFTTAILCC                       // swifttailcc
 	SWITCH                            // switch
+	SYNC                              // sync
 	SYNCSCOPE                         // syncscope
 	TAIL                              // tail
 	TAILCC                            // tailcc
@@ -489,6 +502,7 @@ const (
 	STRINGLOCATIONEXPRESSIONCOLON     // stringLocationExpression:
 	SYSROOTCOLON                      // sysroot:
 	TAGCOLON                          // tag:
+	TARGETFUNCNAMECOLON               // targetFuncName:
 	TEMPLATEPARAMSCOLON               // templateParams:
 	THISADJUSTMENTCOLON               // thisAdjustment:
 	THROWNTYPESCOLON                  // thrownTypes:
@@ -560,6 +574,9 @@ var tokenStr = [...]string{
 	"align",
 	"alignstack",
 	"alloca",
+	"allocalign",
+	"allockind",
+	"allocptr",
 	"allocsize",
 	"alwaysinline",
 	"amdgpu_cs",
@@ -582,6 +599,7 @@ var tokenStr = [...]string{
 	"arm_apcscc",
 	"ashr",
 	"asm",
+	"async",
 	"atomic",
 	"atomicrmw",
 	"attributes",
@@ -651,7 +669,10 @@ var tokenStr = [...]string{
 	"fence",
 	"filter",
 	"float",
+	"fmax",
+	"fmin",
 	"fmul",
+	"fn_ret_thunk_extern",
 	"fneg",
 	"fp128",
 	"fpext",
@@ -721,6 +742,8 @@ var tokenStr = [...]string{
 	"ninf",
 	"nnan",
 	"no_cfi",
+	"no_sanitize_address",
+	"no_sanitize_hwaddress",
 	"noalias",
 	"nobuiltin",
 	"nocallback",
@@ -739,6 +762,7 @@ var tokenStr = [...]string{
 	"norecurse",
 	"noredzone",
 	"noreturn",
+	"nosanitize_bounds",
 	"nosanitize_coverage",
 	"nosync",
 	"notail",
@@ -771,6 +795,7 @@ var tokenStr = [...]string{
 	"prefix",
 	"preserve_allcc",
 	"preserve_mostcc",
+	"presplitcoroutine",
 	"private",
 	"prologue",
 	"protected",
@@ -789,6 +814,7 @@ var tokenStr = [...]string{
 	"safestack",
 	"samesize",
 	"sanitize_address",
+	"sanitize_address_dyninit",
 	"sanitize_hwaddress",
 	"sanitize_memory",
 	"sanitize_memtag",
@@ -828,6 +854,7 @@ var tokenStr = [...]string{
 	"swiftself",
 	"swifttailcc",
 	"switch",
+	"sync",
 	"syncscope",
 	"tail",
 	"tailcc",
@@ -997,6 +1024,7 @@ var tokenStr = [...]string{
 	"stringLocationExpression:",
 	"sysroot:",
 	"tag:",
+	"targetFuncName:",
 	"templateParams:",
 	"thisAdjustment:",
 	"thrownTypes:",
