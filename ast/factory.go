@@ -48,6 +48,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &AndExpr{n}
 	case ll.AndInst:
 		return &AndInst{n}
+	case ll.AnnotationsField:
+		return &AnnotationsField{n}
 	case ll.Arg:
 		return &Arg{n}
 	case ll.ArgField:
@@ -208,6 +210,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &DISPFlagInt{n}
 	case ll.DISPFlags:
 		return &DISPFlags{n}
+	case ll.DIStringType:
+		return &DIStringType{n}
 	case ll.DISubprogram:
 		return &DISubprogram{n}
 	case ll.DISubrange:
@@ -220,6 +224,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &DITemplateValueParameter{n}
 	case ll.DLLStorageClass:
 		return &DLLStorageClass{n}
+	case ll.DSOLocalEquivalentConst:
+		return &DSOLocalEquivalentConst{n}
 	case ll.DataLocationField:
 		return &DataLocationField{n}
 	case ll.DebugInfoForProfilingField:
@@ -548,6 +554,8 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &NamedMetadataDef{n}
 	case ll.NamedType:
 		return &NamedType{n}
+	case ll.NoCFIConst:
+		return &NoCFIConst{n}
 	case ll.NodesField:
 		return &NodesField{n}
 	case ll.NoneConst:
@@ -680,8 +688,14 @@ func ToLlvmNode(n *Node) LlvmNode {
 		return &StoreInst{n}
 	case ll.StrideField:
 		return &StrideField{n}
+	case ll.StringLengthExpressionField:
+		return &StringLengthExpressionField{n}
+	case ll.StringLengthField:
+		return &StringLengthField{n}
 	case ll.StringLit:
 		return &StringLit{n}
+	case ll.StringLocationExpressionField:
+		return &StringLocationExpressionField{n}
 	case ll.StructConst:
 		return &StructConst{n}
 	case ll.StructRetAttr:

@@ -29,6 +29,7 @@ var (
 	AllocatedField                  = func(t ll.NodeType) bool { return t == ll.AllocatedField }
 	AndExpr                         = func(t ll.NodeType) bool { return t == ll.AndExpr }
 	AndInst                         = func(t ll.NodeType) bool { return t == ll.AndInst }
+	AnnotationsField                = func(t ll.NodeType) bool { return t == ll.AnnotationsField }
 	Arg                             = func(t ll.NodeType) bool { return t == ll.Arg }
 	ArgField                        = func(t ll.NodeType) bool { return t == ll.ArgField }
 	Args                            = func(t ll.NodeType) bool { return t == ll.Args }
@@ -109,12 +110,14 @@ var (
 	DISPFlagEnum                    = func(t ll.NodeType) bool { return t == ll.DISPFlagEnum }
 	DISPFlagInt                     = func(t ll.NodeType) bool { return t == ll.DISPFlagInt }
 	DISPFlags                       = func(t ll.NodeType) bool { return t == ll.DISPFlags }
+	DIStringType                    = func(t ll.NodeType) bool { return t == ll.DIStringType }
 	DISubprogram                    = func(t ll.NodeType) bool { return t == ll.DISubprogram }
 	DISubrange                      = func(t ll.NodeType) bool { return t == ll.DISubrange }
 	DISubroutineType                = func(t ll.NodeType) bool { return t == ll.DISubroutineType }
 	DITemplateTypeParameter         = func(t ll.NodeType) bool { return t == ll.DITemplateTypeParameter }
 	DITemplateValueParameter        = func(t ll.NodeType) bool { return t == ll.DITemplateValueParameter }
 	DLLStorageClass                 = func(t ll.NodeType) bool { return t == ll.DLLStorageClass }
+	DSOLocalEquivalentConst         = func(t ll.NodeType) bool { return t == ll.DSOLocalEquivalentConst }
 	DataLocationField               = func(t ll.NodeType) bool { return t == ll.DataLocationField }
 	DebugInfoForProfilingField      = func(t ll.NodeType) bool { return t == ll.DebugInfoForProfilingField }
 	DeclarationField                = func(t ll.NodeType) bool { return t == ll.DeclarationField }
@@ -279,6 +282,7 @@ var (
 	NameTableKindInt                = func(t ll.NodeType) bool { return t == ll.NameTableKindInt }
 	NamedMetadataDef                = func(t ll.NodeType) bool { return t == ll.NamedMetadataDef }
 	NamedType                       = func(t ll.NodeType) bool { return t == ll.NamedType }
+	NoCFIConst                      = func(t ll.NodeType) bool { return t == ll.NoCFIConst }
 	NodesField                      = func(t ll.NodeType) bool { return t == ll.NodesField }
 	NoneConst                       = func(t ll.NodeType) bool { return t == ll.NoneConst }
 	NullConst                       = func(t ll.NodeType) bool { return t == ll.NullConst }
@@ -345,7 +349,10 @@ var (
 	SplitDebugInliningField         = func(t ll.NodeType) bool { return t == ll.SplitDebugInliningField }
 	StoreInst                       = func(t ll.NodeType) bool { return t == ll.StoreInst }
 	StrideField                     = func(t ll.NodeType) bool { return t == ll.StrideField }
+	StringLengthExpressionField     = func(t ll.NodeType) bool { return t == ll.StringLengthExpressionField }
+	StringLengthField               = func(t ll.NodeType) bool { return t == ll.StringLengthField }
 	StringLit                       = func(t ll.NodeType) bool { return t == ll.StringLit }
+	StringLocationExpressionField   = func(t ll.NodeType) bool { return t == ll.StringLocationExpressionField }
 	StructConst                     = func(t ll.NodeType) bool { return t == ll.StructConst }
 	StructRetAttr                   = func(t ll.NodeType) bool { return t == ll.StructRetAttr }
 	StructType                      = func(t ll.NodeType) bool { return t == ll.StructType }
@@ -437,6 +444,7 @@ var (
 	DINamespaceField                = OneOf(ll.DINamespaceField...)
 	DIObjCPropertyField             = OneOf(ll.DIObjCPropertyField...)
 	DISPFlag                        = OneOf(ll.DISPFlag...)
+	DIStringTypeField               = OneOf(ll.DIStringTypeField...)
 	DISubprogramField               = OneOf(ll.DISubprogramField...)
 	DISubrangeField                 = OneOf(ll.DISubrangeField...)
 	DISubroutineTypeField           = OneOf(ll.DISubroutineTypeField...)

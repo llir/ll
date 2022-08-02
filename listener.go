@@ -86,33 +86,35 @@ const (
 	ZeroInitializerConst
 	UndefConst
 	PoisonConst
-	BlockAddressConst  // Func=GlobalIdent Block=LocalIdent
-	FNegExpr           // X=TypeConst
-	AddExpr            // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
-	FAddExpr           // X=TypeConst Y=TypeConst
-	SubExpr            // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
-	FSubExpr           // X=TypeConst Y=TypeConst
-	MulExpr            // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
-	FMulExpr           // X=TypeConst Y=TypeConst
-	UDivExpr           // Exact? X=TypeConst Y=TypeConst
-	SDivExpr           // Exact? X=TypeConst Y=TypeConst
-	FDivExpr           // X=TypeConst Y=TypeConst
-	URemExpr           // X=TypeConst Y=TypeConst
-	SRemExpr           // X=TypeConst Y=TypeConst
-	FRemExpr           // X=TypeConst Y=TypeConst
-	ShlExpr            // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
-	LShrExpr           // Exact? X=TypeConst Y=TypeConst
-	AShrExpr           // Exact? X=TypeConst Y=TypeConst
-	AndExpr            // X=TypeConst Y=TypeConst
-	OrExpr             // X=TypeConst Y=TypeConst
-	XorExpr            // X=TypeConst Y=TypeConst
-	ExtractElementExpr // X=TypeConst Index=TypeConst
-	InsertElementExpr  // X=TypeConst Elem=TypeConst Index=TypeConst
-	ShuffleVectorExpr  // X=TypeConst Y=TypeConst Mask=TypeConst
-	ExtractValueExpr   // X=TypeConst Indices=(UintLit)*
-	InsertValueExpr    // X=TypeConst Elem=TypeConst Indices=(UintLit)*
-	GetElementPtrExpr  // InBounds? ElemType=Type Src=TypeConst Indices=(GEPIndex)*
-	GEPIndex           // InRange? Index=TypeConst
+	BlockAddressConst       // Func=GlobalIdent Block=LocalIdent
+	DSOLocalEquivalentConst // Func=GlobalIdent
+	NoCFIConst              // Func=GlobalIdent
+	FNegExpr                // X=TypeConst
+	AddExpr                 // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
+	FAddExpr                // X=TypeConst Y=TypeConst
+	SubExpr                 // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
+	FSubExpr                // X=TypeConst Y=TypeConst
+	MulExpr                 // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
+	FMulExpr                // X=TypeConst Y=TypeConst
+	UDivExpr                // Exact? X=TypeConst Y=TypeConst
+	SDivExpr                // Exact? X=TypeConst Y=TypeConst
+	FDivExpr                // X=TypeConst Y=TypeConst
+	URemExpr                // X=TypeConst Y=TypeConst
+	SRemExpr                // X=TypeConst Y=TypeConst
+	FRemExpr                // X=TypeConst Y=TypeConst
+	ShlExpr                 // OverflowFlags=(OverflowFlag)* X=TypeConst Y=TypeConst
+	LShrExpr                // Exact? X=TypeConst Y=TypeConst
+	AShrExpr                // Exact? X=TypeConst Y=TypeConst
+	AndExpr                 // X=TypeConst Y=TypeConst
+	OrExpr                  // X=TypeConst Y=TypeConst
+	XorExpr                 // X=TypeConst Y=TypeConst
+	ExtractElementExpr      // X=TypeConst Index=TypeConst
+	InsertElementExpr       // X=TypeConst Elem=TypeConst Index=TypeConst
+	ShuffleVectorExpr       // X=TypeConst Y=TypeConst Mask=TypeConst
+	ExtractValueExpr        // X=TypeConst Indices=(UintLit)*
+	InsertValueExpr         // X=TypeConst Elem=TypeConst Indices=(UintLit)*
+	GetElementPtrExpr       // InBounds? ElemType=Type Src=TypeConst Indices=(GEPIndex)*
+	GEPIndex                // InRange? Index=TypeConst
 	InRange
 	TruncExpr          // From=TypeConst To=Type
 	ZExtExpr           // From=TypeConst To=Type
@@ -193,146 +195,151 @@ const (
 	Cleanup
 	Clause // ClauseType X=TypeValue
 	ClauseType
-	CatchPadInst               // CatchSwitch=LocalIdent Args=(ExceptionArg)* Metadata=(MetadataAttachment)*
-	CleanupPadInst             // ParentPad=ExceptionPad Args=(ExceptionArg)* Metadata=(MetadataAttachment)*
-	LocalDefTerm               // Name=LocalIdent Term=ValueTerminator
-	RetTerm                    // XTyp=(ConcreteType | VoidType) X=Value? Metadata=(MetadataAttachment)*
-	BrTerm                     // Target=Label Metadata=(MetadataAttachment)*
-	CondBrTerm                 // CondTyp=IntType Cond=Value TargetTrue=Label TargetFalse=Label Metadata=(MetadataAttachment)*
-	SwitchTerm                 // X=TypeValue Default=Label Cases=(Case)* Metadata=(MetadataAttachment)*
-	Case                       // X=TypeConst Target=Label
-	IndirectBrTerm             // Addr=TypeValue ValidTargets=(Label)* Metadata=(MetadataAttachment)*
-	InvokeTerm                 // CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Invokee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* NormalRetTarget=Label ExceptionRetTarget=Label Metadata=(MetadataAttachment)*
-	CallBrTerm                 // CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Callee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* NormalRetTarget=Label OtherRetTargets=(Label)* Metadata=(MetadataAttachment)*
-	ResumeTerm                 // X=TypeValue Metadata=(MetadataAttachment)*
-	CatchSwitchTerm            // ParentPad=ExceptionPad Handlers DefaultUnwindTarget=UnwindTarget Metadata=(MetadataAttachment)*
-	Handlers                   // Labels=(Label)+
-	CatchRetTerm               // CatchPad=Value Target=Label Metadata=(MetadataAttachment)*
-	CleanupRetTerm             // CleanupPad=Value UnwindTarget Metadata=(MetadataAttachment)*
-	UnreachableTerm            // Metadata=(MetadataAttachment)*
-	MDTuple                    // MDFields=(MDField)*
-	MDString                   // Val=StringLit
-	MetadataAttachment         // Name=MetadataName MDNode
-	DIArgList                  // Fields=(TypeValue)*
-	DIBasicType                // Fields=(DIBasicTypeField)*
-	DICommonBlock              // Fields=(DICommonBlockField)*
-	DICompileUnit              // Fields=(DICompileUnitField)*
-	DICompositeType            // Fields=(DICompositeTypeField)*
-	DIDerivedType              // Fields=(DIDerivedTypeField)*
-	DIEnumerator               // Fields=(DIEnumeratorField)*
-	DIExpression               // Fields=(DIExpressionField)*
-	DIFile                     // Fields=(DIFileField)*
-	DIGlobalVariable           // Fields=(DIGlobalVariableField)*
-	DIGlobalVariableExpression // Fields=(DIGlobalVariableExpressionField)*
-	DIImportedEntity           // Fields=(DIImportedEntityField)*
-	DILabel                    // Fields=(DILabelField)*
-	DILexicalBlock             // Fields=(DILexicalBlockField)*
-	DILexicalBlockFile         // Fields=(DILexicalBlockFileField)*
-	DILocalVariable            // Fields=(DILocalVariableField)*
-	DILocation                 // Fields=(DILocationField)*
-	DIMacro                    // Fields=(DIMacroField)*
-	DIMacroFile                // Fields=(DIMacroFileField)*
-	DIModule                   // Fields=(DIModuleField)*
-	DINamespace                // Fields=(DINamespaceField)*
-	DIObjCProperty             // Fields=(DIObjCPropertyField)*
-	DISubprogram               // Fields=(DISubprogramField)*
-	DISubrange                 // Fields=(DISubrangeField)*
-	DISubroutineType           // Fields=(DISubroutineTypeField)*
-	DITemplateTypeParameter    // Fields=(DITemplateTypeParameterField)*
-	DITemplateValueParameter   // Fields=(DITemplateValueParameterField)*
-	GenericDINode              // Fields=(GenericDINodeField)*
-	AlignField                 // Align=UintLit
-	AllocatedField             // Allocated=MDField
-	ArgField                   // Arg=UintLit
-	AssociatedField            // Associated=MDField
-	AttributesField            // Attributes=UintLit
-	BaseTypeField              // BaseType=MDField
-	CCField                    // CC=DwarfCC
-	ChecksumField              // Checksum=StringLit
-	ChecksumkindField          // Checksumkind=ChecksumKind
-	ColumnField                // Column=IntLit
-	ConfigMacrosField          // ConfigMacros=StringLit
-	ContainingTypeField        // ContainingType=MDField
-	CountField                 // Count=MDFieldOrInt
-	DebugInfoForProfilingField // DebugInfoForProfiling=BoolLit
-	DeclarationField           // Declaration=MDField
-	DirectoryField             // Directory=StringLit
-	DiscriminatorField         // Discriminator=MDField
-	DataLocationField          // DataLocation=MDField
-	DefaultedField             // Name=BoolLit
-	DiscriminatorIntField      // Discriminator=UintLit
-	DwarfAddressSpaceField     // DwarfAddressSpace=UintLit
-	DwoIdField                 // DwoId=UintLit
-	ElementsField              // Elements=MDField
-	EmissionKindField          // EmissionKind
-	EncodingField              // Encoding=DwarfAttEncodingOrUint
-	EntityField                // Entity=MDField
-	EnumsField                 // Enums=MDField
-	ExportSymbolsField         // ExportSymbols=BoolLit
-	ExprField                  // Expr=MDField
-	ExtraDataField             // ExtraData=MDField
-	FileField                  // File=MDField
-	FilenameField              // Filename=StringLit
-	FlagsField                 // Flags=DIFlags
-	FlagsStringField           // Flags=StringLit
-	GetterField                // Getter=StringLit
-	GlobalsField               // Globals=MDField
-	HeaderField                // Header=StringLit
-	IdentifierField            // Identifier=StringLit
-	ImportsField               // Imports=MDField
-	IncludePathField           // IncludePath=StringLit
-	InlinedAtField             // InlinedAt=MDField
-	IsDeclField                // IsDecl=BoolLit
-	IsDefinitionField          // IsDefinition=BoolLit
-	IsImplicitCodeField        // IsImplicitCode=BoolLit
-	IsLocalField               // IsLocal=BoolLit
-	IsOptimizedField           // IsOptimized=BoolLit
-	IsUnsignedField            // IsUnsigned=BoolLit
-	APINotesField              // APINotes=StringLit
-	LanguageField              // Language=DwarfLang
-	LineField                  // Line=IntLit
-	LinkageNameField           // LinkageName=StringLit
-	LowerBoundField            // LowerBound=MDFieldOrInt
-	MacrosField                // Macros=MDField
-	NameField                  // Name=StringLit
-	NameTableKindField         // NameTableKind
-	NodesField                 // Nodes=MDField
-	OffsetField                // OffsetField=UintLit
-	OperandsField              // Operands=(MDField)*
-	ProducerField              // Producer=StringLit
-	RangesBaseAddressField     // RangesBaseAddress=BoolLit
-	RankField                  // Rank=MDFieldOrInt
-	RetainedNodesField         // RetainedNodes=MDField
-	RetainedTypesField         // RetainedTypes=MDField
-	RuntimeLangField           // RuntimeLang=DwarfLang
-	RuntimeVersionField        // RuntimeVersion=UintLit
-	ScopeField                 // Scope=MDField
-	ScopeLineField             // ScopeLine=IntLit
-	SDKField                   // SDK=StringLit
-	SetterField                // Setter=StringLit
-	SizeField                  // Size=UintLit
-	SourceField                // Source=StringLit
-	SPFlagsField               // SPFlags=DISPFlags
-	SplitDebugFilenameField    // SplitDebugFilename=StringLit
-	SplitDebugInliningField    // SplitDebugInlining=BoolLit
-	StrideField                // Stride=MDFieldOrInt
-	SysrootField               // Sysroot=StringLit
-	TagField                   // Tag=DwarfTag
-	TemplateParamsField        // TemplateParams=MDField
-	ThisAdjustmentField        // ThisAdjustment=IntLit
-	ThrownTypesField           // ThrownTypes=MDField
-	TypeField                  // Typ=MDField
-	TypeMacinfoField           // Typ=DwarfMacinfo
-	TypesField                 // Types=MDField
-	UnitField                  // Unit=MDField
-	UpperBoundField            // UpperBound=MDFieldOrInt
-	ValueField                 // Value=MDField
-	ValueIntField              // Value=IntLit
-	ValueStringField           // Value=StringLit
-	VarField                   // Var=MDField
-	VirtualIndexField          // VirtualIndex=UintLit
-	VirtualityField            // Virtuality=DwarfVirtuality
-	VtableHolderField          // VtableHolder=MDField
+	CatchPadInst                  // CatchSwitch=LocalIdent Args=(ExceptionArg)* Metadata=(MetadataAttachment)*
+	CleanupPadInst                // ParentPad=ExceptionPad Args=(ExceptionArg)* Metadata=(MetadataAttachment)*
+	LocalDefTerm                  // Name=LocalIdent Term=ValueTerminator
+	RetTerm                       // XTyp=(ConcreteType | VoidType) X=Value? Metadata=(MetadataAttachment)*
+	BrTerm                        // Target=Label Metadata=(MetadataAttachment)*
+	CondBrTerm                    // CondTyp=IntType Cond=Value TargetTrue=Label TargetFalse=Label Metadata=(MetadataAttachment)*
+	SwitchTerm                    // X=TypeValue Default=Label Cases=(Case)* Metadata=(MetadataAttachment)*
+	Case                          // X=TypeConst Target=Label
+	IndirectBrTerm                // Addr=TypeValue ValidTargets=(Label)* Metadata=(MetadataAttachment)*
+	InvokeTerm                    // CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Invokee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* NormalRetTarget=Label ExceptionRetTarget=Label Metadata=(MetadataAttachment)*
+	CallBrTerm                    // CallingConv? ReturnAttrs=(ReturnAttribute)* AddrSpace? Typ=Type Callee=Value Args FuncAttrs=(FuncAttribute)* OperandBundles=(OperandBundle)* NormalRetTarget=Label OtherRetTargets=(Label)* Metadata=(MetadataAttachment)*
+	ResumeTerm                    // X=TypeValue Metadata=(MetadataAttachment)*
+	CatchSwitchTerm               // ParentPad=ExceptionPad Handlers DefaultUnwindTarget=UnwindTarget Metadata=(MetadataAttachment)*
+	Handlers                      // Labels=(Label)+
+	CatchRetTerm                  // CatchPad=Value Target=Label Metadata=(MetadataAttachment)*
+	CleanupRetTerm                // CleanupPad=Value UnwindTarget Metadata=(MetadataAttachment)*
+	UnreachableTerm               // Metadata=(MetadataAttachment)*
+	MDTuple                       // MDFields=(MDField)*
+	MDString                      // Val=StringLit
+	MetadataAttachment            // Name=MetadataName MDNode
+	DIArgList                     // Fields=(TypeValue)*
+	DIBasicType                   // Fields=(DIBasicTypeField)*
+	DIStringType                  // Fields=(DIStringTypeField)*
+	DICommonBlock                 // Fields=(DICommonBlockField)*
+	DICompileUnit                 // Fields=(DICompileUnitField)*
+	DICompositeType               // Fields=(DICompositeTypeField)*
+	DIDerivedType                 // Fields=(DIDerivedTypeField)*
+	DIEnumerator                  // Fields=(DIEnumeratorField)*
+	DIExpression                  // Fields=(DIExpressionField)*
+	DIFile                        // Fields=(DIFileField)*
+	DIGlobalVariable              // Fields=(DIGlobalVariableField)*
+	DIGlobalVariableExpression    // Fields=(DIGlobalVariableExpressionField)*
+	DIImportedEntity              // Fields=(DIImportedEntityField)*
+	DILabel                       // Fields=(DILabelField)*
+	DILexicalBlock                // Fields=(DILexicalBlockField)*
+	DILexicalBlockFile            // Fields=(DILexicalBlockFileField)*
+	DILocalVariable               // Fields=(DILocalVariableField)*
+	DILocation                    // Fields=(DILocationField)*
+	DIMacro                       // Fields=(DIMacroField)*
+	DIMacroFile                   // Fields=(DIMacroFileField)*
+	DIModule                      // Fields=(DIModuleField)*
+	DINamespace                   // Fields=(DINamespaceField)*
+	DIObjCProperty                // Fields=(DIObjCPropertyField)*
+	DISubprogram                  // Fields=(DISubprogramField)*
+	DISubrange                    // Fields=(DISubrangeField)*
+	DISubroutineType              // Fields=(DISubroutineTypeField)*
+	DITemplateTypeParameter       // Fields=(DITemplateTypeParameterField)*
+	DITemplateValueParameter      // Fields=(DITemplateValueParameterField)*
+	GenericDINode                 // Fields=(GenericDINodeField)*
+	AlignField                    // Align=UintLit
+	AllocatedField                // Allocated=MDField
+	AnnotationsField              // Annotations=MDField
+	ArgField                      // Arg=UintLit
+	AssociatedField               // Associated=MDField
+	AttributesField               // Attributes=UintLit
+	BaseTypeField                 // BaseType=MDField
+	CCField                       // CC=DwarfCC
+	ChecksumField                 // Checksum=StringLit
+	ChecksumkindField             // Checksumkind=ChecksumKind
+	ColumnField                   // Column=IntLit
+	ConfigMacrosField             // ConfigMacros=StringLit
+	ContainingTypeField           // ContainingType=MDField
+	CountField                    // Count=MDFieldOrInt
+	DebugInfoForProfilingField    // DebugInfoForProfiling=BoolLit
+	DeclarationField              // Declaration=MDField
+	DirectoryField                // Directory=StringLit
+	DiscriminatorField            // Discriminator=MDField
+	DataLocationField             // DataLocation=MDField
+	DefaultedField                // Name=BoolLit
+	DiscriminatorIntField         // Discriminator=UintLit
+	DwarfAddressSpaceField        // DwarfAddressSpace=UintLit
+	DwoIdField                    // DwoId=UintLit
+	ElementsField                 // Elements=MDField
+	EmissionKindField             // EmissionKind
+	EncodingField                 // Encoding=DwarfAttEncodingOrUint
+	EntityField                   // Entity=MDField
+	EnumsField                    // Enums=MDField
+	ExportSymbolsField            // ExportSymbols=BoolLit
+	ExprField                     // Expr=MDField
+	ExtraDataField                // ExtraData=MDField
+	FileField                     // File=MDField
+	FilenameField                 // Filename=StringLit
+	FlagsField                    // Flags=DIFlags
+	FlagsStringField              // Flags=StringLit
+	GetterField                   // Getter=StringLit
+	GlobalsField                  // Globals=MDField
+	HeaderField                   // Header=StringLit
+	IdentifierField               // Identifier=StringLit
+	ImportsField                  // Imports=MDField
+	IncludePathField              // IncludePath=StringLit
+	InlinedAtField                // InlinedAt=MDField
+	IsDeclField                   // IsDecl=BoolLit
+	IsDefinitionField             // IsDefinition=BoolLit
+	IsImplicitCodeField           // IsImplicitCode=BoolLit
+	IsLocalField                  // IsLocal=BoolLit
+	IsOptimizedField              // IsOptimized=BoolLit
+	IsUnsignedField               // IsUnsigned=BoolLit
+	APINotesField                 // APINotes=StringLit
+	LanguageField                 // Language=DwarfLang
+	LineField                     // Line=IntLit
+	LinkageNameField              // LinkageName=StringLit
+	LowerBoundField               // LowerBound=MDFieldOrInt
+	MacrosField                   // Macros=MDField
+	NameField                     // Name=StringLit
+	NameTableKindField            // NameTableKind
+	NodesField                    // Nodes=MDField
+	OffsetField                   // OffsetField=UintLit
+	OperandsField                 // Operands=(MDField)*
+	ProducerField                 // Producer=StringLit
+	RangesBaseAddressField        // RangesBaseAddress=BoolLit
+	RankField                     // Rank=MDFieldOrInt
+	RetainedNodesField            // RetainedNodes=MDField
+	RetainedTypesField            // RetainedTypes=MDField
+	RuntimeLangField              // RuntimeLang=DwarfLang
+	RuntimeVersionField           // RuntimeVersion=UintLit
+	ScopeField                    // Scope=MDField
+	ScopeLineField                // ScopeLine=IntLit
+	SDKField                      // SDK=StringLit
+	SetterField                   // Setter=StringLit
+	SizeField                     // Size=UintLit
+	SourceField                   // Source=StringLit
+	SPFlagsField                  // SPFlags=DISPFlags
+	SplitDebugFilenameField       // SplitDebugFilename=StringLit
+	SplitDebugInliningField       // SplitDebugInlining=BoolLit
+	StrideField                   // Stride=MDFieldOrInt
+	StringLengthField             // StringLength=MDField
+	StringLengthExpressionField   // StringLengthExpression=MDField
+	StringLocationExpressionField // StringLocationExpression=MDField
+	SysrootField                  // Sysroot=StringLit
+	TagField                      // Tag=DwarfTag
+	TemplateParamsField           // TemplateParams=MDField
+	ThisAdjustmentField           // ThisAdjustment=IntLit
+	ThrownTypesField              // ThrownTypes=MDField
+	TypeField                     // Typ=MDField
+	TypeMacinfoField              // Typ=DwarfMacinfo
+	TypesField                    // Types=MDField
+	UnitField                     // Unit=MDField
+	UpperBoundField               // UpperBound=MDFieldOrInt
+	ValueField                    // Value=MDField
+	ValueIntField                 // Value=IntLit
+	ValueStringField              // Value=StringLit
+	VarField                      // Var=MDField
+	VirtualIndexField             // VirtualIndex=UintLit
+	VirtualityField               // Virtuality=DwarfVirtuality
+	VtableHolderField             // VtableHolder=MDField
 	ChecksumKind
 	DIFlags // Flags=(DIFlag)+
 	DIFlagEnum
@@ -492,6 +499,8 @@ var nodeTypeStr = [...]string{
 	"UndefConst",
 	"PoisonConst",
 	"BlockAddressConst",
+	"DSOLocalEquivalentConst",
+	"NoCFIConst",
 	"FNegExpr",
 	"AddExpr",
 	"FAddExpr",
@@ -620,6 +629,7 @@ var nodeTypeStr = [...]string{
 	"MetadataAttachment",
 	"DIArgList",
 	"DIBasicType",
+	"DIStringType",
 	"DICommonBlock",
 	"DICompileUnit",
 	"DICompositeType",
@@ -648,6 +658,7 @@ var nodeTypeStr = [...]string{
 	"GenericDINode",
 	"AlignField",
 	"AllocatedField",
+	"AnnotationsField",
 	"ArgField",
 	"AssociatedField",
 	"AttributesField",
@@ -721,6 +732,9 @@ var nodeTypeStr = [...]string{
 	"SplitDebugFilenameField",
 	"SplitDebugInliningField",
 	"StrideField",
+	"StringLengthField",
+	"StringLengthExpressionField",
+	"StringLocationExpressionField",
 	"SysrootField",
 	"TagField",
 	"TemplateParamsField",
@@ -856,6 +870,7 @@ var Constant = []NodeType{
 	BlockAddressConst,
 	BoolConst,
 	CharArrayConst,
+	DSOLocalEquivalentConst,
 	ExtractElementExpr,
 	ExtractValueExpr,
 	FAddExpr,
@@ -879,6 +894,7 @@ var Constant = []NodeType{
 	IntToPtrExpr,
 	LShrExpr,
 	MulExpr,
+	NoCFIConst,
 	NoneConst,
 	NullConst,
 	OrExpr,
@@ -991,6 +1007,7 @@ var DICompileUnitField = []NodeType{
 var DICompositeTypeField = []NodeType{
 	AlignField,
 	AllocatedField,
+	AnnotationsField,
 	AssociatedField,
 	BaseTypeField,
 	DataLocationField,
@@ -1013,6 +1030,7 @@ var DICompositeTypeField = []NodeType{
 
 var DIDerivedTypeField = []NodeType{
 	AlignField,
+	AnnotationsField,
 	BaseTypeField,
 	DwarfAddressSpaceField,
 	ExtraDataField,
@@ -1058,6 +1076,7 @@ var DIGlobalVariableExpressionField = []NodeType{
 
 var DIGlobalVariableField = []NodeType{
 	AlignField,
+	AnnotationsField,
 	DeclarationField,
 	FileField,
 	IsDefinitionField,
@@ -1071,6 +1090,7 @@ var DIGlobalVariableField = []NodeType{
 }
 
 var DIImportedEntityField = []NodeType{
+	ElementsField,
 	EntityField,
 	FileField,
 	LineField,
@@ -1101,6 +1121,7 @@ var DILexicalBlockFileField = []NodeType{
 
 var DILocalVariableField = []NodeType{
 	AlignField,
+	AnnotationsField,
 	ArgField,
 	FileField,
 	FlagsField,
@@ -1164,7 +1185,19 @@ var DISPFlag = []NodeType{
 	DISPFlagInt,
 }
 
+var DIStringTypeField = []NodeType{
+	AlignField,
+	EncodingField,
+	NameField,
+	SizeField,
+	StringLengthExpressionField,
+	StringLengthField,
+	StringLocationExpressionField,
+	TagField,
+}
+
 var DISubprogramField = []NodeType{
+	AnnotationsField,
 	ContainingTypeField,
 	DeclarationField,
 	FileField,
@@ -1413,6 +1446,7 @@ var MDField = []NodeType{
 	DIModule,
 	DINamespace,
 	DIObjCProperty,
+	DIStringType,
 	DISubprogram,
 	DISubrange,
 	DISubroutineType,
@@ -1449,6 +1483,7 @@ var MDFieldOrInt = []NodeType{
 	DIModule,
 	DINamespace,
 	DIObjCProperty,
+	DIStringType,
 	DISubprogram,
 	DISubrange,
 	DISubroutineType,
@@ -1485,6 +1520,7 @@ var MDNode = []NodeType{
 	DIModule,
 	DINamespace,
 	DIObjCProperty,
+	DIStringType,
 	DISubprogram,
 	DISubrange,
 	DISubroutineType,
@@ -1518,6 +1554,7 @@ var Metadata = []NodeType{
 	DIModule,
 	DINamespace,
 	DIObjCProperty,
+	DIStringType,
 	DISubprogram,
 	DISubrange,
 	DISubroutineType,
@@ -1584,6 +1621,7 @@ var SpecializedMDNode = []NodeType{
 	DIModule,
 	DINamespace,
 	DIObjCProperty,
+	DIStringType,
 	DISubprogram,
 	DISubrange,
 	DISubroutineType,
@@ -1662,6 +1700,7 @@ var Value = []NodeType{
 	BlockAddressConst,
 	BoolConst,
 	CharArrayConst,
+	DSOLocalEquivalentConst,
 	ExtractElementExpr,
 	ExtractValueExpr,
 	FAddExpr,
@@ -1687,6 +1726,7 @@ var Value = []NodeType{
 	LShrExpr,
 	LocalIdent,
 	MulExpr,
+	NoCFIConst,
 	NoneConst,
 	NullConst,
 	OrExpr,
